@@ -1,0 +1,637 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3E1457A237F0ED5DAA116D60 /* libPods-DataSourcesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6648EB9D0A7F2502D02AA01 /* libPods-DataSourcesTests.a */; };
+		6F0CD60E1C51109400D09C01 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CD60D1C51109400D09C01 /* main.m */; };
+		6F0CD6111C51109400D09C01 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CD6101C51109400D09C01 /* AppDelegate.m */; };
+		6F0CD6141C51109400D09C01 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CD6131C51109400D09C01 /* ViewController.m */; };
+		6F0CD6171C51109400D09C01 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F0CD6151C51109400D09C01 /* Main.storyboard */; };
+		6F0CD6191C51109400D09C01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F0CD6181C51109400D09C01 /* Assets.xcassets */; };
+		6F0CD61C1C51109400D09C01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F0CD61A1C51109400D09C01 /* LaunchScreen.storyboard */; };
+		6F0CD6271C51109500D09C01 /* TECTableViewCellFactorySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CD6261C51109500D09C01 /* TECTableViewCellFactorySpec.m */; };
+		6F2E890C1C5142DF00FD4165 /* TECTableViewCellRegistratorSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2E890B1C5142DF00FD4165 /* TECTableViewCellRegistratorSpec.m */; };
+		6F59A9521C57B8EB0095289C /* TECTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A9511C57B8EB0095289C /* TECTableController.m */; };
+		6F59A9581C57BEF30095289C /* TECCallbackExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A9571C57BEF30095289C /* TECCallbackExecutor.m */; };
+		6F59A9661C57DCAF0095289C /* TECDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A9651C57DCAF0095289C /* TECDelegateProxy.m */; };
+		6F59A96A1C58CA650095289C /* TECMemoryContentProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A9691C58CA650095289C /* TECMemoryContentProvider.m */; };
+		6F59A96D1C58CA990095289C /* TECMemorySectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A96C1C58CA990095289C /* TECMemorySectionModel.m */; };
+		6F59A9701C58CDC40095289C /* TECCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A96F1C58CDC40095289C /* TECCustomCell.m */; };
+		6F59A9811C58EC610095289C /* TECTableViewSectionHeaderExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A9801C58EC610095289C /* TECTableViewSectionHeaderExtender.m */; };
+		6F59A9841C58ECF70095289C /* TECTableViewSectionFooterExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A9831C58ECF70095289C /* TECTableViewSectionFooterExtender.m */; };
+		6F59A98A1C5911570095289C /* TECTableViewExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A9891C5911570095289C /* TECTableViewExtender.m */; };
+		6F78F0461C511788006F08DC /* TECTableViewCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F78F0451C511788006F08DC /* TECTableViewCellFactory.m */; };
+		6F78F04D1C513344006F08DC /* TECTableViewCellRegistrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F78F04C1C513344006F08DC /* TECTableViewCellRegistrator.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6F0CD6231C51109400D09C01 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6F0CD6011C51109400D09C01 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6F0CD6081C51109400D09C01;
+			remoteInfo = DataSources;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1EF957566F87E00C2CAB1977 /* Pods-DataSourcesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataSourcesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DataSourcesTests/Pods-DataSourcesTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2BA9BBEB5BFFAD972BFA7ACE /* Pods-DataSourcesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataSourcesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DataSourcesTests/Pods-DataSourcesTests.release.xcconfig"; sourceTree = "<group>"; };
+		6F0CD6091C51109400D09C01 /* DataSources.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DataSources.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F0CD60D1C51109400D09C01 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6F0CD60F1C51109400D09C01 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		6F0CD6101C51109400D09C01 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		6F0CD6121C51109400D09C01 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		6F0CD6131C51109400D09C01 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		6F0CD6161C51109400D09C01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6F0CD6181C51109400D09C01 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6F0CD61B1C51109400D09C01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6F0CD61D1C51109400D09C01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6F0CD6221C51109400D09C01 /* DataSourcesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataSourcesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F0CD6261C51109500D09C01 /* TECTableViewCellFactorySpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TECTableViewCellFactorySpec.m; sourceTree = "<group>"; };
+		6F0CD6281C51109500D09C01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6F0CD6331C51117000D09C01 /* TECTableViewCellFactoryProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewCellFactoryProtocol.h; sourceTree = "<group>"; };
+		6F2E890B1C5142DF00FD4165 /* TECTableViewCellRegistratorSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewCellRegistratorSpec.m; sourceTree = "<group>"; };
+		6F59A9501C57B8EB0095289C /* TECTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableController.h; sourceTree = "<group>"; };
+		6F59A9511C57B8EB0095289C /* TECTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableController.m; sourceTree = "<group>"; };
+		6F59A9561C57BEF30095289C /* TECCallbackExecutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECCallbackExecutor.h; sourceTree = "<group>"; };
+		6F59A9571C57BEF30095289C /* TECCallbackExecutor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECCallbackExecutor.m; sourceTree = "<group>"; };
+		6F59A9621C57C7D90095289C /* TECContentProviderProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECContentProviderProtocol.h; sourceTree = "<group>"; };
+		6F59A9631C57C86A0095289C /* TECSectionModelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECSectionModelProtocol.h; sourceTree = "<group>"; };
+		6F59A9641C57DCAF0095289C /* TECDelegateProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECDelegateProxy.h; sourceTree = "<group>"; };
+		6F59A9651C57DCAF0095289C /* TECDelegateProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECDelegateProxy.m; sourceTree = "<group>"; };
+		6F59A9681C58CA650095289C /* TECMemoryContentProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECMemoryContentProvider.h; sourceTree = "<group>"; };
+		6F59A9691C58CA650095289C /* TECMemoryContentProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECMemoryContentProvider.m; sourceTree = "<group>"; };
+		6F59A96B1C58CA990095289C /* TECMemorySectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECMemorySectionModel.h; sourceTree = "<group>"; };
+		6F59A96C1C58CA990095289C /* TECMemorySectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECMemorySectionModel.m; sourceTree = "<group>"; };
+		6F59A96E1C58CDC40095289C /* TECCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECCustomCell.h; sourceTree = "<group>"; };
+		6F59A96F1C58CDC40095289C /* TECCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECCustomCell.m; sourceTree = "<group>"; };
+		6F59A97F1C58EC610095289C /* TECTableViewSectionHeaderExtender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewSectionHeaderExtender.h; sourceTree = "<group>"; };
+		6F59A9801C58EC610095289C /* TECTableViewSectionHeaderExtender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewSectionHeaderExtender.m; sourceTree = "<group>"; };
+		6F59A9821C58ECF70095289C /* TECTableViewSectionFooterExtender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewSectionFooterExtender.h; sourceTree = "<group>"; };
+		6F59A9831C58ECF70095289C /* TECTableViewSectionFooterExtender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewSectionFooterExtender.m; sourceTree = "<group>"; };
+		6F59A9881C5911570095289C /* TECTableViewExtender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewExtender.h; sourceTree = "<group>"; };
+		6F59A9891C5911570095289C /* TECTableViewExtender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewExtender.m; sourceTree = "<group>"; };
+		6F78F0441C511788006F08DC /* TECTableViewCellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewCellFactory.h; sourceTree = "<group>"; };
+		6F78F0451C511788006F08DC /* TECTableViewCellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewCellFactory.m; sourceTree = "<group>"; };
+		6F78F0481C511E6C006F08DC /* TECTableViewCellRegistratorProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewCellRegistratorProtocol.h; sourceTree = "<group>"; };
+		6F78F04B1C513344006F08DC /* TECTableViewCellRegistrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewCellRegistrator.h; sourceTree = "<group>"; };
+		6F78F04C1C513344006F08DC /* TECTableViewCellRegistrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewCellRegistrator.m; sourceTree = "<group>"; };
+		E6648EB9D0A7F2502D02AA01 /* libPods-DataSourcesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DataSourcesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6F0CD6061C51109400D09C01 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6F0CD61F1C51109400D09C01 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E1457A237F0ED5DAA116D60 /* libPods-DataSourcesTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		27C0CDB6768F17A16CBB3368 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E6648EB9D0A7F2502D02AA01 /* libPods-DataSourcesTests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4A67D102CFC23DAFD8DB3332 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1EF957566F87E00C2CAB1977 /* Pods-DataSourcesTests.debug.xcconfig */,
+				2BA9BBEB5BFFAD972BFA7ACE /* Pods-DataSourcesTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		6F0CD6001C51109400D09C01 = {
+			isa = PBXGroup;
+			children = (
+				6F0CD60B1C51109400D09C01 /* DataSources */,
+				6F0CD6251C51109500D09C01 /* DataSourcesTests */,
+				6F0CD60A1C51109400D09C01 /* Products */,
+				4A67D102CFC23DAFD8DB3332 /* Pods */,
+				27C0CDB6768F17A16CBB3368 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		6F0CD60A1C51109400D09C01 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6F0CD6091C51109400D09C01 /* DataSources.app */,
+				6F0CD6221C51109400D09C01 /* DataSourcesTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6F0CD60B1C51109400D09C01 /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				6F59A9771C58E97F0095289C /* TableView */,
+				6F59A9761C58E9790095289C /* Shared */,
+				6F0CD60F1C51109400D09C01 /* AppDelegate.h */,
+				6F0CD6101C51109400D09C01 /* AppDelegate.m */,
+				6F0CD6121C51109400D09C01 /* ViewController.h */,
+				6F0CD6131C51109400D09C01 /* ViewController.m */,
+				6F0CD6151C51109400D09C01 /* Main.storyboard */,
+				6F0CD6181C51109400D09C01 /* Assets.xcassets */,
+				6F0CD61A1C51109400D09C01 /* LaunchScreen.storyboard */,
+				6F0CD61D1C51109400D09C01 /* Info.plist */,
+				6F0CD60C1C51109400D09C01 /* Supporting Files */,
+				6F59A96E1C58CDC40095289C /* TECCustomCell.h */,
+				6F59A96F1C58CDC40095289C /* TECCustomCell.m */,
+			);
+			path = DataSources;
+			sourceTree = "<group>";
+		};
+		6F0CD60C1C51109400D09C01 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6F0CD60D1C51109400D09C01 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6F0CD6251C51109500D09C01 /* DataSourcesTests */ = {
+			isa = PBXGroup;
+			children = (
+				6F2E890B1C5142DF00FD4165 /* TECTableViewCellRegistratorSpec.m */,
+				6F0CD6261C51109500D09C01 /* TECTableViewCellFactorySpec.m */,
+				6F0CD6281C51109500D09C01 /* Info.plist */,
+			);
+			path = DataSourcesTests;
+			sourceTree = "<group>";
+		};
+		6F59A9751C58E9640095289C /* CellRegistrator */ = {
+			isa = PBXGroup;
+			children = (
+				6F78F0481C511E6C006F08DC /* TECTableViewCellRegistratorProtocol.h */,
+				6F78F04B1C513344006F08DC /* TECTableViewCellRegistrator.h */,
+				6F78F04C1C513344006F08DC /* TECTableViewCellRegistrator.m */,
+			);
+			name = CellRegistrator;
+			sourceTree = "<group>";
+		};
+		6F59A9761C58E9790095289C /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				6F59A97E1C58EAE90095289C /* SectionModel */,
+				6F59A97D1C58EAA80095289C /* CallbackExecutor */,
+				6F59A97C1C58EA9C0095289C /* DelegateProxy */,
+				6F59A9791C58EA500095289C /* ContentProviders */,
+			);
+			name = Shared;
+			sourceTree = "<group>";
+		};
+		6F59A9771C58E97F0095289C /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				6F59A97B1C58EA870095289C /* Controller */,
+				6F59A97A1C58EA610095289C /* Extenders */,
+				6F59A9781C58E98C0095289C /* CellFactory */,
+				6F59A9751C58E9640095289C /* CellRegistrator */,
+			);
+			name = TableView;
+			sourceTree = "<group>";
+		};
+		6F59A9781C58E98C0095289C /* CellFactory */ = {
+			isa = PBXGroup;
+			children = (
+				6F0CD6331C51117000D09C01 /* TECTableViewCellFactoryProtocol.h */,
+				6F78F0441C511788006F08DC /* TECTableViewCellFactory.h */,
+				6F78F0451C511788006F08DC /* TECTableViewCellFactory.m */,
+			);
+			name = CellFactory;
+			sourceTree = "<group>";
+		};
+		6F59A9791C58EA500095289C /* ContentProviders */ = {
+			isa = PBXGroup;
+			children = (
+				6F59A9621C57C7D90095289C /* TECContentProviderProtocol.h */,
+				6F59A9681C58CA650095289C /* TECMemoryContentProvider.h */,
+				6F59A9691C58CA650095289C /* TECMemoryContentProvider.m */,
+			);
+			name = ContentProviders;
+			sourceTree = "<group>";
+		};
+		6F59A97A1C58EA610095289C /* Extenders */ = {
+			isa = PBXGroup;
+			children = (
+				6F59A9881C5911570095289C /* TECTableViewExtender.h */,
+				6F59A9891C5911570095289C /* TECTableViewExtender.m */,
+				6F59A97F1C58EC610095289C /* TECTableViewSectionHeaderExtender.h */,
+				6F59A9801C58EC610095289C /* TECTableViewSectionHeaderExtender.m */,
+				6F59A9821C58ECF70095289C /* TECTableViewSectionFooterExtender.h */,
+				6F59A9831C58ECF70095289C /* TECTableViewSectionFooterExtender.m */,
+			);
+			name = Extenders;
+			sourceTree = "<group>";
+		};
+		6F59A97B1C58EA870095289C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6F59A9501C57B8EB0095289C /* TECTableController.h */,
+				6F59A9511C57B8EB0095289C /* TECTableController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		6F59A97C1C58EA9C0095289C /* DelegateProxy */ = {
+			isa = PBXGroup;
+			children = (
+				6F59A9641C57DCAF0095289C /* TECDelegateProxy.h */,
+				6F59A9651C57DCAF0095289C /* TECDelegateProxy.m */,
+			);
+			name = DelegateProxy;
+			sourceTree = "<group>";
+		};
+		6F59A97D1C58EAA80095289C /* CallbackExecutor */ = {
+			isa = PBXGroup;
+			children = (
+				6F59A9561C57BEF30095289C /* TECCallbackExecutor.h */,
+				6F59A9571C57BEF30095289C /* TECCallbackExecutor.m */,
+			);
+			name = CallbackExecutor;
+			sourceTree = "<group>";
+		};
+		6F59A97E1C58EAE90095289C /* SectionModel */ = {
+			isa = PBXGroup;
+			children = (
+				6F59A9631C57C86A0095289C /* TECSectionModelProtocol.h */,
+				6F59A96B1C58CA990095289C /* TECMemorySectionModel.h */,
+				6F59A96C1C58CA990095289C /* TECMemorySectionModel.m */,
+			);
+			name = SectionModel;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6F0CD6081C51109400D09C01 /* DataSources */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6F0CD62B1C51109500D09C01 /* Build configuration list for PBXNativeTarget "DataSources" */;
+			buildPhases = (
+				6F0CD6051C51109400D09C01 /* Sources */,
+				6F0CD6061C51109400D09C01 /* Frameworks */,
+				6F0CD6071C51109400D09C01 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DataSources;
+			productName = DataSources;
+			productReference = 6F0CD6091C51109400D09C01 /* DataSources.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6F0CD6211C51109400D09C01 /* DataSourcesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6F0CD62E1C51109500D09C01 /* Build configuration list for PBXNativeTarget "DataSourcesTests" */;
+			buildPhases = (
+				F2FD005E9BDA2B0D13BE1174 /* Check Pods Manifest.lock */,
+				6F0CD61E1C51109400D09C01 /* Sources */,
+				6F0CD61F1C51109400D09C01 /* Frameworks */,
+				6F0CD6201C51109400D09C01 /* Resources */,
+				D6EE78F54AABF78D6ECBAB99 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6F0CD6241C51109400D09C01 /* PBXTargetDependency */,
+			);
+			name = DataSourcesTests;
+			productName = DataSourcesTests;
+			productReference = 6F0CD6221C51109400D09C01 /* DataSourcesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6F0CD6011C51109400D09C01 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = TEC;
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = "Alexey Fayzullov";
+				TargetAttributes = {
+					6F0CD6081C51109400D09C01 = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
+					6F0CD6211C51109400D09C01 = {
+						CreatedOnToolsVersion = 7.1.1;
+						TestTargetID = 6F0CD6081C51109400D09C01;
+					};
+				};
+			};
+			buildConfigurationList = 6F0CD6041C51109400D09C01 /* Build configuration list for PBXProject "DataSources" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6F0CD6001C51109400D09C01;
+			productRefGroup = 6F0CD60A1C51109400D09C01 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6F0CD6081C51109400D09C01 /* DataSources */,
+				6F0CD6211C51109400D09C01 /* DataSourcesTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6F0CD6071C51109400D09C01 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F0CD61C1C51109400D09C01 /* LaunchScreen.storyboard in Resources */,
+				6F0CD6191C51109400D09C01 /* Assets.xcassets in Resources */,
+				6F0CD6171C51109400D09C01 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6F0CD6201C51109400D09C01 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D6EE78F54AABF78D6ECBAB99 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DataSourcesTests/Pods-DataSourcesTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F2FD005E9BDA2B0D13BE1174 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6F0CD6051C51109400D09C01 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F59A9841C58ECF70095289C /* TECTableViewSectionFooterExtender.m in Sources */,
+				6F78F04D1C513344006F08DC /* TECTableViewCellRegistrator.m in Sources */,
+				6F59A9581C57BEF30095289C /* TECCallbackExecutor.m in Sources */,
+				6F59A9661C57DCAF0095289C /* TECDelegateProxy.m in Sources */,
+				6F0CD6141C51109400D09C01 /* ViewController.m in Sources */,
+				6F0CD6111C51109400D09C01 /* AppDelegate.m in Sources */,
+				6F59A96A1C58CA650095289C /* TECMemoryContentProvider.m in Sources */,
+				6F59A9701C58CDC40095289C /* TECCustomCell.m in Sources */,
+				6F59A9521C57B8EB0095289C /* TECTableController.m in Sources */,
+				6F59A98A1C5911570095289C /* TECTableViewExtender.m in Sources */,
+				6F0CD60E1C51109400D09C01 /* main.m in Sources */,
+				6F59A9811C58EC610095289C /* TECTableViewSectionHeaderExtender.m in Sources */,
+				6F78F0461C511788006F08DC /* TECTableViewCellFactory.m in Sources */,
+				6F59A96D1C58CA990095289C /* TECMemorySectionModel.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6F0CD61E1C51109400D09C01 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F2E890C1C5142DF00FD4165 /* TECTableViewCellRegistratorSpec.m in Sources */,
+				6F0CD6271C51109500D09C01 /* TECTableViewCellFactorySpec.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6F0CD6241C51109400D09C01 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6F0CD6081C51109400D09C01 /* DataSources */;
+			targetProxy = 6F0CD6231C51109400D09C01 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6F0CD6151C51109400D09C01 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6F0CD6161C51109400D09C01 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		6F0CD61A1C51109400D09C01 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6F0CD61B1C51109400D09C01 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6F0CD6291C51109500D09C01 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		6F0CD62A1C51109500D09C01 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6F0CD62C1C51109500D09C01 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = DataSources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.techery.datasources.DataSources;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		6F0CD62D1C51109500D09C01 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = DataSources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.techery.datasources.DataSources;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		6F0CD62F1C51109500D09C01 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1EF957566F87E00C2CAB1977 /* Pods-DataSourcesTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = DataSourcesTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.techery.datasources.DataSourcesTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DataSources.app/DataSources";
+			};
+			name = Debug;
+		};
+		6F0CD6301C51109500D09C01 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2BA9BBEB5BFFAD972BFA7ACE /* Pods-DataSourcesTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = DataSourcesTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.techery.datasources.DataSourcesTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DataSources.app/DataSources";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6F0CD6041C51109400D09C01 /* Build configuration list for PBXProject "DataSources" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F0CD6291C51109500D09C01 /* Debug */,
+				6F0CD62A1C51109500D09C01 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6F0CD62B1C51109500D09C01 /* Build configuration list for PBXNativeTarget "DataSources" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F0CD62C1C51109500D09C01 /* Debug */,
+				6F0CD62D1C51109500D09C01 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6F0CD62E1C51109500D09C01 /* Build configuration list for PBXNativeTarget "DataSourcesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F0CD62F1C51109500D09C01 /* Debug */,
+				6F0CD6301C51109500D09C01 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6F0CD6011C51109400D09C01 /* Project object */;
+}
