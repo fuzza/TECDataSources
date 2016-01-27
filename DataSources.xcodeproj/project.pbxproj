@@ -27,6 +27,7 @@
 		6F59A98A1C5911570095289C /* TECTableViewExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A9891C5911570095289C /* TECTableViewExtender.m */; };
 		6F78F0461C511788006F08DC /* TECTableViewCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F78F0451C511788006F08DC /* TECTableViewCellFactory.m */; };
 		6F78F04D1C513344006F08DC /* TECTableViewCellRegistrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F78F04C1C513344006F08DC /* TECTableViewCellRegistrator.m */; };
+		6FD285C71C591D0400A11316 /* TECTableViewCellExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD285C61C591D0400A11316 /* TECTableViewCellExtender.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,8 @@
 		6F78F0481C511E6C006F08DC /* TECTableViewCellRegistratorProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewCellRegistratorProtocol.h; sourceTree = "<group>"; };
 		6F78F04B1C513344006F08DC /* TECTableViewCellRegistrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewCellRegistrator.h; sourceTree = "<group>"; };
 		6F78F04C1C513344006F08DC /* TECTableViewCellRegistrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewCellRegistrator.m; sourceTree = "<group>"; };
+		6FD285C51C591D0400A11316 /* TECTableViewCellExtender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewCellExtender.h; sourceTree = "<group>"; };
+		6FD285C61C591D0400A11316 /* TECTableViewCellExtender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewCellExtender.m; sourceTree = "<group>"; };
 		E6648EB9D0A7F2502D02AA01 /* libPods-DataSourcesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DataSourcesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -240,6 +243,8 @@
 				6F59A9801C58EC610095289C /* TECTableViewSectionHeaderExtender.m */,
 				6F59A9821C58ECF70095289C /* TECTableViewSectionFooterExtender.h */,
 				6F59A9831C58ECF70095289C /* TECTableViewSectionFooterExtender.m */,
+				6FD285C51C591D0400A11316 /* TECTableViewCellExtender.h */,
+				6FD285C61C591D0400A11316 /* TECTableViewCellExtender.m */,
 			);
 			name = Extenders;
 			sourceTree = "<group>";
@@ -430,6 +435,7 @@
 				6F0CD60E1C51109400D09C01 /* main.m in Sources */,
 				6F59A9811C58EC610095289C /* TECTableViewSectionHeaderExtender.m in Sources */,
 				6F78F0461C511788006F08DC /* TECTableViewCellFactory.m in Sources */,
+				6FD285C71C591D0400A11316 /* TECTableViewCellExtender.m in Sources */,
 				6F59A96D1C58CA990095289C /* TECMemorySectionModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

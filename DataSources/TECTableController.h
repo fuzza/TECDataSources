@@ -22,6 +22,7 @@ typedef void(^TECTableCompletionBlock)();
 
 - (void)setupWithTableView:(UITableView *)tableView;
 - (void)reloadDataSourceWithCompletion:(TECTableCompletionBlock)completion;
-- (void)addExtender:(TECTableViewExtender *)extender;
+
+- (void)addExtenders:(NSArray <TECTableViewExtender *> *)extenders;
 
 @end

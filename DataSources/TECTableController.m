@@ -12,22 +12,24 @@
 #import "TECSectionModelProtocol.h"
 
 #import "TECDelegateProxy.h"
+#import "TECTableViewExtender.h"
 
-#import "TECTableViewSectionHeaderExtender.h"
-
-@interface TECTableController () <UITableViewDataSource, UITableViewDelegate>
+@interface TECTableController ()
 
 @property (nonatomic, weak) UITableView *tableView;
 
 @property (nonatomic, strong) id <TECTableViewCellFactoryProtocol> cellFactory;
 @property (nonatomic, strong) id <TECContentProviderProtocol> contentProvider;
 
-@property (nonatomic, strong) TECDelegateProxy <id <UITableViewDelegate>> *delegateProxy;
-@property (nonatomic, strong) TECDelegateProxy <id <UITableViewDataSource>> *dataSourceProxy;
+@property (nonatomic, strong) TECDelegateProxy <id <UITableViewDelegate, UITableViewDataSource>> *delegateProxy;
+
+@property (nonatomic, strong) NSArray <TECTableViewExtender *> *extenders;
 
 @end
 
 @implementation TECTableController
+
+#pragma mark - Lifecycle
 
 - (instancetype)initWithContentProvider:(id <TECContentProviderProtocol>)contentProvider
                             cellFactory:(id <TECTableViewCellFactoryProtocol>)cellFactory {
@@ -35,26 +37,9 @@
     if(self) {
         self.contentProvider = contentProvider;
         self.cellFactory = cellFactory;
-        
-        self.delegateProxy = [[TECDelegateProxy alloc] initWithPrimaryDelegate:self];
-        self.dataSourceProxy = [[TECDelegateProxy alloc] initWithPrimaryDelegate:self];
+        self.delegateProxy = [[TECDelegateProxy alloc] init];
     }
     return self;
-}
-
-- (void)addExtender:(TECTableViewExtender *)extender {
-    extender.tableView = self.tableView;
-    extender.cellFactory = self.cellFactory;
-    extender.contentProvider = self.contentProvider;
-    
-    [self.delegateProxy attachSecondaryDelegate:extender];
-    [self.dataSourceProxy attachSecondaryDelegate:extender];
-}
-
-- (void)setupWithTableView:(UITableView *)tableView {
-    self.tableView = tableView;
-    self.tableView.dataSource = [self.dataSourceProxy proxy];
-    self.tableView.delegate = [self.delegateProxy proxy];
 }
 
 - (void)dealloc {
@@ -66,34 +51,35 @@
     self.tableView.delegate = nil;
 }
 
+#pragma mark - Extenders configuration
+
+- (void)addExtenders:(NSArray <TECTableViewExtender *> *)extenders {
+    self.extenders = extenders;
+    for(TECTableViewExtender *extender in self.extenders) {
+        [self addExtender:extender];
+    }
+}
+
+- (void)addExtender:(TECTableViewExtender *)extender {
+    extender.tableView = self.tableView;
+    extender.cellFactory = self.cellFactory;
+    extender.contentProvider = self.contentProvider;
+    [self.delegateProxy attachDelegate:extender];
+}
+
+#pragma mark - Setup
+
+- (void)setupWithTableView:(UITableView *)tableView {
+    self.tableView = tableView;
+    self.tableView.dataSource = [self.delegateProxy proxy];
+    self.tableView.delegate = [self.delegateProxy proxy];
+}
+
 - (void)reloadDataSourceWithCompletion:(TECTableCompletionBlock)completion {
     [self.tableView reloadData];
     if(completion) {
         completion();
     }
-}
-
-#pragma mark - UITableViewDataSource implementation
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.contentProvider numberOfItemsInSection:section];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    id item = [self.contentProvider itemAtIndexPath:indexPath];
-    UITableViewCell *cell = [self.cellFactory cellForItem:item tableView:tableView atIndexPath:indexPath];
-    return [self.cellFactory configureCell:cell forItem:item inTableView:tableView atIndexPath:indexPath];
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [self.contentProvider numberOfSections];
-}
-
-#pragma mark - UITableViewDelegate protocol
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    id item = [self.contentProvider itemAtIndexPath:indexPath];
-    [self.cellFactory configureCell:cell forItem:item inTableView:tableView atIndexPath:indexPath];
 }
 
 @end

@@ -10,15 +10,13 @@
 
 @interface TECDelegateProxy ()
 
-@property (nonatomic, strong) id primaryDelegate;
-@property (nonatomic, strong) NSHashTable *secondaryDelegates;
+@property (nonatomic, strong) NSHashTable *delegates;
 
 @end
 
 @implementation TECDelegateProxy
 
-- (instancetype)initWithPrimaryDelegate:(id)delegate {
-    self.primaryDelegate = delegate;
+- (instancetype)init {
     [self setupDelegatesCache];
     return self;
 }
@@ -28,25 +26,22 @@
 }
 
 - (void)setupDelegatesCache {
-    self.secondaryDelegates = [NSHashTable hashTableWithOptions:NSPointerFunctionsWeakMemory];
+    self.delegates = [NSHashTable hashTableWithOptions:NSPointerFunctionsWeakMemory];
 }
 
-- (void)attachSecondaryDelegate:(id)delegate {
-    [self.secondaryDelegates addObject:delegate];
+- (void)attachDelegate:(id)delegate {
+    [self.delegates addObject:delegate];
 }
 
-- (void)deattachSecondaryDelegate:(id)delegate {
-    [self.secondaryDelegates removeObject:delegate];
+- (void)deattachDelegate:(id)delegate {
+    [self.delegates removeObject:delegate];
 }
 
 #pragma mark - Message forwarding
 
 - (BOOL)conformsToProtocol:(Protocol *)aProtocol {
-    if([self.primaryDelegate conformsToProtocol:aProtocol]) {
-        return YES;
-    }
-    for(id secondaryDelegate in self.secondaryDelegates.allObjects) {
-        if([secondaryDelegate conformsToProtocol:aProtocol]) {
+    for(id delegate in self.delegates.allObjects) {
+        if([delegate conformsToProtocol:aProtocol]) {
             return YES;
         }
     }
@@ -54,11 +49,8 @@
 }
 
 - (BOOL)respondsToSelector:(SEL)aSelector {
-    if([self.primaryDelegate respondsToSelector:aSelector]) {
-        return YES;
-    }
-    for(id secondaryDelegate in self.secondaryDelegates.allObjects) {
-        if([secondaryDelegate respondsToSelector:aSelector]) {
+    for(id delegate in self.delegates.allObjects) {
+        if([delegate respondsToSelector:aSelector]) {
             return YES;
         }
     }
@@ -66,13 +58,18 @@
 }
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)selector {
-    return [self.primaryDelegate methodSignatureForSelector:selector];
+    for(id delegate in self.delegates.allObjects) {
+        if([delegate respondsToSelector:selector]) {
+            return [delegate methodSignatureForSelector:selector];
+        }
+    }
+    return nil;
 }
 
 - (void)forwardInvocation:(NSInvocation *)invocation {
     BOOL shouldReturnValue = invocation.methodSignature.methodReturnLength;
-    if(!shouldReturnValue) {
-        [self forwardInvocationToAllObjects:invocation];
+    if(shouldReturnValue) {
+        [self forwardInvocationToFirstResponder:invocation];
     } else {
         [self forwardInvocationToAllObjects:invocation];
     }
@@ -81,32 +78,23 @@
 #pragma mark - Helper methods
 
 - (void)forwardInvocationToAllObjects:(NSInvocation *)invocation {
-    [self forwardInvocation:invocation toObject:self.primaryDelegate];
-    for(id secondaryDelegate in self.secondaryDelegates.allObjects) {
-        [self forwardInvocation:invocation toObject:secondaryDelegate];
+    for(id delegate in self.delegates.allObjects) {
+        if([delegate respondsToSelector:invocation.selector]) {
+            [invocation invokeWithTarget:delegate];
+        }
     }
 }
 
 - (void)forwardInvocationToFirstResponder:(NSInvocation *)invocation {
     NSMutableArray *respondersArray = [@[] mutableCopy];
-    if([self.primaryDelegate respondsToSelector:invocation.selector]) {
-        [respondersArray addObject:self.primaryDelegate];
-    }
-    for(id secondaryDelegate in self.secondaryDelegates.allObjects) {
-        [self forwardInvocation:invocation toObject:secondaryDelegate];
-        if([secondaryDelegate respondsToSelector:invocation.selector]) {
-            [respondersArray addObject:secondaryDelegate];
+    for(id delegate in self.delegates.allObjects) {
+        if([delegate respondsToSelector:invocation.selector]) {
+            [respondersArray addObject:delegate];
         }
     }
     
     NSParameterAssert(respondersArray.count < 2);
     [invocation invokeWithTarget:respondersArray.firstObject];
-}
-
-- (void)forwardInvocation:(NSInvocation *)invocation toObject:(id)object {
-    if([object respondsToSelector:invocation.selector]) {
-        [invocation invokeWithTarget:object];
-    }
 }
 
 @end

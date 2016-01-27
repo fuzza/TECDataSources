@@ -19,6 +19,7 @@
 
 #import "TECTableViewSectionHeaderExtender.h"
 #import "TECTableViewSectionFooterExtender.h"
+#import "TECTableViewCellExtender.h"
 
 @interface ViewController ()
 
@@ -64,10 +65,14 @@
                                                                    cellFactory:factory];
 
     self.footerExtender = [[TECTableViewSectionFooterExtender alloc] init];
-    [self.tableController addExtender:self.footerExtender];
-    
     self.headerExtender = [[TECTableViewSectionHeaderExtender alloc] init];
-    [self.tableController addExtender:self.headerExtender];
+    
+    TECTableViewCellExtender *cellExtender = [[TECTableViewCellExtender alloc] init];
+    
+    [self.tableController addExtenders:@[
+                                        self.headerExtender,
+                                        self.footerExtender,
+                                        cellExtender]];
     
     [self.tableController setupWithTableView:self.tableView];
     [self.tableController reloadDataSourceWithCompletion:nil];

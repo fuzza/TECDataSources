@@ -10,10 +10,10 @@
 
 @interface TECDelegateProxy <T>: NSProxy
 
-- (instancetype)initWithPrimaryDelegate:(T)delegate;
+- (instancetype)init;
 - (T)proxy;
 
-- (void)attachSecondaryDelegate:(T)delegate;
-- (void)deattachSecondaryDelegate:(T)delegate;
+- (void)attachDelegate:(T)delegate;
+- (void)deattachDelegate:(T)delegate;
 
 @end
