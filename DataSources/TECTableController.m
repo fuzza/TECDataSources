@@ -7,7 +7,6 @@
 //
 
 #import "TECTableController.h"
-#import "TECTableViewCellFactoryProtocol.h"
 #import "TECContentProviderProtocol.h"
 #import "TECSectionModelProtocol.h"
 
@@ -18,11 +17,9 @@
 
 @property (nonatomic, weak) UITableView *tableView;
 
-@property (nonatomic, strong) id <TECTableViewCellFactoryProtocol> cellFactory;
 @property (nonatomic, strong) id <TECContentProviderProtocol> contentProvider;
 
 @property (nonatomic, strong) TECDelegateProxy <id <UITableViewDelegate, UITableViewDataSource>> *delegateProxy;
-
 @property (nonatomic, strong) NSArray <TECTableViewExtender *> *extenders;
 
 @end
@@ -31,12 +28,10 @@
 
 #pragma mark - Lifecycle
 
-- (instancetype)initWithContentProvider:(id <TECContentProviderProtocol>)contentProvider
-                            cellFactory:(id <TECTableViewCellFactoryProtocol>)cellFactory {
+- (instancetype)initWithContentProvider:(id <TECContentProviderProtocol>)contentProvider {
     self = [super init];
     if(self) {
         self.contentProvider = contentProvider;
-        self.cellFactory = cellFactory;
         self.delegateProxy = [[TECDelegateProxy alloc] init];
     }
     return self;
@@ -62,7 +57,6 @@
 
 - (void)addExtender:(TECTableViewExtender *)extender {
     extender.tableView = self.tableView;
-    extender.cellFactory = self.cellFactory;
     extender.contentProvider = self.contentProvider;
     [self.delegateProxy attachDelegate:extender];
 }

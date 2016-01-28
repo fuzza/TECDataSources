@@ -18,7 +18,8 @@
 
 @implementation TECTableViewCellFactory
 
-- (instancetype)initWithСellRegistrator:(id <TECTableViewCellRegistratorProtocol>)cellRegistrator configurationHandler:(TECTableViewCellConfigurationHandler)handler; {
+- (instancetype)initWithСellRegistrator:(id <TECTableViewCellRegistratorProtocol>)cellRegistrator
+                   configurationHandler:(TECTableViewCellConfigurationHandler)handler; {
     self = [super init];
     if(self) {
         NSParameterAssert(cellRegistrator);
@@ -28,7 +29,8 @@
     return self;
 }
 
-- (UITableViewCell *)cellForItem:(id)item tableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)cellForItem:(id)item
+                       tableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath {
     NSString *reuseIdentifier = [self.cellRegistrator cellReuseIdentifierForItem:item tableView:tableView atIndexPath:indexPath];
     NSParameterAssert(reuseIdentifier);
     return [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
