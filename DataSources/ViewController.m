@@ -74,7 +74,7 @@
                                         cellExtender]];
     
     [self.tableController setupWithTableView:self.tableView];
-    [self.tableController reloadDataSourceWithCompletion:nil];
+    [contentProvider reloadDataSourceWithCompletion:nil];
 }
 
 @end

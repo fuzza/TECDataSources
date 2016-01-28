@@ -7,6 +7,7 @@
 //
 
 #import "TECMemoryContentProvider.h"
+#import "TECContentProviderDelegate.h"
 
 @interface TECMemoryContentProvider ()
 
@@ -15,6 +16,7 @@
 @end
 
 @implementation TECMemoryContentProvider
+@synthesize presentationAdapter = _presentationAdapter;
 
 - (instancetype)initWithSections:(NSArray<id<TECSectionModelProtocol>> *)sections {
     self = [super init];
@@ -41,6 +43,13 @@
 - (id)itemAtIndexPath:(NSIndexPath *)indexPath {
     id<TECSectionModelProtocol> section = self.sections[indexPath.section];
     return section.items[indexPath.row];
+}
+
+- (void)reloadDataSourceWithCompletion:(TECContentProviderCompletionBlock)completion {
+    [self.presentationAdapter contentProviderDidReloadData:self];
+    if(completion) {
+        completion();
+    }
 }
 
 @end

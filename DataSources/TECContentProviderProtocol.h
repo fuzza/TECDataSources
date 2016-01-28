@@ -9,12 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "TECSectionModelProtocol.h"
 
+@protocol TECContentProviderPresentationAdapterProtocol;
+
+typedef void(^TECContentProviderCompletionBlock)();
+
 @protocol TECContentProviderProtocol <NSObject>
+
+@property (nonatomic, weak) id <TECContentProviderPresentationAdapterProtocol> presentationAdapter;
 
 - (NSInteger)numberOfSections;
 - (NSInteger)numberOfItemsInSection:(NSInteger)section;
 
 - (id<TECSectionModelProtocol>)sectionAtIndex:(NSInteger)index;
 - (id)itemAtIndexPath:(NSIndexPath *)indexPath;
+
+- (void)reloadDataSourceWithCompletion:(TECContentProviderCompletionBlock)completion;
 
 @end
