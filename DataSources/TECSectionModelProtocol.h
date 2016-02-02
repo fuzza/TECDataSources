@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol TECSectionModelProtocol <NSObject, NSFastEnumeration>
+@protocol TECSectionModelProtocol <NSObject, NSFastEnumeration, NSCopying>
 
-@property (nonatomic, strong, readonly) NSString *headerTitle;
-@property (nonatomic, strong, readonly) NSString *footerTitle;
+@property (nonatomic, copy, readonly) NSString *headerTitle;
+@property (nonatomic, copy, readonly) NSString *footerTitle;
 
 - (id)objectAtIndexedSubscript:(NSUInteger)idx;
 - (NSUInteger)count;

@@ -11,9 +11,9 @@
 
 @interface TECMemorySectionModel ()
 
-@property (nonatomic, strong, readwrite) NSArray *items;
-@property (nonatomic, strong, readwrite) NSString *headerTitle;
-@property (nonatomic, strong, readwrite) NSString *footerTitle;
+@property (nonatomic, copy, readwrite) NSArray *items;
+@property (nonatomic, copy, readwrite) NSString *headerTitle;
+@property (nonatomic, copy, readwrite) NSString *footerTitle;
 
 @end
 
@@ -52,7 +52,8 @@
 #pragma mark - NSFastEnumeration implementation
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state
-                                  objects:(__unsafe_unretained id  _Nonnull *)buffer count:(NSUInteger)len {
+                                  objects:(__unsafe_unretained id  _Nonnull *)buffer
+                                    count:(NSUInteger)len {
     return [self.items countByEnumeratingWithState:state objects:buffer count:len];
 }
 
@@ -91,6 +92,32 @@
             return;
         }
     }
+}
+
+#pragma mark - NSCopying implementation
+
+- (NSUInteger)hash {
+    NSUInteger hash = 0;
+    for(id object in self) {
+        hash += [object hash];
+    }
+    return hash + self.headerTitle.hash + self.footerTitle.hash;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL result = NO;
+    if ([object isKindOfClass:[self class]] || [self isKindOfClass:[object class]]) {
+        result = [[self items] isEqualToArray:[object items]] &&
+                 ([self.headerTitle isEqualToString:[object headerTitle]] || ([self headerTitle] == nil && [object headerTitle] == nil)) &&
+                 ([self.footerTitle isEqualToString:[object footerTitle]] || ([self footerTitle] == nil && [object footerTitle] == nil));
+    }
+    return result;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    return [[[self class] alloc] initWithItems:self.items
+                                   headerTitle:self.headerTitle
+                                   footerTitle:self.footerTitle];
 }
 
 @end

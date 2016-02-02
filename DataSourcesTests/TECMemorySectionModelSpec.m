@@ -171,4 +171,47 @@ describe(@"Cocoa collection support", ^() {
     });
 });
 
+describe(@"NSCopying implementation", ^{
+
+    it(@"should return equal hashes for equal models", ^() {
+        TECMemorySectionModel *model1 = [[TECMemorySectionModel alloc] initWithItems:testArray2];
+        TECMemorySectionModel *model2 = [[TECMemorySectionModel alloc] initWithItems:testArray2];
+        [[theValue([model1 hash]) should] equal:theValue([model2 hash])];
+    });
+    
+    it(@"should consider equal models with equal items array", ^() {
+        TECMemorySectionModel *model1 = [[TECMemorySectionModel alloc] initWithItems:testArray2];
+        TECMemorySectionModel *model2 = [[TECMemorySectionModel alloc] initWithItems:testArray2];
+        [[model1 should] equal:model2];
+    });
+    
+    it(@"should consider different models with different items array", ^() {
+        TECMemorySectionModel *model1 = [[TECMemorySectionModel alloc] initWithItems:testArray2];
+        TECMemorySectionModel *model2 = [[TECMemorySectionModel alloc] initWithItems:testArray1];
+        [[model1 shouldNot] equal:model2];
+    });
+    
+    it(@"should return different instance on copy", ^() {
+        TECMemorySectionModel *model1 = [[TECMemorySectionModel alloc] initWithItems:testArray2];
+        TECMemorySectionModel *model2 = [model1 copy];
+        [[model1 shouldNot] beIdenticalTo:model2];
+    });
+
+//
+//    Test fails due to..
+//    [NSArray copy] returns same instance?!
+//
+//    it(@"should return different instances with different items array on copy", ^() {
+//        TECMemorySectionModel *model1 = [[TECMemorySectionModel alloc] initWithItems:testArray2];
+//        TECMemorySectionModel *model2 = [model1 copy];
+//        [[[model1 items] shouldNot] beIdenticalTo:[model2 items]];
+//    });
+    
+    it(@"should return equal instances on copy", ^() {
+        TECMemorySectionModel *model1 = [[TECMemorySectionModel alloc] initWithItems:testArray2];
+        TECMemorySectionModel *model2 = [model1 copy];
+        [[model1 should] equal:model2];
+    });
+});
+
 SPEC_END
