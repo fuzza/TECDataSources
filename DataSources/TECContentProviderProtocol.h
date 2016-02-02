@@ -13,7 +13,7 @@
 
 typedef void(^TECContentProviderCompletionBlock)();
 
-@protocol TECContentProviderProtocol <NSObject>
+@protocol TECContentProviderProtocol <NSObject, NSFastEnumeration>
 
 @property (nonatomic, weak) id <TECContentProviderPresentationAdapterProtocol> presentationAdapter;
 
