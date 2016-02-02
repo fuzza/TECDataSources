@@ -34,14 +34,12 @@ describe(@"Cocoa collection support", ^() {
     TECMemorySectionModel * __block section1 = nil;
     TECMemorySectionModel * __block section2 = nil;
     NSMutableArray * __block array1 = nil;
-    NSMutableArray * __block array2 = nil;
     TECMemoryContentProvider * __block provider = nil;
     
     beforeEach(^() {
         section1 = [[TECMemorySectionModel alloc] initWithItems:testArray1];
         section2 = [[TECMemorySectionModel alloc] initWithItems:testArray2];
         array1 = [NSMutableArray array];
-        array2 = [NSMutableArray array];
         provider = [[TECMemoryContentProvider alloc] initWithSections:@[section1, section2]];
     });
     
@@ -65,33 +63,69 @@ describe(@"Cocoa collection support", ^() {
     });
     
     it(@"should return section enumerator", ^() {
+        [[provider.sectionEnumerator shouldNot] beNil];
     });
     
     it(@"should return reverse section enumerator", ^() {
+        [[provider.reverseSectionEnumerator shouldNot] beNil];
     });
     
     it(@"should enumerate sections via direct enumerator", ^() {
+        for (id <TECSectionModelProtocol> section in provider.sectionEnumerator) {
+            [array1 addObject:section];
+        }
+        [[array1 should] equal:@[section1, section2]];
     });
     
     it(@"should enumerate sections via reverse enumerator", ^() {
+        for (id <TECSectionModelProtocol> section in provider.reverseSectionEnumerator) {
+            [array1 addObject:section];
+        }
+        [[array1 should] equal:@[section2, section1]];
     });
     
     it(@"should enumerate sections via block directly", ^() {
+        [provider enumerateObjectsUsingBlock:^(id <TECSectionModelProtocol> obj, NSUInteger idx, BOOL *stop) {
+            [array1 addObject:obj];
+        }];
+        [[array1 should] equal:@[section1, section2]];
     });
     
     it(@"should enumerate sections via block in reverse order", ^() {
+        [provider enumerateObjectsUsingBlock:^(id <TECSectionModelProtocol> obj, NSUInteger idx, BOOL *stop) {
+            [array1 addObject:obj];
+        } options:NSEnumerationReverse];
+        [[array1 should] equal:@[section2, section1]];
     });
     
     it(@"should enumerate sections via block concurrently", ^() {
+        [provider enumerateObjectsUsingBlock:^(id <TECSectionModelProtocol> obj, NSUInteger idx, BOOL *stop) {
+            [array1 addObject:obj];
+        } options:NSEnumerationConcurrent];
+        [[array1 shouldEventually] equal:@[section1, section2]];
     });
     
     it(@"should enumerate sections via block concurrently in reverse order", ^() {
+        [provider enumerateObjectsUsingBlock:^(id <TECSectionModelProtocol> obj, NSUInteger idx, BOOL *stop) {
+            [array1 addObject:obj];
+        } options:NSEnumerationConcurrent | NSEnumerationReverse];
+        [[array1 shouldEventually] equal:@[section2, section1]];
     });
     
     it(@"should respect stop parameter when enumerating directly", ^() {
+        [provider enumerateObjectsUsingBlock:^(id <TECSectionModelProtocol> obj, NSUInteger idx, BOOL *stop) {
+            [array1 addObject:obj];
+            *stop = YES;
+        }];
+        [[array1 should] equal:@[section1]];
     });
     
     it(@"should respect stop parameter when enumerating in reverse order", ^() {
+        [provider enumerateObjectsUsingBlock:^(id <TECSectionModelProtocol> obj, NSUInteger idx, BOOL *stop) {
+            [array1 addObject:obj];
+            *stop = YES;
+        } options:NSEnumerationReverse];
+        [[array1 should] equal:@[section2]];
     });
 });
 
