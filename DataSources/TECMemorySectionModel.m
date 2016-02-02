@@ -38,10 +38,25 @@
     return self;
 }
 
+- (id)objectAtIndexedSubscript:(NSUInteger)idx {
+    return self.items[idx];
+}
+
 #pragma mark - Mutating items
 
 - (void)replaceItems:(NSArray *)items {
     self.items = items;
+}
+
+#pragma mark - NSFastEnumeration implementation
+
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state
+                                  objects:(__unsafe_unretained id  _Nonnull *)buffer count:(NSUInteger)len {
+    return [self.items countByEnumeratingWithState:state objects:buffer count:len];
+}
+
+- (NSUInteger)count {
+    return self.items.count;
 }
 
 @end

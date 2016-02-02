@@ -21,7 +21,7 @@
 
 #pragma mark - Objects casting
 
-@property (nonatomic, strong, readonly) NSArray <T> *items;
 - (void)replaceItems:(NSArray <T> *)items;
+- (T)objectAtIndexedSubscript:(NSUInteger)idx;
 
 @end

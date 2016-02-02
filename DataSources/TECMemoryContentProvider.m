@@ -33,7 +33,7 @@
 }
 
 - (NSInteger)numberOfItemsInSection:(NSInteger)section {
-    return self.sections[section].items.count;
+    return self.sections[section].count;
 }
 
 - (id<TECSectionModelProtocol>)sectionAtIndex:(NSInteger)index {
@@ -42,7 +42,7 @@
 
 - (id)itemAtIndexPath:(NSIndexPath *)indexPath {
     id<TECSectionModelProtocol> section = self.sections[indexPath.section];
-    return section.items[indexPath.row];
+    return section[indexPath.row];
 }
 
 - (void)reloadDataSourceWithCompletion:(TECContentProviderCompletionBlock)completion {
