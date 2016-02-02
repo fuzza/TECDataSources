@@ -7,6 +7,7 @@
 //
 
 #import "TECMemorySectionModel.h"
+#import <libkern/OSAtomic.h>
 
 @interface TECMemorySectionModel ()
 
@@ -57,6 +58,39 @@
 
 - (NSUInteger)count {
     return self.items.count;
+}
+
+- (NSEnumerator *)objectEnumerator {
+    return [self.items objectEnumerator];
+}
+
+- (NSEnumerator *)reverseObjectEnumerator {
+    return [self.items reverseObjectEnumerator];
+}
+
+- (void)enumerateObjectsUsingBlock:(void (^)(id, NSUInteger, BOOL *))block {
+    [self enumerateObjectsUsingBlock:block options:0];
+}
+
+- (void)enumerateObjectsUsingBlock:(void (^)(id, NSUInteger, BOOL *))block
+                           options:(NSEnumerationOptions)options {
+    __block volatile int32_t idx = 0;
+    __block BOOL stop = NO;
+    for (id object in (options & NSEnumerationReverse) ? [self reverseObjectEnumerator] : [self objectEnumerator] ) {
+        void(^innerBlock)() = ^() {
+            block(object, idx, &stop);
+            OSAtomicIncrement32(&idx);
+        };
+        if (options & NSEnumerationConcurrent) {
+            dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), innerBlock);
+        }
+        else {
+            innerBlock();
+        }
+        if (stop) {
+            return;
+        }
+    }
 }
 
 @end

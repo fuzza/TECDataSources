@@ -23,5 +23,10 @@
 
 - (void)replaceItems:(NSArray <T> *)items;
 - (T)objectAtIndexedSubscript:(NSUInteger)idx;
+- (NSEnumerator<T> *)objectEnumerator;
+- (NSEnumerator<T> *)reverseObjectEnumerator;
+- (void)enumerateObjectsUsingBlock:(void (^)(T obj, NSUInteger idx, BOOL *stop))block;
+- (void)enumerateObjectsUsingBlock:(void (^)(T obj, NSUInteger idx, BOOL *stop))block options:(NSEnumerationOptions)options;
+
 
 @end

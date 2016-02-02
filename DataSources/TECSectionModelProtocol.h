@@ -15,5 +15,9 @@
 
 - (id)objectAtIndexedSubscript:(NSUInteger)idx;
 - (NSUInteger)count;
+- (NSEnumerator *)objectEnumerator;
+- (NSEnumerator *)reverseObjectEnumerator;
+- (void)enumerateObjectsUsingBlock:(void (^)(id obj, NSUInteger idx, BOOL *stop))block;
+- (void)enumerateObjectsUsingBlock:(void (^)(id obj, NSUInteger idx, BOOL *stop))block options:(NSEnumerationOptions)options;
 
 @end

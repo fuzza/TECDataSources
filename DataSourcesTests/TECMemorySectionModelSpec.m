@@ -51,6 +51,124 @@ describe(@"Cocoa collection support", ^() {
         TECMemorySectionModel *model = [[TECMemorySectionModel alloc] initWithItems:testArray2];
         [[theValue([model count]) should] equal:theValue(2)];
     });
+    
+    it(@"should return object within bracketed notation", ^() {
+        TECMemorySectionModel *model = [[TECMemorySectionModel alloc] initWithItems:testArray2];
+        [[model[1] should] equal:testString2];
+    });
+    
+    it(@"should enumerate objects with for-in construct", ^() {
+        NSMutableArray *array = [NSMutableArray array];
+        TECMemorySectionModel *model = [[TECMemorySectionModel alloc] initWithItems:testArray2];
+        for (NSString *item in model) {
+            [array addObject:item];
+        }
+        [[array should] equal:testArray2];
+    });
+    
+    it(@"should return object enumerator", ^() {
+        TECMemorySectionModel *model = [[TECMemorySectionModel alloc] initWithItems:testArray2];
+        [[[model objectEnumerator] shouldNot] beNil];
+    });
+    
+    it(@"should return reverse object enumerator", ^() {
+        TECMemorySectionModel *model = [[TECMemorySectionModel alloc] initWithItems:testArray2];
+        [[[model reverseObjectEnumerator] shouldNot] beNil];
+    });
+    
+    it(@"should enumerate objects via direct enumerator", ^() {
+        NSMutableArray *array1 = [NSMutableArray array];
+        NSMutableArray *array2 = [NSMutableArray array];
+        TECMemorySectionModel *model = [[TECMemorySectionModel alloc] initWithItems:testArray2];
+        for(id object in model) {
+            [array1 addObject:object];
+        }
+        for(id object in model.objectEnumerator) {
+            [array2 addObject:object];
+        }
+        [[array1 should] equal:array2];
+    });
+    
+    it(@"should enumerate objects via reverse enumerator", ^() {
+        NSMutableArray *array1 = [NSMutableArray array];
+        NSMutableArray *array2 = [NSMutableArray array];
+        TECMemorySectionModel *model = [[TECMemorySectionModel alloc] initWithItems:testArray2];
+        for(id object in model) {
+            [array1 insertObject:object atIndex:0];
+        }
+        for(id object in model.reverseObjectEnumerator) {
+            [array2 addObject:object];
+        }
+        [[array1 should] equal:array2];
+    });
+    
+    it(@"should enumerate objects via block directly", ^() {
+        NSMutableArray *array1 = [NSMutableArray array];
+        TECMemorySectionModel *model = [[TECMemorySectionModel alloc] initWithItems:testArray2];
+        [model enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            [array1 addObject:obj];
+        }];
+        [[array1 should] equal:testArray2];
+    });
+    
+    it(@"should enumerate objects via block in reverse order", ^() {
+        NSMutableArray *array1 = [NSMutableArray array];
+        NSMutableArray *array2 = [NSMutableArray array];
+        TECMemorySectionModel *model = [[TECMemorySectionModel alloc] initWithItems:testArray2];
+        for(id object in model) {
+            [array1 insertObject:object atIndex:0];
+        }
+        [model enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            [array2 addObject:obj];
+        } options:NSEnumerationReverse];
+        [[array1 should] equal:array2];
+    });
+    
+    it(@"should enumerate objects via block concurrently", ^() {
+        NSMutableArray *array1 = [NSMutableArray array];
+        NSMutableArray *array2 = [NSMutableArray array];
+        TECMemorySectionModel *model = [[TECMemorySectionModel alloc] initWithItems:testArray2];
+        for(id object in model) {
+            [array1 addObject:object];
+        }
+        [model enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            [array2 addObject:obj];
+        } options:NSEnumerationConcurrent];
+        [[array1 shouldEventually] equal:array2];
+    });
+    
+    it(@"should enumerate objects via block concurrently in reverse order", ^() {
+        NSMutableArray *array1 = [NSMutableArray array];
+        NSMutableArray *array2 = [NSMutableArray array];
+        TECMemorySectionModel *model = [[TECMemorySectionModel alloc] initWithItems:testArray2];
+        for(id object in model) {
+            [array1 insertObject:object atIndex:0];
+        }
+        [model enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            [array2 addObject:obj];
+        } options:NSEnumerationConcurrent | NSEnumerationReverse];
+        [[array1 shouldEventually] equal:array2];
+    });
+    
+    it(@"should respect stop parameter when enumerating directly", ^() {
+        NSMutableArray *array1 = [NSMutableArray array];
+        TECMemorySectionModel *model = [[TECMemorySectionModel alloc] initWithItems:testArray2];
+        [model enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            [array1 addObject:obj];
+            *stop = YES;
+        }];
+        [[array1 should] equal:testArray1];
+    });
+    
+    it(@"should respect stop parameter when enumerating in reverse order", ^() {
+        NSMutableArray *array1 = [NSMutableArray array];
+        TECMemorySectionModel *model = [[TECMemorySectionModel alloc] initWithItems:testArray2];
+        [model enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            [array1 addObject:obj];
+            *stop = YES;
+        } options:NSEnumerationReverse];
+        [[array1 should] equal:@[testString2]];
+    });
 });
 
 SPEC_END
