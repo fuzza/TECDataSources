@@ -83,7 +83,6 @@
     for (id object in enumerator) {
         void(^innerBlock)() = ^() {
             block(object, idx, &stop);
-            
             OSAtomicIncrement32(&idx);
         };
         if (isEnumerationConcurrent) {
