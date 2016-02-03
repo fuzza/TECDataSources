@@ -84,13 +84,16 @@
                            options:(NSEnumerationOptions)options {
     __block volatile int32_t idx = 0;
     __block BOOL stop = NO;
-    for (id object in (options & NSEnumerationReverse) ? [self reverseSectionEnumerator] : [self sectionEnumerator] ) {
+    BOOL isEnumerationConcurrent = options & NSEnumerationConcurrent;
+    BOOL isEnumerationReverse = options & NSEnumerationReverse;
+    NSEnumerator *enumerator = isEnumerationReverse ? [self reverseSectionEnumerator] : [self sectionEnumerator];
+    for (id object in enumerator) {
         void(^innerBlock)() = ^() {
             block(object, idx, &stop);
             OSAtomicIncrement32(&idx);
         };
-        if (options & NSEnumerationConcurrent) {
-            dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), innerBlock);
+        if (isEnumerationConcurrent) {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), innerBlock);
         }
         else {
             innerBlock();
