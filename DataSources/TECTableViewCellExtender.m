@@ -11,7 +11,22 @@
 #import "TECSectionModelProtocol.h"
 #import "TECTableViewCellFactoryProtocol.h"
 
+@interface TECTableViewCellExtender ()
+
+@property (nonatomic, strong) id <TECTableViewCellFactoryProtocol> cellFactory;
+
+@end
+
 @implementation TECTableViewCellExtender
+
+- (instancetype)initWithCellFactory:(id <TECTableViewCellFactoryProtocol>)cellFactory {
+    NSParameterAssert(cellFactory);
+    self = [super init];
+    if(self) {
+        self.cellFactory = cellFactory;
+    }
+    return self;
+}
 
 #pragma mark - UITableViewDataSource implementation
 

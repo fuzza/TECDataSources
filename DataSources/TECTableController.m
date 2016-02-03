@@ -7,22 +7,20 @@
 //
 
 #import "TECTableController.h"
-#import "TECTableViewCellFactoryProtocol.h"
 #import "TECContentProviderProtocol.h"
 #import "TECSectionModelProtocol.h"
 
 #import "TECDelegateProxy.h"
 #import "TECTableViewExtender.h"
+#import "TECContentProviderDelegate.h"
 
-@interface TECTableController ()
+@interface TECTableController () <TECContentProviderPresentationAdapterProtocol>
 
 @property (nonatomic, weak) UITableView *tableView;
 
-@property (nonatomic, strong) id <TECTableViewCellFactoryProtocol> cellFactory;
 @property (nonatomic, strong) id <TECContentProviderProtocol> contentProvider;
 
 @property (nonatomic, strong) TECDelegateProxy <id <UITableViewDelegate, UITableViewDataSource>> *delegateProxy;
-
 @property (nonatomic, strong) NSArray <TECTableViewExtender *> *extenders;
 
 @end
@@ -31,12 +29,12 @@
 
 #pragma mark - Lifecycle
 
-- (instancetype)initWithContentProvider:(id <TECContentProviderProtocol>)contentProvider
-                            cellFactory:(id <TECTableViewCellFactoryProtocol>)cellFactory {
+- (instancetype)initWithContentProvider:(id <TECContentProviderProtocol>)contentProvider {
     self = [super init];
     if(self) {
         self.contentProvider = contentProvider;
-        self.cellFactory = cellFactory;
+        self.contentProvider.presentationAdapter = self;
+        
         self.delegateProxy = [[TECDelegateProxy alloc] init];
     }
     return self;
@@ -62,7 +60,6 @@
 
 - (void)addExtender:(TECTableViewExtender *)extender {
     extender.tableView = self.tableView;
-    extender.cellFactory = self.cellFactory;
     extender.contentProvider = self.contentProvider;
     [self.delegateProxy attachDelegate:extender];
 }
@@ -75,11 +72,10 @@
     self.tableView.delegate = [self.delegateProxy proxy];
 }
 
-- (void)reloadDataSourceWithCompletion:(TECTableCompletionBlock)completion {
+#pragma mark - ContentProviderPresentationAdapter
+
+- (void)contentProviderDidReloadData:(id<TECContentProviderProtocol>)contentProvider {
     [self.tableView reloadData];
-    if(completion) {
-        completion();
-    }
 }
 
 @end

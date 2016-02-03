@@ -8,6 +8,7 @@
 
 #import "TECTableViewExtender.h"
 
+#pragma clang diagnostic ignored "-Wprotocol"
 @implementation TECTableViewExtender
 
 @end

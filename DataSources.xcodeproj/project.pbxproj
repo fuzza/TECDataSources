@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00A85D441C60D8FE00125C2C /* TECMemorySectionModelSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A85D431C60D8FE00125C2C /* TECMemorySectionModelSpec.m */; };
+		00A85D461C60FCDA00125C2C /* TECMemoryContentProviderSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A85D451C60FCDA00125C2C /* TECMemoryContentProviderSpec.m */; };
 		3E1457A237F0ED5DAA116D60 /* libPods-DataSourcesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6648EB9D0A7F2502D02AA01 /* libPods-DataSourcesTests.a */; };
 		6F0CD60E1C51109400D09C01 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CD60D1C51109400D09C01 /* main.m */; };
 		6F0CD6111C51109400D09C01 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CD6101C51109400D09C01 /* AppDelegate.m */; };
@@ -17,7 +19,6 @@
 		6F0CD6271C51109500D09C01 /* TECTableViewCellFactorySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CD6261C51109500D09C01 /* TECTableViewCellFactorySpec.m */; };
 		6F2E890C1C5142DF00FD4165 /* TECTableViewCellRegistratorSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2E890B1C5142DF00FD4165 /* TECTableViewCellRegistratorSpec.m */; };
 		6F59A9521C57B8EB0095289C /* TECTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A9511C57B8EB0095289C /* TECTableController.m */; };
-		6F59A9581C57BEF30095289C /* TECCallbackExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A9571C57BEF30095289C /* TECCallbackExecutor.m */; };
 		6F59A9661C57DCAF0095289C /* TECDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A9651C57DCAF0095289C /* TECDelegateProxy.m */; };
 		6F59A96A1C58CA650095289C /* TECMemoryContentProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A9691C58CA650095289C /* TECMemoryContentProvider.m */; };
 		6F59A96D1C58CA990095289C /* TECMemorySectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A96C1C58CA990095289C /* TECMemorySectionModel.m */; };
@@ -41,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00A85D431C60D8FE00125C2C /* TECMemorySectionModelSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECMemorySectionModelSpec.m; sourceTree = "<group>"; };
+		00A85D451C60FCDA00125C2C /* TECMemoryContentProviderSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECMemoryContentProviderSpec.m; sourceTree = "<group>"; };
 		1EF957566F87E00C2CAB1977 /* Pods-DataSourcesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataSourcesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DataSourcesTests/Pods-DataSourcesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2BA9BBEB5BFFAD972BFA7ACE /* Pods-DataSourcesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataSourcesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DataSourcesTests/Pods-DataSourcesTests.release.xcconfig"; sourceTree = "<group>"; };
 		6F0CD6091C51109400D09C01 /* DataSources.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DataSources.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,8 +63,6 @@
 		6F2E890B1C5142DF00FD4165 /* TECTableViewCellRegistratorSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewCellRegistratorSpec.m; sourceTree = "<group>"; };
 		6F59A9501C57B8EB0095289C /* TECTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableController.h; sourceTree = "<group>"; };
 		6F59A9511C57B8EB0095289C /* TECTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableController.m; sourceTree = "<group>"; };
-		6F59A9561C57BEF30095289C /* TECCallbackExecutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECCallbackExecutor.h; sourceTree = "<group>"; };
-		6F59A9571C57BEF30095289C /* TECCallbackExecutor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECCallbackExecutor.m; sourceTree = "<group>"; };
 		6F59A9621C57C7D90095289C /* TECContentProviderProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECContentProviderProtocol.h; sourceTree = "<group>"; };
 		6F59A9631C57C86A0095289C /* TECSectionModelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECSectionModelProtocol.h; sourceTree = "<group>"; };
 		6F59A9641C57DCAF0095289C /* TECDelegateProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECDelegateProxy.h; sourceTree = "<group>"; };
@@ -83,6 +84,7 @@
 		6F78F0481C511E6C006F08DC /* TECTableViewCellRegistratorProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewCellRegistratorProtocol.h; sourceTree = "<group>"; };
 		6F78F04B1C513344006F08DC /* TECTableViewCellRegistrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewCellRegistrator.h; sourceTree = "<group>"; };
 		6F78F04C1C513344006F08DC /* TECTableViewCellRegistrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewCellRegistrator.m; sourceTree = "<group>"; };
+		6FB0892F1C5A75DF008AF389 /* TECContentProviderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECContentProviderDelegate.h; sourceTree = "<group>"; };
 		6FD285C51C591D0400A11316 /* TECTableViewCellExtender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewCellExtender.h; sourceTree = "<group>"; };
 		6FD285C61C591D0400A11316 /* TECTableViewCellExtender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewCellExtender.m; sourceTree = "<group>"; };
 		E6648EB9D0A7F2502D02AA01 /* libPods-DataSourcesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DataSourcesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -177,6 +179,8 @@
 			children = (
 				6F2E890B1C5142DF00FD4165 /* TECTableViewCellRegistratorSpec.m */,
 				6F0CD6261C51109500D09C01 /* TECTableViewCellFactorySpec.m */,
+				00A85D431C60D8FE00125C2C /* TECMemorySectionModelSpec.m */,
+				00A85D451C60FCDA00125C2C /* TECMemoryContentProviderSpec.m */,
 				6F0CD6281C51109500D09C01 /* Info.plist */,
 			);
 			path = DataSourcesTests;
@@ -196,7 +200,6 @@
 			isa = PBXGroup;
 			children = (
 				6F59A97E1C58EAE90095289C /* SectionModel */,
-				6F59A97D1C58EAA80095289C /* CallbackExecutor */,
 				6F59A97C1C58EA9C0095289C /* DelegateProxy */,
 				6F59A9791C58EA500095289C /* ContentProviders */,
 			);
@@ -230,6 +233,7 @@
 				6F59A9621C57C7D90095289C /* TECContentProviderProtocol.h */,
 				6F59A9681C58CA650095289C /* TECMemoryContentProvider.h */,
 				6F59A9691C58CA650095289C /* TECMemoryContentProvider.m */,
+				6FB0892F1C5A75DF008AF389 /* TECContentProviderDelegate.h */,
 			);
 			name = ContentProviders;
 			sourceTree = "<group>";
@@ -265,15 +269,6 @@
 				6F59A9651C57DCAF0095289C /* TECDelegateProxy.m */,
 			);
 			name = DelegateProxy;
-			sourceTree = "<group>";
-		};
-		6F59A97D1C58EAA80095289C /* CallbackExecutor */ = {
-			isa = PBXGroup;
-			children = (
-				6F59A9561C57BEF30095289C /* TECCallbackExecutor.h */,
-				6F59A9571C57BEF30095289C /* TECCallbackExecutor.m */,
-			);
-			name = CallbackExecutor;
 			sourceTree = "<group>";
 		};
 		6F59A97E1C58EAE90095289C /* SectionModel */ = {
@@ -424,7 +419,6 @@
 			files = (
 				6F59A9841C58ECF70095289C /* TECTableViewSectionFooterExtender.m in Sources */,
 				6F78F04D1C513344006F08DC /* TECTableViewCellRegistrator.m in Sources */,
-				6F59A9581C57BEF30095289C /* TECCallbackExecutor.m in Sources */,
 				6F59A9661C57DCAF0095289C /* TECDelegateProxy.m in Sources */,
 				6F0CD6141C51109400D09C01 /* ViewController.m in Sources */,
 				6F0CD6111C51109400D09C01 /* AppDelegate.m in Sources */,
@@ -446,6 +440,8 @@
 			files = (
 				6F2E890C1C5142DF00FD4165 /* TECTableViewCellRegistratorSpec.m in Sources */,
 				6F0CD6271C51109500D09C01 /* TECTableViewCellFactorySpec.m in Sources */,
+				00A85D441C60D8FE00125C2C /* TECMemorySectionModelSpec.m in Sources */,
+				00A85D461C60FCDA00125C2C /* TECMemoryContentProviderSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,7 +559,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = DataSources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.techery.datasources.DataSources;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -574,7 +572,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = DataSources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.techery.datasources.DataSources;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -586,7 +586,10 @@
 			baseConfigurationReference = 1EF957566F87E00C2CAB1977 /* Pods-DataSourcesTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = DataSourcesTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.techery.datasources.DataSourcesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -599,7 +602,10 @@
 			baseConfigurationReference = 2BA9BBEB5BFFAD972BFA7ACE /* Pods-DataSourcesTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = DataSourcesTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.techery.datasources.DataSourcesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

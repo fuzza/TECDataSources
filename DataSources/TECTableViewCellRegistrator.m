@@ -37,12 +37,13 @@
     self.registratorCache = [NSMutableDictionary new];
 }
 
-- (NSString *)cellReuseIdentifierForItem:(id)item tableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath {
+- (NSString *)cellReuseIdentifierForItem:(id)item
+                               tableView:(UITableView *)tableView
+                             atIndexPath:(NSIndexPath *)indexPath {
     NSParameterAssert(item);
     NSParameterAssert(indexPath);
     
     Class cellClass = self.classHandler(item, indexPath);
-    NSParameterAssert(cellClass);
     
     NSString *reuseIdentifier = self.reuseIdHandler(cellClass, item, indexPath);
     NSParameterAssert(reuseIdentifier);
@@ -55,7 +56,17 @@
     return reuseIdentifier;
 }
 
-- (void)registerCellClass:(Class)cellClass inTableView:(UITableView *)tableView forReuseIdentifier:(NSString *)reuseIdentifier {
+- (Class)cellClassForItem:(id)item
+                tableView:(UITableView *)tableView
+              atIndexPath:(NSIndexPath *)indexPath {
+    Class cellClass = self.classHandler(item, indexPath);
+    NSParameterAssert(cellClass);
+    return cellClass;
+}
+
+- (void)registerCellClass:(Class)cellClass
+              inTableView:(UITableView *)tableView
+       forReuseIdentifier:(NSString *)reuseIdentifier {
     NSParameterAssert(cellClass);
     NSParameterAssert(reuseIdentifier);
     

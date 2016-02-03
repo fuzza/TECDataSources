@@ -14,7 +14,6 @@
 @interface TECTableViewExtender : NSObject <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, weak) id<TECContentProviderProtocol> contentProvider;
-@property (nonatomic, weak) id<TECTableViewCellFactoryProtocol> cellFactory;
 @property (nonatomic, weak) UITableView *tableView;
 
 @end

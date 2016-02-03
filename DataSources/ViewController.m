@@ -61,13 +61,12 @@
     TECMemorySectionModel *secondSection = [[TECMemorySectionModel alloc] initWithItems:@[@"four", @"five", @"six"] headerTitle:@"secondHeader" footerTitle:@"secondFooter"];
     TECMemoryContentProvider *contentProvider = [[TECMemoryContentProvider alloc] initWithSections:@[firstSection, secondSection]];
     
-    self.tableController = [[TECTableController alloc] initWithContentProvider:contentProvider
-                                                                   cellFactory:factory];
+    self.tableController = [[TECTableController alloc] initWithContentProvider:contentProvider];
 
     self.footerExtender = [[TECTableViewSectionFooterExtender alloc] init];
     self.headerExtender = [[TECTableViewSectionHeaderExtender alloc] init];
     
-    TECTableViewCellExtender *cellExtender = [[TECTableViewCellExtender alloc] init];
+    TECTableViewCellExtender *cellExtender = [[TECTableViewCellExtender alloc] initWithCellFactory:factory];
     
     [self.tableController addExtenders:@[
                                         self.headerExtender,
@@ -75,7 +74,7 @@
                                         cellExtender]];
     
     [self.tableController setupWithTableView:self.tableView];
-    [self.tableController reloadDataSourceWithCompletion:nil];
+    [contentProvider reloadDataSourceWithCompletion:nil];
 }
 
 @end

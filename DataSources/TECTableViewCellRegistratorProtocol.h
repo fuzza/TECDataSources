@@ -14,4 +14,8 @@
                                tableView:(UITableView *)tableView
                              atIndexPath:(NSIndexPath *)indexPath;
 
+- (Class)cellClassForItem:(id)item
+                tableView:(UITableView *)tableView
+              atIndexPath:(NSIndexPath *)indexPath;
+
 @end

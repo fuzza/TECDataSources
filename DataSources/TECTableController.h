@@ -8,20 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol TECTableViewCellFactoryProtocol;
 @protocol TECContentProviderProtocol;
 
 @class TECTableViewExtender;
 
-typedef void(^TECTableCompletionBlock)();
-
 @interface TECTableController : NSObject
 
-- (instancetype)initWithContentProvider:(id <TECContentProviderProtocol>)contentProvider
-                            cellFactory:(id <TECTableViewCellFactoryProtocol>)cellFactoryr;
+- (instancetype)initWithContentProvider:(id <TECContentProviderProtocol>)contentProvider;
 
 - (void)setupWithTableView:(UITableView *)tableView;
-- (void)reloadDataSourceWithCompletion:(TECTableCompletionBlock)completion;
 
 - (void)addExtenders:(NSArray <TECTableViewExtender *> *)extenders;
 
