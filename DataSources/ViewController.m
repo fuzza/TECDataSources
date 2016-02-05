@@ -63,10 +63,10 @@
     
     self.tableController = [[TECTableController alloc] initWithContentProvider:contentProvider];
 
-    self.footerExtender = [[TECTableViewSectionFooterExtender alloc] init];
-    self.headerExtender = [[TECTableViewSectionHeaderExtender alloc] init];
+    self.footerExtender = [TECTableViewSectionFooterExtender extender];
+    self.headerExtender = [TECTableViewSectionHeaderExtender extender];
     
-    TECTableViewCellExtender *cellExtender = [[TECTableViewCellExtender alloc] initWithCellFactory:factory];
+    TECTableViewCellExtender *cellExtender = [TECTableViewCellExtender cellExtenderWithCellFactory:factory];
     
     [self.tableController addExtenders:@[
                                         self.headerExtender,

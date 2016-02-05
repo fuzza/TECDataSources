@@ -11,13 +11,17 @@
 #import "TECSectionModelProtocol.h"
 #import "TECTableViewCellFactoryProtocol.h"
 
-@interface TECTableViewCellExtender ()
+TECTableViewExtenderInterfaceExtension(TECTableViewCellExtender)
 
 @property (nonatomic, strong) id <TECTableViewCellFactoryProtocol> cellFactory;
 
-@end
+TECTableViewExtenderEnd
 
-@implementation TECTableViewCellExtender
+TECTableViewExtenderImplementation(TECTableViewCellExtender)
+
++ (instancetype)cellExtenderWithCellFactory:(id <TECTableViewCellFactoryProtocol>)cellFactory {
+    return [[self alloc] initWithCellFactory:cellFactory];
+}
 
 - (instancetype)initWithCellFactory:(id <TECTableViewCellFactoryProtocol>)cellFactory {
     NSParameterAssert(cellFactory);
@@ -51,4 +55,4 @@
     [self.cellFactory configureCell:cell forItem:item inTableView:tableView atIndexPath:indexPath];
 }
 
-@end
+TECTableViewExtenderEnd

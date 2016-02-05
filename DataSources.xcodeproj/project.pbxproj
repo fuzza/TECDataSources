@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		008D85671C63B51C002D82F3 /* TECTableViewEditingExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 008D85661C63B51C002D82F3 /* TECTableViewEditingExtender.m */; };
+		008D856A1C63B561002D82F3 /* TECTableViewDeletingExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 008D85691C63B561002D82F3 /* TECTableViewDeletingExtender.m */; };
+		008D856D1C63B5A8002D82F3 /* TECTableViewItemUpdatingExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 008D856C1C63B5A8002D82F3 /* TECTableViewItemUpdatingExtender.m */; };
+		008D85701C648F52002D82F3 /* TECTableViewReorderingExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 008D856F1C648F52002D82F3 /* TECTableViewReorderingExtender.m */; };
 		00A85D441C60D8FE00125C2C /* TECMemorySectionModelSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A85D431C60D8FE00125C2C /* TECMemorySectionModelSpec.m */; };
 		00A85D461C60FCDA00125C2C /* TECMemoryContentProviderSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A85D451C60FCDA00125C2C /* TECMemoryContentProviderSpec.m */; };
 		3E1457A237F0ED5DAA116D60 /* libPods-DataSourcesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6648EB9D0A7F2502D02AA01 /* libPods-DataSourcesTests.a */; };
@@ -42,6 +46,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		008D85651C63B51C002D82F3 /* TECTableViewEditingExtender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewEditingExtender.h; sourceTree = "<group>"; };
+		008D85661C63B51C002D82F3 /* TECTableViewEditingExtender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewEditingExtender.m; sourceTree = "<group>"; };
+		008D85681C63B561002D82F3 /* TECTableViewDeletingExtender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewDeletingExtender.h; sourceTree = "<group>"; };
+		008D85691C63B561002D82F3 /* TECTableViewDeletingExtender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewDeletingExtender.m; sourceTree = "<group>"; };
+		008D856B1C63B5A8002D82F3 /* TECTableViewItemUpdatingExtender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewItemUpdatingExtender.h; sourceTree = "<group>"; };
+		008D856C1C63B5A8002D82F3 /* TECTableViewItemUpdatingExtender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewItemUpdatingExtender.m; sourceTree = "<group>"; };
+		008D856E1C648F52002D82F3 /* TECTableViewReorderingExtender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewReorderingExtender.h; sourceTree = "<group>"; };
+		008D856F1C648F52002D82F3 /* TECTableViewReorderingExtender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewReorderingExtender.m; sourceTree = "<group>"; };
 		00A85D431C60D8FE00125C2C /* TECMemorySectionModelSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECMemorySectionModelSpec.m; sourceTree = "<group>"; };
 		00A85D451C60FCDA00125C2C /* TECMemoryContentProviderSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECMemoryContentProviderSpec.m; sourceTree = "<group>"; };
 		1EF957566F87E00C2CAB1977 /* Pods-DataSourcesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataSourcesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DataSourcesTests/Pods-DataSourcesTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -249,6 +261,14 @@
 				6F59A9831C58ECF70095289C /* TECTableViewSectionFooterExtender.m */,
 				6FD285C51C591D0400A11316 /* TECTableViewCellExtender.h */,
 				6FD285C61C591D0400A11316 /* TECTableViewCellExtender.m */,
+				008D85651C63B51C002D82F3 /* TECTableViewEditingExtender.h */,
+				008D85661C63B51C002D82F3 /* TECTableViewEditingExtender.m */,
+				008D85681C63B561002D82F3 /* TECTableViewDeletingExtender.h */,
+				008D85691C63B561002D82F3 /* TECTableViewDeletingExtender.m */,
+				008D856B1C63B5A8002D82F3 /* TECTableViewItemUpdatingExtender.h */,
+				008D856C1C63B5A8002D82F3 /* TECTableViewItemUpdatingExtender.m */,
+				008D856E1C648F52002D82F3 /* TECTableViewReorderingExtender.h */,
+				008D856F1C648F52002D82F3 /* TECTableViewReorderingExtender.m */,
 			);
 			name = Extenders;
 			sourceTree = "<group>";
@@ -420,6 +440,8 @@
 				6F59A9841C58ECF70095289C /* TECTableViewSectionFooterExtender.m in Sources */,
 				6F78F04D1C513344006F08DC /* TECTableViewCellRegistrator.m in Sources */,
 				6F59A9661C57DCAF0095289C /* TECDelegateProxy.m in Sources */,
+				008D856A1C63B561002D82F3 /* TECTableViewDeletingExtender.m in Sources */,
+				008D85701C648F52002D82F3 /* TECTableViewReorderingExtender.m in Sources */,
 				6F0CD6141C51109400D09C01 /* ViewController.m in Sources */,
 				6F0CD6111C51109400D09C01 /* AppDelegate.m in Sources */,
 				6F59A96A1C58CA650095289C /* TECMemoryContentProvider.m in Sources */,
@@ -427,8 +449,10 @@
 				6F59A9521C57B8EB0095289C /* TECTableController.m in Sources */,
 				6F59A98A1C5911570095289C /* TECTableViewExtender.m in Sources */,
 				6F0CD60E1C51109400D09C01 /* main.m in Sources */,
+				008D85671C63B51C002D82F3 /* TECTableViewEditingExtender.m in Sources */,
 				6F59A9811C58EC610095289C /* TECTableViewSectionHeaderExtender.m in Sources */,
 				6F78F0461C511788006F08DC /* TECTableViewCellFactory.m in Sources */,
+				008D856D1C63B5A8002D82F3 /* TECTableViewItemUpdatingExtender.m in Sources */,
 				6FD285C71C591D0400A11316 /* TECTableViewCellExtender.m in Sources */,
 				6F59A96D1C58CA990095289C /* TECMemorySectionModel.m in Sources */,
 			);

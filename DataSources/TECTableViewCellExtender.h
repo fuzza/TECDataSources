@@ -10,8 +10,9 @@
 
 @protocol TECTableViewCellFactoryProtocol;
 
-@interface TECTableViewCellExtender : TECTableViewExtender
+TECTableViewExtenderInterface(TECTableViewCellExtender)
 
++ (instancetype)cellExtenderWithCellFactory:(id <TECTableViewCellFactoryProtocol>)cellFactory;
 - (instancetype)initWithCellFactory:(id <TECTableViewCellFactoryProtocol>)cellFactory;
 
-@end
+TECTableViewExtenderEnd

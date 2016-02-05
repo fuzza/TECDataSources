@@ -12,6 +12,7 @@
 @protocol TECContentProviderPresentationAdapterProtocol;
 
 typedef void(^TECContentProviderCompletionBlock)();
+typedef void(^TECContentProviderBatchUpdatesBlock)();
 
 @protocol TECContentProviderProtocol <NSObject, NSFastEnumeration>
 
@@ -25,7 +26,17 @@ typedef void(^TECContentProviderCompletionBlock)();
 
 - (void)reloadDataSourceWithCompletion:(TECContentProviderCompletionBlock)completion;
 
+- (void)performBatchUpdatesWithBlock:(TECContentProviderBatchUpdatesBlock)block;
+- (void)insertSection:(id <TECSectionModelProtocol>)section atIndex:(NSUInteger)index;
+- (void)deleteSectionAtIndex:(NSUInteger)index;
+- (void)insertItem:(id)item atIndexPath:(NSIndexPath *)indexPath;
+- (void)deleteItemAtIndexPath:(NSIndexPath *)indexPath;
+- (void)updateItemAtIndexPath:(NSIndexPath *)indexPath;
+- (void)updateItemAtIndexPath:(NSIndexPath *)indexPath withItem:(id)item;
+- (void)moveItemAtIndexPath:(NSIndexPath *)indexPath toIndexPath:(NSIndexPath *)newIndexPath;
+
 - (id)objectAtIndexedSubscript:(NSUInteger)idx;
+- (void)setObject:(id)object atIndexedSubscript:(NSUInteger)idx;
 - (NSUInteger)count;
 - (NSEnumerator *)sectionEnumerator;
 - (NSEnumerator *)reverseSectionEnumerator;
@@ -33,5 +44,6 @@ typedef void(^TECContentProviderCompletionBlock)();
 - (void)enumerateObjectsUsingBlock:(void (^)(id obj, NSUInteger idx, BOOL *stop))block options:(NSEnumerationOptions)options;
 
 - (id)objectForKeyedSubscript:(NSIndexPath *)key;
+- (void)setObject:(id)object forKeyedSubscript:(NSIndexPath *)key;
 
 @end

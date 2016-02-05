@@ -11,7 +11,27 @@
 @protocol TECContentProviderProtocol;
 @protocol TECTableViewCellFactoryProtocol;
 
+#define TECTableViewExtenderInterface(InterfaceName) \
+    _Pragma("clang diagnostic push") \
+    _Pragma("clang diagnostic ignored \"-Wprotocol\"") \
+    @interface InterfaceName : TECTableViewExtender
+
+#define TECTableViewExtenderInterfaceExtension(InterfaceName) \
+    _Pragma("clang diagnostic push") \
+    _Pragma("clang diagnostic ignored \"-Wprotocol\"") \
+    @interface InterfaceName ()
+
+#define TECTableViewExtenderImplementation(InterfaceName) \
+    _Pragma("clang diagnostic push") \
+    _Pragma("clang diagnostic ignored \"-Wprotocol\"") \
+    @implementation InterfaceName
+
+#define TECTableViewExtenderEnd @end \
+    _Pragma("clang diagnostic pop") \
+
 @interface TECTableViewExtender : NSObject <UITableViewDataSource, UITableViewDelegate>
+
++ (instancetype)extender;
 
 @property (nonatomic, weak) id<TECContentProviderProtocol> contentProvider;
 @property (nonatomic, weak) UITableView *tableView;

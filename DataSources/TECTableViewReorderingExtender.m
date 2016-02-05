@@ -1,0 +1,66 @@
+//
+//  TECTableViewReorderingExtender.m
+//  DataSources
+//
+//  Created by Petro Korienev on 2/4/16.
+//  Copyright © 2016 Alexey Fayzullov. All rights reserved.
+//
+
+#import "TECTableViewReorderingExtender.h"
+#import "TECContentProviderProtocol.h"
+
+TECTableViewExtenderInterfaceExtension(TECTableViewReorderingExtender)
+
+@property (nonatomic, copy) TECTableViewReorderingExtenderCanMoveBlock canMoveBlock;
+@property (nonatomic, copy) TECTableViewReorderingExtenderTargetIndexPathBlock targetIndexPathBlock;
+
+TECTableViewExtenderEnd
+
+TECTableViewExtenderImplementation(TECTableViewReorderingExtender)
+
++ (instancetype)reorderingExtenderWithCanMoveBlock:(TECTableViewReorderingExtenderCanMoveBlock)canMoveBlock
+                              targetIndexPathBlock:(TECTableViewReorderingExtenderTargetIndexPathBlock)targetIndexPathBlock {
+    return [[self alloc] initWithCanMoveBlock:canMoveBlock
+                         targetIndexPathBlock:targetIndexPathBlock];
+}
+
+- (instancetype)initWithCanMoveBlock:(TECTableViewReorderingExtenderCanMoveBlock)canMoveBlock
+                targetIndexPathBlock:(TECTableViewReorderingExtenderTargetIndexPathBlock)targetIndexPathBlock {
+    self = [self init];
+    if (self) {
+        self.canMoveBlock = canMoveBlock;
+        self.targetIndexPathBlock = targetIndexPathBlock;
+    }
+    return self;
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath {
+    NSIndexPath *result = sourceIndexPath;
+    if (self.targetIndexPathBlock) {
+        result = self.targetIndexPathBlock(tableView,
+                                           sourceIndexPath,
+                                           self.contentProvider[sourceIndexPath.section],
+                                           self.contentProvider[sourceIndexPath],
+                                           proposedDestinationIndexPath,
+                                           self.contentProvider[proposedDestinationIndexPath.section],
+                                           self.contentProvider[proposedDestinationIndexPath]);
+    }
+    return result;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    BOOL result = YES;
+    if (self.canMoveBlock) {
+        result = self.canMoveBlock(tableView,
+                                   indexPath,
+                                   self.contentProvider[indexPath.section],
+                                   self.contentProvider[indexPath]);
+    }
+    return result;
+}
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    [self.contentProvider moveItemAtIndexPath:sourceIndexPath toIndexPath:destinationIndexPath];
+}
+
+TECTableViewExtenderEnd
