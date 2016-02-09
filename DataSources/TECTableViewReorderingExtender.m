@@ -37,13 +37,19 @@ TECTableViewExtenderImplementation(TECTableViewReorderingExtender)
 - (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath {
     NSIndexPath *result = sourceIndexPath;
     if (self.targetIndexPathBlock) {
+        id targetItem = nil;
+        // The item may be targeted to append existing section and will fire NSRangeException
+        // without following check
+        if (proposedDestinationIndexPath.row < [self.contentProvider[proposedDestinationIndexPath.section] count]) {
+            targetItem = self.contentProvider[proposedDestinationIndexPath];
+        }
         result = self.targetIndexPathBlock(tableView,
                                            sourceIndexPath,
                                            self.contentProvider[sourceIndexPath.section],
                                            self.contentProvider[sourceIndexPath],
                                            proposedDestinationIndexPath,
                                            self.contentProvider[proposedDestinationIndexPath.section],
-                                           self.contentProvider[proposedDestinationIndexPath]);
+                                           targetItem);
     }
     return result;
 }

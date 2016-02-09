@@ -14,10 +14,8 @@
 
 @interface TECTableController : NSObject
 
-- (instancetype)initWithContentProvider:(id <TECContentProviderProtocol>)contentProvider;
-
-- (void)setupWithTableView:(UITableView *)tableView;
-
-- (void)addExtenders:(NSArray <TECTableViewExtender *> *)extenders;
+- (instancetype)initWithContentProvider:(id <TECContentProviderProtocol>)contentProvider
+                              tableView:(UITableView *)tableView
+                              extenders:(NSArray <TECTableViewExtender *> *)extenders;
 
 @end

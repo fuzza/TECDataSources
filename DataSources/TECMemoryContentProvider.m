@@ -12,8 +12,9 @@
 
 @interface TECMemoryContentProvider ()
 
-@property (nonatomic, copy) NSMutableArray<id<TECSectionModelProtocol>> *sections;
+@property (nonatomic, strong) NSMutableArray<id<TECSectionModelProtocol>> *sections;
 @property (nonatomic, assign) BOOL isUpdating;
+@property (nonatomic, assign) BOOL isBatchUpdating;
 
 @end
 
@@ -60,24 +61,20 @@
 }
 
 - (void)setObject:(id<TECSectionModelProtocol>)object atIndexedSubscript:(NSUInteger)idx {
-    if (!object) {
-        [self.sections removeObjectAtIndex:idx];
-    }
-    else {
-        self.sections[idx] = object;
-    }
+    NSParameterAssert(object);
+    self.sections[idx] = object;
 }
 
 - (void)performBatchUpdatesWithBlock:(TECContentProviderBatchUpdatesBlock)block {
-    [self notifyWillChangeContentIfNeeded];
+    [self notifyWillChangeContentIfNeededIsBatchUpdate:YES];
     if (block) {
         block(self);
     }
-    [self notifyDidChangeContentIfNeeded];
+    [self notifyDidChangeContentIfNeededIsBatchUpdate:YES];
 }
 
 - (void)insertSection:(id <TECSectionModelProtocol>)section atIndex:(NSUInteger)index {
-    [self notifyWillChangeContentIfNeeded];
+    [self notifyWillChangeContentIfNeededIsBatchUpdate:NO];
     [self.sections insertObject:section atIndex:index];
     if ([self.presentationAdapter respondsToSelector:@selector(contentProviderDidChangeSection:
                                                                atIndex:
@@ -86,13 +83,13 @@
                                                           atIndex:index
                                                     forChangeType:TECContentProviderSectionChangeTypeInsert];
     }
-    [self notifyDidChangeContentIfNeeded];
+    [self notifyDidChangeContentIfNeededIsBatchUpdate:NO];
 }
 
 - (void)deleteSectionAtIndex:(NSUInteger)index {
-    [self notifyWillChangeContentIfNeeded];
+    [self notifyWillChangeContentIfNeededIsBatchUpdate:NO];
     id<TECSectionModelProtocol> section = self[index];
-    self[index] = nil;
+    [self.sections removeObjectAtIndex:index];
     if ([self.presentationAdapter respondsToSelector:@selector(contentProviderDidChangeSection:
                                                                atIndex:
                                                                forChangeType:)]) {
@@ -100,11 +97,11 @@
                                                           atIndex:index
                                                     forChangeType:TECContentProviderSectionChangeTypeDelete];
     }
-    [self notifyDidChangeContentIfNeeded];
+    [self notifyDidChangeContentIfNeededIsBatchUpdate:NO];
 }
 
 - (void)insertItem:(id)item atIndexPath:(NSIndexPath *)indexPath {
-    [self notifyWillChangeContentIfNeeded];
+    [self notifyWillChangeContentIfNeededIsBatchUpdate:NO];
     [self[indexPath.section] insertItem:item atIndex:indexPath.row];
     if ([self.presentationAdapter respondsToSelector:@selector(contentProviderDidChangeItem:
                                                                atIndexPath:
@@ -115,13 +112,13 @@
                                                  forChangeType:TECContentProviderItemChangeTypeInsert
                                                   newIndexPath:nil];
     }
-    [self notifyDidChangeContentIfNeeded];
+    [self notifyDidChangeContentIfNeededIsBatchUpdate:NO];
 }
 
 - (void)deleteItemAtIndexPath:(NSIndexPath *)indexPath {
-    [self notifyWillChangeContentIfNeeded];
+    [self notifyWillChangeContentIfNeededIsBatchUpdate:NO];
     id item = self[indexPath.section][indexPath.row];
-    self[indexPath.section][indexPath.row] = nil;
+    [self[indexPath.section] removeItemAtIndex:indexPath.row];
     if ([self.presentationAdapter respondsToSelector:@selector(contentProviderDidChangeItem:
                                                                atIndexPath:
                                                                forChangeType:
@@ -131,7 +128,7 @@
                                                  forChangeType:TECContentProviderItemChangeTypeDelete
                                                   newIndexPath:nil];
     }
-    [self notifyDidChangeContentIfNeeded];
+    [self notifyDidChangeContentIfNeededIsBatchUpdate:NO];
 }
 
 - (void)updateItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -139,9 +136,12 @@
 }
 
 - (void)updateItemAtIndexPath:(NSIndexPath *)indexPath withItem:(id)item {
-    [self notifyWillChangeContentIfNeeded];
+    [self notifyWillChangeContentIfNeededIsBatchUpdate:NO];
     if (item != nil) {
         self[indexPath.section][indexPath.row] = item;
+    }
+    else {
+        item = self[indexPath.section][indexPath.row];
     }
     if ([self.presentationAdapter respondsToSelector:@selector(contentProviderDidChangeItem:
                                                                atIndexPath:
@@ -152,13 +152,13 @@
                                                  forChangeType:TECContentProviderItemChangeTypeUpdate
                                                   newIndexPath:nil];
     }
-    [self notifyDidChangeContentIfNeeded];
+    [self notifyDidChangeContentIfNeededIsBatchUpdate:NO];
 }
 
 - (void)moveItemAtIndexPath:(NSIndexPath *)indexPath toIndexPath:(NSIndexPath *)newIndexPath {
-    [self notifyWillChangeContentIfNeeded];
+    [self notifyWillChangeContentIfNeededIsBatchUpdate:NO];
     id item = self[indexPath];
-    self[indexPath] = nil;
+    [self[indexPath.section] removeItemAtIndex:indexPath.row];
     [self[newIndexPath.section] insertItem:item atIndex:newIndexPath.row];
     if ([self.presentationAdapter respondsToSelector:@selector(contentProviderDidChangeItem:
                                                                atIndexPath:
@@ -169,7 +169,7 @@
                                                  forChangeType:TECContentProviderItemChangeTypeMove
                                                   newIndexPath:newIndexPath];
     }
-    [self notifyDidChangeContentIfNeeded];
+    [self notifyDidChangeContentIfNeededIsBatchUpdate:NO];
 }
 
 #pragma mark - NSFastEnumeration implementation
@@ -225,16 +225,23 @@
 }
 
 - (void)setObject:(id)object forKeyedSubscript:(NSIndexPath *)key {
+    NSParameterAssert(object);
     self[key.section][key.row] = object;
 }
 
 #pragma mark - helper
 
-- (void)notifyWillChangeContentIfNeeded {
+- (void)notifyWillChangeContentIfNeededIsBatchUpdate:(BOOL)isBatchUpdate {
     [self notifyChangeContentBeginIfNeeded:YES];
+    if (isBatchUpdate) {
+        self.isBatchUpdating = YES;
+    }
 }
 
-- (void)notifyDidChangeContentIfNeeded {
+- (void)notifyDidChangeContentIfNeededIsBatchUpdate:(BOOL)isBatchUpdate {
+    if (isBatchUpdate) {
+        self.isBatchUpdating = NO;
+    }
     [self notifyChangeContentBeginIfNeeded:NO];
 }
 
@@ -242,11 +249,14 @@
     SEL selector = willOrDid ?
                     @selector(contentProviderWillChangeContent:) :
                     @selector(contentProviderDidChangeContent:);
-    BOOL shouldUpdate = self.isUpdating ^ willOrDid;
+    BOOL shouldUpdate = !self.isBatchUpdating & (self.isUpdating ^ willOrDid);
     if (shouldUpdate) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         if ([self.presentationAdapter respondsToSelector:selector]) {
-            ((void(*)(id,SEL,id))[((NSObject *)self.presentationAdapter) methodForSelector:selector])(self.presentationAdapter, _cmd, self);
+            [self.presentationAdapter performSelector:selector withObject:self];
         }
+#pragma clang diagnostic pop
         self.isUpdating = !self.isUpdating;
     }
 }

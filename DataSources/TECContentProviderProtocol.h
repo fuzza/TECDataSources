@@ -10,9 +10,10 @@
 #import "TECSectionModelProtocol.h"
 
 @protocol TECContentProviderPresentationAdapterProtocol;
+@protocol TECContentProviderProtocol;
 
 typedef void(^TECContentProviderCompletionBlock)();
-typedef void(^TECContentProviderBatchUpdatesBlock)();
+typedef void(^TECContentProviderBatchUpdatesBlock)(id<TECContentProviderProtocol> provider);
 
 @protocol TECContentProviderProtocol <NSObject, NSFastEnumeration>
 

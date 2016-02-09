@@ -44,12 +44,8 @@
 }
 
 - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)idx {
-    if (!object) {
-        [self removeItemAtIndex:idx];
-    }
-    else {
-        self.items[idx] = object;
-    }
+    NSParameterAssert(object);
+    self.items[idx] = object;
 }
 
 - (void)insertItem:(id)item atIndex:(NSUInteger)idx {

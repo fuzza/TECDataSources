@@ -14,6 +14,6 @@
 - (T)proxy;
 
 - (void)attachDelegate:(T)delegate;
-- (void)deattachDelegate:(T)delegate;
+- (void)detachDelegate:(T)delegate;
 
 @end
