@@ -8,7 +8,7 @@
 
 #import "TECFetchedResultsControllerContentProvider.h"
 
-@interface TECFetchedResultsControllerContentProvider ()
+@interface TECFetchedResultsControllerContentProvider () <NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, weak) id <TECFetchedResultsControllerContentProviderGetter> itemsGetter;
 @property (nonatomic, weak) id <TECFetchedResultsControllerContentProviderMutator> itemsMutator;
@@ -27,6 +27,8 @@
         self.itemsGetter = getter;
         self.itemsMutator = mutator;
         self.fetchedResultsController = [self.itemsGetter fetchedResultsControllerForFetchRequest:fetchRequest sectionNameKeyPath:sectionNameKeyPath];
+        self.fetchedResultsController.delegate = self;
+        [self.fetchedResultsController performFetch:nil];
     }
     return self;
 }

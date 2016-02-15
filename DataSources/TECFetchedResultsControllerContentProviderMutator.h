@@ -9,8 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-typedef void(^TECFetchedResultsControllerContentProviderMutatorArrayChangeBlock)(NSArray<NSManagedObject *> *objectsobjects, NSError *error);
+typedef void(^TECFetchedResultsControllerContentProviderMutatorArrayChangeBlock)(NSArray<NSManagedObject *> *objects, NSError *error);
 
 @protocol TECFetchedResultsControllerContentProviderMutator <NSObject>
+
+- (void)mutateObjects:(NSArray <NSManagedObject *> *)objects
+withEntityDescription:(NSEntityDescription *)entityDescription
+                block:(TECFetchedResultsControllerContentProviderMutatorArrayChangeBlock)block;
 
 @end

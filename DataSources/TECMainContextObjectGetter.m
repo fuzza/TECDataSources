@@ -17,6 +17,7 @@
 @implementation TECMainContextObjectGetter
 
 - (instancetype)initWithManagedObjectContext:(NSManagedObjectContext *)context {
+    NSParameterAssert(context);
     self = [self init];
     if (self) {
         self.context = context;
@@ -24,7 +25,9 @@
     return self;
 }
 
-- (NSFetchedResultsController *)fetchedResultsControllerForFetchRequest:(NSFetchRequest *)fetchRequest sectionNameKeyPath:(NSString *)sectionNameKeyPath {
+- (NSFetchedResultsController *)fetchedResultsControllerForFetchRequest:(NSFetchRequest *)fetchRequest
+                                                     sectionNameKeyPath:(NSString *)sectionNameKeyPath {
+    NSParameterAssert(fetchRequest);
     return [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                                managedObjectContext:self.context
                                                  sectionNameKeyPath:sectionNameKeyPath

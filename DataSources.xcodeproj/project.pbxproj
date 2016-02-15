@@ -10,6 +10,7 @@
 		005F13751C6F713900765CC1 /* TECFetchedResultsControllerContentProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F13741C6F713900765CC1 /* TECFetchedResultsControllerContentProvider.m */; };
 		005F137A1C6F80CA00765CC1 /* TECBackgroundContextObjectMutator.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F13791C6F80CA00765CC1 /* TECBackgroundContextObjectMutator.m */; };
 		005F137D1C6F80E900765CC1 /* TECMainContextObjectGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F137C1C6F80E900765CC1 /* TECMainContextObjectGetter.m */; };
+		005F13801C71ACFF00765CC1 /* TECCoreDataSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F137F1C71ACFF00765CC1 /* TECCoreDataSectionModel.m */; };
 		008D85671C63B51C002D82F3 /* TECTableViewEditingExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 008D85661C63B51C002D82F3 /* TECTableViewEditingExtender.m */; };
 		008D856A1C63B561002D82F3 /* TECTableViewDeletingExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 008D85691C63B561002D82F3 /* TECTableViewDeletingExtender.m */; };
 		008D856D1C63B5A8002D82F3 /* TECTableViewItemUpdatingExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 008D856C1C63B5A8002D82F3 /* TECTableViewItemUpdatingExtender.m */; };
@@ -57,6 +58,8 @@
 		005F13791C6F80CA00765CC1 /* TECBackgroundContextObjectMutator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECBackgroundContextObjectMutator.m; sourceTree = "<group>"; };
 		005F137B1C6F80E900765CC1 /* TECMainContextObjectGetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECMainContextObjectGetter.h; sourceTree = "<group>"; };
 		005F137C1C6F80E900765CC1 /* TECMainContextObjectGetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECMainContextObjectGetter.m; sourceTree = "<group>"; };
+		005F137E1C71ACFF00765CC1 /* TECCoreDataSectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECCoreDataSectionModel.h; sourceTree = "<group>"; };
+		005F137F1C71ACFF00765CC1 /* TECCoreDataSectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECCoreDataSectionModel.m; sourceTree = "<group>"; };
 		008D85651C63B51C002D82F3 /* TECTableViewEditingExtender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewEditingExtender.h; sourceTree = "<group>"; };
 		008D85661C63B51C002D82F3 /* TECTableViewEditingExtender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewEditingExtender.m; sourceTree = "<group>"; };
 		008D85681C63B561002D82F3 /* TECTableViewDeletingExtender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewDeletingExtender.h; sourceTree = "<group>"; };
@@ -316,6 +319,8 @@
 				6F59A9631C57C86A0095289C /* TECSectionModelProtocol.h */,
 				6F59A96B1C58CA990095289C /* TECMemorySectionModel.h */,
 				6F59A96C1C58CA990095289C /* TECMemorySectionModel.m */,
+				005F137E1C71ACFF00765CC1 /* TECCoreDataSectionModel.h */,
+				005F137F1C71ACFF00765CC1 /* TECCoreDataSectionModel.m */,
 			);
 			name = SectionModel;
 			sourceTree = "<group>";
@@ -461,6 +466,7 @@
 				6F59A9661C57DCAF0095289C /* TECDelegateProxy.m in Sources */,
 				005F137D1C6F80E900765CC1 /* TECMainContextObjectGetter.m in Sources */,
 				008D856A1C63B561002D82F3 /* TECTableViewDeletingExtender.m in Sources */,
+				005F13801C71ACFF00765CC1 /* TECCoreDataSectionModel.m in Sources */,
 				008D85701C648F52002D82F3 /* TECTableViewReorderingExtender.m in Sources */,
 				6F0CD6141C51109400D09C01 /* ViewController.m in Sources */,
 				6F0CD6111C51109400D09C01 /* AppDelegate.m in Sources */,
