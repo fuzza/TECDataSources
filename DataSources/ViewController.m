@@ -55,9 +55,9 @@
     }];
     
     TECTableViewCellFactory *factory = [[TECTableViewCellFactory alloc] initWithСellRegistrator:registrator
-            configurationHandler:^UITableViewCell *(UITableViewCell *cell, id item, UITableView *tableView, NSIndexPath *indexPath) {
-                return cell;
-    }];
+            configurationHandler:^(UITableViewCell *cell, NSString *item, UITableView *tableView, NSIndexPath *indexPath) {
+                cell.textLabel.text = item;
+            }];
     
     TECMemorySectionModel *firstSection = [[TECMemorySectionModel alloc] initWithItems:@[@"one", @"two", @"three"] headerTitle:@"firstHeader" footerTitle:@"firstFooter"];
     TECMemorySectionModel *secondSection = [[TECMemorySectionModel alloc] initWithItems:@[@"four", @"five", @"six"] headerTitle:@"secondHeader" footerTitle:@"secondFooter"];
