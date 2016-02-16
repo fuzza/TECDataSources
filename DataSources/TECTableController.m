@@ -12,9 +12,8 @@
 
 #import "TECDelegateProxy.h"
 #import "TECTableViewExtender.h"
-#import "TECContentProviderDelegate.h"
 
-@interface TECTableController () <TECContentProviderPresentationAdapterProtocol>
+@interface TECTableController ()
 
 @property (nonatomic, weak) UITableView *tableView;
 
@@ -29,13 +28,14 @@
 
 #pragma mark - Lifecycle
 
-- (instancetype)initWithContentProvider:(id <TECContentProviderProtocol>)contentProvider {
+- (instancetype)initWithContentProvider:(id <TECContentProviderProtocol>)contentProvider
+                          delegateProxy:(TECDelegateProxy *)delegateProxy{
     self = [super init];
     if(self) {
         self.contentProvider = contentProvider;
         self.contentProvider.presentationAdapter = self;
         
-        self.delegateProxy = [[TECDelegateProxy alloc] init];
+        self.delegateProxy = delegateProxy;
     }
     return self;
 }

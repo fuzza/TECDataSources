@@ -21,6 +21,8 @@
 #import "TECTableViewSectionFooterExtender.h"
 #import "TECTableViewCellExtender.h"
 
+#import "TECDelegateProxy.h"
+
 @interface ViewController ()
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -61,7 +63,8 @@
     TECMemorySectionModel *secondSection = [[TECMemorySectionModel alloc] initWithItems:@[@"four", @"five", @"six"] headerTitle:@"secondHeader" footerTitle:@"secondFooter"];
     TECMemoryContentProvider *contentProvider = [[TECMemoryContentProvider alloc] initWithSections:@[firstSection, secondSection]];
     
-    self.tableController = [[TECTableController alloc] initWithContentProvider:contentProvider];
+    self.tableController = [[TECTableController alloc] initWithContentProvider:contentProvider
+                                                                 delegateProxy:[[TECDelegateProxy alloc] init]];
 
     self.footerExtender = [[TECTableViewSectionFooterExtender alloc] init];
     self.headerExtender = [[TECTableViewSectionHeaderExtender alloc] init];
