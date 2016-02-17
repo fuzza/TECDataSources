@@ -7,12 +7,15 @@
 //
 
 #import "TECFetchedResultsControllerContentProvider.h"
+#import "TECCoreDataSectionModel.h"
+#import "TECContentProviderDelegate.h"
 
 @interface TECFetchedResultsControllerContentProvider () <NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, weak) id <TECFetchedResultsControllerContentProviderGetter> itemsGetter;
 @property (nonatomic, weak) id <TECFetchedResultsControllerContentProviderMutator> itemsMutator;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) NSArray *sectionModelArray;
 
 @end
 
@@ -29,8 +32,17 @@
         self.fetchedResultsController = [self.itemsGetter fetchedResultsControllerForFetchRequest:fetchRequest sectionNameKeyPath:sectionNameKeyPath];
         self.fetchedResultsController.delegate = self;
         [self.fetchedResultsController performFetch:nil];
+        [self snapshotSectionModelArray];
     }
     return self;
+}
+
+- (void)snapshotSectionModelArray {
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:self.fetchedResultsController.sections.count];
+    for(id<NSFetchedResultsSectionInfo> sectionInfo in self.fetchedResultsController.sections) {
+        [array addObject:[[TECCoreDataSectionModel alloc] initWithFetchedResultsSectionInfo:sectionInfo]];
+    }
+    self.sectionModelArray = [NSArray arrayWithArray:array];
 }
 
 #pragma mark - NSFastEnumeration implementation
@@ -112,7 +124,15 @@
 }
 
 - (void)reloadDataSourceWithCompletion:(TECContentProviderCompletionBlock)completion {
-    
+    self.fetchedResultsController.delegate = nil;
+    [self.fetchedResultsController performFetch:nil];
+    self.fetchedResultsController.delegate = self;
+    if (completion) {
+        completion();
+    }
+    if ([self.presentationAdapter respondsToSelector:@selector(contentProviderDidReloadData:)]) {
+        [self.presentationAdapter contentProviderDidReloadData:self];
+    }
 }
 
 - (void)performBatchUpdatesWithBlock:(TECContentProviderBatchUpdatesBlock)block {
@@ -125,6 +145,37 @@
 
 - (void)enumerateObjectsUsingBlock:(void (^)(id, NSUInteger, BOOL *))block options:(NSEnumerationOptions)options {
     
+}
+
+#pragma mark - NSFetchedResutsControllerDelegate implementation
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    if ([self.presentationAdapter respondsToSelector:@selector(contentProviderWillChangeContent:)]) {
+        [self.presentationAdapter contentProviderWillChangeContent:self];
+    }
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id<NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
+    if ([self.presentationAdapter respondsToSelector:@selector(contentProviderDidChangeSection:atIndex:forChangeType:)]) {
+        [self.presentationAdapter contentProviderDidChangeSection:[[TECCoreDataSectionModel alloc] initWithFetchedResultsSectionInfo:sectionInfo]
+                                                          atIndex:sectionIndex
+                                                    forChangeType:(TECContentProviderSectionChangeType)type];
+    }
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    if ([self.presentationAdapter respondsToSelector:@selector(contentProviderDidChangeItem:atIndexPath:forChangeType:newIndexPath:)]) {
+        [self.presentationAdapter contentProviderDidChangeItem:anObject
+                                                   atIndexPath:indexPath
+                                                 forChangeType:(TECContentProviderItemChangeType)type
+                                                  newIndexPath:newIndexPath];
+    }
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    if ([self.presentationAdapter respondsToSelector:@selector(contentProviderDidChangeContent:)]) {
+        [self.presentationAdapter contentProviderDidChangeContent:self];
+    }
 }
 
 @end

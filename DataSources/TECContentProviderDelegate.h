@@ -19,8 +19,8 @@ typedef NS_ENUM(NSUInteger, TECContentProviderSectionChangeType) {
 typedef NS_ENUM(NSUInteger, TECContentProviderItemChangeType) {
     TECContentProviderItemChangeTypeInsert,
     TECContentProviderItemChangeTypeDelete,
-    TECContentProviderItemChangeTypeUpdate,
-    TECContentProviderItemChangeTypeMove
+    TECContentProviderItemChangeTypeMove,
+    TECContentProviderItemChangeTypeUpdate
 };
 
 @protocol TECContentProviderPresentationAdapterProtocol <NSObject>
