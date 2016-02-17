@@ -8,10 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol TECSectionModelProtocol <NSObject>
+@protocol TECSectionModelProtocol <NSObject, NSFastEnumeration, NSCopying>
 
-@property (nonatomic, strong, readonly) NSArray *items;
-@property (nonatomic, strong, readonly) NSString *headerTitle;
-@property (nonatomic, strong, readonly) NSString *footerTitle;
+@property (nonatomic, copy, readonly) NSString *headerTitle;
+@property (nonatomic, copy, readonly) NSString *footerTitle;
+
+- (id)objectAtIndexedSubscript:(NSUInteger)idx;
+- (NSUInteger)count;
+- (NSEnumerator *)objectEnumerator;
+- (NSEnumerator *)reverseObjectEnumerator;
+- (void)enumerateObjectsUsingBlock:(void (^)(id obj, NSUInteger idx, BOOL *stop))block;
+- (void)enumerateObjectsUsingBlock:(void (^)(id obj, NSUInteger idx, BOOL *stop))block options:(NSEnumerationOptions)options;
 
 @end
