@@ -85,7 +85,9 @@
     NSArray *allResponders = [self allRespondersForSelector:invocation.selector];
     NSParameterAssert(allResponders.count < 2);
     
-    [invocation invokeWithTarget:allResponders.firstObject];
+    if(allResponders.firstObject) {
+        [invocation invokeWithTarget:allResponders.firstObject];
+    }
 }
 
 #pragma mark - Getting responders
