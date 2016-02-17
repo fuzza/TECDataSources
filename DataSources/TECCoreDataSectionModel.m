@@ -64,6 +64,7 @@
     __block BOOL stop = NO;
     BOOL isEnumerationConcurrent = options & NSEnumerationConcurrent;
     BOOL isEnumerationReverse = options & NSEnumerationReverse;
+    NSAssert(!isEnumerationConcurrent, @"%s NSEnumerationConcurrent: doing this with CoreData is the best way to shoot own leg", __PRETTY_FUNCTION__);
     NSEnumerator *enumerator = isEnumerationReverse ? [self reverseObjectEnumerator] : [self objectEnumerator];
     for (id object in enumerator) {
         void(^innerBlock)() = ^() {

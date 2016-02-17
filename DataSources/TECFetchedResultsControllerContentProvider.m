@@ -9,6 +9,7 @@
 #import "TECFetchedResultsControllerContentProvider.h"
 #import "TECCoreDataSectionModel.h"
 #import "TECContentProviderDelegate.h"
+#import <libkern/OSAtomic.h>
 
 @interface TECFetchedResultsControllerContentProvider () <NSFetchedResultsControllerDelegate>
 
@@ -48,23 +49,23 @@
 #pragma mark - NSFastEnumeration implementation
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id  _Nonnull *)buffer count:(NSUInteger)len {
-    return [self.fetchedResultsController.sections countByEnumeratingWithState:state objects:buffer count:len];
+    return [self.sectionModelArray countByEnumeratingWithState:state objects:buffer count:len];
 }
 
 - (NSUInteger)count {
-    return self.fetchedResultsController.sections.count;
+    return self.sectionModelArray.count;
 }
 
 - (NSEnumerator *)sectionEnumerator {
-    return [self.fetchedResultsController.sections objectEnumerator];
+    return [self.sectionModelArray objectEnumerator];
 }
 
 - (NSEnumerator *)reverseSectionEnumerator {
-    return [self.fetchedResultsController.sections reverseObjectEnumerator];
+    return [self.sectionModelArray reverseObjectEnumerator];
 }
 
 - (NSInteger)numberOfSections {
-    return self.fetchedResultsController.sections.count;
+    return [self.fetchedResultsController.sections count];
 }
 
 - (NSInteger)numberOfItemsInSection:(NSInteger)section {
@@ -72,31 +73,32 @@
 }
 
 - (void)deleteSectionAtIndex:(NSUInteger)index {
-    
+    [self.itemsMutator deleteObjects:self.fetchedResultsController.sections[index].objects
+               withEntityDescription:self.fetchedResultsController.fetchRequest.entity];
 }
 
 - (void)insertSection:(id<TECSectionModelProtocol>)section atIndex:(NSUInteger)index {
-    
+    NSAssert(NO, @"%s CoreData content provider asked for ineligible mutation", __PRETTY_FUNCTION__);
 }
 
 - (void)updateItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    [self.fetchedResultsController.managedObjectContext refreshObject:[self.fetchedResultsController objectAtIndexPath:indexPath] mergeChanges:YES];
 }
 
 - (void)updateItemAtIndexPath:(NSIndexPath *)indexPath withItem:(id)item {
-    
+    NSAssert(NO, @"%s CoreData content provider asked for ineligible mutation", __PRETTY_FUNCTION__);
 }
 
 - (void)moveItemAtIndexPath:(NSIndexPath *)indexPath toIndexPath:(NSIndexPath *)newIndexPath {
-    
+    NSAssert(NO, @"%s CoreData content provider asked for ineligible mutation", __PRETTY_FUNCTION__);
 }
 
 - (void)insertItem:(id)item atIndexPath:(NSIndexPath *)indexPath {
-    
+    NSAssert(NO, @"%s CoreData content provider asked for ineligible mutation", __PRETTY_FUNCTION__);
 }
 
 - (void)deleteItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    [self.itemsMutator deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
 }
 
 - (id)itemAtIndexPath:(NSIndexPath *)indexPath {
@@ -108,7 +110,7 @@
 }
 
 - (void)setObject:(id)object forKeyedSubscript:(NSIndexPath *)key {
-    
+    NSAssert(NO, @"%s CoreData content provider asked for ineligible mutation", __PRETTY_FUNCTION__);
 }
 
 - (id)objectAtIndexedSubscript:(NSUInteger)idx {
@@ -116,11 +118,11 @@
 }
 
 - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)idx {
-    
+    NSAssert(NO, @"%s CoreData content provider asked for ineligible mutation", __PRETTY_FUNCTION__);
 }
 
 - (id<TECSectionModelProtocol>)sectionAtIndex:(NSInteger)idx {
-    return (id<TECSectionModelProtocol>)self.fetchedResultsController.sections[idx];
+    return [[TECCoreDataSectionModel alloc] initWithFetchedResultsSectionInfo:self.fetchedResultsController.sections[idx]];
 }
 
 - (void)reloadDataSourceWithCompletion:(TECContentProviderCompletionBlock)completion {
@@ -136,7 +138,9 @@
 }
 
 - (void)performBatchUpdatesWithBlock:(TECContentProviderBatchUpdatesBlock)block {
-    
+    if (block) {
+        block(self);
+    }
 }
 
 - (void)enumerateObjectsUsingBlock:(void (^)(id, NSUInteger, BOOL *))block {
@@ -144,7 +148,27 @@
 }
 
 - (void)enumerateObjectsUsingBlock:(void (^)(id, NSUInteger, BOOL *))block options:(NSEnumerationOptions)options {
-    
+    __block volatile int32_t idx = 0;
+    __block BOOL stop = NO;
+    BOOL isEnumerationConcurrent = options & NSEnumerationConcurrent;
+    BOOL isEnumerationReverse = options & NSEnumerationReverse;
+    NSAssert(!isEnumerationConcurrent, @"%s NSEnumerationConcurrent: doing this with CoreData is the best way to shoot own leg", __PRETTY_FUNCTION__);
+    NSEnumerator *enumerator = isEnumerationReverse ? [self reverseSectionEnumerator] : [self sectionEnumerator];
+    for (id object in enumerator) {
+        void(^innerBlock)() = ^() {
+            block(object, idx, &stop);
+            OSAtomicIncrement32(&idx);
+        };
+        if (isEnumerationConcurrent) {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), innerBlock);
+        }
+        else {
+            innerBlock();
+        }
+        if (stop) {
+            return;
+        }
+    }
 }
 
 #pragma mark - NSFetchedResutsControllerDelegate implementation
@@ -173,6 +197,7 @@
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self snapshotSectionModelArray];
     if ([self.presentationAdapter respondsToSelector:@selector(contentProviderDidChangeContent:)]) {
         [self.presentationAdapter contentProviderDidChangeContent:self];
     }

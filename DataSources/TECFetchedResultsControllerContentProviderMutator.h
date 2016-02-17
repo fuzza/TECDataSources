@@ -10,11 +10,19 @@
 #import <CoreData/CoreData.h>
 
 typedef void(^TECFetchedResultsControllerContentProviderMutatorArrayChangeBlock)(NSArray<NSManagedObject *> *objects, NSError *error);
+typedef void(^TECFetchedResultsControllerContentProviderMutatorObjectChangeBlock)(NSManagedObject *object, NSError *error);
 
 @protocol TECFetchedResultsControllerContentProviderMutator <NSObject>
 
 - (void)mutateObjects:(NSArray <NSManagedObject *> *)objects
 withEntityDescription:(NSEntityDescription *)entityDescription
                 block:(TECFetchedResultsControllerContentProviderMutatorArrayChangeBlock)block;
+- (void)mutateObject:(NSManagedObject *)object
+           withBlock:(TECFetchedResultsControllerContentProviderMutatorObjectChangeBlock)block;
+- (void)insertObject:(NSManagedObject *)object;
+- (void)deleteObject:(NSManagedObject *)object;
+- (void)insertObjects:(NSArray <NSManagedObject *> *)objects;
+- (void)deleteObjects:(NSArray <NSManagedObject *> *)objects
+withEntityDescription:(NSEntityDescription *)entityDescription;
 
 @end
