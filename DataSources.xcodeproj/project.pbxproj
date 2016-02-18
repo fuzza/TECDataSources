@@ -16,7 +16,7 @@
 		3E1457A237F0ED5DAA116D60 /* libPods-DataSourcesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6648EB9D0A7F2502D02AA01 /* libPods-DataSourcesTests.a */; };
 		6F0CD60E1C51109400D09C01 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CD60D1C51109400D09C01 /* main.m */; };
 		6F0CD6111C51109400D09C01 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CD6101C51109400D09C01 /* AppDelegate.m */; };
-		6F0CD6141C51109400D09C01 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CD6131C51109400D09C01 /* ViewController.m */; };
+		6F0CD6141C51109400D09C01 /* TECExampleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CD6131C51109400D09C01 /* TECExampleTableViewController.m */; };
 		6F0CD6171C51109400D09C01 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F0CD6151C51109400D09C01 /* Main.storyboard */; };
 		6F0CD6191C51109400D09C01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F0CD6181C51109400D09C01 /* Assets.xcassets */; };
 		6F0CD61C1C51109400D09C01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F0CD61A1C51109400D09C01 /* LaunchScreen.storyboard */; };
@@ -39,6 +39,7 @@
 		6F59A98A1C5911570095289C /* TECTableViewExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A9891C5911570095289C /* TECTableViewExtender.m */; };
 		6F78F0461C511788006F08DC /* TECTableViewCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F78F0451C511788006F08DC /* TECTableViewCellFactory.m */; };
 		6F78F04D1C513344006F08DC /* TECTableViewCellRegistrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F78F04C1C513344006F08DC /* TECTableViewCellRegistrator.m */; };
+		6FD26B1B1C761476006A0E2F /* TECExampleCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD26B1A1C761476006A0E2F /* TECExampleCollectionViewController.m */; };
 		6FD285C71C591D0400A11316 /* TECTableViewCellExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD285C61C591D0400A11316 /* TECTableViewCellExtender.m */; };
 /* End PBXBuildFile section */
 
@@ -69,8 +70,8 @@
 		6F0CD60D1C51109400D09C01 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6F0CD60F1C51109400D09C01 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6F0CD6101C51109400D09C01 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		6F0CD6121C51109400D09C01 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		6F0CD6131C51109400D09C01 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		6F0CD6121C51109400D09C01 /* TECExampleTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TECExampleTableViewController.h; sourceTree = "<group>"; };
+		6F0CD6131C51109400D09C01 /* TECExampleTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TECExampleTableViewController.m; sourceTree = "<group>"; };
 		6F0CD6161C51109400D09C01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6F0CD6181C51109400D09C01 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6F0CD61B1C51109400D09C01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -112,6 +113,8 @@
 		6F78F04B1C513344006F08DC /* TECTableViewCellRegistrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewCellRegistrator.h; sourceTree = "<group>"; };
 		6F78F04C1C513344006F08DC /* TECTableViewCellRegistrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewCellRegistrator.m; sourceTree = "<group>"; };
 		6FB0892F1C5A75DF008AF389 /* TECContentProviderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECContentProviderDelegate.h; sourceTree = "<group>"; };
+		6FD26B191C761476006A0E2F /* TECExampleCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECExampleCollectionViewController.h; sourceTree = "<group>"; };
+		6FD26B1A1C761476006A0E2F /* TECExampleCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECExampleCollectionViewController.m; sourceTree = "<group>"; };
 		6FD285C51C591D0400A11316 /* TECTableViewCellExtender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewCellExtender.h; sourceTree = "<group>"; };
 		6FD285C61C591D0400A11316 /* TECTableViewCellExtender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewCellExtender.m; sourceTree = "<group>"; };
 		E6648EB9D0A7F2502D02AA01 /* libPods-DataSourcesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DataSourcesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,12 +179,15 @@
 		6F0CD60B1C51109400D09C01 /* DataSources */ = {
 			isa = PBXGroup;
 			children = (
+				6FD26B181C76135F006A0E2F /* CollectionView */,
 				6F59A9771C58E97F0095289C /* TableView */,
 				6F59A9761C58E9790095289C /* Shared */,
 				6F0CD60F1C51109400D09C01 /* AppDelegate.h */,
 				6F0CD6101C51109400D09C01 /* AppDelegate.m */,
-				6F0CD6121C51109400D09C01 /* ViewController.h */,
-				6F0CD6131C51109400D09C01 /* ViewController.m */,
+				6F0CD6121C51109400D09C01 /* TECExampleTableViewController.h */,
+				6F0CD6131C51109400D09C01 /* TECExampleTableViewController.m */,
+				6FD26B191C761476006A0E2F /* TECExampleCollectionViewController.h */,
+				6FD26B1A1C761476006A0E2F /* TECExampleCollectionViewController.m */,
 				6F0CD6151C51109400D09C01 /* Main.storyboard */,
 				6F0CD6181C51109400D09C01 /* Assets.xcassets */,
 				6F0CD61A1C51109400D09C01 /* LaunchScreen.storyboard */,
@@ -324,6 +330,13 @@
 			name = SectionModel;
 			sourceTree = "<group>";
 		};
+		6FD26B181C76135F006A0E2F /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CollectionView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -461,11 +474,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F59A9841C58ECF70095289C /* TECTableViewSectionFooterExtender.m in Sources */,
+				6FD26B1B1C761476006A0E2F /* TECExampleCollectionViewController.m in Sources */,
 				6F78F04D1C513344006F08DC /* TECTableViewCellRegistrator.m in Sources */,
 				6F59A9661C57DCAF0095289C /* TECDelegateProxy.m in Sources */,
 				008D856A1C63B561002D82F3 /* TECTableViewDeletingExtender.m in Sources */,
 				008D85701C648F52002D82F3 /* TECTableViewReorderingExtender.m in Sources */,
-				6F0CD6141C51109400D09C01 /* ViewController.m in Sources */,
+				6F0CD6141C51109400D09C01 /* TECExampleTableViewController.m in Sources */,
 				6F0CD6111C51109400D09C01 /* AppDelegate.m in Sources */,
 				6F59A96A1C58CA650095289C /* TECMemoryContentProvider.m in Sources */,
 				6F59A9701C58CDC40095289C /* TECCustomCell.m in Sources */,
