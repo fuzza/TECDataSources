@@ -10,7 +10,7 @@
 
 @interface TECDelegateProxy ()
 
-@property (nonatomic, strong) NSMutableSet *delegates;
+@property (nonatomic, strong) NSHashTable *delegates;
 
 @end
 
@@ -26,7 +26,7 @@
 }
 
 - (void)setupDelegatesCache {
-    self.delegates = [NSMutableSet new];
+    self.delegates = [NSHashTable weakObjectsHashTable];
 }
 
 - (void)attachDelegate:(id)delegate {
@@ -40,7 +40,7 @@
 #pragma mark - NSObject protocol
 
 - (BOOL)conformsToProtocol:(Protocol *)aProtocol {
-    for(id delegate in self.delegates.allObjects) {
+    for(id delegate in self.delegates) {
         if([delegate conformsToProtocol:aProtocol]) {
             return YES;
         }
@@ -93,7 +93,7 @@
 #pragma mark - Getting responders
 
 - (id)firstResponderForSelector:(SEL)aSelector {
-    for(id delegate in self.delegates.allObjects) {
+    for(id delegate in self.delegates) {
         if([delegate respondsToSelector:aSelector]) {
             return delegate;
         }
@@ -103,7 +103,7 @@
 
 - (NSArray *)allRespondersForSelector:(SEL)aSelector {
     NSMutableArray *respondersArray = [@[] mutableCopy];
-    for(id delegate in self.delegates.allObjects) {
+    for(id delegate in self.delegates) {
         if([delegate respondsToSelector:aSelector]) {
             [respondersArray addObject:delegate];
         }

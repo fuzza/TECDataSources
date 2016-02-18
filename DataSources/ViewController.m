@@ -50,8 +50,13 @@
 
 @implementation ViewController
 
-- (void)loadView {
-    [super loadView];
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self setupSubviews];
+    [self setupTableController];
+}
+
+- (void)setupSubviews {
     self.tableView = [[UITableView alloc] init];
     [self.view addSubview:self.tableView];
     self.toolbar = [[UIToolbar alloc] initWithFrame:self.view.frame];
@@ -61,11 +66,6 @@
     self.reloadButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:nil action:@selector(reloadButtonPressed:)];
     self.toolbar.items = @[self.editBarButtonItem, self.flexibleSpace, self.reloadButtonItem];
     [self.view addSubview:self.toolbar];
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self setupTableController];
 }
 
 - (void)viewWillLayoutSubviews {
