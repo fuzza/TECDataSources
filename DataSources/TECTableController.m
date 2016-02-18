@@ -12,9 +12,8 @@
 
 #import "TECDelegateProxy.h"
 #import "TECTableViewExtender.h"
-#import "TECContentProviderDelegate.h"
 
-@interface TECTableController () <TECContentProviderPresentationAdapterProtocol>
+@interface TECTableController ()
 
 @property (nonatomic, weak) UITableView *tableView;
 
@@ -31,13 +30,14 @@
 
 - (instancetype)initWithContentProvider:(id <TECContentProviderProtocol>)contentProvider
                               tableView:(UITableView *)tableView
-                              extenders:(NSArray<TECTableViewExtender *> *)extenders {
+                              extenders:(NSArray<TECTableViewExtender *> *)extenders
+                          delegateProxy:(TECDelegateProxy *)delegateProxy {
     self = [self init];
     if(self) {
         self.contentProvider = contentProvider;
         self.contentProvider.presentationAdapter = self;
-        
-        self.delegateProxy = [[TECDelegateProxy alloc] init];
+
+        self.delegateProxy = delegateProxy;
         self.extenders = [NSMutableArray new];
         
         self.tableView = tableView;

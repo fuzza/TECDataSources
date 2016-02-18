@@ -36,11 +36,10 @@
     return [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
 }
 
-- (UITableViewCell *)configureCell:(UITableViewCell *)cell forItem:(id)item inTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath {
+- (void)configureCell:(UITableViewCell *)cell forItem:(id)item inTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath {
     if(self.configurationHandler) {
-        return self.configurationHandler(cell, item, tableView, indexPath);
+        self.configurationHandler(cell, item, tableView, indexPath);
     }
-    return cell;
 }
 
 @end

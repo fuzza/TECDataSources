@@ -13,7 +13,7 @@
 
 @interface TECTableViewCellFactory <__covariant CellType: UITableViewCell *, ObjectType> : NSObject <TECTableViewCellFactoryProtocol>
 
-typedef CellType(^TECTableViewCellConfigurationHandler)(CellType cell, ObjectType item, UITableView *tableView, NSIndexPath *indexPath);
+typedef void(^TECTableViewCellConfigurationHandler)(CellType cell, ObjectType item, UITableView *tableView, NSIndexPath *indexPath);
 
 - (instancetype)initWithСellRegistrator:(id <TECTableViewCellRegistratorProtocol>)cellRegistrator
                    configurationHandler:(TECTableViewCellConfigurationHandler)handler;
@@ -22,9 +22,9 @@ typedef CellType(^TECTableViewCellConfigurationHandler)(CellType cell, ObjectTyp
               tableView:(UITableView *)tableView
             atIndexPath:(NSIndexPath *)indexPath;
 
-- (CellType)configureCell:(CellType)cell
-                  forItem:(ObjectType)item
-              inTableView:(UITableView *)tableView
-              atIndexPath:(NSIndexPath *)indexPath;
+- (void)configureCell:(CellType)cell
+              forItem:(ObjectType)item
+          inTableView:(UITableView *)tableView
+          atIndexPath:(NSIndexPath *)indexPath;
 
 @end
