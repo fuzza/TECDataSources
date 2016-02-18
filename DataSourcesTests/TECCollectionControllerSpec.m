@@ -33,12 +33,11 @@ describe(@"TECCollectionController", ^{
         return [UICollectionView nullMock];
     });
     
-    __block id contentProviderMock;
-
-    beforeEach(^{
-        contentProviderMock = [KWMock mockForProtocol:@protocol(TECContentProviderProtocol)];
+    let(contentProviderMock, ^id{
+        id contentProviderMock = [KWMock mockForProtocol:@protocol(TECContentProviderProtocol)];
         [contentProviderMock stub:@selector(setPresentationAdapter:)];
-    });
+        return contentProviderMock;
+    }) ;
     
     TECCollectionController *(^createSut)() = ^{
         return [[TECCollectionController alloc] initWithContentProvider:contentProviderMock
