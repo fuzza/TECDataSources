@@ -14,6 +14,9 @@
 @property (nonatomic, copy, readonly) NSString *footerTitle;
 
 - (id)objectAtIndexedSubscript:(NSUInteger)idx;
+- (void)setObject:(id)object atIndexedSubscript:(NSUInteger)idx;
+- (void)insertItem:(id)object atIndex:(NSUInteger)idx;
+- (void)removeItemAtIndex:(NSUInteger)idx;
 - (NSUInteger)count;
 - (NSEnumerator *)objectEnumerator;
 - (NSEnumerator *)reverseObjectEnumerator;

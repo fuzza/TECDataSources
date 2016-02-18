@@ -19,41 +19,45 @@ __block id contentProviderMock;
 
 __block id delegateProxyMock;
 
+__block id firstExtender;
+__block id secondExtender;
+
+__block id tableViewMock;
+
 describe(@"TECTableController", ^{
 
     beforeEach(^{
         contentProviderMock = [KWMock mockForProtocol:@protocol(TECContentProviderProtocol)];
         [contentProviderMock stub:@selector(setPresentationAdapter:)];
         
-        delegateProxyMock = [KWMock mockForClass:[TECDelegateProxy class]];
+        delegateProxyMock = [KWMock nullMockForClass:[TECDelegateProxy class]];
         
-        sut = [[TECTableController alloc] initWithContentProvider:contentProviderMock
-                                                    delegateProxy:delegateProxyMock];
+        firstExtender = [TECTableViewExtender nullMock];
+        secondExtender = [TECTableViewExtender nullMock];
+        
+        tableViewMock = [UITableView mock];
+        [tableViewMock stub:@selector(setDataSource:)];
+        [tableViewMock stub:@selector(setDelegate:)];
     });
     
     describe(@"Init", ^{
         it(@"Should be set as presentation adapter for content provider", ^{
             KWCaptureSpy *adapterSpy = [contentProviderMock captureArgument:@selector(setPresentationAdapter:) atIndex:0];
             
-            TECTableController *localSut = [[TECTableController alloc] initWithContentProvider:contentProviderMock
-                                                                                 delegateProxy:delegateProxyMock];
-            [[adapterSpy.argument should] equal:localSut];
+            sut = [[TECTableController alloc] initWithContentProvider:contentProviderMock
+                                                            tableView:tableViewMock
+                                                            extenders:@[firstExtender, secondExtender]
+                                                        delegateProxy:delegateProxyMock];
+            [[adapterSpy.argument should] equal:sut];
         });
     });
     
     describe(@"Table view interactions", ^{
-        __block id tableViewMock;
         __block id proxyMock;
         
         beforeEach(^{
-            tableViewMock = [UITableView mock];
-            [tableViewMock stub:@selector(setDataSource:)];
-            [tableViewMock stub:@selector(setDelegate:)];
-            
             proxyMock = [KWMock mockForClass:[TECDelegateProxy class]];
             [delegateProxyMock stub:@selector(proxy) andReturn:proxyMock];
-            
-            [sut setupWithTableView:tableViewMock];
         });
         
         context(@"Setup", ^{
@@ -61,7 +65,10 @@ describe(@"TECTableController", ^{
                 KWCaptureSpy *dataSourceSpy = [tableViewMock captureArgument:@selector(setDataSource:) atIndex:0];
                 KWCaptureSpy *delegateSpy = [tableViewMock captureArgument:@selector(setDelegate:) atIndex:0];
                 
-                [sut setupWithTableView:tableViewMock];
+                sut = [[TECTableController alloc] initWithContentProvider:contentProviderMock
+                                                                tableView:tableViewMock
+                                                                extenders:@[firstExtender, secondExtender]
+                                                            delegateProxy:delegateProxyMock];
                 
                 [[dataSourceSpy.argument should] beIdenticalTo:proxyMock];
                 [[delegateSpy.argument should] beIdenticalTo:proxyMock];
@@ -70,6 +77,11 @@ describe(@"TECTableController", ^{
         
         context(@"Dealloc", ^{
             it(@"Should clean table view delegate and datasource", ^{
+                sut = [[TECTableController alloc] initWithContentProvider:contentProviderMock
+                                                                tableView:tableViewMock
+                                                                extenders:@[firstExtender, secondExtender]
+                                                            delegateProxy:delegateProxyMock];
+                
                 [[tableViewMock should] receive:@selector(setDataSource:) withArguments:nil];
                 [[tableViewMock should] receive:@selector(setDelegate:) withArguments:nil];
                 
@@ -79,23 +91,26 @@ describe(@"TECTableController", ^{
         
         context(@"Extenders", ^{
             it(@"Should register extenders in delegate proxy", ^{
-                id firstExtender = [TECTableViewExtender mock];
                 [[firstExtender should] receive:@selector(setTableView:) withArguments:tableViewMock];
                 [[firstExtender should] receive:@selector(setContentProvider:) withArguments:contentProviderMock];
-                
-                id secondExtender = [TECTableViewExtender mock];
                 [[secondExtender should] receive:@selector(setTableView:) withArguments:tableViewMock];
                 [[secondExtender should] receive:@selector(setContentProvider:) withArguments:contentProviderMock];
-                
                 [[delegateProxyMock should] receive:@selector(attachDelegate:) withArguments:firstExtender];
                 [[delegateProxyMock should] receive:@selector(attachDelegate:) withArguments:secondExtender];
                 
-                [sut addExtenders:@[firstExtender, secondExtender]];
+                sut = [[TECTableController alloc] initWithContentProvider:contentProviderMock
+                                                                tableView:tableViewMock
+                                                                extenders:@[firstExtender, secondExtender]
+                                                            delegateProxy:delegateProxyMock];
             });
         });
         
         context(@"Content provider callbacks", ^{
             it(@"Should reload table on reload callback", ^{
+                sut = [[TECTableController alloc] initWithContentProvider:contentProviderMock
+                                                                tableView:tableViewMock
+                                                                extenders:@[firstExtender, secondExtender]
+                                                            delegateProxy:delegateProxyMock];
                 [[tableViewMock should] receive:@selector(reloadData)];
                 [sut contentProviderDidReloadData:contentProviderMock];
             });

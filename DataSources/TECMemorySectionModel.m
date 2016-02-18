@@ -11,7 +11,7 @@
 
 @interface TECMemorySectionModel ()
 
-@property (nonatomic, copy, readwrite) NSArray *items;
+@property (nonatomic, strong, readwrite) NSMutableArray *items;
 @property (nonatomic, copy, readwrite) NSString *headerTitle;
 @property (nonatomic, copy, readwrite) NSString *footerTitle;
 
@@ -32,7 +32,7 @@
                   footerTitle:(NSString *)footerTitle {
     self = [super init];
     if(self) {
-        self.items = items;
+        self.items = [items mutableCopy];
         self.headerTitle = headerTitle;
         self.footerTitle = footerTitle;
     }
@@ -43,10 +43,23 @@
     return self.items[idx];
 }
 
+- (void)setObject:(id)object atIndexedSubscript:(NSUInteger)idx {
+    NSParameterAssert(object);
+    self.items[idx] = object;
+}
+
+- (void)insertItem:(id)item atIndex:(NSUInteger)idx {
+    [self.items insertObject:item atIndex:idx];
+}
+
+- (void)removeItemAtIndex:(NSUInteger)idx {
+    [self.items removeObjectAtIndex:idx];
+}
+
 #pragma mark - Mutating items
 
 - (void)replaceItems:(NSArray *)items {
-    self.items = items;
+    self.items = [items mutableCopy];
 }
 
 #pragma mark - NSFastEnumeration implementation

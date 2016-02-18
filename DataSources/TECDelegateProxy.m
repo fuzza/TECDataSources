@@ -26,21 +26,21 @@
 }
 
 - (void)setupDelegatesCache {
-    self.delegates = [NSHashTable hashTableWithOptions:NSPointerFunctionsWeakMemory];
+    self.delegates = [NSHashTable weakObjectsHashTable];
 }
 
 - (void)attachDelegate:(id)delegate {
     [self.delegates addObject:delegate];
 }
 
-- (void)deattachDelegate:(id)delegate {
+- (void)detachDelegate:(id)delegate {
     [self.delegates removeObject:delegate];
 }
 
 #pragma mark - NSObject protocol
 
 - (BOOL)conformsToProtocol:(Protocol *)aProtocol {
-    for(id delegate in self.delegates.allObjects) {
+    for(id delegate in self.delegates) {
         if([delegate conformsToProtocol:aProtocol]) {
             return YES;
         }
@@ -93,7 +93,7 @@
 #pragma mark - Getting responders
 
 - (id)firstResponderForSelector:(SEL)aSelector {
-    for(id delegate in self.delegates.allObjects) {
+    for(id delegate in self.delegates) {
         if([delegate respondsToSelector:aSelector]) {
             return delegate;
         }
@@ -103,7 +103,7 @@
 
 - (NSArray *)allRespondersForSelector:(SEL)aSelector {
     NSMutableArray *respondersArray = [@[] mutableCopy];
-    for(id delegate in self.delegates.allObjects) {
+    for(id delegate in self.delegates) {
         if([delegate respondsToSelector:aSelector]) {
             [respondersArray addObject:delegate];
         }

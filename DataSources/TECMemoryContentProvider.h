@@ -13,6 +13,7 @@
 
 - (instancetype)initWithSections:(NSArray <id <TECSectionModelProtocol>> *)sections;
 - (id <TECSectionModelProtocol>)objectAtIndexedSubscript:(NSUInteger)idx;
+- (void)setObject:(id <TECSectionModelProtocol>)object atIndexedSubscript:(NSUInteger)idx;
 - (NSEnumerator<id <TECSectionModelProtocol>> *)sectionEnumerator;
 - (NSEnumerator<id <TECSectionModelProtocol>> *)reverseSectionEnumerator;
 - (void)enumerateObjectsUsingBlock:(void (^)(id <TECSectionModelProtocol> obj, NSUInteger idx, BOOL *stop))block;

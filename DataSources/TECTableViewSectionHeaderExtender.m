@@ -10,11 +10,11 @@
 #import "TECContentProviderProtocol.h"
 #import "TECSectionModelProtocol.h"
 
-@implementation TECTableViewSectionHeaderExtender
+TECTableViewExtenderImplementation(TECTableViewSectionHeaderExtender)
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     id <TECSectionModelProtocol> sectionModel = [self.contentProvider sectionAtIndex:section];
     return sectionModel.headerTitle;
 }
 
-@end
+TECTableViewExtenderEnd

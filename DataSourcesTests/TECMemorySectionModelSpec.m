@@ -181,6 +181,12 @@ describe(@"NSCopying implementation", ^{
         [[model1 shouldNot] beIdenticalTo:model2];
     });
     
+    it(@"should return different instances with different items array on copy", ^() {
+        TECMemorySectionModel *model1 = [[TECMemorySectionModel alloc] initWithItems:testArray2];
+        TECMemorySectionModel *model2 = [model1 copy];
+        [[[model1 items] shouldNot] beIdenticalTo:[model2 items]];
+    });
+    
     it(@"should return equal instances on copy", ^() {
         TECMemorySectionModel *model1 = [[TECMemorySectionModel alloc] initWithItems:testArray2];
         TECMemorySectionModel *model2 = [model1 copy];
