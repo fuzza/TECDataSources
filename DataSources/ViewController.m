@@ -24,6 +24,8 @@
 #import "TECTableViewReorderingExtender.h"
 #import "TECTableViewDeletingExtender.h"
 
+#import "TECDelegateProxy.h"
+
 @interface ViewController ()
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -80,9 +82,8 @@
     }];
     
     TECTableViewCellFactory *factory = [[TECTableViewCellFactory alloc] initWithСellRegistrator:registrator
-            configurationHandler:^UITableViewCell *(UITableViewCell *cell, id item, UITableView *tableView, NSIndexPath *indexPath) {
+            configurationHandler:^(UITableViewCell *cell, id item, UITableView *tableView, NSIndexPath *indexPath) {
                 cell.textLabel.text = item;
-                return cell;
     }];
     
     TECMemorySectionModel *firstSection = [[TECMemorySectionModel alloc] initWithItems:@[@"one", @"two", @"three"] headerTitle:@"firstHeader" footerTitle:@"firstFooter"];
@@ -118,7 +119,8 @@
                                                           self.cellExtender,
                                                           self.editingExtender,
                                                           self.deletingExtender,
-                                                          self.reorderingExtender]];
+                                                          self.reorderingExtender]
+                                          delegateProxy:[[TECDelegateProxy alloc] init]];
 }
 
 - (void)editButtonPressed:(id)sender {
