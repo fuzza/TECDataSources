@@ -46,6 +46,26 @@
     self.sectionModelArray = [NSArray arrayWithArray:array];
 }
 
+- (void)setCurrentRequest:(NSFetchRequest *)currentRequest {
+    self.fetchedResultsController.delegate = nil;
+    self.fetchedResultsController.fetchRequest.predicate = currentRequest.predicate;
+    self.fetchedResultsController.fetchRequest.sortDescriptors = currentRequest.sortDescriptors;
+    self.fetchedResultsController.fetchRequest.propertiesToFetch = currentRequest.propertiesToFetch;
+    self.fetchedResultsController.fetchRequest.propertiesToGroupBy = currentRequest.propertiesToGroupBy;
+    self.fetchedResultsController.fetchRequest.fetchBatchSize = currentRequest.fetchBatchSize;
+    self.fetchedResultsController.fetchRequest.fetchLimit = currentRequest.fetchLimit;
+    self.fetchedResultsController.fetchRequest.fetchOffset = currentRequest.fetchOffset;
+    [self.fetchedResultsController performFetch:nil];
+    self.fetchedResultsController.delegate = self;
+    if ([self.presentationAdapter respondsToSelector:@selector(contentProviderDidReloadData:)]) {
+        [self.presentationAdapter contentProviderDidReloadData:self];
+    }
+}
+
+- (NSFetchRequest *)getCopyOfCurrentRequest {
+    return [self.fetchedResultsController.fetchRequest copy];
+}
+
 #pragma mark - NSFastEnumeration implementation
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id  _Nonnull *)buffer count:(NSUInteger)len {

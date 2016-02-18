@@ -15,6 +15,7 @@
 		008D856A1C63B561002D82F3 /* TECTableViewDeletingExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 008D85691C63B561002D82F3 /* TECTableViewDeletingExtender.m */; };
 		008D856D1C63B5A8002D82F3 /* TECTableViewItemUpdatingExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 008D856C1C63B5A8002D82F3 /* TECTableViewItemUpdatingExtender.m */; };
 		008D85701C648F52002D82F3 /* TECTableViewReorderingExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 008D856F1C648F52002D82F3 /* TECTableViewReorderingExtender.m */; };
+		009B584C1C74D05B00CAC105 /* TECFetchedResultsControllerContentProviderSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 009B584B1C74D05B00CAC105 /* TECFetchedResultsControllerContentProviderSpec.m */; };
 		00A85D441C60D8FE00125C2C /* TECMemorySectionModelSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A85D431C60D8FE00125C2C /* TECMemorySectionModelSpec.m */; };
 		00A85D461C60FCDA00125C2C /* TECMemoryContentProviderSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A85D451C60FCDA00125C2C /* TECMemoryContentProviderSpec.m */; };
 		3E1457A237F0ED5DAA116D60 /* libPods-DataSourcesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6648EB9D0A7F2502D02AA01 /* libPods-DataSourcesTests.a */; };
@@ -68,6 +69,7 @@
 		008D856C1C63B5A8002D82F3 /* TECTableViewItemUpdatingExtender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewItemUpdatingExtender.m; sourceTree = "<group>"; };
 		008D856E1C648F52002D82F3 /* TECTableViewReorderingExtender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewReorderingExtender.h; sourceTree = "<group>"; };
 		008D856F1C648F52002D82F3 /* TECTableViewReorderingExtender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewReorderingExtender.m; sourceTree = "<group>"; };
+		009B584B1C74D05B00CAC105 /* TECFetchedResultsControllerContentProviderSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECFetchedResultsControllerContentProviderSpec.m; sourceTree = "<group>"; };
 		00A85D431C60D8FE00125C2C /* TECMemorySectionModelSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECMemorySectionModelSpec.m; sourceTree = "<group>"; };
 		00A85D451C60FCDA00125C2C /* TECMemoryContentProviderSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECMemoryContentProviderSpec.m; sourceTree = "<group>"; };
 		1EF957566F87E00C2CAB1977 /* Pods-DataSourcesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataSourcesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DataSourcesTests/Pods-DataSourcesTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				6F0CD6261C51109500D09C01 /* TECTableViewCellFactorySpec.m */,
 				00A85D431C60D8FE00125C2C /* TECMemorySectionModelSpec.m */,
 				00A85D451C60FCDA00125C2C /* TECMemoryContentProviderSpec.m */,
+				009B584B1C74D05B00CAC105 /* TECFetchedResultsControllerContentProviderSpec.m */,
 				6F0CD6281C51109500D09C01 /* Info.plist */,
 			);
 			path = DataSourcesTests;
@@ -492,6 +495,7 @@
 			files = (
 				6F2E890C1C5142DF00FD4165 /* TECTableViewCellRegistratorSpec.m in Sources */,
 				6F0CD6271C51109500D09C01 /* TECTableViewCellFactorySpec.m in Sources */,
+				009B584C1C74D05B00CAC105 /* TECFetchedResultsControllerContentProviderSpec.m in Sources */,
 				00A85D441C60D8FE00125C2C /* TECMemorySectionModelSpec.m in Sources */,
 				00A85D461C60FCDA00125C2C /* TECMemoryContentProviderSpec.m in Sources */,
 			);

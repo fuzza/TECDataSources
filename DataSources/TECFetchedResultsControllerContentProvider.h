@@ -19,6 +19,9 @@
                        fetchRequest:(NSFetchRequest *)fetchRequest
                  sectionNameKeyPath:(NSString *)sectionNameKeyPath;
 
+- (void)setCurrentRequest:(NSFetchRequest *)currentRequest; // This will trigger reload
+- (NSFetchRequest *)getCopyOfCurrentRequest;
+
 @property (nonatomic, weak) id <TECContentProviderPresentationAdapterProtocol> presentationAdapter;
 
 @end
