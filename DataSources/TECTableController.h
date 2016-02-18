@@ -7,14 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TECContentProviderDelegate.h"
 
 @protocol TECContentProviderProtocol;
 
 @class TECTableViewExtender;
+@class TECDelegateProxy;
 
-@interface TECTableController : NSObject
+@interface TECTableController : NSObject <TECContentProviderPresentationAdapterProtocol>
 
-- (instancetype)initWithContentProvider:(id <TECContentProviderProtocol>)contentProvider;
+- (instancetype)initWithContentProvider:(id <TECContentProviderProtocol>)contentProvider
+                          delegateProxy:(TECDelegateProxy *)delegateProxy;
 
 - (void)setupWithTableView:(UITableView *)tableView;
 

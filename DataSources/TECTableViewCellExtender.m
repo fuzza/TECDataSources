@@ -37,7 +37,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     id item = [self.contentProvider itemAtIndexPath:indexPath];
     UITableViewCell *cell = [self.cellFactory cellForItem:item tableView:tableView atIndexPath:indexPath];
-    return [self.cellFactory configureCell:cell forItem:item inTableView:tableView atIndexPath:indexPath];
+    return cell;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

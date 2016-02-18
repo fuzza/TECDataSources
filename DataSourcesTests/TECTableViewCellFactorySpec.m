@@ -57,20 +57,23 @@ describe(@"Creating cell", ^{
 
 
 describe(@"Configuring cell", ^{
-    it(@"Should pass-through cell if no configuration handler", ^{
+    it(@"Shouldn't call configure cell block if no block provided", ^{
+        BOOL isHandlerCalled = NO;
+        
         TECTableViewCellFactory *sut = [[TECTableViewCellFactory alloc] initWithСellRegistrator:cellRegistratorMock
                                                                            configurationHandler:nil];
-        UITableViewCell *result = [sut configureCell:cellMock
-                                             forItem:itemMock
-                                         inTableView:tableViewMock
-                                         atIndexPath:indexPathMock];
-        [[result should] equal:cellMock];
+        [sut configureCell:cellMock
+                   forItem:itemMock
+               inTableView:tableViewMock
+               atIndexPath:indexPathMock];
+        
+        [[theValue(isHandlerCalled) should] beFalse];
     });
     
-    it(@"Should return configured cell", ^{
-        id configuredCellMock = [UITableViewCell mock];
+    it(@"Should call configure cell block", ^{
+        __block BOOL isHandlerCalled = NO;
         
-        TECTableViewCellConfigurationHandler handler = ^__kindof UITableViewCell *(UITableViewCell *cell,
+        TECTableViewCellConfigurationHandler handler = ^(UITableViewCell *cell,
                                                                                      id item,
                                                                                      UITableView *tableView,
                                                                                      NSIndexPath *indexPath) {
@@ -79,17 +82,17 @@ describe(@"Configuring cell", ^{
             [[tableView should] equal:tableViewMock];
             [[indexPath should] equal:indexPathMock];
             
-            return configuredCellMock;
+            isHandlerCalled = YES;
         };
         
         TECTableViewCellFactory *sut = [[TECTableViewCellFactory alloc] initWithСellRegistrator:cellRegistratorMock
                                                                            configurationHandler:handler];
-        UITableViewCell *result = [sut configureCell:cellMock
-                                                  forItem:itemMock
-                                              inTableView:tableViewMock
-                                              atIndexPath:indexPathMock];
+        [sut configureCell:cellMock
+                   forItem:itemMock
+               inTableView:tableViewMock
+               atIndexPath:indexPathMock];
         
-        [[result should] equal:configuredCellMock];
+        [[theValue(isHandlerCalled) should] beTrue];
     });
 });
 

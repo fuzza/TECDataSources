@@ -14,9 +14,9 @@
                        tableView:(UITableView *)tableView
                      atIndexPath:(NSIndexPath *)indexPath;
 
-- (UITableViewCell *)configureCell:(UITableViewCell *)cell
-                           forItem:(id)item
-                       inTableView:(UITableView *)tableView
-                       atIndexPath:(NSIndexPath *)indexPath;
+- (void)configureCell:(UITableViewCell *)cell
+              forItem:(id)item
+          inTableView:(UITableView *)tableView
+          atIndexPath:(NSIndexPath *)indexPath;
 
 @end

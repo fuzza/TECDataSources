@@ -21,6 +21,8 @@
 #import "TECTableViewSectionFooterExtender.h"
 #import "TECTableViewCellExtender.h"
 
+#import "TECDelegateProxy.h"
+
 @interface ViewController ()
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -53,15 +55,16 @@
     }];
     
     TECTableViewCellFactory *factory = [[TECTableViewCellFactory alloc] initWithСellRegistrator:registrator
-            configurationHandler:^UITableViewCell *(UITableViewCell *cell, id item, UITableView *tableView, NSIndexPath *indexPath) {
-                return cell;
-    }];
+            configurationHandler:^(UITableViewCell *cell, NSString *item, UITableView *tableView, NSIndexPath *indexPath) {
+                cell.textLabel.text = item;
+            }];
     
     TECMemorySectionModel *firstSection = [[TECMemorySectionModel alloc] initWithItems:@[@"one", @"two", @"three"] headerTitle:@"firstHeader" footerTitle:@"firstFooter"];
     TECMemorySectionModel *secondSection = [[TECMemorySectionModel alloc] initWithItems:@[@"four", @"five", @"six"] headerTitle:@"secondHeader" footerTitle:@"secondFooter"];
     TECMemoryContentProvider *contentProvider = [[TECMemoryContentProvider alloc] initWithSections:@[firstSection, secondSection]];
     
-    self.tableController = [[TECTableController alloc] initWithContentProvider:contentProvider];
+    self.tableController = [[TECTableController alloc] initWithContentProvider:contentProvider
+                                                                 delegateProxy:[[TECDelegateProxy alloc] init]];
 
     self.footerExtender = [[TECTableViewSectionFooterExtender alloc] init];
     self.headerExtender = [[TECTableViewSectionHeaderExtender alloc] init];

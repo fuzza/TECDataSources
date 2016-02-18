@@ -37,7 +37,7 @@
     [self.delegates removeObject:delegate];
 }
 
-#pragma mark - Message forwarding
+#pragma mark - NSObject protocol
 
 - (BOOL)conformsToProtocol:(Protocol *)aProtocol {
     for(id delegate in self.delegates.allObjects) {
@@ -49,19 +49,18 @@
 }
 
 - (BOOL)respondsToSelector:(SEL)aSelector {
-    for(id delegate in self.delegates.allObjects) {
-        if([delegate respondsToSelector:aSelector]) {
-            return YES;
-        }
+    if([self firstResponderForSelector:aSelector]) {
+        return YES;
     }
     return NO;
 }
 
-- (NSMethodSignature *)methodSignatureForSelector:(SEL)selector {
-    for(id delegate in self.delegates.allObjects) {
-        if([delegate respondsToSelector:selector]) {
-            return [delegate methodSignatureForSelector:selector];
-        }
+#pragma mark - Message forwarding
+
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector {
+    id responder = [self firstResponderForSelector:aSelector];
+    if(responder) {
+        return [responder methodSignatureForSelector:aSelector];
     }
     return nil;
 }
@@ -75,26 +74,41 @@
     }
 }
 
-#pragma mark - Helper methods
-
 - (void)forwardInvocationToAllObjects:(NSInvocation *)invocation {
-    for(id delegate in self.delegates.allObjects) {
-        if([delegate respondsToSelector:invocation.selector]) {
-            [invocation invokeWithTarget:delegate];
-        }
+    NSArray *allResponders = [self allRespondersForSelector:invocation.selector];
+    for (id responder in allResponders) {
+        [invocation invokeWithTarget:responder];
     }
 }
 
 - (void)forwardInvocationToFirstResponder:(NSInvocation *)invocation {
+    NSArray *allResponders = [self allRespondersForSelector:invocation.selector];
+    NSParameterAssert(allResponders.count < 2);
+    
+    if(allResponders.firstObject) {
+        [invocation invokeWithTarget:allResponders.firstObject];
+    }
+}
+
+#pragma mark - Getting responders
+
+- (id)firstResponderForSelector:(SEL)aSelector {
+    for(id delegate in self.delegates.allObjects) {
+        if([delegate respondsToSelector:aSelector]) {
+            return delegate;
+        }
+    }
+    return nil;
+}
+
+- (NSArray *)allRespondersForSelector:(SEL)aSelector {
     NSMutableArray *respondersArray = [@[] mutableCopy];
     for(id delegate in self.delegates.allObjects) {
-        if([delegate respondsToSelector:invocation.selector]) {
+        if([delegate respondsToSelector:aSelector]) {
             [respondersArray addObject:delegate];
         }
     }
-    
-    NSParameterAssert(respondersArray.count < 2);
-    [invocation invokeWithTarget:respondersArray.firstObject];
+    return respondersArray;
 }
 
 @end
