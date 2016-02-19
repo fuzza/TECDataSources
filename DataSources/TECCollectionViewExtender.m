@@ -8,6 +8,9 @@
 
 #import "TECCollectionViewExtender.h"
 
+_Pragma("clang diagnostic push")
+_Pragma("clang diagnostic ignored \"-Wprotocol\"")
 @implementation TECCollectionViewExtender
 
 @end
+_Pragma("clang diagnostic pop")

@@ -10,7 +10,7 @@
 
 @protocol TECContentProviderProtocol;
 
-@interface TECCollectionViewExtender : NSObject
+@interface TECCollectionViewExtender : NSObject <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (nonatomic, weak) UICollectionView *collectionView;
 @property (nonatomic, weak) id <TECContentProviderProtocol> contentProvider;
