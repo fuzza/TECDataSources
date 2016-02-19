@@ -20,7 +20,6 @@
 #import "TECTableViewSectionFooterExtender.h"
 #import "TECTableViewCellExtender.h"
 #import "TECTableViewEditingExtender.h"
-#import "TECTableViewReorderingExtender.h"
 #import "TECTableViewDeletingExtender.h"
 
 #import "TECDelegateProxy.h"
@@ -41,7 +40,6 @@
 @property (nonatomic, strong) TECTableViewSectionHeaderExtender *headerExtender;
 @property (nonatomic, strong) TECTableViewSectionFooterExtender *footerExtender;
 @property (nonatomic, strong) TECTableViewCellExtender *cellExtender;
-@property (nonatomic, strong) TECTableViewReorderingExtender *reorderingExtender;
 @property (nonatomic, strong) TECTableViewEditingExtender *editingExtender;
 @property (nonatomic, strong) TECTableViewDeletingExtender *deletingExtender;
 
@@ -92,16 +90,6 @@
     self.headerExtender = [TECTableViewSectionHeaderExtender extender];
     
     self.cellExtender = [TECTableViewCellExtender cellExtenderWithCellFactory:factory];
-    self.reorderingExtender =
-    [TECTableViewReorderingExtender reorderingExtenderWithCanMoveBlock:^BOOL(UITableView *tableView, NSIndexPath *indexPath, id<TECSectionModelProtocol> section, id item) {
-        return YES;
-    } targetIndexPathBlock:^NSIndexPath *(UITableView *tableView, NSIndexPath *indexPath, id<TECSectionModelProtocol> section, id item, NSIndexPath *targetIndexPath, id<TECSectionModelProtocol> targetSection, id targetItem) {
-        NSIndexPath *result = targetIndexPath;
-        if (indexPath.section == 0 || targetIndexPath.section == 0) { // Disable reorder from and to first section, enable from others
-            result = indexPath;
-        }
-        return result;
-    }];
     self.editingExtender = [TECTableViewEditingExtender editingExtenderWithCanEditBlock:^BOOL(UITableView *tableView, NSIndexPath *indexPath, id<TECSectionModelProtocol> section, id item) {
         return YES;
     }];
@@ -119,8 +107,7 @@
                                                           self.footerExtender,
                                                           self.cellExtender,
                                                           self.editingExtender,
-                                                          self.deletingExtender,
-                                                          self.reorderingExtender]
+                                                          self.deletingExtender]
                                           delegateProxy:[[TECDelegateProxy alloc] init]];
 }
 

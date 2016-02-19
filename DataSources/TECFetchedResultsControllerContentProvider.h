@@ -12,6 +12,10 @@
 #import "TECFetchedResultsControllerContentProviderGetter.h"
 #import "TECFetchedResultsControllerContentProviderMutator.h"
 
+typedef void(^TECFetchedResultsControllerContentProviderMoveBlock)(NSFetchedResultsController *controller,
+                                                                   NSIndexPath *from,
+                                                                   NSIndexPath *to);
+
 @interface TECFetchedResultsControllerContentProvider : NSObject <TECContentProviderProtocol>
 
 - (instancetype)initWithItemsGetter:(id <TECFetchedResultsControllerContentProviderGetter>)getter
@@ -23,5 +27,7 @@
 - (NSFetchRequest *)getCopyOfCurrentRequest;
 
 @property (nonatomic, weak) id <TECContentProviderPresentationAdapterProtocol> presentationAdapter;
+
+@property (nonatomic, copy) TECFetchedResultsControllerContentProviderMoveBlock moveBlock;
 
 @end

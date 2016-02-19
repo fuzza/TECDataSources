@@ -150,10 +150,10 @@
             </objects>
             <point key="canvasLocation" x="240" y="996"/>
         </scene>
-        <!--Fetched Result Controller Content Provider View Controller-->
+        <!--Fetched Results Content Provider Reordering View Controller-->
         <scene sceneID="9lV-xh-oqU">
             <objects>
-                <viewController id="7C6-aJ-2Ju" customClass="FetchedResultControllerContentProviderViewController" sceneMemberID="viewController">
+                <viewController id="7C6-aJ-2Ju" customClass="FetchedResultsContentProviderReorderingViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2Lz-ZE-bQ3"/>
                         <viewControllerLayoutGuide type="bottom" id="aHf-il-wDT"/>

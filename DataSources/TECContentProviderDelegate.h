@@ -12,12 +12,12 @@
 @protocol TECSectionModelProtocol;
 
 typedef NS_ENUM(NSUInteger, TECContentProviderSectionChangeType) {
-    TECContentProviderSectionChangeTypeInsert,
+    TECContentProviderSectionChangeTypeInsert = 1, // To map to NSFetchedResultChangeType enum transparently
     TECContentProviderSectionChangeTypeDelete
 };
 
 typedef NS_ENUM(NSUInteger, TECContentProviderItemChangeType) {
-    TECContentProviderItemChangeTypeInsert,
+    TECContentProviderItemChangeTypeInsert = 1, // To map to NSFetchedResultChangeType enum transparently
     TECContentProviderItemChangeTypeDelete,
     TECContentProviderItemChangeTypeMove,
     TECContentProviderItemChangeTypeUpdate

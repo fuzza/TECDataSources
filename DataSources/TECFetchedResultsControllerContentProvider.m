@@ -13,8 +13,8 @@
 
 @interface TECFetchedResultsControllerContentProvider () <NSFetchedResultsControllerDelegate>
 
-@property (nonatomic, weak) id <TECFetchedResultsControllerContentProviderGetter> itemsGetter;
-@property (nonatomic, weak) id <TECFetchedResultsControllerContentProviderMutator> itemsMutator;
+@property (nonatomic, strong) id <TECFetchedResultsControllerContentProviderGetter> itemsGetter;
+@property (nonatomic, strong) id <TECFetchedResultsControllerContentProviderMutator> itemsMutator;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) NSArray *sectionModelArray;
 
@@ -110,7 +110,10 @@
 }
 
 - (void)moveItemAtIndexPath:(NSIndexPath *)indexPath toIndexPath:(NSIndexPath *)newIndexPath {
-    NSAssert(NO, @"%s CoreData content provider asked for ineligible mutation", __PRETTY_FUNCTION__);
+    NSAssert(self.moveBlock, @"%s CoreData content provider asked for ineligible mutation", __PRETTY_FUNCTION__);
+    if (self.moveBlock) {
+        self.moveBlock(self.fetchedResultsController, indexPath, newIndexPath);
+    }
 }
 
 - (void)insertItem:(id)item atIndexPath:(NSIndexPath *)indexPath {
