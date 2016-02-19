@@ -6,7 +6,7 @@
 //  Copyright © 2016 Alexey Fayzullov. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "MemoryContentProviderViewController.h"
 #import "TECTableController.h"
 
 #import "TECMemoryContentProvider.h"
@@ -26,7 +26,7 @@
 
 #import "TECDelegateProxy.h"
 
-@interface ViewController ()
+@interface MemoryContentProviderViewController ()
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIToolbar *toolbar;
@@ -34,6 +34,7 @@
 @property (nonatomic, strong) UIBarButtonItem *doneBarButtonItem;
 @property (nonatomic, strong) UIBarButtonItem *flexibleSpace;
 @property (nonatomic, strong) UIBarButtonItem *reloadButtonItem;
+@property (nonatomic, strong) UIBarButtonItem *closeButtonItem;
 
 @property (nonatomic, strong) TECTableController *tableController;
 
@@ -48,7 +49,7 @@
 
 @end
 
-@implementation ViewController
+@implementation MemoryContentProviderViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -63,8 +64,9 @@
     self.editBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editButtonPressed:)];
     self.doneBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonPressed:)];
     self.flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    self.reloadButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:nil action:@selector(reloadButtonPressed:)];
-    self.toolbar.items = @[self.editBarButtonItem, self.flexibleSpace, self.reloadButtonItem];
+    self.reloadButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(reloadButtonPressed:)];
+    self.closeButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(closeButtonPressed:)];
+    self.toolbar.items = @[self.editBarButtonItem, self.flexibleSpace, self.reloadButtonItem, self.closeButtonItem];
     [self.view addSubview:self.toolbar];
 }
 
@@ -109,7 +111,6 @@
     }];
     self.deletingExtender = [TECTableViewDeletingExtender extender];
    
-// Table controller may be initialized with set of extenders, table view and content provider
     self.tableController =
     [[TECTableController alloc] initWithContentProvider:self.contentProvider
                                               tableView:self.tableView
@@ -127,18 +128,24 @@
     [self.editingExtender setEditing:YES animated:YES];
     [self.toolbar setItems:@[self.doneBarButtonItem,
                              self.flexibleSpace,
-                             self.reloadButtonItem] animated:YES];
+                             self.reloadButtonItem,
+                             self.closeButtonItem] animated:YES];
 }
 
 - (void)doneButtonPressed:(id)sender {
     [self.editingExtender setEditing:NO animated:YES];
     [self.toolbar setItems:@[self.editBarButtonItem,
                              self.flexibleSpace,
-                             self.reloadButtonItem] animated:YES];
+                             self.reloadButtonItem,
+                             self.closeButtonItem] animated:YES];
 }
 
 - (void)reloadButtonPressed:(id)sender {
     [self.contentProvider reloadDataSourceWithCompletion:nil];
+}
+
+- (void)closeButtonPressed:(id)sender {
+    [self performSegueWithIdentifier:@"backToRootViewControllerWithSegue" sender:sender];
 }
 
 @end

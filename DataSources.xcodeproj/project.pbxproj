@@ -16,12 +16,21 @@
 		008D856D1C63B5A8002D82F3 /* TECTableViewItemUpdatingExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 008D856C1C63B5A8002D82F3 /* TECTableViewItemUpdatingExtender.m */; };
 		008D85701C648F52002D82F3 /* TECTableViewReorderingExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 008D856F1C648F52002D82F3 /* TECTableViewReorderingExtender.m */; };
 		009B584C1C74D05B00CAC105 /* TECFetchedResultsControllerContentProviderSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 009B584B1C74D05B00CAC105 /* TECFetchedResultsControllerContentProviderSpec.m */; };
+		00A4CA3D1C75DCFE00515A94 /* FetchedResultControllerContentProviderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A4CA3C1C75DCFE00515A94 /* FetchedResultControllerContentProviderViewController.m */; };
 		00A85D441C60D8FE00125C2C /* TECMemorySectionModelSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A85D431C60D8FE00125C2C /* TECMemorySectionModelSpec.m */; };
 		00A85D461C60FCDA00125C2C /* TECMemoryContentProviderSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A85D451C60FCDA00125C2C /* TECMemoryContentProviderSpec.m */; };
+		00AA47181C75E53900B2AD56 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00AA47171C75E53900B2AD56 /* RootViewController.m */; };
+		00AA471B1C77039500B2AD56 /* FetchedResultsContentProviderReorderingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00AA471A1C77039500B2AD56 /* FetchedResultsContentProviderReorderingViewController.m */; };
+		00AA471E1C77042A00B2AD56 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 00AA471D1C77042A00B2AD56 /* CoreDataManager.m */; };
+		00AA47211C770E2100B2AD56 /* DataSources.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 00AA471F1C770E2100B2AD56 /* DataSources.xcdatamodeld */; };
+		00AA472A1C770EC400B2AD56 /* Person+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 00AA47231C770EC400B2AD56 /* Person+CoreDataProperties.m */; };
+		00AA472B1C770EC400B2AD56 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 00AA47251C770EC400B2AD56 /* Person.m */; };
+		00AA472C1C770EC400B2AD56 /* PersonOrdered+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 00AA47271C770EC400B2AD56 /* PersonOrdered+CoreDataProperties.m */; };
+		00AA472D1C770EC400B2AD56 /* PersonOrdered.m in Sources */ = {isa = PBXBuildFile; fileRef = 00AA47291C770EC400B2AD56 /* PersonOrdered.m */; };
 		3E1457A237F0ED5DAA116D60 /* libPods-DataSourcesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6648EB9D0A7F2502D02AA01 /* libPods-DataSourcesTests.a */; };
 		6F0CD60E1C51109400D09C01 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CD60D1C51109400D09C01 /* main.m */; };
 		6F0CD6111C51109400D09C01 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CD6101C51109400D09C01 /* AppDelegate.m */; };
-		6F0CD6141C51109400D09C01 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CD6131C51109400D09C01 /* ViewController.m */; };
+		6F0CD6141C51109400D09C01 /* MemoryContentProviderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CD6131C51109400D09C01 /* MemoryContentProviderViewController.m */; };
 		6F0CD6171C51109400D09C01 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F0CD6151C51109400D09C01 /* Main.storyboard */; };
 		6F0CD6191C51109400D09C01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F0CD6181C51109400D09C01 /* Assets.xcassets */; };
 		6F0CD61C1C51109400D09C01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F0CD61A1C51109400D09C01 /* LaunchScreen.storyboard */; };
@@ -77,16 +86,33 @@
 		008D856E1C648F52002D82F3 /* TECTableViewReorderingExtender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewReorderingExtender.h; sourceTree = "<group>"; };
 		008D856F1C648F52002D82F3 /* TECTableViewReorderingExtender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewReorderingExtender.m; sourceTree = "<group>"; };
 		009B584B1C74D05B00CAC105 /* TECFetchedResultsControllerContentProviderSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECFetchedResultsControllerContentProviderSpec.m; sourceTree = "<group>"; };
+		00A4CA3B1C75DCFE00515A94 /* FetchedResultControllerContentProviderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchedResultControllerContentProviderViewController.h; sourceTree = "<group>"; };
+		00A4CA3C1C75DCFE00515A94 /* FetchedResultControllerContentProviderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchedResultControllerContentProviderViewController.m; sourceTree = "<group>"; };
 		00A85D431C60D8FE00125C2C /* TECMemorySectionModelSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECMemorySectionModelSpec.m; sourceTree = "<group>"; };
 		00A85D451C60FCDA00125C2C /* TECMemoryContentProviderSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECMemoryContentProviderSpec.m; sourceTree = "<group>"; };
+		00AA47161C75E53900B2AD56 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		00AA47171C75E53900B2AD56 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		00AA47191C77039500B2AD56 /* FetchedResultsContentProviderReorderingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchedResultsContentProviderReorderingViewController.h; sourceTree = "<group>"; };
+		00AA471A1C77039500B2AD56 /* FetchedResultsContentProviderReorderingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchedResultsContentProviderReorderingViewController.m; sourceTree = "<group>"; };
+		00AA471C1C77042A00B2AD56 /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
+		00AA471D1C77042A00B2AD56 /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
+		00AA47201C770E2100B2AD56 /* DataSources.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataSources.xcdatamodel; sourceTree = "<group>"; };
+		00AA47221C770EC400B2AD56 /* Person+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Person+CoreDataProperties.h"; sourceTree = "<group>"; };
+		00AA47231C770EC400B2AD56 /* Person+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Person+CoreDataProperties.m"; sourceTree = "<group>"; };
+		00AA47241C770EC400B2AD56 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		00AA47251C770EC400B2AD56 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		00AA47261C770EC400B2AD56 /* PersonOrdered+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PersonOrdered+CoreDataProperties.h"; sourceTree = "<group>"; };
+		00AA47271C770EC400B2AD56 /* PersonOrdered+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PersonOrdered+CoreDataProperties.m"; sourceTree = "<group>"; };
+		00AA47281C770EC400B2AD56 /* PersonOrdered.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonOrdered.h; sourceTree = "<group>"; };
+		00AA47291C770EC400B2AD56 /* PersonOrdered.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonOrdered.m; sourceTree = "<group>"; };
 		1EF957566F87E00C2CAB1977 /* Pods-DataSourcesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataSourcesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DataSourcesTests/Pods-DataSourcesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2BA9BBEB5BFFAD972BFA7ACE /* Pods-DataSourcesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataSourcesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DataSourcesTests/Pods-DataSourcesTests.release.xcconfig"; sourceTree = "<group>"; };
 		6F0CD6091C51109400D09C01 /* DataSources.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DataSources.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F0CD60D1C51109400D09C01 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6F0CD60F1C51109400D09C01 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6F0CD6101C51109400D09C01 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		6F0CD6121C51109400D09C01 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		6F0CD6131C51109400D09C01 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		6F0CD6121C51109400D09C01 /* MemoryContentProviderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MemoryContentProviderViewController.h; sourceTree = "<group>"; };
+		6F0CD6131C51109400D09C01 /* MemoryContentProviderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MemoryContentProviderViewController.m; sourceTree = "<group>"; };
 		6F0CD6161C51109400D09C01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6F0CD6181C51109400D09C01 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6F0CD61B1C51109400D09C01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -196,8 +222,25 @@
 				6F59A9761C58E9790095289C /* Shared */,
 				6F0CD60F1C51109400D09C01 /* AppDelegate.h */,
 				6F0CD6101C51109400D09C01 /* AppDelegate.m */,
-				6F0CD6121C51109400D09C01 /* ViewController.h */,
-				6F0CD6131C51109400D09C01 /* ViewController.m */,
+				00AA471C1C77042A00B2AD56 /* CoreDataManager.h */,
+				00AA471D1C77042A00B2AD56 /* CoreDataManager.m */,
+				00AA47161C75E53900B2AD56 /* RootViewController.h */,
+				00AA47171C75E53900B2AD56 /* RootViewController.m */,
+				6F0CD6121C51109400D09C01 /* MemoryContentProviderViewController.h */,
+				6F0CD6131C51109400D09C01 /* MemoryContentProviderViewController.m */,
+				00A4CA3B1C75DCFE00515A94 /* FetchedResultControllerContentProviderViewController.h */,
+				00A4CA3C1C75DCFE00515A94 /* FetchedResultControllerContentProviderViewController.m */,
+				00AA47191C77039500B2AD56 /* FetchedResultsContentProviderReorderingViewController.h */,
+				00AA471A1C77039500B2AD56 /* FetchedResultsContentProviderReorderingViewController.m */,
+				00AA471F1C770E2100B2AD56 /* DataSources.xcdatamodeld */,
+				00AA47221C770EC400B2AD56 /* Person+CoreDataProperties.h */,
+				00AA47231C770EC400B2AD56 /* Person+CoreDataProperties.m */,
+				00AA47241C770EC400B2AD56 /* Person.h */,
+				00AA47251C770EC400B2AD56 /* Person.m */,
+				00AA47261C770EC400B2AD56 /* PersonOrdered+CoreDataProperties.h */,
+				00AA47271C770EC400B2AD56 /* PersonOrdered+CoreDataProperties.m */,
+				00AA47281C770EC400B2AD56 /* PersonOrdered.h */,
+				00AA47291C770EC400B2AD56 /* PersonOrdered.m */,
 				6F0CD6151C51109400D09C01 /* Main.storyboard */,
 				6F0CD6181C51109400D09C01 /* Assets.xcassets */,
 				6F0CD61A1C51109400D09C01 /* LaunchScreen.storyboard */,
@@ -489,24 +532,33 @@
 			files = (
 				6F59A9841C58ECF70095289C /* TECTableViewSectionFooterExtender.m in Sources */,
 				6F78F04D1C513344006F08DC /* TECTableViewCellRegistrator.m in Sources */,
+				00AA47181C75E53900B2AD56 /* RootViewController.m in Sources */,
 				6F59A9661C57DCAF0095289C /* TECDelegateProxy.m in Sources */,
 				005F137D1C6F80E900765CC1 /* TECMainContextObjectGetter.m in Sources */,
+				00AA472D1C770EC400B2AD56 /* PersonOrdered.m in Sources */,
 				008D856A1C63B561002D82F3 /* TECTableViewDeletingExtender.m in Sources */,
 				005F13801C71ACFF00765CC1 /* TECCoreDataSectionModel.m in Sources */,
 				008D85701C648F52002D82F3 /* TECTableViewReorderingExtender.m in Sources */,
-				6F0CD6141C51109400D09C01 /* ViewController.m in Sources */,
+				6F0CD6141C51109400D09C01 /* MemoryContentProviderViewController.m in Sources */,
+				00AA47211C770E2100B2AD56 /* DataSources.xcdatamodeld in Sources */,
 				6F0CD6111C51109400D09C01 /* AppDelegate.m in Sources */,
 				6F59A96A1C58CA650095289C /* TECMemoryContentProvider.m in Sources */,
+				00AA472A1C770EC400B2AD56 /* Person+CoreDataProperties.m in Sources */,
 				6F59A9701C58CDC40095289C /* TECCustomCell.m in Sources */,
 				6F59A9521C57B8EB0095289C /* TECTableController.m in Sources */,
 				6F59A98A1C5911570095289C /* TECTableViewExtender.m in Sources */,
+				00AA471E1C77042A00B2AD56 /* CoreDataManager.m in Sources */,
 				6F0CD60E1C51109400D09C01 /* main.m in Sources */,
+				00AA472C1C770EC400B2AD56 /* PersonOrdered+CoreDataProperties.m in Sources */,
 				008D85671C63B51C002D82F3 /* TECTableViewEditingExtender.m in Sources */,
 				6F59A9811C58EC610095289C /* TECTableViewSectionHeaderExtender.m in Sources */,
 				005F13751C6F713900765CC1 /* TECFetchedResultsControllerContentProvider.m in Sources */,
 				6F78F0461C511788006F08DC /* TECTableViewCellFactory.m in Sources */,
+				00AA472B1C770EC400B2AD56 /* Person.m in Sources */,
+				00A4CA3D1C75DCFE00515A94 /* FetchedResultControllerContentProviderViewController.m in Sources */,
 				008D856D1C63B5A8002D82F3 /* TECTableViewItemUpdatingExtender.m in Sources */,
 				6FD285C71C591D0400A11316 /* TECTableViewCellExtender.m in Sources */,
+				00AA471B1C77039500B2AD56 /* FetchedResultsContentProviderReorderingViewController.m in Sources */,
 				005F137A1C6F80CA00765CC1 /* TECBackgroundContextObjectMutator.m in Sources */,
 				6F59A96D1C58CA990095289C /* TECMemorySectionModel.m in Sources */,
 			);
@@ -730,6 +782,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		00AA471F1C770E2100B2AD56 /* DataSources.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				00AA47201C770E2100B2AD56 /* DataSources.xcdatamodel */,
+			);
+			currentVersion = 00AA47201C770E2100B2AD56 /* DataSources.xcdatamodel */;
+			path = DataSources.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 6F0CD6011C51109400D09C01 /* Project object */;
 }
