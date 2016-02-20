@@ -13,7 +13,8 @@
 
 typedef NS_ENUM(NSUInteger, TECContentProviderSectionChangeType) {
     TECContentProviderSectionChangeTypeInsert = 1, // To map to NSFetchedResultChangeType enum transparently
-    TECContentProviderSectionChangeTypeDelete
+    TECContentProviderSectionChangeTypeDelete,
+    TECContentProviderSectionChangeTypeUpdate
 };
 
 typedef NS_ENUM(NSUInteger, TECContentProviderItemChangeType) {

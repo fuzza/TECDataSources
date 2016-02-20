@@ -117,18 +117,13 @@ describe(@"Cocoa collection support", ^() {
     
     it(@"should enumerate sections via block concurrently", ^() {
         [provider enumerateObjectsUsingBlock:^(id <TECSectionModelProtocol> obj, NSUInteger idx, BOOL *stop) {
-            [array1 addObject:obj];
+            @synchronized(array1) {
+                [array1 addObject:obj];
+            }
         } options:NSEnumerationConcurrent];
-        [[array1 shouldEventually] equal:@[section1, section2]];
+        [[array1 shouldEventually] containObjectsInArray:@[section1, section2]];
     });
-    
-    it(@"should enumerate sections via block concurrently in reverse order", ^() {
-        [provider enumerateObjectsUsingBlock:^(id <TECSectionModelProtocol> obj, NSUInteger idx, BOOL *stop) {
-            [array1 addObject:obj];
-        } options:NSEnumerationConcurrent | NSEnumerationReverse];
-        [[array1 shouldEventually] equal:@[section2, section1]];
-    });
-    
+        
     it(@"should respect stop parameter when enumerating directly", ^() {
         [provider enumerateObjectsUsingBlock:^(id <TECSectionModelProtocol> obj, NSUInteger idx, BOOL *stop) {
             [array1 addObject:obj];
@@ -230,7 +225,7 @@ describe(@"Adaptor callbacks", ^{
     });
     
     it(@"should call contentProviderDidChangeItem when inserting an item", ^() {
-        [[adaptorNullMock should] receive:@selector(contentProviderDidChangeItem:atIndexPath:forChangeType:newIndexPath:) withArguments:testString1, [NSIndexPath indexPathForItem:0 inSection:0], theValue(TECContentProviderItemChangeTypeInsert), nil];
+        [[adaptorNullMock should] receive:@selector(contentProviderDidChangeItem:atIndexPath:forChangeType:newIndexPath:) withArguments:testString1, nil, theValue(TECContentProviderItemChangeTypeInsert), [NSIndexPath indexPathForItem:0 inSection:0]];
         [provider insertItem:testString1 atIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
     });
     

@@ -27,6 +27,9 @@
 #import "TECDelegateProxy.h"
 #import "CoreDataManager.h"
 
+#import "TECMainContextObjectGetter.h"
+#import "TECBackgroundContextObjectMutator.h"
+
 #import "PersonOrdered.h"
 
 @interface FetchedResultsContentProviderReorderingViewController ()
@@ -47,6 +50,9 @@
 @property (nonatomic, strong) TECTableViewReorderingExtender *reorderingExtender;
 @property (nonatomic, strong) TECTableViewEditingExtender *editingExtender;
 @property (nonatomic, strong) TECTableViewDeletingExtender *deletingExtender;
+
+@property (nonatomic, strong) TECMainContextObjectGetter *objectGetter;
+@property (nonatomic, strong) TECBackgroundContextObjectMutator *objectMutator;
 
 @property (nonatomic, strong) TECFetchedResultsControllerContentProvider *contentProvider;
 
@@ -99,26 +105,52 @@
     self.reorderingExtender =
     [TECTableViewReorderingExtender reorderingExtenderWithCanMoveBlock:^BOOL(UITableView *tableView, NSIndexPath *indexPath, id<TECSectionModelProtocol> section, id item) {
         return YES;
-    } targetIndexPathBlock:^NSIndexPath *(UITableView *tableView, NSIndexPath *indexPath, id<TECSectionModelProtocol> section, id item, NSIndexPath *targetIndexPath, id<TECSectionModelProtocol> targetSection, id targetItem) {
-        NSIndexPath *result = targetIndexPath;
-        if (indexPath.section == 0 || targetIndexPath.section == 0) { // Disable reorder from and to first section, enable from others
-            result = indexPath;
-        }
-        return result;
-    }];
+    }
+                                                  targetIndexPathBlock:nil];
     self.editingExtender = [TECTableViewEditingExtender editingExtenderWithCanEditBlock:^BOOL(UITableView *tableView, NSIndexPath *indexPath, id<TECSectionModelProtocol> section, id item) {
         return YES;
     }];
     self.deletingExtender = [TECTableViewDeletingExtender extender];
     
-    self.contentProvider =
-    [[TECFetchedResultsControllerContentProvider alloc] initWithItemsGetter:[[CoreDataManager sharedObject] createObjectGetter]
-                                                               itemsMutator:[[CoreDataManager sharedObject] createObjectMutator] fetchRequest:[[CoreDataManager sharedObject] createPersonFetchRequest] sectionNameKeyPath:nil];
+    self.objectGetter = [[CoreDataManager sharedObject] createObjectGetter];
+    self.objectMutator = [[CoreDataManager sharedObject] createObjectMutator];
     
+    NSFetchRequest *fetchRequest = [[CoreDataManager sharedObject] createPersonOrderedFetchRequest];
+    
+    self.contentProvider =
+    [[TECFetchedResultsControllerContentProvider alloc] initWithItemsGetter:self.objectGetter
+                                                               itemsMutator:self.objectMutator
+                                                               fetchRequest:fetchRequest
+                                                         sectionNameKeyPath:nil];
+    __weak typeof(self) weakSelf = self;
     self.contentProvider.moveBlock = ^(NSFetchedResultsController *fetchedResultsController,
                                        NSIndexPath *from,
                                        NSIndexPath *to) {
-
+        PersonOrdered *fromObj = [fetchedResultsController objectAtIndexPath:from];
+        PersonOrdered *toObj = [fetchedResultsController objectAtIndexPath:to];
+        NSInteger fromOrdinal = fromObj.ordinal.integerValue;
+        NSInteger toOrdinal = toObj.ordinal.integerValue;
+        NSInteger minOrdinal = MIN(fromOrdinal, toOrdinal);
+        NSInteger maxOrdinal = MAX(fromOrdinal, toOrdinal);
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ordinal <= %@ AND ordinal >= %@",
+                                  @(maxOrdinal), @(minOrdinal)];
+        NSArray *objects = [fetchedResultsController.fetchedObjects filteredArrayUsingPredicate:predicate];
+        [weakSelf.objectMutator mutateObjects:objects
+                        withEntityDescription:fetchedResultsController.fetchRequest.entity
+                                        block:^(NSArray<PersonOrdered *> *objects, NSError *error)
+        {
+            [objects enumerateObjectsUsingBlock:^(PersonOrdered *obj, NSUInteger idx, BOOL *stop) {
+                if (idx == 0 && maxOrdinal == toOrdinal) {
+                    obj.ordinal = @(maxOrdinal);
+                }
+                else if (idx == objects.count - 1 && minOrdinal == toOrdinal) {
+                    obj.ordinal = @(minOrdinal);
+                }
+                else {
+                    obj.ordinal = @(obj.ordinal.integerValue + ((maxOrdinal == toOrdinal) ? -1 : 1));
+                }
+            }];
+        }];
     };
     
     self.tableController =

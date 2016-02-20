@@ -33,15 +33,20 @@ withEntityDescription:(NSEntityDescription *)entityDescription
     NSParameterAssert(block);
     TECFetchedResultsControllerContentProviderMutatorArrayChangeBlock innerBlock = [block copy];
     NSArray *objectIDs = [objects valueForKeyPath:@"objectID"];
+    NSMutableArray *objectsToMutate = [objectIDs mutableCopy];
     NSManagedObjectContext *context = self.context;
     [context performBlock:^() {
         NSError *error = nil;
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         fetchRequest.entity = entityDescription;
-        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"objectID IN %@", objectIDs];
-        NSArray *objectsToMutate = [context executeFetchRequest:fetchRequest error:&error];
+        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"SELF IN %@", objectIDs];
+        NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+        for (NSManagedObject *managedObject in fetchedObjects) {
+            [objectsToMutate replaceObjectAtIndex:[objectIDs indexOfObject:managedObject.objectID]
+                                       withObject:managedObject];
+        }
         if (innerBlock) {
-            innerBlock(objectsToMutate, error);
+            innerBlock([NSArray arrayWithArray:objectsToMutate], error);
             [context save:&error];
         }
     }];
@@ -107,7 +112,7 @@ withEntityDescription:(NSEntityDescription *)entityDescription {
         NSError *error = nil;
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         fetchRequest.entity = entityDescription;
-        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"objectID IN %@", objectIDs];
+        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"SELF IN %@", objectIDs];
         NSArray *objectsToRemove = [context executeFetchRequest:fetchRequest error:&error];
         for(NSManagedObject *object in objectsToRemove) {
             [context deleteObject:object];

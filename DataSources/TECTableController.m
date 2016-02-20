@@ -96,7 +96,7 @@
                                   withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
         case TECContentProviderItemChangeTypeInsert:
-            [self.tableView insertRowsAtIndexPaths:@[indexPath]
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
                                   withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
         case TECContentProviderItemChangeTypeMove:
@@ -120,6 +120,10 @@
             break;
         case TECContentProviderSectionChangeTypeDelete:
             [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:index]
+                          withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+        case TECContentProviderSectionChangeTypeUpdate:
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:index]
                           withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
     }

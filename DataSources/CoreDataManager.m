@@ -106,6 +106,12 @@
     return fr;
 }
 
+- (NSFetchRequest *)createPersonOrderedFetchRequest {
+    NSFetchRequest *fr = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([PersonOrdered class])];
+    fr.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"ordinal" ascending:YES]];
+    return fr;
+}
+
 #pragma mark - lazy
 
 - (NSURL *)containerDirectoryURL {

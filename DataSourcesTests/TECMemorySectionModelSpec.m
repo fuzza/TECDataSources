@@ -123,19 +123,11 @@ describe(@"Cocoa collection support", ^() {
             [array1 addObject:object];
         }
         [model enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            [array2 addObject:obj];
+            @synchronized(array2) {
+                [array2 addObject:obj];
+            }
         } options:NSEnumerationConcurrent];
-        [[array1 shouldEventually] equal:array2];
-    });
-    
-    it(@"should enumerate objects via block concurrently in reverse order", ^() {
-        for(id object in model) {
-            [array1 insertObject:object atIndex:0];
-        }
-        [model enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            [array2 addObject:obj];
-        } options:NSEnumerationConcurrent | NSEnumerationReverse];
-        [[array1 shouldEventually] equal:array2];
+        [[array1 shouldEventually] containObjectsInArray:array2];
     });
     
     it(@"should respect stop parameter when enumerating directly", ^() {
