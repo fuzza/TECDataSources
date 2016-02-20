@@ -96,7 +96,7 @@
                                   withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
         case TECContentProviderItemChangeTypeInsert:
-            [self.tableView insertRowsAtIndexPaths:@[indexPath]
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
                                   withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
         case TECContentProviderItemChangeTypeMove:

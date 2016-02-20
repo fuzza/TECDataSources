@@ -21,5 +21,6 @@
 - (id<TECFetchedResultsControllerContentProviderGetter>)createObjectGetter;
 - (id<TECFetchedResultsControllerContentProviderMutator>)createObjectMutator;
 - (NSFetchRequest *)createPersonFetchRequest;
+- (NSFetchRequest *)createPersonOrderedFetchRequest;
 
 @end
