@@ -50,6 +50,9 @@
 		6FEC95C61C773F4F00B1094E /* TECDummyModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC95C51C773F4F00B1094E /* TECDummyModels.m */; };
 		6FEC95C91C7741EA00B1094E /* TECReusableViewRegistrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC95C81C7741EA00B1094E /* TECReusableViewRegistrator.m */; };
 		6FEC95CD1C7752F000B1094E /* TECReusableViewsRegistratorSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC95CC1C7752F000B1094E /* TECReusableViewsRegistratorSpec.m */; };
+		6FEC95D91C7B1F6200B1094E /* TECReusableViewsFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC95D81C7B1F6200B1094E /* TECReusableViewsFactory.m */; };
+		6FEC95DB1C7B1F7000B1094E /* TECReusableViewsFactorySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC95DA1C7B1F7000B1094E /* TECReusableViewsFactorySpec.m */; };
+		6FEC95DD1C7B1F8D00B1094E /* TECReusableViewsFactoryHelperSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC95DC1C7B1F8D00B1094E /* TECReusableViewsFactoryHelperSpec.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,6 +146,11 @@
 		6FEC95C71C7741EA00B1094E /* TECReusableViewRegistrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECReusableViewRegistrator.h; sourceTree = "<group>"; };
 		6FEC95C81C7741EA00B1094E /* TECReusableViewRegistrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECReusableViewRegistrator.m; sourceTree = "<group>"; };
 		6FEC95CC1C7752F000B1094E /* TECReusableViewsRegistratorSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECReusableViewsRegistratorSpec.m; sourceTree = "<group>"; };
+		6FEC95D71C7B1F6200B1094E /* TECReusableViewsFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECReusableViewsFactory.h; sourceTree = "<group>"; };
+		6FEC95D81C7B1F6200B1094E /* TECReusableViewsFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECReusableViewsFactory.m; sourceTree = "<group>"; };
+		6FEC95DA1C7B1F7000B1094E /* TECReusableViewsFactorySpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECReusableViewsFactorySpec.m; sourceTree = "<group>"; };
+		6FEC95DC1C7B1F8D00B1094E /* TECReusableViewsFactoryHelperSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECReusableViewsFactoryHelperSpec.m; sourceTree = "<group>"; };
+		6FEC95DE1C7B207A00B1094E /* TECReusableViewFactoryProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECReusableViewFactoryProtocol.h; sourceTree = "<group>"; };
 		E6648EB9D0A7F2502D02AA01 /* libPods-DataSourcesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DataSourcesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -270,6 +278,7 @@
 		6F59A9761C58E9790095289C /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				6FEC95D51C7B1F3300B1094E /* ReusableViewsFactory */,
 				6FEC95B81C77163800B1094E /* ReusableViewsRegistrator */,
 				6F59A97E1C58EAE90095289C /* SectionModel */,
 				6F59A97C1C58EA9C0095289C /* DelegateProxy */,
@@ -431,6 +440,7 @@
 		6FEC95CA1C7752CB00B1094E /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				6FEC95D61C7B1F4800B1094E /* ReusableViewsFactory */,
 				6FEC95CB1C7752D900B1094E /* ReusableViewsRegistrator */,
 			);
 			name = Shared;
@@ -442,6 +452,25 @@
 				6FEC95CC1C7752F000B1094E /* TECReusableViewsRegistratorSpec.m */,
 			);
 			name = ReusableViewsRegistrator;
+			sourceTree = "<group>";
+		};
+		6FEC95D51C7B1F3300B1094E /* ReusableViewsFactory */ = {
+			isa = PBXGroup;
+			children = (
+				6FEC95D71C7B1F6200B1094E /* TECReusableViewsFactory.h */,
+				6FEC95D81C7B1F6200B1094E /* TECReusableViewsFactory.m */,
+				6FEC95DE1C7B207A00B1094E /* TECReusableViewFactoryProtocol.h */,
+			);
+			name = ReusableViewsFactory;
+			sourceTree = "<group>";
+		};
+		6FEC95D61C7B1F4800B1094E /* ReusableViewsFactory */ = {
+			isa = PBXGroup;
+			children = (
+				6FEC95DA1C7B1F7000B1094E /* TECReusableViewsFactorySpec.m */,
+				6FEC95DC1C7B1F8D00B1094E /* TECReusableViewsFactoryHelperSpec.m */,
+			);
+			name = ReusableViewsFactory;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -581,6 +610,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F59A9841C58ECF70095289C /* TECTableViewSectionFooterExtender.m in Sources */,
+				6FEC95D91C7B1F6200B1094E /* TECReusableViewsFactory.m in Sources */,
 				6FD26B1B1C761476006A0E2F /* TECExampleCollectionViewController.m in Sources */,
 				6FEC95C01C771B5700B1094E /* TECCollectionViewCellRegistratorAdapter.m in Sources */,
 				6F78F04D1C513344006F08DC /* TECTableViewCellRegistrator.m in Sources */,
@@ -624,7 +654,9 @@
 				6F48555D1C73AF2C0006F6E5 /* TECTableViewCellExtenderSpec.m in Sources */,
 				6F48555B1C739F870006F6E5 /* TECTableViewSectionFooterExtenderSpec.m in Sources */,
 				00A85D441C60D8FE00125C2C /* TECMemorySectionModelSpec.m in Sources */,
+				6FEC95DD1C7B1F8D00B1094E /* TECReusableViewsFactoryHelperSpec.m in Sources */,
 				6FEC95CD1C7752F000B1094E /* TECReusableViewsRegistratorSpec.m in Sources */,
+				6FEC95DB1C7B1F7000B1094E /* TECReusableViewsFactorySpec.m in Sources */,
 				00A85D461C60FCDA00125C2C /* TECMemoryContentProviderSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
