@@ -8,97 +8,77 @@
 
 #import <Kiwi/Kiwi.h>
 #import "TECDummyModels.h"
-#import "TECCollectionViewSimpleCellFactory.h"
+#import "TECSimpleReusableViewFactory.h"
 #import "TECReusableViewRegistrationAdapterProtocol.h"
 
 SPEC_BEGIN(TECCollectionViewSimpleCellFactorySpec)
 
-describe(@"TECCollectionViewSimpleFactory", ^{
-    itBehavesLike(@"reusable views factory", @{@"class" : [TECCollectionViewSimpleCellFactory class]});
+describe(@"TECSimpleReusableViewFactory", ^{
+    itBehavesLike(@"reusable views factory", @{@"class" : [TECSimpleReusableViewFactory class]});
     
-    let(cellMock, ^id{
-        return [TECCollectionViewTestCell new];
+    let(viewMock, ^id{
+        return [UICollectionViewCell new];
     });
     
-    let(cellClass, ^Class{
+    let(viewClass, ^Class{
         return [UICollectionViewCell class];
-    });
-    
-    let(cellSubclass, ^Class{
-        return [TECCollectionViewTestCell class];
     });
     
     let(adapterMock, ^id{
         return [KWMock nullMockForProtocol:@protocol(TECReusableViewRegistrationAdapterProtocol)];
     });
     
-    let(sut, ^TECCollectionViewSimpleCellFactory <TECCollectionViewTestCell *, NSString *> *{
-        return [[TECCollectionViewSimpleCellFactory alloc] initWithRegistrationAdapter:adapterMock];
+    let(sut, ^TECSimpleReusableViewFactory <UICollectionViewCell *, NSString *> *{
+        return [[TECSimpleReusableViewFactory alloc] initWithRegistrationAdapter:adapterMock];
     });
     
     let(indexPathMock, ^id{
         return [NSIndexPath mock];
     });
     
-    describe(@"Cell class registration", ^{
-        it(@"Register cell or subclass in adapter by class name", ^{
+    describe(@"View class registration", ^{
+        it(@"Register view in adapter by class name", ^{
             [[adapterMock should] receive:@selector(registerClass:forReuseIdentifier:)
-                            withArguments: cellClass, NSStringFromClass(cellClass)];
-            [sut registerCellClass:cellClass];
-        });
-        
-        it(@"Register cell subclass in adapter by class name", ^{
-            [[adapterMock should] receive:@selector(registerClass:forReuseIdentifier:)
-                            withArguments: cellSubclass, NSStringFromClass(cellSubclass)];
-            [sut registerCellClass:cellSubclass];
+                            withArguments:viewClass, NSStringFromClass(viewClass)];
+            [sut registerViewClass:viewClass];
         });
         
         #ifndef DNS_BLOCK_ASSERTIONS
         it(@"Throws on second register", ^{
-            [sut registerCellClass:cellClass];
+            [sut registerViewClass:viewClass];
             [[theBlock(^{
-                [sut registerCellClass:cellSubclass];
+                [sut registerViewClass:[UILabel class]];
             }) should] raise];
         });
         
         it(@"Throws if no class passed", ^{
             [[theBlock(^{
-                [sut registerCellClass:nil];
-            }) should] raise];
-        });
-        
-        it(@"Throws if class is not cell class", ^{
-            [[theBlock(^{
-                [sut registerCellClass:[UIImage class]];
+                [sut registerViewClass:nil];
             }) should] raise];
         });
         #endif
     });
     
-    describe(@"Cell creation", ^{
-        let(cellSubclass, ^Class{
-            return [TECCollectionViewTestCell class];
-        });
-        
-        it(@"Return reused cell from adapter", ^{
-            [sut registerCellClass:cellSubclass];
-            [adapterMock stub:@selector(reuseViewWithIdentifier:forIndexPath:) andReturn:cellMock withArguments:NSStringFromClass(cellSubclass), indexPathMock];
+    describe(@"View creation", ^{
+        it(@"Return reused view from adapter", ^{
+            [sut registerViewClass:viewClass];
+            [adapterMock stub:@selector(reuseViewWithIdentifier:forIndexPath:) andReturn:viewMock withArguments:NSStringFromClass(viewClass), indexPathMock];
             id result = [sut viewForItem:@"test item" atIndexPath:indexPathMock];
-            [[result should] equal:cellMock];
+            [[result should] equal:viewMock];
         });
         
         #ifndef DNS_BLOCK_ASSERTIONS
-        it(@"Throws if reused object is not cell", ^{
-            [sut registerCellClass:cellSubclass];
-            [adapterMock stub:@selector(reuseViewWithIdentifier:forIndexPath:) andReturn:[NSLayoutAnchor new] withArguments:NSStringFromClass(cellSubclass), indexPathMock];
+        it(@"Throws if object class is not strictly matched to registered", ^{
+            [sut registerViewClass:viewClass];
+            [adapterMock stub:@selector(reuseViewWithIdentifier:forIndexPath:) andReturn:[UILabel new] withArguments:NSStringFromClass(viewClass), indexPathMock];
             [[theBlock(^{
                 __unused id result = [sut viewForItem:@"test item" atIndexPath:indexPathMock];
             }) should] raise];
         });
         
 
-        it(@"Throws if cell is not registered", ^{
-            [adapterMock stub:@selector(reuseViewWithIdentifier:forIndexPath:) andReturn:cellMock];
+        it(@"Throws if view is not registered", ^{
+            [adapterMock stub:@selector(reuseViewWithIdentifier:forIndexPath:) andReturn:viewMock];
             [[theBlock(^{
                 __unused id result = [sut viewForItem:@"test item" atIndexPath:indexPathMock];
             }) should] raise];
@@ -109,19 +89,19 @@ describe(@"TECCollectionViewSimpleFactory", ^{
     describe(@"Cell configuration", ^{
         it(@"Calls config block with params", ^{
             __block BOOL blockRunned = NO;
-            [sut setConfigurationHandler:^(TECCollectionViewTestCell *cell, NSString *item, NSIndexPath *path) {
-                [[cell should] equal:cellMock];
+            [sut setConfigurationHandler:^(UICollectionViewCell *cell, NSString *item, NSIndexPath *path) {
+                [[cell should] equal:viewMock];
                 [[item should] equal:@"test"];
                 [[path should] equal:indexPathMock];
                 blockRunned = YES;
             }];
             
-            [sut configureView:cellMock forItem:@"test" atIndexPath:indexPathMock];
+            [sut configureView:viewMock forItem:@"test" atIndexPath:indexPathMock];
             [[theValue(blockRunned) should] beTrue];
         });
         
         it(@"Shouldn't crash if no block", ^{
-            [sut configureView:cellMock forItem:@"test" atIndexPath:indexPathMock];
+            [sut configureView:viewMock forItem:@"test" atIndexPath:indexPathMock];
         });
     });
     
