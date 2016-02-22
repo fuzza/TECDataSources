@@ -48,8 +48,7 @@
     [main performBlock:^() {
         NSFetchRequest *frPerson = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([Person class])];
         NSFetchRequest *frPersonOrdered = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([PersonOrdered class])];
-        NSArray *persons = [main executeFetchRequest:frPerson error:NULL];
-        if (!persons.count) {
+        if (![main countForFetchRequest:frPerson error:NULL]) {
             [background performBlock:^() {
                 NSEntityDescription *personEntityDescription = [NSEntityDescription entityForName:NSStringFromClass([Person class]) inManagedObjectContext:background];
                 [TEST_PERSON_ARRAY_NAME enumerateObjectsUsingBlock:^(NSString *name, NSUInteger idx, BOOL *stop) {
@@ -60,8 +59,7 @@
                 [background save:NULL];
             }];
         }
-        NSArray *personsOrdered = [main executeFetchRequest:frPersonOrdered error:NULL];
-        if (!personsOrdered.count) {
+        if (![main countForFetchRequest:frPersonOrdered error:NULL]) {
             [background performBlock:^() {
                 NSEntityDescription *personOrderedEntityDescription = [NSEntityDescription entityForName:NSStringFromClass([PersonOrdered class]) inManagedObjectContext:background];
                 [TEST_PERSON_ARRAY_NAME enumerateObjectsUsingBlock:^(NSString *name, NSUInteger idx, BOOL *stop) {
@@ -137,7 +135,7 @@
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
         // Report any error we got.
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil];
+        [[NSFileManager defaultManager] removeItemAtURL:storeURL error:NULL];
         abort();
     }
     
