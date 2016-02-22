@@ -146,6 +146,7 @@ NSString * const kTECChangesetNewIndexPathKey = @"newIndexPath";
     };
     NSPredicate *filterOddUpdatesPredicate =
     [NSPredicate predicateWithFormat:@"NOT ((%K = %@) AND (%K IN %@))", kTECChangesetChangeTypeKey, @(NSFetchedResultsChangeUpdate), kTECChangesetIndexPathKey, moves];
+    [NSPredicate predicateWithFormat:@"NOT ((%K = %@) AND (%K IN %@))", kTECChangesetChangeTypeKey, @(TECContentProviderItemChangeTypeUpdate), kTECChangesetIndexPathKey, moves];
     [self.changeSetArray filterUsingPredicate:filterOddUpdatesPredicate];
 }
 
