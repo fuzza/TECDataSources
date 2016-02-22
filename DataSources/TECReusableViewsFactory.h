@@ -11,13 +11,10 @@
 
 @protocol TECReusableViewRegistrationAdapterProtocol;
 
-@interface TECReusableViewsFactory <ReusableViewType>: NSObject <TECReusableViewFactoryProtocol>
+@interface TECReusableViewsFactory : NSObject <TECReusableViewFactoryProtocol>
 
 - (instancetype)initWithRegistrationAdapter:(id<TECReusableViewRegistrationAdapterProtocol>)registrationAdapter;
 
 @property (nonatomic, readonly) id <TECReusableViewRegistrationAdapterProtocol> registrationAdapter;
-
-- (ReusableViewType)viewForItem:(id)item atIndexPath:(NSIndexPath *)indexPath;
-- (void)configureView:(ReusableViewType)view forItem:(id)item atIndexPath:(NSIndexPath *)indexPath;
 
 @end
