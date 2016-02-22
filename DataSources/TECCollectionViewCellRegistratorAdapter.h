@@ -14,5 +14,7 @@
 @property (nonatomic, weak, readonly) UICollectionView *collectionView;
 
 - (instancetype)initWithCollectionView:(UICollectionView *)collectionView;
+- (UICollectionViewCell *)reuseViewWithIdentifier:(NSString *)identifier
+                                     forIndexPath:(NSIndexPath *)indexPath;
 
 @end

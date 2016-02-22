@@ -82,6 +82,41 @@ describe(@"TECCollectionViewCellRegistratorAdapter", ^{
         });
         #endif
     });
+    
+    describe(@"View reuse", ^{
+        let(reuseId, ^id{
+            return @"Test reuse id";
+        });
+        
+        let(cellMock, ^id{
+            return [UICollectionViewCell nullMock];
+        });
+        
+        let(indexPathMock, ^id{
+            return [NSIndexPath mock];
+        });
+        
+        it(@"Should return reused cell from collection view", ^{
+            [[collectionViewMock should] receive:@selector(dequeueReusableCellWithReuseIdentifier:forIndexPath:) andReturn:cellMock withArguments:reuseId, indexPathMock];
+            
+            id result = [sut reuseViewWithIdentifier:reuseId forIndexPath:indexPathMock];
+            [[result should] equal:cellMock];
+        });
+        
+        #ifndef DNS_BLOCK_ASSERTIONS
+        it(@"Should raise if nil identifier passed", ^{
+            [[theBlock(^{
+                [sut reuseViewWithIdentifier:nil forIndexPath:indexPathMock];
+            }) should] raise];
+        });
+        
+        it(@"Should raise if nil indexPathPassed", ^{
+            [[theBlock(^{
+                [sut reuseViewWithIdentifier:reuseId forIndexPath:nil];
+            }) should] raise];
+        });
+        #endif
+    });
 });
 
 SPEC_END

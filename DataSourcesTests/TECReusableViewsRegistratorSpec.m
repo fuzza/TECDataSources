@@ -175,10 +175,7 @@ describe(@"TECReusableViewRegistrator", ^{
                 [[result1 should] equal:reuseIdentifier];
                 [[result1 should] equal:result2];
             });
-            
         });
-        
-        
     });
 });
 

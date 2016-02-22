@@ -32,4 +32,11 @@
     [self.collectionView registerClass:aClass forCellWithReuseIdentifier:reuseIdentifier];
 }
 
+- (UICollectionViewCell *)reuseViewWithIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath {
+    NSParameterAssert(identifier);
+    NSParameterAssert(indexPath);
+    return [self.collectionView dequeueReusableCellWithReuseIdentifier:identifier
+                                                          forIndexPath:indexPath];
+}
+
 @end
