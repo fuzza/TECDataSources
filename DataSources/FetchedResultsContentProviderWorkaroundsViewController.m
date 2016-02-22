@@ -1,12 +1,12 @@
 //
-//  FetchedResultsContentProviderReorderingViewController.m
+//  FetchedResultsContentProviderWorkaroundsViewController.m
 //  DataSources
 //
-//  Created by Petro Korienev on 2/18/16.
+//  Created by Petro Korienev on 2/20/16.
 //  Copyright © 2016 Alexey Fayzullov. All rights reserved.
 //
 
-#import "FetchedResultsContentProviderReorderingViewController.h"
+#import "FetchedResultsContentProviderWorkaroundsViewController.h"
 
 #import "TECTableController.h"
 
@@ -30,9 +30,9 @@
 #import "TECMainContextObjectGetter.h"
 #import "TECBackgroundContextObjectMutator.h"
 
-#import "PersonOrdered.h"
+#import "Person.h"
 
-@interface FetchedResultsContentProviderReorderingViewController ()
+@interface FetchedResultsContentProviderWorkaroundsViewController ()
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIToolbar *toolbar;
@@ -58,7 +58,7 @@
 
 @end
 
-@implementation FetchedResultsContentProviderReorderingViewController
+@implementation FetchedResultsContentProviderWorkaroundsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -121,36 +121,6 @@
                                                                itemsMutator:self.objectMutator
                                                                fetchRequest:fetchRequest
                                                          sectionNameKeyPath:nil];
-    __weak typeof(self) weakSelf = self;
-    self.contentProvider.moveBlock = ^(NSFetchedResultsController *fetchedResultsController,
-                                       NSIndexPath *from,
-                                       NSIndexPath *to) {
-        PersonOrdered *fromObj = [fetchedResultsController objectAtIndexPath:from];
-        PersonOrdered *toObj = [fetchedResultsController objectAtIndexPath:to];
-        NSInteger fromOrdinal = fromObj.ordinal.integerValue;
-        NSInteger toOrdinal = toObj.ordinal.integerValue;
-        NSInteger minOrdinal = MIN(fromOrdinal, toOrdinal);
-        NSInteger maxOrdinal = MAX(fromOrdinal, toOrdinal);
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ordinal <= %@ AND ordinal >= %@",
-                                  @(maxOrdinal), @(minOrdinal)];
-        NSArray *objects = [fetchedResultsController.fetchedObjects filteredArrayUsingPredicate:predicate];
-        [weakSelf.objectMutator mutateObjects:objects
-                        withEntityDescription:fetchedResultsController.fetchRequest.entity
-                                        block:^(NSArray<PersonOrdered *> *objects, NSError *error)
-        {
-            [objects enumerateObjectsUsingBlock:^(PersonOrdered *obj, NSUInteger idx, BOOL *stop) {
-                if (idx == 0 && maxOrdinal == toOrdinal) {
-                    obj.ordinal = @(maxOrdinal);
-                }
-                else if (idx == objects.count - 1 && minOrdinal == toOrdinal) {
-                    obj.ordinal = @(minOrdinal);
-                }
-                else {
-                    obj.ordinal = @(obj.ordinal.integerValue + ((maxOrdinal == toOrdinal) ? -1 : 1));
-                }
-            }];
-        }];
-    };
     
     self.tableController =
     [[TECTableController alloc] initWithContentProvider:self.contentProvider

@@ -27,6 +27,7 @@
 		00AA472B1C770EC400B2AD56 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 00AA47251C770EC400B2AD56 /* Person.m */; };
 		00AA472C1C770EC400B2AD56 /* PersonOrdered+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 00AA47271C770EC400B2AD56 /* PersonOrdered+CoreDataProperties.m */; };
 		00AA472D1C770EC400B2AD56 /* PersonOrdered.m in Sources */ = {isa = PBXBuildFile; fileRef = 00AA47291C770EC400B2AD56 /* PersonOrdered.m */; };
+		00AA47551C7B26D000B2AD56 /* FetchedResultsContentProviderWorkaroundsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00AA47541C7B26D000B2AD56 /* FetchedResultsContentProviderWorkaroundsViewController.m */; };
 		3E1457A237F0ED5DAA116D60 /* libPods-DataSourcesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6648EB9D0A7F2502D02AA01 /* libPods-DataSourcesTests.a */; };
 		6F0CD60E1C51109400D09C01 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CD60D1C51109400D09C01 /* main.m */; };
 		6F0CD6111C51109400D09C01 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CD6101C51109400D09C01 /* AppDelegate.m */; };
@@ -105,6 +106,8 @@
 		00AA47271C770EC400B2AD56 /* PersonOrdered+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PersonOrdered+CoreDataProperties.m"; sourceTree = "<group>"; };
 		00AA47281C770EC400B2AD56 /* PersonOrdered.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonOrdered.h; sourceTree = "<group>"; };
 		00AA47291C770EC400B2AD56 /* PersonOrdered.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonOrdered.m; sourceTree = "<group>"; };
+		00AA47531C7B26D000B2AD56 /* FetchedResultsContentProviderWorkaroundsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchedResultsContentProviderWorkaroundsViewController.h; sourceTree = "<group>"; };
+		00AA47541C7B26D000B2AD56 /* FetchedResultsContentProviderWorkaroundsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchedResultsContentProviderWorkaroundsViewController.m; sourceTree = "<group>"; };
 		1EF957566F87E00C2CAB1977 /* Pods-DataSourcesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataSourcesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DataSourcesTests/Pods-DataSourcesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2BA9BBEB5BFFAD972BFA7ACE /* Pods-DataSourcesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataSourcesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DataSourcesTests/Pods-DataSourcesTests.release.xcconfig"; sourceTree = "<group>"; };
 		6F0CD6091C51109400D09C01 /* DataSources.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DataSources.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -232,6 +235,8 @@
 				00A4CA3C1C75DCFE00515A94 /* FetchedResultControllerContentProviderViewController.m */,
 				00AA47191C77039500B2AD56 /* FetchedResultsContentProviderReorderingViewController.h */,
 				00AA471A1C77039500B2AD56 /* FetchedResultsContentProviderReorderingViewController.m */,
+				00AA47531C7B26D000B2AD56 /* FetchedResultsContentProviderWorkaroundsViewController.h */,
+				00AA47541C7B26D000B2AD56 /* FetchedResultsContentProviderWorkaroundsViewController.m */,
 				00AA471F1C770E2100B2AD56 /* DataSources.xcdatamodeld */,
 				00AA47221C770EC400B2AD56 /* Person+CoreDataProperties.h */,
 				00AA47231C770EC400B2AD56 /* Person+CoreDataProperties.m */,
@@ -558,6 +563,7 @@
 				00A4CA3D1C75DCFE00515A94 /* FetchedResultControllerContentProviderViewController.m in Sources */,
 				008D856D1C63B5A8002D82F3 /* TECTableViewItemUpdatingExtender.m in Sources */,
 				6FD285C71C591D0400A11316 /* TECTableViewCellExtender.m in Sources */,
+				00AA47551C7B26D000B2AD56 /* FetchedResultsContentProviderWorkaroundsViewController.m in Sources */,
 				00AA471B1C77039500B2AD56 /* FetchedResultsContentProviderReorderingViewController.m in Sources */,
 				005F137A1C6F80CA00765CC1 /* TECBackgroundContextObjectMutator.m in Sources */,
 				6F59A96D1C58CA990095289C /* TECMemorySectionModel.m in Sources */,

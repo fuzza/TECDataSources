@@ -78,8 +78,27 @@
                                             <segue destination="7C6-aJ-2Ju" kind="show" id="oHV-qQ-BYc"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" tag="1" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="H1k-fA-g2V">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="vFd-aB-SLd">
                                         <rect key="frame" x="0.0" y="152" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vFd-aB-SLd" id="fXa-5K-9IV">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="FRC Workarounds sample" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w4S-sF-IGa">
+                                                    <rect key="frame" x="16" y="11" width="270" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="hYt-iO-ghu" kind="show" id="ElD-cF-WRY"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" tag="1" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="H1k-fA-g2V">
+                                        <rect key="frame" x="0.0" y="196" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="H1k-fA-g2V" id="348-vH-fTW">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -105,7 +124,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dw6-gT-Kro" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-499" y="971"/>
+            <point key="canvasLocation" x="-586" y="1329"/>
         </scene>
         <!--Memory Content Provider View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -148,7 +167,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3tu-5b-lcv" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="G5h-QG-Ib0" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="240" y="996"/>
+            <point key="canvasLocation" x="314" y="998"/>
         </scene>
         <!--Fetched Results Content Provider Reordering View Controller-->
         <scene sceneID="9lV-xh-oqU">
@@ -170,7 +189,29 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CBX-9f-iMx" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="xpi-Du-JPm" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="240" y="1750"/>
+            <point key="canvasLocation" x="314" y="1760"/>
+        </scene>
+        <!--Fetched Results Content Provider Workarounds View Controller-->
+        <scene sceneID="PDY-Zq-h5t">
+            <objects>
+                <viewController id="hYt-iO-ghu" customClass="FetchedResultsContentProviderWorkaroundsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="WP1-63-7xx"/>
+                        <viewControllerLayoutGuide type="bottom" id="Zjs-iW-4Ka"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tV8-nd-1nX">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="6RV-P6-vvN" kind="unwind" identifier="backToRootViewControllerWithSegue" unwindAction="backToRootViewControllerWithSegue:" id="nPV-mJ-kXl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AJ9-a8-SCU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="6RV-P6-vvN" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="314" y="2536"/>
         </scene>
     </scenes>
 </document>
