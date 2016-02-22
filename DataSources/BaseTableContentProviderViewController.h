@@ -40,4 +40,6 @@
 
 - (void)setupTableController;
 
+- (void)closeButtonPressed:(id)sender;
+
 @end

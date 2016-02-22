@@ -109,6 +109,8 @@ NSString * const kTECChangesetNewIndexPathKey = @"newIndexPath";
     // )
     // NSFetchResultsController produces such changes when section name changes but it's relative index stays the same, e.g.:
     // you have grouping by the first letter, and you have two rows: "DI" and "MK", and you rename them to "I" and "K" respectively
+    //
+    // UITableView also asserts moves from section deleted this way
     [self workConsecutiveSectionInsertDeleteAround];
     // 3.
     // Note: sometimes section changes occur after row changes, e.g.: (
@@ -133,6 +135,9 @@ NSString * const kTECChangesetNewIndexPathKey = @"newIndexPath";
     //     "ins row {0, 2}",
     // Or even better just get rid of them
     [self workManualMovesAround];
+    // 5.
+    // Move from-to same indexpath should be replaced by update
+    [self workOddMovesAround];
 }
 
 - (void)workUpdateThenMoveAround {
@@ -175,6 +180,9 @@ NSString * const kTECChangesetNewIndexPathKey = @"newIndexPath";
                                       atIndex:0];
         }
     }
+    NSPredicate *filterChangesForDeletedSection =
+    [NSPredicate predicateWithFormat:@"NOT ((%K = %@) AND (%K IN %@))", kTECChangesetKindKey, @(TECChangesetKindRow), [NSString stringWithFormat:@"%@.%@", kTECChangesetIndexPathKey, @"section"], duplicatingIndices];
+    [self.changeSetArray filterUsingPredicate:filterChangesForDeletedSection];
 }
 
 - (void)workSectionBeforeRowChangeSetsAround {
@@ -215,6 +223,16 @@ NSString * const kTECChangesetNewIndexPathKey = @"newIndexPath";
             }
         }
     }
+}
+
+- (void)workOddMovesAround {
+    NSPredicate *filterOddMovesPredicate =
+    [NSPredicate predicateWithFormat:@"%K = %@ AND %K = %K", kTECChangesetKindKey, @(TECChangesetKindRow), kTECChangesetIndexPathKey, kTECChangesetNewIndexPathKey];
+    NSArray <NSMutableDictionary *> *oddMoves = [self.changeSetArray filteredArrayUsingPredicate:filterOddMovesPredicate];
+    [oddMoves enumerateObjectsUsingBlock:^(NSMutableDictionary *changeset, NSUInteger idx, BOOL *stop) {
+        changeset[kTECChangesetChangeTypeKey] = @(NSFetchedResultsChangeUpdate);
+        [changeset removeObjectForKey:kTECChangesetNewIndexPathKey];
+    }];
 }
 
 - (void)setCurrentRequest:(NSFetchRequest *)currentRequest {
