@@ -210,43 +210,6 @@ NSString * const kTECChangesetNewIndexPathKey = @"newIndexPath";
             }
         }
         if (foundCycle) {
-            /*
-            NSIndexPath *minIndexPath = [cycle valueForKeyPath:[NSString stringWithFormat:@"@min.%@", kTECChangesetIndexPathKey]];
-            NSDictionary *changesetWithMinIndexPath = [cycle filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K = %@", kTECChangesetIndexPathKey, minIndexPath]].firstObject;
-            NSIndexPath *minNewIndexPath = [cycle valueForKeyPath:[NSString stringWithFormat:@"@min.%@", kTECChangesetNewIndexPathKey]];
-            NSDictionary *changesetWithMinNewIndexPath = [cycle filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K = %@", kTECChangesetNewIndexPathKey, minNewIndexPath]].firstObject;
-            NSIndexPath *maxIndexPath = [cycle valueForKeyPath:[NSString stringWithFormat:@"@max.%@", kTECChangesetIndexPathKey]];
-            NSDictionary *changesetWithMaxIndexPath = [cycle filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K = %@", kTECChangesetIndexPathKey, maxIndexPath]].firstObject;
-            NSIndexPath *maxNewIndexPath = [cycle valueForKeyPath:[NSString stringWithFormat:@"@max.%@", kTECChangesetNewIndexPathKey]];
-            NSDictionary *changesetWithMaxNewIndexPath = [cycle filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K = %@", kTECChangesetNewIndexPathKey, maxNewIndexPath]].firstObject;
-            NSUInteger indexOfFirstObjectOfCycleInChangesetArray = [self.changeSetArray indexOfObject:cycle.firstObject];
-            BOOL isMoveDown = (changesetWithMinIndexPath == changesetWithMaxNewIndexPath);
-            BOOL isMoveUp = (changesetWithMaxIndexPath == changesetWithMinNewIndexPath);
-            NSMutableDictionary *deleteChangeset = [@{kTECChangesetKindKey:@(TECChangesetKindRow),
-                                                      kTECChangesetChangeTypeKey:@(NSFetchedResultsChangeDelete),
-                                                      kTECChangesetIndexPathKey:minIndexPath} mutableCopy];
-            NSMutableDictionary *insertChangeset = [@{kTECChangesetKindKey:@(TECChangesetKindRow),
-                                                      kTECChangesetChangeTypeKey:@(NSFetchedResultsChangeInsert),
-                                                      kTECChangesetNewIndexPathKey:maxNewIndexPath} mutableCopy];
-            NSManagedObject *object = nil;
-            if (isMoveDown) {
-                object = [self.fetchedResultsController objectAtIndexPath:maxNewIndexPath];
-                deleteChangeset[kTECChangesetIndexPathKey] = minIndexPath;
-                insertChangeset[kTECChangesetNewIndexPathKey] = maxNewIndexPath;
-            }
-            else if (isMoveUp) {
-                object = [self.fetchedResultsController objectAtIndexPath:minNewIndexPath];
-                deleteChangeset[kTECChangesetIndexPathKey] = maxIndexPath;
-                insertChangeset[kTECChangesetNewIndexPathKey] = minNewIndexPath;
-            }
-            else {
-                NSAssert(NO, @"Incorrect move cycle detected in %s", __PRETTY_FUNCTION__);
-            }
-            deleteChangeset[kTECChangesetObjectKey] = object;
-            insertChangeset[kTECChangesetObjectKey] = object;
-            [self.changeSetArray insertObject:deleteChangeset atIndex:indexOfFirstObjectOfCycleInChangesetArray];
-            [self.changeSetArray insertObject:insertChangeset atIndex:indexOfFirstObjectOfCycleInChangesetArray];
-            */
             for (NSMutableDictionary *changeset in cycle) {
                 [self.changeSetArray removeObject:changeset];
             }

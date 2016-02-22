@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseTableContentProviderViewController.h"
 
-@interface FetchedResultsContentProviderReorderingViewController : UIViewController
+@interface FetchedResultsContentProviderReorderingViewController : BaseTableContentProviderViewController
 
 @end

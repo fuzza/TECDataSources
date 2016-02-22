@@ -27,52 +27,11 @@
 
 @interface FetchedResultControllerContentProviderViewController ()
 
-@property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) UIToolbar *toolbar;
-@property (nonatomic, strong) UIBarButtonItem *editBarButtonItem;
-@property (nonatomic, strong) UIBarButtonItem *doneBarButtonItem;
-@property (nonatomic, strong) UIBarButtonItem *flexibleSpace;
-@property (nonatomic, strong) UIBarButtonItem *reloadButtonItem;
-@property (nonatomic, strong) UIBarButtonItem *closeButtonItem;
-
-@property (nonatomic, strong) TECTableController *tableController;
-
-@property (nonatomic, strong) TECTableViewSectionHeaderExtender *headerExtender;
-@property (nonatomic, strong) TECTableViewSectionFooterExtender *footerExtender;
-@property (nonatomic, strong) TECTableViewCellExtender *cellExtender;
-@property (nonatomic, strong) TECTableViewEditingExtender *editingExtender;
-@property (nonatomic, strong) TECTableViewDeletingExtender *deletingExtender;
-
 @property (nonatomic, strong) TECFetchedResultsControllerContentProvider *contentProvider;
 
 @end
 
 @implementation FetchedResultControllerContentProviderViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self setupSubviews];
-    [self setupTableController];
-}
-
-- (void)setupSubviews {
-    self.tableView = [[UITableView alloc] init];
-    [self.view addSubview:self.tableView];
-    self.toolbar = [[UIToolbar alloc] initWithFrame:self.view.frame];
-    self.editBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editButtonPressed:)];
-    self.doneBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonPressed:)];
-    self.flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    self.reloadButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(reloadButtonPressed:)];
-    self.closeButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(closeButtonPressed:)];
-    self.toolbar.items = @[self.editBarButtonItem, self.flexibleSpace, self.reloadButtonItem, self.closeButtonItem];
-    [self.view addSubview:self.toolbar];
-}
-
-- (void)viewWillLayoutSubviews {
-    [super viewWillLayoutSubviews];
-    self.toolbar.frame = CGRectMake(0, 20, self.view.frame.size.width, 44);
-    self.tableView.frame = CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - 64);
-}
 
 - (void)setupTableController {
     TECTableViewCellRegistrator *registrator = [[TECTableViewCellRegistrator alloc] initWithClassHandler:^Class(id item, NSIndexPath *indexPath) {
@@ -109,30 +68,6 @@
                                                           self.editingExtender,
                                                           self.deletingExtender]
                                           delegateProxy:[[TECDelegateProxy alloc] init]];
-}
-
-- (void)editButtonPressed:(id)sender {
-    [self.editingExtender setEditing:YES animated:YES];
-    [self.toolbar setItems:@[self.doneBarButtonItem,
-                             self.flexibleSpace,
-                             self.reloadButtonItem,
-                             self.closeButtonItem] animated:YES];
-}
-
-- (void)doneButtonPressed:(id)sender {
-    [self.editingExtender setEditing:NO animated:YES];
-    [self.toolbar setItems:@[self.editBarButtonItem,
-                             self.flexibleSpace,
-                             self.reloadButtonItem,
-                             self.closeButtonItem] animated:YES];
-}
-
-- (void)reloadButtonPressed:(id)sender {
-    [self.contentProvider reloadDataSourceWithCompletion:nil];
-}
-
-- (void)closeButtonPressed:(id)sender {
-    [self performSegueWithIdentifier:@"backToRootViewControllerWithSegue" sender:sender];
 }
 
 @end

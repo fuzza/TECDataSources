@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseTableContentProviderViewController.h"
 
-@interface MemoryContentProviderViewController : UIViewController
+@interface MemoryContentProviderViewController : BaseTableContentProviderViewController
 
 @end
 
