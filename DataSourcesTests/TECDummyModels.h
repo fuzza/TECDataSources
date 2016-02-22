@@ -10,3 +10,6 @@
 
 @interface TECCollectionViewTestCell : UICollectionViewCell
 @end
+
+@interface TECCollectionViewTestSupplementary : UICollectionReusableView
+@end

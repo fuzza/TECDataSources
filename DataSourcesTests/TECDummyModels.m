@@ -11,3 +11,5 @@
 @implementation TECCollectionViewTestCell
 @end
 
+@implementation TECCollectionViewTestSupplementary
+@end
