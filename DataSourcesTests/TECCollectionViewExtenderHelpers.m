@@ -6,10 +6,11 @@
 //  Copyright © 2016 Alexey Fayzullov. All rights reserved.
 //
 
+#import <Kiwi/Kiwi.h>
 #import "TECCollectionViewExtender.h"
 #import "TECContentProviderProtocol.h"
 
-SHARED_EXAMPLES_BEGIN(TECCollectionExtenderHelpers)
+SHARED_EXAMPLES_BEGIN(TECCollectionViewExtenderHelpers)
 
 sharedExamplesFor(@"extender", ^(NSDictionary *data) {
     __block Class sutClass;

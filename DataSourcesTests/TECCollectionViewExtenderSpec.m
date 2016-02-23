@@ -7,7 +7,7 @@
 //
 
 #import <Kiwi/Kiwi.h>
-#import "TECCollectionExtenderHelpers.h"
+#import "TECCollectionViewExtender.h"
 
 SPEC_BEGIN(TECCollectionViewExtenderSpec)
 
