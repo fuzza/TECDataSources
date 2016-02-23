@@ -10,6 +10,7 @@
 #import "TECContentProviderProtocol.h"
 #import "TECCollectionViewExtender.h"
 #import "TECDelegateProxy.h"
+#import "TECBlockOperation.h"
 
 @interface TECCollectionController ()
 
@@ -17,6 +18,7 @@
 @property (nonatomic, strong) id <TECContentProviderProtocol> contentProvider;
 @property (nonatomic, strong) NSArray <TECCollectionViewExtender *> *extenders;
 @property (nonatomic, strong) TECDelegateProxy *delegateProxy;
+@property (nonatomic, strong) TECBlockOperation *blockOperation;
 
 @end
 
@@ -65,10 +67,75 @@
     self.collectionView.dataSource = [self.delegateProxy proxy];
 }
 
-#pragma mark - ContentProviderPresentationAdapter
+#pragma mark - TECContentProviderPresentationAdapterProtocol
 
 - (void)contentProviderDidReloadData:(id<TECContentProviderProtocol>)contentProvider {
     [self.collectionView reloadData];
+}
+
+- (void)contentProviderWillChangeContent:(id<TECContentProviderProtocol>)contentProvider {
+    self.blockOperation = [TECBlockOperation operation];
+}
+
+- (void)contentProviderDidChangeSection:(id<TECSectionModelProtocol>)section
+                                atIndex:(NSUInteger)index
+                          forChangeType:(TECContentProviderSectionChangeType)changeType {
+    __weak typeof(self) weakSelf = self;
+    switch (changeType) {
+        case TECContentProviderSectionChangeTypeInsert: {
+            [self.blockOperation addExecutionBlock:^{
+                [weakSelf.collectionView insertSections:[NSIndexSet indexSetWithIndex:index]];
+            }];
+            break;
+        }
+        case TECContentProviderSectionChangeTypeDelete: {
+            [self.blockOperation addExecutionBlock:^{
+                [weakSelf.collectionView deleteSections:[NSIndexSet indexSetWithIndex:index]];
+            }];
+            break;
+        }
+    }
+}
+
+- (void)contentProviderDidChangeItem:(id<TECSectionModelProtocol>)section
+                         atIndexPath:(NSIndexPath *)indexPath
+                       forChangeType:(TECContentProviderItemChangeType)changeType
+                        newIndexPath:(NSIndexPath *)newIndexPath {
+    __weak typeof(self) weakSelf = self;
+    switch (changeType) {
+        case TECContentProviderItemChangeTypeInsert: {
+            [self.blockOperation addExecutionBlock:^{
+                [weakSelf.collectionView insertItemsAtIndexPaths:@[indexPath]];
+            }];
+            break;
+        }
+        case TECContentProviderItemChangeTypeDelete: {
+            [self.blockOperation addExecutionBlock:^{
+                [weakSelf.collectionView deleteItemsAtIndexPaths:@[indexPath]];
+            }];
+            break;
+        }
+        case TECContentProviderItemChangeTypeUpdate: {
+            [self.blockOperation addExecutionBlock:^{
+                [weakSelf.collectionView reloadItemsAtIndexPaths:@[indexPath]];
+            }];
+            break;
+        }
+        case TECContentProviderItemChangeTypeMove: {
+            [self.blockOperation addExecutionBlock:^{
+                [weakSelf.collectionView deleteItemsAtIndexPaths:@[indexPath]];
+                [weakSelf.collectionView insertItemsAtIndexPaths:@[newIndexPath]];
+            }];
+            break;
+        }
+    }
+}
+
+- (void)contentProviderDidChangeContent:(id<TECContentProviderProtocol>)contentProvider {
+    __weak typeof(self) weakSelf = self;
+    [self.collectionView performBatchUpdates:^{
+        [weakSelf.blockOperation start];
+    } completion:nil];
 }
 
 @end

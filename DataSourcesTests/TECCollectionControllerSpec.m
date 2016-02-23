@@ -12,6 +12,7 @@
 #import "TECContentProviderDelegate.h"
 #import "TECCollectionViewExtender.h"
 #import "TECDelegateProxy.h"
+#import "TECBlockOperation.h"
 
 SPEC_BEGIN(TECCollectionControllerSpec)
 
@@ -95,9 +96,100 @@ describe(@"TECCollectionController", ^{
     describe(@"React to content provider changes", ^{
         let(sut, createSut);
         
+        let(operationMock, ^id{
+            return [TECBlockOperation mock];
+        });
+        
+        let(sectionMock, ^id{
+            return [KWMock mockForProtocol:@protocol(TECSectionModelProtocol)];
+        });
+        
+        let(indexPathMock, ^id{
+            return [NSIndexPath mock];
+        });
+        
+        let(newIndexPathMock, ^id{
+            return [NSIndexPath mock];
+        });
+        
+        typedef void(^TECControllerTestEmptyBlock)();
+        
+        void(^verifyOperationBlockExecution)(TECControllerTestEmptyBlock) = ^(TECControllerTestEmptyBlock builderBlock) {
+            KWCaptureSpy *addOperationSpy = [operationMock captureArgument:@selector(addExecutionBlock:) atIndex:0];
+            if(builderBlock) {
+                builderBlock();
+            }
+            void(^operationBlock)() = (void(^)())addOperationSpy.argument;
+            operationBlock();
+        };
+        
+        beforeEach(^{
+            [TECBlockOperation stub:@selector(operation) andReturn:operationMock];
+            [sut contentProviderWillChangeContent:contentProviderMock];
+        });
+        
         it(@"Should reload collection view when content provider asks", ^{
             [[collectionViewMock should] receive:@selector(reloadData)];
             [sut contentProviderDidReloadData:contentProviderMock];
+        });
+        
+        it(@"Creates new operation before changing content", ^{
+            [[TECBlockOperation should] receive:@selector(operation)];
+            [sut contentProviderWillChangeContent:contentProviderMock];
+        });
+        
+        it(@"Puts section insert in queue", ^{
+            verifyOperationBlockExecution(^{
+                [[collectionViewMock should] receive:@selector(insertSections:) withArguments:[NSIndexSet indexSetWithIndex:5]];
+                
+                [sut contentProviderDidChangeSection:sectionMock atIndex:5 forChangeType:TECContentProviderSectionChangeTypeInsert];
+            });
+        });
+        
+        it(@"Puts section delete in queue", ^{
+            verifyOperationBlockExecution(^{
+                [[collectionViewMock should] receive:@selector(deleteSections:) withArguments:[NSIndexSet indexSetWithIndex:7]];
+                [sut contentProviderDidChangeSection:sectionMock atIndex:7 forChangeType:TECContentProviderSectionChangeTypeDelete];
+            });
+        });
+        
+        it(@"Puts object insert in queue", ^{
+            verifyOperationBlockExecution(^{
+                [[collectionViewMock should] receive:@selector(insertItemsAtIndexPaths:) withArguments:@[indexPathMock]];
+                [sut contentProviderDidChangeItem:sectionMock atIndexPath:indexPathMock forChangeType:TECContentProviderItemChangeTypeInsert newIndexPath:newIndexPathMock];
+            });
+        });
+        
+        it(@"Puts object delete in queue", ^{
+            verifyOperationBlockExecution(^{
+                [[collectionViewMock should] receive:@selector(deleteItemsAtIndexPaths:) withArguments:@[indexPathMock]];
+                [sut contentProviderDidChangeItem:sectionMock atIndexPath:indexPathMock forChangeType:TECContentProviderItemChangeTypeDelete newIndexPath:newIndexPathMock];
+            });
+        });
+        
+        it(@"Puts object update in queue", ^{
+            verifyOperationBlockExecution(^{
+                [[collectionViewMock should] receive:@selector(reloadItemsAtIndexPaths:) withArguments:@[indexPathMock]];
+                [sut contentProviderDidChangeItem:sectionMock atIndexPath:indexPathMock forChangeType:TECContentProviderItemChangeTypeUpdate newIndexPath:newIndexPathMock];
+            });
+        });
+        
+        it(@"Puts object move in queue", ^{
+            verifyOperationBlockExecution(^{
+                [[collectionViewMock should] receive:@selector(deleteItemsAtIndexPaths:) withArguments:@[indexPathMock]];
+                [[collectionViewMock should] receive:@selector(insertItemsAtIndexPaths:) withArguments:@[newIndexPathMock]];
+                [sut contentProviderDidChangeItem:sectionMock atIndexPath:indexPathMock forChangeType:TECContentProviderItemChangeTypeMove newIndexPath:newIndexPathMock];
+            });
+        });
+        
+        it(@"Runs batch update after content change", ^{
+            KWCaptureSpy *batchUpdateSpy = [collectionViewMock captureArgument:@selector(performBatchUpdates:completion:) atIndex:0];
+            [[operationMock should] receive:@selector(start)];
+            
+            [sut contentProviderDidChangeContent:contentProviderMock];
+            
+            void(^batchUpdateBlock)() = (void(^)())batchUpdateSpy.argument;
+            batchUpdateBlock();
         });
     });
 });
