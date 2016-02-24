@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TECExampleTableViewController : UIViewController
+@interface ViewController : UIViewController
 
 
 @end

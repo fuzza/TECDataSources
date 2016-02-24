@@ -6,7 +6,7 @@
 //  Copyright © 2016 Alexey Fayzullov. All rights reserved.
 //
 
-#import "TECExampleTableViewController.h"
+#import "ViewController.h"
 #import "TECTableController.h"
 
 #import "TECMemoryContentProvider.h"
@@ -26,7 +26,7 @@
 
 #import "TECDelegateProxy.h"
 
-@interface TECExampleTableViewController ()
+@interface ViewController ()
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIToolbar *toolbar;
@@ -48,7 +48,7 @@
 
 @end
 
-@implementation TECExampleTableViewController
+@implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
