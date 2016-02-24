@@ -28,7 +28,7 @@
 #pragma mark - TECCellRegistratorAdapterProtocol
 
 - (void)registerClass:(Class)aClass forReuseIdentifier:(NSString *)reuseIdentifier {
-    NSParameterAssert([aClass isSubclassOfClass:[UICollectionViewCell class]]);
+    NSAssert([aClass isSubclassOfClass:[UICollectionViewCell class]], @"Class should be UICollectionView subclass");
     [self.collectionView registerClass:aClass forCellWithReuseIdentifier:reuseIdentifier];
 }
 
