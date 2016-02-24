@@ -17,7 +17,7 @@ describe(@"TECCollectionViewCellExtender", ^{
     itBehavesLike(@"extender", @{@"class" : [TECCollectionViewCellExtender class]});
     
     let(cellFactoryMock, ^id{
-        return [KWMock nullMockForProtocol:@protocol(TECReusableViewFactoryProtocol)];
+        return [KWMock mockForProtocol:@protocol(TECReusableViewFactoryProtocol)];
     });
     
     let(contentProviderMock, ^id{

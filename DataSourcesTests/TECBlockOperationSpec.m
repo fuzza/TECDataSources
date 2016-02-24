@@ -30,10 +30,6 @@ it(@"Is initialized", ^{
     [[sut should] beKindOfClass:[TECBlockOperation class]];
 });
 
-it(@"Is not asynchronous", ^{
-    [[theValue(sut.asynchronous) should] beFalse];
-});
-
 it(@"Runs all blocks synchronously on start", ^{
     dispatch_queue_t testQueue = dispatch_queue_create("block operation test_queue", DISPATCH_QUEUE_SERIAL);
     dispatch_queue_set_specific(testQueue, contextKey, (void *)contextKey, NULL);
