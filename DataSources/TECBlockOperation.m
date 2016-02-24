@@ -11,11 +11,7 @@
 @implementation TECBlockOperation
 
 + (instancetype)operation {
-    return [[self alloc] init];
-}
-
-- (BOOL)isAsynchronous {
-    return NO;
+    return [self new];
 }
 
 - (void)start {
