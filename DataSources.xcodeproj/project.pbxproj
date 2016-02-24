@@ -29,6 +29,20 @@
 		6F48555D1C73AF2C0006F6E5 /* TECTableViewCellExtenderSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F48555C1C73AF2C0006F6E5 /* TECTableViewCellExtenderSpec.m */; };
 		6F48555F1C73B7120006F6E5 /* TECDelegateProxySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F48555E1C73B7120006F6E5 /* TECDelegateProxySpec.m */; };
 		6F4855621C73B89F0006F6E5 /* TECDelegateProxyTestModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4855611C73B89F0006F6E5 /* TECDelegateProxyTestModels.m */; };
+		6F550A2F1C7B5B1600846E46 /* TECCollectionViewSupplementaryRegistrationAdapterSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F550A2E1C7B5B1600846E46 /* TECCollectionViewSupplementaryRegistrationAdapterSpec.m */; };
+		6F550A321C7B636B00846E46 /* TECSimpleReusableViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F550A311C7B636B00846E46 /* TECSimpleReusableViewFactory.m */; };
+		6F550A351C7B639200846E46 /* TECCollectionViewSimpleFactorySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F550A341C7B639200846E46 /* TECCollectionViewSimpleFactorySpec.m */; };
+		6F550A381C7B7FC200846E46 /* TECCollectionViewSupplementaryExtenderSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F550A361C7B7F7600846E46 /* TECCollectionViewSupplementaryExtenderSpec.m */; };
+		6F550A3C1C7B802D00846E46 /* TECCollectionViewExtenderHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC95B61C7646DB00B1094E /* TECCollectionViewExtenderHelpers.m */; };
+		6F550A401C7CBEFA00846E46 /* TECBlockOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F550A3F1C7CBEFA00846E46 /* TECBlockOperation.m */; };
+		6F550A431C7CBF1300846E46 /* TECBlockOperationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F550A421C7CBF1300846E46 /* TECBlockOperationSpec.m */; };
+		6F550A511C7DBC9600846E46 /* TECCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F550A461C7DBC9600846E46 /* TECCollectionController.m */; };
+		6F550A521C7DBC9600846E46 /* TECCollectionViewCellExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F550A481C7DBC9600846E46 /* TECCollectionViewCellExtender.m */; };
+		6F550A531C7DBC9600846E46 /* TECCollectionViewCellRegistratorAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F550A4A1C7DBC9600846E46 /* TECCollectionViewCellRegistratorAdapter.m */; };
+		6F550A541C7DBC9600846E46 /* TECCollectionViewExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F550A4C1C7DBC9600846E46 /* TECCollectionViewExtender.m */; };
+		6F550A551C7DBC9600846E46 /* TECCollectionViewSupplementaryExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F550A4E1C7DBC9600846E46 /* TECCollectionViewSupplementaryExtender.m */; };
+		6F550A561C7DBC9600846E46 /* TECCollectionViewSupplementaryRegistrationAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F550A501C7DBC9600846E46 /* TECCollectionViewSupplementaryRegistrationAdapter.m */; };
+		6F550A5B1C7DBD3900846E46 /* TECTableViewCellRegistrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F78F04C1C513344006F08DC /* TECTableViewCellRegistrator.m */; };
 		6F59A9521C57B8EB0095289C /* TECTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A9511C57B8EB0095289C /* TECTableController.m */; };
 		6F59A9661C57DCAF0095289C /* TECDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A9651C57DCAF0095289C /* TECDelegateProxy.m */; };
 		6F59A96A1C58CA650095289C /* TECMemoryContentProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A9691C58CA650095289C /* TECMemoryContentProvider.m */; };
@@ -38,8 +52,17 @@
 		6F59A9841C58ECF70095289C /* TECTableViewSectionFooterExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A9831C58ECF70095289C /* TECTableViewSectionFooterExtender.m */; };
 		6F59A98A1C5911570095289C /* TECTableViewExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A9891C5911570095289C /* TECTableViewExtender.m */; };
 		6F78F0461C511788006F08DC /* TECTableViewCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F78F0451C511788006F08DC /* TECTableViewCellFactory.m */; };
-		6F78F04D1C513344006F08DC /* TECTableViewCellRegistrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F78F04C1C513344006F08DC /* TECTableViewCellRegistrator.m */; };
+		6FD26B1D1C7614C1006A0E2F /* TECCollectionControllerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD26B1C1C7614C1006A0E2F /* TECCollectionControllerSpec.m */; };
 		6FD285C71C591D0400A11316 /* TECTableViewCellExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD285C61C591D0400A11316 /* TECTableViewCellExtender.m */; };
+		6FEC95B51C76455900B1094E /* TECCollectionViewExtenderSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC95B41C76455900B1094E /* TECCollectionViewExtenderSpec.m */; };
+		6FEC95C21C771B6400B1094E /* TECCollectionViewCellRegistratorAdapterSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC95C11C771B6400B1094E /* TECCollectionViewCellRegistratorAdapterSpec.m */; };
+		6FEC95C61C773F4F00B1094E /* TECDummyModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC95C51C773F4F00B1094E /* TECDummyModels.m */; };
+		6FEC95C91C7741EA00B1094E /* TECReusableViewRegistrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC95C81C7741EA00B1094E /* TECReusableViewRegistrator.m */; };
+		6FEC95CD1C7752F000B1094E /* TECReusableViewsRegistratorSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC95CC1C7752F000B1094E /* TECReusableViewsRegistratorSpec.m */; };
+		6FEC95D91C7B1F6200B1094E /* TECReusableViewsFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC95D81C7B1F6200B1094E /* TECReusableViewsFactory.m */; };
+		6FEC95DB1C7B1F7000B1094E /* TECReusableViewsFactorySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC95DA1C7B1F7000B1094E /* TECReusableViewsFactorySpec.m */; };
+		6FEC95DD1C7B1F8D00B1094E /* TECReusableViewsFactoryHelperSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC95DC1C7B1F8D00B1094E /* TECReusableViewsFactoryHelperSpec.m */; };
+		6FEC95E51C7B2ECB00B1094E /* TECCollectionViewCellExtenderSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC95E41C7B2ECB00B1094E /* TECCollectionViewCellExtenderSpec.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +111,26 @@
 		6F48555E1C73B7120006F6E5 /* TECDelegateProxySpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECDelegateProxySpec.m; sourceTree = "<group>"; };
 		6F4855601C73B89F0006F6E5 /* TECDelegateProxyTestModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECDelegateProxyTestModels.h; sourceTree = "<group>"; };
 		6F4855611C73B89F0006F6E5 /* TECDelegateProxyTestModels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECDelegateProxyTestModels.m; sourceTree = "<group>"; };
+		6F550A2E1C7B5B1600846E46 /* TECCollectionViewSupplementaryRegistrationAdapterSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECCollectionViewSupplementaryRegistrationAdapterSpec.m; sourceTree = "<group>"; };
+		6F550A301C7B636B00846E46 /* TECSimpleReusableViewFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECSimpleReusableViewFactory.h; sourceTree = "<group>"; };
+		6F550A311C7B636B00846E46 /* TECSimpleReusableViewFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECSimpleReusableViewFactory.m; sourceTree = "<group>"; };
+		6F550A341C7B639200846E46 /* TECCollectionViewSimpleFactorySpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECCollectionViewSimpleFactorySpec.m; sourceTree = "<group>"; };
+		6F550A361C7B7F7600846E46 /* TECCollectionViewSupplementaryExtenderSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TECCollectionViewSupplementaryExtenderSpec.m; path = ../DataSources/TECCollectionViewSupplementaryExtenderSpec.m; sourceTree = "<group>"; };
+		6F550A3E1C7CBEFA00846E46 /* TECBlockOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECBlockOperation.h; sourceTree = "<group>"; };
+		6F550A3F1C7CBEFA00846E46 /* TECBlockOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECBlockOperation.m; sourceTree = "<group>"; };
+		6F550A421C7CBF1300846E46 /* TECBlockOperationSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECBlockOperationSpec.m; sourceTree = "<group>"; };
+		6F550A451C7DBC9600846E46 /* TECCollectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECCollectionController.h; sourceTree = "<group>"; };
+		6F550A461C7DBC9600846E46 /* TECCollectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECCollectionController.m; sourceTree = "<group>"; };
+		6F550A471C7DBC9600846E46 /* TECCollectionViewCellExtender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECCollectionViewCellExtender.h; sourceTree = "<group>"; };
+		6F550A481C7DBC9600846E46 /* TECCollectionViewCellExtender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECCollectionViewCellExtender.m; sourceTree = "<group>"; };
+		6F550A491C7DBC9600846E46 /* TECCollectionViewCellRegistratorAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECCollectionViewCellRegistratorAdapter.h; sourceTree = "<group>"; };
+		6F550A4A1C7DBC9600846E46 /* TECCollectionViewCellRegistratorAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECCollectionViewCellRegistratorAdapter.m; sourceTree = "<group>"; };
+		6F550A4B1C7DBC9600846E46 /* TECCollectionViewExtender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECCollectionViewExtender.h; sourceTree = "<group>"; };
+		6F550A4C1C7DBC9600846E46 /* TECCollectionViewExtender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECCollectionViewExtender.m; sourceTree = "<group>"; };
+		6F550A4D1C7DBC9600846E46 /* TECCollectionViewSupplementaryExtender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECCollectionViewSupplementaryExtender.h; sourceTree = "<group>"; };
+		6F550A4E1C7DBC9600846E46 /* TECCollectionViewSupplementaryExtender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECCollectionViewSupplementaryExtender.m; sourceTree = "<group>"; };
+		6F550A4F1C7DBC9600846E46 /* TECCollectionViewSupplementaryRegistrationAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECCollectionViewSupplementaryRegistrationAdapter.h; sourceTree = "<group>"; };
+		6F550A501C7DBC9600846E46 /* TECCollectionViewSupplementaryRegistrationAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECCollectionViewSupplementaryRegistrationAdapter.m; sourceTree = "<group>"; };
 		6F59A9501C57B8EB0095289C /* TECTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableController.h; sourceTree = "<group>"; };
 		6F59A9511C57B8EB0095289C /* TECTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableController.m; sourceTree = "<group>"; };
 		6F59A9621C57C7D90095289C /* TECContentProviderProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECContentProviderProtocol.h; sourceTree = "<group>"; };
@@ -112,8 +155,25 @@
 		6F78F04B1C513344006F08DC /* TECTableViewCellRegistrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewCellRegistrator.h; sourceTree = "<group>"; };
 		6F78F04C1C513344006F08DC /* TECTableViewCellRegistrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewCellRegistrator.m; sourceTree = "<group>"; };
 		6FB0892F1C5A75DF008AF389 /* TECContentProviderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECContentProviderDelegate.h; sourceTree = "<group>"; };
+		6FD26B1C1C7614C1006A0E2F /* TECCollectionControllerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECCollectionControllerSpec.m; sourceTree = "<group>"; };
 		6FD285C51C591D0400A11316 /* TECTableViewCellExtender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewCellExtender.h; sourceTree = "<group>"; };
 		6FD285C61C591D0400A11316 /* TECTableViewCellExtender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewCellExtender.m; sourceTree = "<group>"; };
+		6FEC95B41C76455900B1094E /* TECCollectionViewExtenderSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECCollectionViewExtenderSpec.m; sourceTree = "<group>"; };
+		6FEC95B61C7646DB00B1094E /* TECCollectionViewExtenderHelpers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TECCollectionViewExtenderHelpers.m; sourceTree = "<group>"; };
+		6FEC95B91C77165200B1094E /* TECReusableViewRegistratorProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECReusableViewRegistratorProtocol.h; sourceTree = "<group>"; };
+		6FEC95BB1C771A1B00B1094E /* TECReusableViewRegistrationAdapterProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECReusableViewRegistrationAdapterProtocol.h; sourceTree = "<group>"; };
+		6FEC95C11C771B6400B1094E /* TECCollectionViewCellRegistratorAdapterSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECCollectionViewCellRegistratorAdapterSpec.m; sourceTree = "<group>"; };
+		6FEC95C41C773F4F00B1094E /* TECDummyModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECDummyModels.h; sourceTree = "<group>"; };
+		6FEC95C51C773F4F00B1094E /* TECDummyModels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECDummyModels.m; sourceTree = "<group>"; };
+		6FEC95C71C7741EA00B1094E /* TECReusableViewRegistrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECReusableViewRegistrator.h; sourceTree = "<group>"; };
+		6FEC95C81C7741EA00B1094E /* TECReusableViewRegistrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECReusableViewRegistrator.m; sourceTree = "<group>"; };
+		6FEC95CC1C7752F000B1094E /* TECReusableViewsRegistratorSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECReusableViewsRegistratorSpec.m; sourceTree = "<group>"; };
+		6FEC95D71C7B1F6200B1094E /* TECReusableViewsFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECReusableViewsFactory.h; sourceTree = "<group>"; };
+		6FEC95D81C7B1F6200B1094E /* TECReusableViewsFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECReusableViewsFactory.m; sourceTree = "<group>"; };
+		6FEC95DA1C7B1F7000B1094E /* TECReusableViewsFactorySpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECReusableViewsFactorySpec.m; sourceTree = "<group>"; };
+		6FEC95DC1C7B1F8D00B1094E /* TECReusableViewsFactoryHelperSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECReusableViewsFactoryHelperSpec.m; sourceTree = "<group>"; };
+		6FEC95DE1C7B207A00B1094E /* TECReusableViewFactoryProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECReusableViewFactoryProtocol.h; sourceTree = "<group>"; };
+		6FEC95E41C7B2ECB00B1094E /* TECCollectionViewCellExtenderSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECCollectionViewCellExtenderSpec.m; sourceTree = "<group>"; };
 		E6648EB9D0A7F2502D02AA01 /* libPods-DataSourcesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DataSourcesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -176,6 +236,7 @@
 		6F0CD60B1C51109400D09C01 /* DataSources */ = {
 			isa = PBXGroup;
 			children = (
+				6F550A441C7DBC8900846E46 /* CollectionView */,
 				6F59A9771C58E97F0095289C /* TableView */,
 				6F59A9761C58E9790095289C /* Shared */,
 				6F0CD60F1C51109400D09C01 /* AppDelegate.h */,
@@ -204,6 +265,9 @@
 		6F0CD6251C51109500D09C01 /* DataSourcesTests */ = {
 			isa = PBXGroup;
 			children = (
+				6FEC95E21C7B2EB600B1094E /* CollectionView */,
+				6FEC95CA1C7752CB00B1094E /* Shared */,
+				6FEC95C31C773F3400B1094E /* HelperCode */,
 				6F2E890B1C5142DF00FD4165 /* TECTableViewCellRegistratorSpec.m */,
 				6F0CD6261C51109500D09C01 /* TECTableViewCellFactorySpec.m */,
 				00A85D431C60D8FE00125C2C /* TECMemorySectionModelSpec.m */,
@@ -215,10 +279,86 @@
 				6F48555A1C739F870006F6E5 /* TECTableViewSectionFooterExtenderSpec.m */,
 				6F48555C1C73AF2C0006F6E5 /* TECTableViewCellExtenderSpec.m */,
 				6F48555E1C73B7120006F6E5 /* TECDelegateProxySpec.m */,
-				6F4855601C73B89F0006F6E5 /* TECDelegateProxyTestModels.h */,
-				6F4855611C73B89F0006F6E5 /* TECDelegateProxyTestModels.m */,
+				6FD26B1C1C7614C1006A0E2F /* TECCollectionControllerSpec.m */,
+				6FEC95C11C771B6400B1094E /* TECCollectionViewCellRegistratorAdapterSpec.m */,
 			);
 			path = DataSourcesTests;
+			sourceTree = "<group>";
+		};
+		6F550A2D1C7B5AF100846E46 /* SupplementaryRegistrationAdapter */ = {
+			isa = PBXGroup;
+			children = (
+				6F550A2E1C7B5B1600846E46 /* TECCollectionViewSupplementaryRegistrationAdapterSpec.m */,
+			);
+			name = SupplementaryRegistrationAdapter;
+			sourceTree = "<group>";
+		};
+		6F550A331C7B637700846E46 /* CellFactory */ = {
+			isa = PBXGroup;
+			children = (
+				6F550A341C7B639200846E46 /* TECCollectionViewSimpleFactorySpec.m */,
+			);
+			name = CellFactory;
+			sourceTree = "<group>";
+		};
+		6F550A3D1C7CBEE700846E46 /* BlockOperation */ = {
+			isa = PBXGroup;
+			children = (
+				6F550A3E1C7CBEFA00846E46 /* TECBlockOperation.h */,
+				6F550A3F1C7CBEFA00846E46 /* TECBlockOperation.m */,
+			);
+			name = BlockOperation;
+			sourceTree = "<group>";
+		};
+		6F550A411C7CBF0300846E46 /* BlockOperation */ = {
+			isa = PBXGroup;
+			children = (
+				6F550A421C7CBF1300846E46 /* TECBlockOperationSpec.m */,
+			);
+			name = BlockOperation;
+			sourceTree = "<group>";
+		};
+		6F550A441C7DBC8900846E46 /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				6F550A5A1C7DBCAE00846E46 /* RegistrationAdapters */,
+				6F550A581C7DBCA200846E46 /* Extenders */,
+				6F550A571C7DBC9B00846E46 /* Controller */,
+			);
+			name = CollectionView;
+			sourceTree = "<group>";
+		};
+		6F550A571C7DBC9B00846E46 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6F550A451C7DBC9600846E46 /* TECCollectionController.h */,
+				6F550A461C7DBC9600846E46 /* TECCollectionController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		6F550A581C7DBCA200846E46 /* Extenders */ = {
+			isa = PBXGroup;
+			children = (
+				6F550A4D1C7DBC9600846E46 /* TECCollectionViewSupplementaryExtender.h */,
+				6F550A4E1C7DBC9600846E46 /* TECCollectionViewSupplementaryExtender.m */,
+				6F550A4B1C7DBC9600846E46 /* TECCollectionViewExtender.h */,
+				6F550A4C1C7DBC9600846E46 /* TECCollectionViewExtender.m */,
+				6F550A471C7DBC9600846E46 /* TECCollectionViewCellExtender.h */,
+				6F550A481C7DBC9600846E46 /* TECCollectionViewCellExtender.m */,
+			);
+			name = Extenders;
+			sourceTree = "<group>";
+		};
+		6F550A5A1C7DBCAE00846E46 /* RegistrationAdapters */ = {
+			isa = PBXGroup;
+			children = (
+				6F550A491C7DBC9600846E46 /* TECCollectionViewCellRegistratorAdapter.h */,
+				6F550A4A1C7DBC9600846E46 /* TECCollectionViewCellRegistratorAdapter.m */,
+				6F550A4F1C7DBC9600846E46 /* TECCollectionViewSupplementaryRegistrationAdapter.h */,
+				6F550A501C7DBC9600846E46 /* TECCollectionViewSupplementaryRegistrationAdapter.m */,
+			);
+			name = RegistrationAdapters;
 			sourceTree = "<group>";
 		};
 		6F59A9751C58E9640095289C /* CellRegistrator */ = {
@@ -234,6 +374,9 @@
 		6F59A9761C58E9790095289C /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				6F550A3D1C7CBEE700846E46 /* BlockOperation */,
+				6FEC95D51C7B1F3300B1094E /* ReusableViewsFactory */,
+				6FEC95B81C77163800B1094E /* ReusableViewsRegistrator */,
 				6F59A97E1C58EAE90095289C /* SectionModel */,
 				6F59A97C1C58EA9C0095289C /* DelegateProxy */,
 				6F59A9791C58EA500095289C /* ContentProviders */,
@@ -322,6 +465,88 @@
 				6F59A96C1C58CA990095289C /* TECMemorySectionModel.m */,
 			);
 			name = SectionModel;
+			sourceTree = "<group>";
+		};
+		6FEC95B81C77163800B1094E /* ReusableViewsRegistrator */ = {
+			isa = PBXGroup;
+			children = (
+				6FEC95B91C77165200B1094E /* TECReusableViewRegistratorProtocol.h */,
+				6FEC95BB1C771A1B00B1094E /* TECReusableViewRegistrationAdapterProtocol.h */,
+				6FEC95C71C7741EA00B1094E /* TECReusableViewRegistrator.h */,
+				6FEC95C81C7741EA00B1094E /* TECReusableViewRegistrator.m */,
+			);
+			name = ReusableViewsRegistrator;
+			sourceTree = "<group>";
+		};
+		6FEC95C31C773F3400B1094E /* HelperCode */ = {
+			isa = PBXGroup;
+			children = (
+				6F4855601C73B89F0006F6E5 /* TECDelegateProxyTestModels.h */,
+				6F4855611C73B89F0006F6E5 /* TECDelegateProxyTestModels.m */,
+				6FEC95C41C773F4F00B1094E /* TECDummyModels.h */,
+				6FEC95C51C773F4F00B1094E /* TECDummyModels.m */,
+			);
+			name = HelperCode;
+			sourceTree = "<group>";
+		};
+		6FEC95CA1C7752CB00B1094E /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				6F550A411C7CBF0300846E46 /* BlockOperation */,
+				6FEC95D61C7B1F4800B1094E /* ReusableViewsFactory */,
+				6FEC95CB1C7752D900B1094E /* ReusableViewsRegistrator */,
+			);
+			name = Shared;
+			sourceTree = "<group>";
+		};
+		6FEC95CB1C7752D900B1094E /* ReusableViewsRegistrator */ = {
+			isa = PBXGroup;
+			children = (
+				6FEC95CC1C7752F000B1094E /* TECReusableViewsRegistratorSpec.m */,
+			);
+			name = ReusableViewsRegistrator;
+			sourceTree = "<group>";
+		};
+		6FEC95D51C7B1F3300B1094E /* ReusableViewsFactory */ = {
+			isa = PBXGroup;
+			children = (
+				6F550A301C7B636B00846E46 /* TECSimpleReusableViewFactory.h */,
+				6F550A311C7B636B00846E46 /* TECSimpleReusableViewFactory.m */,
+				6FEC95D71C7B1F6200B1094E /* TECReusableViewsFactory.h */,
+				6FEC95D81C7B1F6200B1094E /* TECReusableViewsFactory.m */,
+				6FEC95DE1C7B207A00B1094E /* TECReusableViewFactoryProtocol.h */,
+			);
+			name = ReusableViewsFactory;
+			sourceTree = "<group>";
+		};
+		6FEC95D61C7B1F4800B1094E /* ReusableViewsFactory */ = {
+			isa = PBXGroup;
+			children = (
+				6FEC95DA1C7B1F7000B1094E /* TECReusableViewsFactorySpec.m */,
+				6FEC95DC1C7B1F8D00B1094E /* TECReusableViewsFactoryHelperSpec.m */,
+			);
+			name = ReusableViewsFactory;
+			sourceTree = "<group>";
+		};
+		6FEC95E21C7B2EB600B1094E /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				6F550A331C7B637700846E46 /* CellFactory */,
+				6F550A2D1C7B5AF100846E46 /* SupplementaryRegistrationAdapter */,
+				6FEC95E31C7B2EBD00B1094E /* Extenders */,
+			);
+			name = CollectionView;
+			sourceTree = "<group>";
+		};
+		6FEC95E31C7B2EBD00B1094E /* Extenders */ = {
+			isa = PBXGroup;
+			children = (
+				6F550A361C7B7F7600846E46 /* TECCollectionViewSupplementaryExtenderSpec.m */,
+				6FEC95B41C76455900B1094E /* TECCollectionViewExtenderSpec.m */,
+				6FEC95B61C7646DB00B1094E /* TECCollectionViewExtenderHelpers.m */,
+				6FEC95E41C7B2ECB00B1094E /* TECCollectionViewCellExtenderSpec.m */,
+			);
+			name = Extenders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -460,9 +685,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F550A5B1C7DBD3900846E46 /* TECTableViewCellRegistrator.m in Sources */,
 				6F59A9841C58ECF70095289C /* TECTableViewSectionFooterExtender.m in Sources */,
-				6F78F04D1C513344006F08DC /* TECTableViewCellRegistrator.m in Sources */,
+				6FEC95D91C7B1F6200B1094E /* TECReusableViewsFactory.m in Sources */,
+				6F550A521C7DBC9600846E46 /* TECCollectionViewCellExtender.m in Sources */,
+				6F550A401C7CBEFA00846E46 /* TECBlockOperation.m in Sources */,
 				6F59A9661C57DCAF0095289C /* TECDelegateProxy.m in Sources */,
+				6F550A321C7B636B00846E46 /* TECSimpleReusableViewFactory.m in Sources */,
 				008D856A1C63B561002D82F3 /* TECTableViewDeletingExtender.m in Sources */,
 				008D85701C648F52002D82F3 /* TECTableViewReorderingExtender.m in Sources */,
 				6F0CD6141C51109400D09C01 /* ViewController.m in Sources */,
@@ -471,13 +700,19 @@
 				6F59A9701C58CDC40095289C /* TECCustomCell.m in Sources */,
 				6F59A9521C57B8EB0095289C /* TECTableController.m in Sources */,
 				6F59A98A1C5911570095289C /* TECTableViewExtender.m in Sources */,
+				6F550A511C7DBC9600846E46 /* TECCollectionController.m in Sources */,
+				6F550A531C7DBC9600846E46 /* TECCollectionViewCellRegistratorAdapter.m in Sources */,
+				6F550A561C7DBC9600846E46 /* TECCollectionViewSupplementaryRegistrationAdapter.m in Sources */,
 				6F0CD60E1C51109400D09C01 /* main.m in Sources */,
 				008D85671C63B51C002D82F3 /* TECTableViewEditingExtender.m in Sources */,
 				6F59A9811C58EC610095289C /* TECTableViewSectionHeaderExtender.m in Sources */,
+				6F550A541C7DBC9600846E46 /* TECCollectionViewExtender.m in Sources */,
 				6F78F0461C511788006F08DC /* TECTableViewCellFactory.m in Sources */,
 				008D856D1C63B5A8002D82F3 /* TECTableViewItemUpdatingExtender.m in Sources */,
 				6FD285C71C591D0400A11316 /* TECTableViewCellExtender.m in Sources */,
 				6F59A96D1C58CA990095289C /* TECMemorySectionModel.m in Sources */,
+				6F550A551C7DBC9600846E46 /* TECCollectionViewSupplementaryExtender.m in Sources */,
+				6FEC95C91C7741EA00B1094E /* TECReusableViewRegistrator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,16 +720,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F550A3C1C7B802D00846E46 /* TECCollectionViewExtenderHelpers.m in Sources */,
 				6F4855531C7375BF0006F6E5 /* TECTableControllerSpec.m in Sources */,
 				6F4855621C73B89F0006F6E5 /* TECDelegateProxyTestModels.m in Sources */,
+				6FEC95B51C76455900B1094E /* TECCollectionViewExtenderSpec.m in Sources */,
 				6F4855571C739E030006F6E5 /* TECTableViewSectionHeaderExtenderSpec.m in Sources */,
+				6FD26B1D1C7614C1006A0E2F /* TECCollectionControllerSpec.m in Sources */,
+				6F550A2F1C7B5B1600846E46 /* TECCollectionViewSupplementaryRegistrationAdapterSpec.m in Sources */,
+				6FEC95C21C771B6400B1094E /* TECCollectionViewCellRegistratorAdapterSpec.m in Sources */,
 				6F2E890C1C5142DF00FD4165 /* TECTableViewCellRegistratorSpec.m in Sources */,
+				6FEC95C61C773F4F00B1094E /* TECDummyModels.m in Sources */,
 				6F4855551C739C720006F6E5 /* TECTableViewExtenderSpec.m in Sources */,
+				6FEC95E51C7B2ECB00B1094E /* TECCollectionViewCellExtenderSpec.m in Sources */,
+				6F550A381C7B7FC200846E46 /* TECCollectionViewSupplementaryExtenderSpec.m in Sources */,
+				6F550A431C7CBF1300846E46 /* TECBlockOperationSpec.m in Sources */,
 				6F0CD6271C51109500D09C01 /* TECTableViewCellFactorySpec.m in Sources */,
 				6F48555F1C73B7120006F6E5 /* TECDelegateProxySpec.m in Sources */,
+				6F550A351C7B639200846E46 /* TECCollectionViewSimpleFactorySpec.m in Sources */,
 				6F48555D1C73AF2C0006F6E5 /* TECTableViewCellExtenderSpec.m in Sources */,
 				6F48555B1C739F870006F6E5 /* TECTableViewSectionFooterExtenderSpec.m in Sources */,
 				00A85D441C60D8FE00125C2C /* TECMemorySectionModelSpec.m in Sources */,
+				6FEC95DD1C7B1F8D00B1094E /* TECReusableViewsFactoryHelperSpec.m in Sources */,
+				6FEC95CD1C7752F000B1094E /* TECReusableViewsRegistratorSpec.m in Sources */,
+				6FEC95DB1C7B1F7000B1094E /* TECReusableViewsFactorySpec.m in Sources */,
 				00A85D461C60FCDA00125C2C /* TECMemoryContentProviderSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
