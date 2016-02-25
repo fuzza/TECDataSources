@@ -27,28 +27,26 @@
 
 
 - (void)mutateObjects:(NSArray <NSManagedObject *> *)objects
-withEntityDescription:(NSEntityDescription *)entityDescription
-                block:(TECFetchedResultsControllerContentProviderMutatorArrayChangeBlock)block {
+             ofEntity:(NSEntityDescription *)entity
+            withBlock:(TECFetchedResultsControllerContentProviderMutatorArrayChangeBlock)block {
     NSParameterAssert(objects);
+    NSParameterAssert(entity);
     NSParameterAssert(block);
-    TECFetchedResultsControllerContentProviderMutatorArrayChangeBlock innerBlock = [block copy];
     NSArray *objectIDs = [objects valueForKeyPath:@"objectID"];
     NSMutableArray *objectsToMutate = [objectIDs mutableCopy];
     NSManagedObjectContext *context = self.context;
     [context performBlock:^() {
         NSError *error = nil;
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        fetchRequest.entity = entityDescription;
+        fetchRequest.entity = entity;
         fetchRequest.predicate = [NSPredicate predicateWithFormat:@"SELF IN %@", objectIDs];
         NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
         for (NSManagedObject *managedObject in fetchedObjects) {
             [objectsToMutate replaceObjectAtIndex:[objectIDs indexOfObject:managedObject.objectID]
                                        withObject:managedObject];
         }
-        if (innerBlock) {
-            innerBlock([NSArray arrayWithArray:objectsToMutate], error);
-            [context save:&error];
-        }
+        block([NSArray arrayWithArray:objectsToMutate], error);
+        [context save:&error];
     }];
 }
 
@@ -56,16 +54,13 @@ withEntityDescription:(NSEntityDescription *)entityDescription
            withBlock:(TECFetchedResultsControllerContentProviderMutatorObjectChangeBlock)block {
     NSParameterAssert(object);
     NSParameterAssert(block);
-    TECFetchedResultsControllerContentProviderMutatorObjectChangeBlock innerBlock = [block copy];
     NSManagedObjectID *objectID = object.objectID;
     NSManagedObjectContext *context = self.context;
     [context performBlock:^() {
         NSError *error = nil;
         NSManagedObject *objectRefetched = [context existingObjectWithID:objectID error:&error];
-        if (innerBlock) {
-            innerBlock(objectRefetched, error);
-            [context save:&error];
-        }
+        block(objectRefetched, error);
+        [context save:&error];
     }];
 }
 
@@ -104,14 +99,15 @@ withEntityDescription:(NSEntityDescription *)entityDescription
 }
 
 - (void)deleteObjects:(NSArray <NSManagedObject *> *)objects
-withEntityDescription:(NSEntityDescription *)entityDescription {
+             ofEntity:(NSEntityDescription *)entity {
     NSParameterAssert(objects);
+    NSParameterAssert(entity);
     NSArray *objectIDs = [objects valueForKeyPath:@"objectID"];
     NSManagedObjectContext *context = self.context;
     [context performBlock:^() {
         NSError *error = nil;
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        fetchRequest.entity = entityDescription;
+        fetchRequest.entity = entity;
         fetchRequest.predicate = [NSPredicate predicateWithFormat:@"SELF IN %@", objectIDs];
         NSArray *objectsToRemove = [context executeFetchRequest:fetchRequest error:&error];
         for(NSManagedObject *object in objectsToRemove) {

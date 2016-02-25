@@ -62,28 +62,50 @@ NSString * const kTECChangesetNewIndexPathKey = @"newIndexPath";
     self.sectionModelArray = [NSArray arrayWithArray:array];
 }
 
+#pragma mark - Changeset management
+
 - (void)resetChangeSetArray {
     self.changeSetArray = [NSMutableArray new];
 }
 
 - (void)flushChangeSetArrayToAdapter {
-    BOOL adapterListensToSectionUpdates = [self.presentationAdapter respondsToSelector:@selector(contentProviderDidChangeSection:atIndex:forChangeType:)];
-    BOOL adapterListensToRowUpdates = [self.presentationAdapter respondsToSelector:@selector(contentProviderDidChangeItem:atIndexPath:forChangeType:newIndexPath:)];
+    BOOL adapterListensToSectionUpdates =
+    [self.presentationAdapter respondsToSelector:@selector(contentProviderDidChangeSection:atIndex:forChangeType:)];
+    BOOL adapterListensToRowUpdates =
+    [self.presentationAdapter respondsToSelector:@selector(contentProviderDidChangeItem:atIndexPath:forChangeType:newIndexPath:)];
     for (NSDictionary *changeset in self.changeSetArray) {
-        if (adapterListensToSectionUpdates && [changeset[kTECChangesetKindKey] unsignedIntegerValue] == TECChangesetKindSection) {
-            [self.presentationAdapter contentProviderDidChangeSection:[[TECCoreDataSectionModel alloc] initWithFetchedResultsSectionInfo:changeset[kTECChangesetSectionKey]]
-                                                              atIndex:[changeset[kTECChangesetIndexKey] unsignedIntegerValue]
-                                                        forChangeType:[changeset[kTECChangesetChangeTypeKey] unsignedIntegerValue]];
+        if (adapterListensToSectionUpdates && [self isSectionChangeset:changeset]) {
+            [self notifyPresentationAdapterAboutSectionChangeset:changeset];
         }
-        if (adapterListensToRowUpdates && [changeset[kTECChangesetKindKey] unsignedIntegerValue] == TECChangesetKindRow) {
-            [self.presentationAdapter contentProviderDidChangeItem:changeset[kTECChangesetObjectKey]
-                                                       atIndexPath:changeset[kTECChangesetIndexPathKey]
-                                                     forChangeType:[changeset[kTECChangesetChangeTypeKey] unsignedIntegerValue]
-                                                      newIndexPath:changeset[kTECChangesetNewIndexPathKey]];
+        if (adapterListensToRowUpdates && [self isRowChangeset:changeset]) {
+            [self notifyPresentationAdapterAboutRowChangeset:changeset];
         }
     }
     [self resetChangeSetArray];
 }
+
+- (void)notifyPresentationAdapterAboutSectionChangeset:(NSDictionary *)changeset {
+    [self.presentationAdapter contentProviderDidChangeSection:[[TECCoreDataSectionModel alloc] initWithFetchedResultsSectionInfo:changeset[kTECChangesetSectionKey]]
+                                                      atIndex:[changeset[kTECChangesetIndexKey] unsignedIntegerValue]
+                                                forChangeType:[changeset[kTECChangesetChangeTypeKey] unsignedIntegerValue]];
+}
+
+- (void)notifyPresentationAdapterAboutRowChangeset:(NSDictionary *)changeset {
+    [self.presentationAdapter contentProviderDidChangeItem:changeset[kTECChangesetObjectKey]
+                                               atIndexPath:changeset[kTECChangesetIndexPathKey]
+                                             forChangeType:[changeset[kTECChangesetChangeTypeKey] unsignedIntegerValue]
+                                              newIndexPath:changeset[kTECChangesetNewIndexPathKey]];
+}
+
+- (BOOL)isSectionChangeset:(NSDictionary *)changeset {
+    return ([changeset[kTECChangesetKindKey] unsignedIntegerValue] == TECChangesetKindSection);
+}
+
+- (BOOL)isRowChangeset:(NSDictionary *)changeset {
+    return ([changeset[kTECChangesetKindKey] unsignedIntegerValue] == TECChangesetKindRow);
+}
+
+#pragma mark - changeset workarounds
 
 - (void)workChangeSetArrayAround {
     // 1.
@@ -140,7 +162,14 @@ NSString * const kTECChangesetNewIndexPathKey = @"newIndexPath";
     [self workOddMovesAround];
 }
 
+#pragma mark workaround 1
+
 - (void)workUpdateThenMoveAround {
+    NSArray *moves = [self rowMovesFromChangesetArray];
+    [self filterOddUpdatesForMoves:moves];
+}
+
+- (NSArray *)rowMovesFromChangesetArray {
     NSMutableArray *moves = [NSMutableArray new];
     for (NSMutableDictionary *changeset in self.changeSetArray) {
         if ([changeset[kTECChangesetKindKey] unsignedIntegerValue] == TECChangesetKindRow) {
@@ -149,26 +178,53 @@ NSString * const kTECChangesetNewIndexPathKey = @"newIndexPath";
             }
         }
     };
+    return moves;
+}
+
+- (void)filterOddUpdatesForMoves:(NSArray *)moves {
     NSPredicate *filterOddUpdatesPredicate =
     [NSPredicate predicateWithFormat:@"NOT ((%K = %@) AND (%K IN %@))", kTECChangesetChangeTypeKey, @(NSFetchedResultsChangeUpdate), kTECChangesetIndexPathKey, moves];
-    [NSPredicate predicateWithFormat:@"NOT ((%K = %@) AND (%K IN %@))", kTECChangesetChangeTypeKey, @(TECContentProviderItemChangeTypeUpdate), kTECChangesetIndexPathKey, moves];
     [self.changeSetArray filterUsingPredicate:filterOddUpdatesPredicate];
 }
 
+#pragma mark workaround 2
+
 - (void)workConsecutiveSectionInsertDeleteAround {
+    NSArray *sectionInserts = [self sectionInsertsForChangesetArray];
+    NSArray *sectionDeletes = [self sectionDeletesForChangesetArray];
+    NSSet *duplicatingIndices = [self duplicatingIndicesForInsertsArray:sectionInserts deletesArray:sectionDeletes];
+    [self filterDuplicatingSectionInsertsDeletesWithIndices:duplicatingIndices];
+    [self insertSectionReloadChangesetsForIndices:duplicatingIndices];
+    [self filterRowChangesFromDeletedSections:duplicatingIndices];
+}
+
+- (NSArray *)sectionInsertsForChangesetArray {
     NSPredicate *filterSectionInsertsPredicate =
     [NSPredicate predicateWithFormat:@"(%K = %@) AND (%K = %@)", kTECChangesetKindKey, @(TECChangesetKindSection), kTECChangesetChangeTypeKey, @(NSFetchedResultsChangeInsert)];
-    NSArray *sectionInserts = [self.changeSetArray filteredArrayUsingPredicate:filterSectionInsertsPredicate];
+    return [self.changeSetArray filteredArrayUsingPredicate:filterSectionInsertsPredicate];
+}
+
+- (NSArray *)sectionDeletesForChangesetArray {
     NSPredicate *filterSectionDeletesPredicate =
     [NSPredicate predicateWithFormat:@"(%K = %@) AND (%K = %@)", kTECChangesetKindKey, @(TECChangesetKindSection), kTECChangesetChangeTypeKey, @(NSFetchedResultsChangeDelete)];
-    NSArray *sectionDeletes = [self.changeSetArray filteredArrayUsingPredicate:filterSectionDeletesPredicate];
+    return [self.changeSetArray filteredArrayUsingPredicate:filterSectionDeletesPredicate];
+}
+
+- (NSSet *)duplicatingIndicesForInsertsArray:(NSArray *)sectionInserts deletesArray:(NSArray *)sectionDeletes {
     NSSet *insertIndices = [NSSet setWithArray:[sectionInserts valueForKey:kTECChangesetIndexKey]];
     NSSet *deleteIndices = [NSSet setWithArray:[sectionDeletes valueForKey:kTECChangesetIndexKey]];
     NSMutableSet *duplicatingIndices = [insertIndices mutableCopy];
     [duplicatingIndices intersectSet:deleteIndices];
+    return duplicatingIndices;
+}
+
+- (void)filterDuplicatingSectionInsertsDeletesWithIndices:(NSSet *)duplicatingIndices {
     NSPredicate *filterOddSectionChangesPredicate =
     [NSPredicate predicateWithFormat:@"NOT ((%K = %@) AND (%K IN %@))", kTECChangesetKindKey, @(TECChangesetKindSection), kTECChangesetIndexKey, duplicatingIndices];
     [self.changeSetArray filterUsingPredicate:filterOddSectionChangesPredicate];
+}
+
+- (void)insertSectionReloadChangesetsForIndices:(NSSet *)duplicatingIndices {
     for (NSNumber *idx in duplicatingIndices) {
         NSMutableDictionary *dict = [@{kTECChangesetKindKey:@(TECChangesetKindSection),
                                        kTECChangesetChangeTypeKey:@(TECContentProviderSectionChangeTypeUpdate),
@@ -180,63 +236,107 @@ NSString * const kTECChangesetNewIndexPathKey = @"newIndexPath";
                                       atIndex:0];
         }
     }
+}
+
+- (void)filterRowChangesFromDeletedSections:(NSSet *)duplicatingIndices {
     NSPredicate *filterChangesForDeletedSection =
     [NSPredicate predicateWithFormat:@"NOT ((%K = %@) AND (%K IN %@))", kTECChangesetKindKey, @(TECChangesetKindRow), [NSString stringWithFormat:@"%@.%@", kTECChangesetIndexPathKey, @"section"], duplicatingIndices];
     [self.changeSetArray filterUsingPredicate:filterChangesForDeletedSection];
 }
 
+#pragma mark workaround 3
+
 - (void)workSectionBeforeRowChangeSetsAround {
     [self.changeSetArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:kTECChangesetKindKey ascending:YES]]];
 }
 
+#pragma mark workaround 4
+
 - (void)workManualMovesAround {
+    NSMutableArray<NSMutableDictionary *> *moves = [self movesForChangesetArray];
+    if (!moves.count) {
+        return;
+    }
+    [self deleteCycleForMovesArray:moves];
+}
+
+- (NSMutableArray<NSMutableDictionary *> *)movesForChangesetArray {
     NSPredicate *filterRowMovesPredicate =
     [NSPredicate predicateWithFormat:@"%K = %@", kTECChangesetChangeTypeKey, @(NSFetchedResultsChangeMove)];
-    NSMutableArray<NSMutableDictionary *> *moves = [[self.changeSetArray filteredArrayUsingPredicate:filterRowMovesPredicate] mutableCopy];
-    if (moves.count) {
-        NSMutableArray<NSMutableDictionary *> *cycle = [NSMutableArray arrayWithCapacity:moves.count];
-        BOOL foundCycle = NO;
-        NSIndexPath *startingIndexPath = moves.firstObject[kTECChangesetIndexPathKey];
-        NSIndexPath *currentTargetIndexPath = moves.firstObject[kTECChangesetNewIndexPathKey];
-        [cycle addObject:moves.firstObject];
-        [moves removeObject:moves.firstObject];
-        while (!foundCycle && moves.count) {
-            NSPredicate *indexPathPredicate = [NSPredicate predicateWithFormat:@"%K = %@", kTECChangesetIndexPathKey, currentTargetIndexPath];
-            NSMutableDictionary *changeset = [moves filteredArrayUsingPredicate:indexPathPredicate].firstObject;
-            if (changeset) {
-                currentTargetIndexPath = changeset[kTECChangesetNewIndexPathKey];
-                foundCycle = [currentTargetIndexPath isEqual:startingIndexPath];
-                [cycle addObject:changeset];
-                [moves removeObject:changeset];
-            }
-            else {
-                [cycle removeAllObjects];
-                startingIndexPath = moves.firstObject[kTECChangesetIndexPathKey];
-                currentTargetIndexPath = moves.firstObject[kTECChangesetNewIndexPathKey];
-                [cycle addObject:moves.firstObject];
-                [moves removeObject:moves.firstObject];
-            }
-        }
-        if (foundCycle) {
-            for (NSMutableDictionary *changeset in cycle) {
-                [self.changeSetArray removeObject:changeset];
-            }
-        }
+    return [[self.changeSetArray filteredArrayUsingPredicate:filterRowMovesPredicate] mutableCopy];
+}
+
+- (void)deleteCycleForMovesArray:(NSMutableArray<NSMutableDictionary *> *)moves{
+    BOOL foundCycle = NO;
+    NSArray *cycle = [self findCycleForMovesArray:moves foundCycle:&foundCycle];
+    if (foundCycle) {
+        [self deleteCycle:cycle];
     }
 }
 
+- (NSArray *)findCycleForMovesArray:(NSMutableArray<NSMutableDictionary *> *)moves foundCycle:(BOOL *)foundCycle {
+    NSMutableArray<NSMutableDictionary *> *cycle = [NSMutableArray arrayWithCapacity:moves.count];
+    NSIndexPath *startingIndexPath = moves.firstObject[kTECChangesetIndexPathKey];
+    NSIndexPath *currentTargetIndexPath = moves.firstObject[kTECChangesetNewIndexPathKey];
+    [self popChangeset:moves.firstObject fromMovesArray:moves toCycle:cycle];
+    while (!(*foundCycle) && moves.count) {
+        NSDictionary *changeset = [self changesetWithTargetIndexPath:currentTargetIndexPath forMovesArray:moves];
+        if (changeset) {
+            currentTargetIndexPath = changeset[kTECChangesetNewIndexPathKey];
+            *foundCycle = [currentTargetIndexPath isEqual:startingIndexPath];
+            [self popChangeset:changeset fromMovesArray:moves toCycle:cycle];
+        }
+        else {
+            [cycle removeAllObjects];
+            startingIndexPath = moves.firstObject[kTECChangesetIndexPathKey];
+            currentTargetIndexPath = moves.firstObject[kTECChangesetNewIndexPathKey];
+            [self popChangeset:moves.firstObject fromMovesArray:moves toCycle:cycle];
+        }
+    }
+    return [NSArray arrayWithArray:cycle];
+}
+
+- (void)deleteCycle:(NSArray *)cycle {
+    for (NSMutableDictionary *changeset in cycle) {
+        [self.changeSetArray removeObject:changeset];
+    }
+}
+
+- (void)popChangeset:(NSDictionary *)changeset fromMovesArray:(NSMutableArray *)moves toCycle:(NSMutableArray *)cycle {
+    [cycle addObject:changeset];
+    [moves removeObject:changeset];
+}
+
+- (NSDictionary *)changesetWithTargetIndexPath:(NSIndexPath *)currentTargetIndexPath forMovesArray:(NSArray *)moves {
+    NSPredicate *indexPathPredicate = [NSPredicate predicateWithFormat:@"%K = %@", kTECChangesetIndexPathKey, currentTargetIndexPath];
+    return [moves filteredArrayUsingPredicate:indexPathPredicate].firstObject;
+}
+
+#pragma mark workaround 5
+
 - (void)workOddMovesAround {
+    NSArray <NSMutableDictionary *> *oddMoves = [self movesToSelfForChangesetArray];
+    [self turnSelfMovesIntoUpdates:oddMoves];
+}
+
+- (NSArray *)movesToSelfForChangesetArray {
     NSPredicate *filterOddMovesPredicate =
     [NSPredicate predicateWithFormat:@"%K = %@ AND %K = %K", kTECChangesetKindKey, @(TECChangesetKindRow), kTECChangesetIndexPathKey, kTECChangesetNewIndexPathKey];
-    NSArray <NSMutableDictionary *> *oddMoves = [self.changeSetArray filteredArrayUsingPredicate:filterOddMovesPredicate];
+    return [self.changeSetArray filteredArrayUsingPredicate:filterOddMovesPredicate];
+}
+
+- (void)turnSelfMovesIntoUpdates:(NSArray *)oddMoves {
     [oddMoves enumerateObjectsUsingBlock:^(NSMutableDictionary *changeset, NSUInteger idx, BOOL *stop) {
         changeset[kTECChangesetChangeTypeKey] = @(NSFetchedResultsChangeUpdate);
         [changeset removeObjectForKey:kTECChangesetNewIndexPathKey];
     }];
 }
 
+#pragma mark - fetch request
+
 - (void)setCurrentRequest:(NSFetchRequest *)currentRequest {
     self.fetchedResultsController.delegate = nil;
+    self.fetchedResultsController.fetchRequest.entity = currentRequest.entity;
     self.fetchedResultsController.fetchRequest.predicate = currentRequest.predicate;
     self.fetchedResultsController.fetchRequest.sortDescriptors = currentRequest.sortDescriptors;
     self.fetchedResultsController.fetchRequest.propertiesToFetch = currentRequest.propertiesToFetch;
@@ -251,7 +351,7 @@ NSString * const kTECChangesetNewIndexPathKey = @"newIndexPath";
     }
 }
 
-- (NSFetchRequest *)getCopyOfCurrentRequest {
+- (NSFetchRequest *)currentRequest {
     return [self.fetchedResultsController.fetchRequest copy];
 }
 
@@ -283,7 +383,7 @@ NSString * const kTECChangesetNewIndexPathKey = @"newIndexPath";
 
 - (void)deleteSectionAtIndex:(NSUInteger)index {
     [self.itemsMutator deleteObjects:self.fetchedResultsController.sections[index].objects
-               withEntityDescription:self.fetchedResultsController.fetchRequest.entity];
+                            ofEntity:self.fetchedResultsController.fetchRequest.entity];
 }
 
 - (void)insertSection:(id<TECSectionModelProtocol>)section atIndex:(NSUInteger)index {
@@ -341,11 +441,11 @@ NSString * const kTECChangesetNewIndexPathKey = @"newIndexPath";
     self.fetchedResultsController.delegate = nil;
     [self.fetchedResultsController performFetch:nil];
     self.fetchedResultsController.delegate = self;
-    if (completion) {
-        completion();
-    }
     if ([self.presentationAdapter respondsToSelector:@selector(contentProviderDidReloadData:)]) {
         [self.presentationAdapter contentProviderDidReloadData:self];
+    }
+    if (completion) {
+        completion();
     }
 }
 

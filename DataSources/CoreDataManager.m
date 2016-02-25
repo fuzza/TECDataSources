@@ -14,8 +14,14 @@
 #import "Person.h"
 #import "PersonOrdered.h"
 
-#define TEST_PERSON_ARRAY_NAME @[@"Alexey Fayzullov", @"Anastasiya Gorban", @"Petro Korienev", @"Sergey Zenchenko"]
-#define TEST_PERSON_ARRAY_PHONE @[@"+380670000000", @"+380670000001", @"+380670000002", @"+380670000003"]
+#define TEST_PERSON_ARRAY @[@{@"name":@"Alexey Fayzullov", @"phone":@"+380670000000"},\
+                            @{@"name":@"Anastasiya Gorban", @"phone":@"+380670000001"},\
+                            @{@"name":@"Petro Korienev", @"phone":@"+380670000002"},\
+                            @{@"name":@"Sergey Zenchenko", @"phone":@"+380670000003"}]
+#define TEST_PERSON_ORDERED_ARRAY @[@{@"name":@"Alexey Fayzullov", @"phone":@"+380670000000", @"ordinal":@(0)},\
+                                    @{@"name":@"Anastasiya Gorban", @"phone":@"+380670000001", @"ordinal":@(1)},\
+                                    @{@"name":@"Petro Korienev", @"phone":@"+380670000002", @"ordinal":@(2)},\
+                                    @{@"name":@"Sergey Zenchenko", @"phone":@"+380670000003", @"ordinal":@(3)}]
 
 @interface CoreDataManager () {
     NSManagedObjectContext *_backgroundManagedObjectContext;
@@ -43,51 +49,19 @@
 }
 
 - (void)setup {
-    NSManagedObjectContext *main = self.mainManagedObjectContext;
-    NSManagedObjectContext *background = self.backgroundManagedObjectContext;
-    [main performBlock:^() {
-        NSFetchRequest *frPerson = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([Person class])];
-        NSFetchRequest *frPersonOrdered = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([PersonOrdered class])];
-        if (![main countForFetchRequest:frPerson error:NULL]) {
-            [background performBlock:^() {
-                NSEntityDescription *personEntityDescription = [NSEntityDescription entityForName:NSStringFromClass([Person class]) inManagedObjectContext:background];
-                [TEST_PERSON_ARRAY_NAME enumerateObjectsUsingBlock:^(NSString *name, NSUInteger idx, BOOL *stop) {
-                    Person *person = [[Person alloc] initWithEntity:personEntityDescription insertIntoManagedObjectContext:background];
-                    person.name = name;
-                    person.phone = TEST_PERSON_ARRAY_PHONE[idx];
-                }];
-                [background save:NULL];
-            }];
-        }
-        if (![main countForFetchRequest:frPersonOrdered error:NULL]) {
-            [background performBlock:^() {
-                NSEntityDescription *personOrderedEntityDescription = [NSEntityDescription entityForName:NSStringFromClass([PersonOrdered class]) inManagedObjectContext:background];
-                [TEST_PERSON_ARRAY_NAME enumerateObjectsUsingBlock:^(NSString *name, NSUInteger idx, BOOL *stop) {
-                    PersonOrdered *personOrdered = [[PersonOrdered alloc] initWithEntity:personOrderedEntityDescription insertIntoManagedObjectContext:background];
-                    personOrdered.name = name;
-                    personOrdered.phone = TEST_PERSON_ARRAY_PHONE[idx];
-                    personOrdered.ordinal = @(idx);
-                }];
-                [background save:NULL];
-            }];
-        }
-    }];
+    if (![self personCount]) {
+        [self fillPersonData];
+    }
+    if (![self personOrderedCount]) {
+        [self fillPersonOrderedData];
+    }
 }
 
 - (void)cleanup {
     NSManagedObjectModel *model = self.managedObjectModel;
-    NSManagedObjectContext *background = self.backgroundManagedObjectContext;
-    [background performBlockAndWait:^() {
-        for (NSEntityDescription *entity in model.entities) {
-            NSFetchRequest *fetchRequest = [NSFetchRequest new];
-            fetchRequest.entity = entity;
-            NSArray *objects = [background executeFetchRequest:fetchRequest error:NULL];
-            for (NSManagedObject *object in objects) {
-                [background deleteObject:object];
-            }
-        }
-        [background save:NULL];
-    }];
+    for (NSEntityDescription *entity in model.entities) {
+        [self cleanupAllObjectsOfEntity:entity];
+    }
 }
 
 - (id<TECFetchedResultsControllerContentProviderGetter>)createObjectGetter {
@@ -175,6 +149,69 @@
     NSManagedObjectContext *main = self.mainManagedObjectContext;
     [main performBlock:^() {
         [main mergeChangesFromContextDidSaveNotification:note];
+    }];
+}
+
+#pragma mark - helper
+
+- (void)fillDataForEntity:(NSEntityDescription *)entity
+                fromArray:(NSArray<NSDictionary *> *)array
+                  context:(NSManagedObjectContext *)context {
+    for (NSDictionary *dictionary in array) {
+        NSManagedObject *managedObject = [[entity.class alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+        [managedObject setValuesForKeysWithDictionary:dictionary];
+    }
+}
+
+- (void)fillPersonData {
+    NSManagedObjectContext *background = self.backgroundManagedObjectContext;
+    [background performBlock:^() {
+        NSEntityDescription *personEntityDescription = [NSEntityDescription entityForName:NSStringFromClass([Person class]) inManagedObjectContext:background];
+        [self fillDataForEntity:personEntityDescription fromArray:TEST_PERSON_ARRAY context:background];
+        [background save:NULL];
+    }];
+}
+
+- (void)fillPersonOrderedData {
+    NSManagedObjectContext *background = self.backgroundManagedObjectContext;
+    [background performBlock:^() {
+        NSEntityDescription *personOrderedEntityDescription = [NSEntityDescription entityForName:NSStringFromClass([PersonOrdered class]) inManagedObjectContext:background];
+        [self fillDataForEntity:personOrderedEntityDescription fromArray:TEST_PERSON_ORDERED_ARRAY context:background];
+        [background save:NULL];
+    }];
+}
+
+- (NSUInteger)countOfEntities:(NSEntityDescription *)entity {
+    __block NSUInteger result = 0;
+    NSManagedObjectContext *main = self.mainManagedObjectContext;
+    [main performBlockAndWait:^() {
+        NSFetchRequest *fr = [NSFetchRequest new];
+        fr.entity = entity;
+        result = [main countForFetchRequest:fr error:NULL];
+    }];
+    return result;
+}
+
+- (NSUInteger)personCount {
+    return [self countOfEntities:[NSEntityDescription entityForName:NSStringFromClass([Person class])
+                                             inManagedObjectContext:self.mainManagedObjectContext]];
+}
+
+- (NSUInteger)personOrderedCount {
+    return [self countOfEntities:[NSEntityDescription entityForName:NSStringFromClass([PersonOrdered class])
+                                             inManagedObjectContext:self.mainManagedObjectContext]];
+}
+
+- (void)cleanupAllObjectsOfEntity:(NSEntityDescription *)entity {
+    NSManagedObjectContext *background = self.backgroundManagedObjectContext;
+    [background performBlockAndWait:^() {
+        NSFetchRequest *fetchRequest = [NSFetchRequest new];
+        fetchRequest.entity = entity;
+        NSArray *objects = [background executeFetchRequest:fetchRequest error:NULL];
+        for (NSManagedObject *object in objects) {
+            [background deleteObject:object];
+        }
+        [background save:NULL];
     }];
 }
 

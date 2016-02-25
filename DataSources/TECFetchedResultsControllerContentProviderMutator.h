@@ -15,14 +15,14 @@ typedef void(^TECFetchedResultsControllerContentProviderMutatorObjectChangeBlock
 @protocol TECFetchedResultsControllerContentProviderMutator <NSObject>
 
 - (void)mutateObjects:(NSArray <NSManagedObject *> *)objects
-withEntityDescription:(NSEntityDescription *)entityDescription
-                block:(TECFetchedResultsControllerContentProviderMutatorArrayChangeBlock)block;
+             ofEntity:(NSEntityDescription *)entity
+            withBlock:(TECFetchedResultsControllerContentProviderMutatorArrayChangeBlock)block;
 - (void)mutateObject:(NSManagedObject *)object
            withBlock:(TECFetchedResultsControllerContentProviderMutatorObjectChangeBlock)block;
 - (void)insertObject:(NSManagedObject *)object;
 - (void)deleteObject:(NSManagedObject *)object;
 - (void)insertObjects:(NSArray <NSManagedObject *> *)objects;
 - (void)deleteObjects:(NSArray <NSManagedObject *> *)objects
-withEntityDescription:(NSEntityDescription *)entityDescription;
+             ofEntity:(NSEntityDescription *)entity;
 
 @end

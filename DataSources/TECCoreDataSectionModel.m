@@ -11,7 +11,7 @@
 
 @interface TECCoreDataSectionModel ()
 
-@property (nonatomic, strong, readwrite) id <NSFetchedResultsSectionInfo> info;
+@property (nonatomic, weak, readwrite) id <NSFetchedResultsSectionInfo> info;
 @property (nonatomic, copy) NSString *footerTitle;
 
 @end

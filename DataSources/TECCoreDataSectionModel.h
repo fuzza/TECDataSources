@@ -13,6 +13,6 @@
 @interface TECCoreDataSectionModel : NSObject <TECSectionModelProtocol>
 
 - (instancetype)initWithFetchedResultsSectionInfo:(id<NSFetchedResultsSectionInfo>)info;
-@property (nonatomic, strong, readonly) id <NSFetchedResultsSectionInfo> info;
+@property (nonatomic, weak, readonly) id <NSFetchedResultsSectionInfo> info;
 
 @end

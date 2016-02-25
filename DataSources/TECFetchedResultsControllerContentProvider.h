@@ -24,7 +24,7 @@ typedef void(^TECFetchedResultsControllerContentProviderMoveBlock)(NSFetchedResu
                  sectionNameKeyPath:(NSString *)sectionNameKeyPath;
 
 - (void)setCurrentRequest:(NSFetchRequest *)currentRequest; // This will trigger reload
-- (NSFetchRequest *)getCopyOfCurrentRequest;
+- (NSFetchRequest *)currentRequest;
 
 @property (nonatomic, weak) id <TECContentProviderPresentationAdapterProtocol> presentationAdapter;
 

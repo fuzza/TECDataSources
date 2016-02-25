@@ -125,8 +125,8 @@
                                        withBlock:^(NSArray<NSManagedObject *> *objects, NSError *error)
      {
          [self.objectMutator mutateObjects:objects
-                     withEntityDescription:objects.firstObject.entity
-                                     block:^(NSArray<Person *> *objects, NSError *error)
+                                  ofEntity:objects.firstObject.entity
+                                 withBlock:^(NSArray<Person *> *objects, NSError *error)
           {
               objects.firstObject.name = [NSString stringWithFormat:@"%@ %@", @"Anastasiya Z", objects.firstObject.name];
               objects.firstObject.phone = [objects.firstObject.phone stringByAppendingString:@"1"];
@@ -143,8 +143,8 @@
                                        withBlock:^(NSArray<NSManagedObject *> *objects, NSError *error)
     {
         [self.objectMutator mutateObjects:objects
-                    withEntityDescription:objects.firstObject.entity
-                                    block:^(NSArray<Person *> *objects, NSError *error)
+                                 ofEntity:objects.firstObject.entity
+                                withBlock:^(NSArray<Person *> *objects, NSError *error)
         {
             [objects enumerateObjectsUsingBlock:^(Person *person, NSUInteger idx, BOOL *stop) {
                 person.name = [NSString stringWithFormat:@"%@%@", ((idx % 2) == 0) ? @"U" : @"V", person.name];

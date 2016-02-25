@@ -93,8 +93,8 @@
                                   @(maxOrdinal), @(minOrdinal)];
         NSArray *objects = [fetchedResultsController.fetchedObjects filteredArrayUsingPredicate:predicate];
         [weakSelf.objectMutator mutateObjects:objects
-                        withEntityDescription:fetchedResultsController.fetchRequest.entity
-                                        block:^(NSArray<PersonOrdered *> *objects, NSError *error)
+                                     ofEntity:fetchedResultsController.fetchRequest.entity
+                                    withBlock:^(NSArray<PersonOrdered *> *objects, NSError *error)
         {
             [objects enumerateObjectsUsingBlock:^(PersonOrdered *obj, NSUInteger idx, BOOL *stop) {
                 if (idx == 0 && maxOrdinal == toOrdinal) {
