@@ -225,6 +225,131 @@ describe(@"Workarounds & changeset accumulator", ^() {
         [[provider should] receive:@selector(workOddMovesAround)];
         [provider workChangeSetArrayAround];
     });
+
+    it(@"should apply workUpdateThenMoveAround correctly", ^() {
+        NSDictionary *changeset1 = @{kTECChangesetKindKey:@(TECChangesetKindRow),
+                                     kTECChangesetChangeTypeKey:@(NSFetchedResultsChangeUpdate),
+                                     kTECChangesetIndexPathKey:[NSIndexPath indexPathForRow:0 inSection:0]};
+        NSDictionary *changeset2 = @{kTECChangesetKindKey:@(TECChangesetKindRow),
+                                     kTECChangesetChangeTypeKey:@(NSFetchedResultsChangeUpdate),
+                                     kTECChangesetIndexPathKey:[NSIndexPath indexPathForRow:2 inSection:0]};
+        NSDictionary *changeset3 = @{kTECChangesetKindKey:@(TECChangesetKindRow),
+                                     kTECChangesetChangeTypeKey:@(NSFetchedResultsChangeMove),
+                                     kTECChangesetIndexPathKey:[NSIndexPath indexPathForRow:0 inSection:0],
+                                     kTECChangesetNewIndexPathKey:[NSIndexPath indexPathForRow:1 inSection:0]};
+        NSMutableArray *array = [@[changeset1, changeset2, changeset3] mutableCopy];
+        provider = [[TECFetchedResultsControllerContentProvider alloc] initWithItemsGetter:getterMock
+                                                                              itemsMutator:mutatorMock
+                                                                              fetchRequest:templateFetchRequest
+                                                                        sectionNameKeyPath:@"name"];
+        provider.changeSetArray = array;
+        [provider workUpdateThenMoveAround];
+        [[provider.changeSetArray should] equal:@[changeset2, changeset3]];
+    });
+    
+    it(@"should apply workConsecutiveSectionInsertDeleteAround correctly", ^() {
+        KWMock<NSFetchedResultsSectionInfo> *section1 = [KWMock nullMockForProtocol:@protocol(NSFetchedResultsSectionInfo)];
+        NSDictionary *changeset1 = @{kTECChangesetKindKey:@(TECChangesetKindSection),
+                                     kTECChangesetChangeTypeKey:@(NSFetchedResultsChangeDelete),
+                                     kTECChangesetIndexKey:@(0)};
+        NSDictionary *changeset2 = @{kTECChangesetKindKey:@(TECChangesetKindSection),
+                                     kTECChangesetChangeTypeKey:@(NSFetchedResultsChangeInsert),
+                                     kTECChangesetIndexKey:@(0)};
+        NSDictionary *changeset3 = @{kTECChangesetKindKey:@(TECChangesetKindSection),
+                                     kTECChangesetChangeTypeKey:@(NSFetchedResultsChangeInsert),
+                                     kTECChangesetIndexKey:@(1)};
+        NSDictionary *changeset4 = @{kTECChangesetKindKey:@(TECChangesetKindRow),
+                                     kTECChangesetChangeTypeKey:@(NSFetchedResultsChangeMove),
+                                     kTECChangesetIndexPathKey:[NSIndexPath indexPathForRow:0 inSection:0],
+                                     kTECChangesetNewIndexPathKey:[NSIndexPath indexPathForRow:0 inSection:1]};
+        NSDictionary *changeset5 = @{kTECChangesetKindKey:@(TECChangesetKindRow),
+                                     kTECChangesetChangeTypeKey:@(NSFetchedResultsChangeInsert),
+                                     kTECChangesetNewIndexPathKey:[NSIndexPath indexPathForRow:1 inSection:1]};
+        NSDictionary *changeset6 = @{kTECChangesetKindKey:@(TECChangesetKindRow),
+                                     kTECChangesetChangeTypeKey:@(NSFetchedResultsChangeInsert),
+                                     kTECChangesetNewIndexPathKey:[NSIndexPath indexPathForRow:2 inSection:1]};
+        
+        NSDictionary *reloadChangeset = @{kTECChangesetKindKey:@(TECChangesetKindSection),
+                                          kTECChangesetChangeTypeKey:@(TECContentProviderSectionChangeTypeUpdate),
+                                          kTECChangesetIndexKey:@(0),
+                                          kTECChangesetSectionKey:section1};
+        
+        NSMutableArray *array = [@[changeset1, changeset2, changeset3, changeset4, changeset5, changeset6] mutableCopy];
+        provider = [[TECFetchedResultsControllerContentProvider alloc] initWithItemsGetter:getterMock
+                                                                              itemsMutator:mutatorMock
+                                                                              fetchRequest:templateFetchRequest
+                                                                        sectionNameKeyPath:@"name"];
+        provider.changeSetArray = array;
+        provider.sectionModelArray = @[[[TECCoreDataSectionModel alloc] initWithFetchedResultsSectionInfo:section1]];
+        [provider workConsecutiveSectionInsertDeleteAround];
+        [[provider.changeSetArray should] equal:@[reloadChangeset, changeset3, changeset5, changeset6]];
+    });
+    
+    it(@"should apply workSectionBeforeRowChangeSetsAround correctly", ^() {
+        NSDictionary *changeset1 = @{kTECChangesetKindKey:@(TECChangesetKindRow),
+                                     kTECChangesetChangeTypeKey:@(NSFetchedResultsChangeUpdate),
+                                     kTECChangesetIndexPathKey:[NSIndexPath indexPathForRow:0 inSection:0]};
+        NSDictionary *changeset2 = @{kTECChangesetKindKey:@(TECChangesetKindRow),
+                                     kTECChangesetChangeTypeKey:@(NSFetchedResultsChangeUpdate),
+                                     kTECChangesetIndexPathKey:[NSIndexPath indexPathForRow:2 inSection:0]};
+        NSDictionary *changeset3 = @{kTECChangesetKindKey:@(TECChangesetKindRow),
+                                     kTECChangesetChangeTypeKey:@(NSFetchedResultsChangeMove),
+                                     kTECChangesetIndexPathKey:[NSIndexPath indexPathForRow:0 inSection:0],
+                                     kTECChangesetNewIndexPathKey:[NSIndexPath indexPathForRow:1 inSection:0]};
+        NSDictionary *changeset4 = @{kTECChangesetKindKey:@(TECChangesetKindSection),
+                                     kTECChangesetChangeTypeKey:@(NSFetchedResultsChangeInsert),
+                                     kTECChangesetIndexKey:@(0)};
+        NSMutableArray *array = [@[changeset1, changeset2, changeset3, changeset4] mutableCopy];
+        provider = [[TECFetchedResultsControllerContentProvider alloc] initWithItemsGetter:getterMock
+                                                                              itemsMutator:mutatorMock
+                                                                              fetchRequest:templateFetchRequest
+                                                                        sectionNameKeyPath:@"name"];
+        provider.changeSetArray = array;
+        [provider workSectionBeforeRowChangeSetsAround];
+        [[provider.changeSetArray should] equal:@[changeset4, changeset1, changeset2, changeset3]];
+    });
+    
+    it(@"should apply workManualMovesAround correctly", ^() {
+        NSDictionary *changeset1 = @{kTECChangesetKindKey:@(TECChangesetKindRow),
+                                     kTECChangesetChangeTypeKey:@(NSFetchedResultsChangeMove),
+                                     kTECChangesetIndexPathKey:[NSIndexPath indexPathForRow:0 inSection:0],
+                                     kTECChangesetNewIndexPathKey:[NSIndexPath indexPathForRow:1 inSection:0]};
+        NSDictionary *changeset2 = @{kTECChangesetKindKey:@(TECChangesetKindRow),
+                                     kTECChangesetChangeTypeKey:@(NSFetchedResultsChangeMove),
+                                     kTECChangesetIndexPathKey:[NSIndexPath indexPathForRow:1 inSection:0],
+                                     kTECChangesetNewIndexPathKey:[NSIndexPath indexPathForRow:2 inSection:0]};
+        NSDictionary *changeset3 = @{kTECChangesetKindKey:@(TECChangesetKindRow),
+                                     kTECChangesetChangeTypeKey:@(NSFetchedResultsChangeMove),
+                                     kTECChangesetIndexPathKey:[NSIndexPath indexPathForRow:2 inSection:0],
+                                     kTECChangesetNewIndexPathKey:[NSIndexPath indexPathForRow:0 inSection:0]};
+        
+        NSMutableArray *array = [@[changeset1, changeset2, changeset3] mutableCopy];
+        provider = [[TECFetchedResultsControllerContentProvider alloc] initWithItemsGetter:getterMock
+                                                                              itemsMutator:mutatorMock
+                                                                              fetchRequest:templateFetchRequest
+                                                                        sectionNameKeyPath:@"name"];
+        provider.changeSetArray = array;
+        [provider workManualMovesAround];
+        [[provider.changeSetArray should] equal:@[]];
+    });
+    
+    it(@"should apply workOddMovesAround correctly", ^() {
+        NSMutableDictionary *changeset1 = [@{kTECChangesetKindKey:@(TECChangesetKindRow),
+                                             kTECChangesetChangeTypeKey:@(NSFetchedResultsChangeMove),
+                                             kTECChangesetIndexPathKey:[NSIndexPath indexPathForRow:0 inSection:0],
+                                             kTECChangesetNewIndexPathKey:[NSIndexPath indexPathForRow:0 inSection:0]} mutableCopy];
+        NSDictionary *updateChangeset = @{kTECChangesetKindKey:@(TECChangesetKindRow),
+                                     kTECChangesetChangeTypeKey:@(NSFetchedResultsChangeUpdate),
+                                     kTECChangesetIndexPathKey:[NSIndexPath indexPathForRow:0 inSection:0]};
+        NSMutableArray *array = [@[changeset1] mutableCopy];
+        provider = [[TECFetchedResultsControllerContentProvider alloc] initWithItemsGetter:getterMock
+                                                                              itemsMutator:mutatorMock
+                                                                              fetchRequest:templateFetchRequest
+                                                                        sectionNameKeyPath:@"name"];
+        provider.changeSetArray = array;
+        [provider workOddMovesAround];
+        [[provider.changeSetArray should] equal:@[updateChangeset]];
+    });
 });
 
 SPEC_END
