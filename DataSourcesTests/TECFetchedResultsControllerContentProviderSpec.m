@@ -26,7 +26,7 @@ extern NSString * const kTECChangesetIndexPathKey;
 extern NSString * const kTECChangesetChangeTypeKey;
 extern NSString * const kTECChangesetNewIndexPathKey;
 
-@interface TECFetchedResultsControllerContentProvider (Test)
+@interface TECFetchedResultsControllerContentProvider (Test) <NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, strong) id <TECFetchedResultsControllerContentProviderGetter> itemsGetter;
 @property (nonatomic, strong) id <TECFetchedResultsControllerContentProviderMutator> itemsMutator;
@@ -349,6 +349,116 @@ describe(@"Workarounds & changeset accumulator", ^() {
         provider.changeSetArray = array;
         [provider workOddMovesAround];
         [[provider.changeSetArray should] equal:@[updateChangeset]];
+    });
+    
+    it(@"should accumulate changesets on FRC item calls", ^{
+        NSFetchedResultsController *frcMock = [NSFetchedResultsController mock];
+        NSManagedObject *objectMock = [NSManagedObject nullMock];
+        NSDictionary *changeset1 = @{kTECChangesetKindKey:@(TECChangesetKindRow),
+                                     kTECChangesetChangeTypeKey:@(NSFetchedResultsChangeInsert),
+                                     kTECChangesetNewIndexPathKey:[NSIndexPath indexPathForRow:0 inSection:0],
+                                     kTECChangesetObjectKey:objectMock};
+        NSDictionary *changeset2 = @{kTECChangesetKindKey:@(TECChangesetKindRow),
+                                     kTECChangesetChangeTypeKey:@(NSFetchedResultsChangeDelete),
+                                     kTECChangesetIndexPathKey:[NSIndexPath indexPathForRow:0 inSection:0],
+                                     kTECChangesetObjectKey:objectMock};
+        NSDictionary *changeset3 = @{kTECChangesetKindKey:@(TECChangesetKindRow),
+                                     kTECChangesetChangeTypeKey:@(NSFetchedResultsChangeMove),
+                                     kTECChangesetIndexPathKey:[NSIndexPath indexPathForRow:0 inSection:0],
+                                     kTECChangesetNewIndexPathKey:[NSIndexPath indexPathForRow:0 inSection:0],
+                                     kTECChangesetObjectKey:objectMock};
+        NSDictionary *changeset4 = @{kTECChangesetKindKey:@(TECChangesetKindRow),
+                                     kTECChangesetChangeTypeKey:@(NSFetchedResultsChangeUpdate),
+                                     kTECChangesetIndexPathKey:[NSIndexPath indexPathForRow:0 inSection:0],
+                                     kTECChangesetObjectKey:objectMock};
+        provider = [[TECFetchedResultsControllerContentProvider alloc] initWithItemsGetter:getterMock
+                                                                              itemsMutator:mutatorMock
+                                                                              fetchRequest:templateFetchRequest
+                                                                        sectionNameKeyPath:@"name"];
+        NSMutableArray *array = [NSMutableArray nullMock];
+        [[array should] receive:@selector(addObject:) withArguments:changeset1];
+        [[array should] receive:@selector(addObject:) withArguments:changeset2];
+        [[array should] receive:@selector(addObject:) withArguments:changeset3];
+        [[array should] receive:@selector(addObject:) withArguments:changeset4];
+        provider.changeSetArray = array;
+        [provider controller:frcMock
+             didChangeObject:objectMock
+                 atIndexPath:nil
+               forChangeType:NSFetchedResultsChangeInsert
+                newIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        [provider controller:frcMock
+             didChangeObject:objectMock
+                 atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+               forChangeType:NSFetchedResultsChangeDelete
+                newIndexPath:nil];
+        [provider controller:frcMock
+             didChangeObject:objectMock
+                 atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+               forChangeType:NSFetchedResultsChangeMove
+                newIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        [provider controller:frcMock
+             didChangeObject:objectMock
+                 atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+               forChangeType:NSFetchedResultsChangeUpdate
+                newIndexPath:nil];
+    });
+    
+    it(@"should accumulate changesets on FRC item calls", ^{
+        NSFetchedResultsController *frcMock = [NSFetchedResultsController mock];
+        id<NSFetchedResultsSectionInfo> infoMock = [KWMock mockForProtocol:@protocol(NSFetchedResultsSectionInfo)];
+        NSDictionary *changeset1 = @{kTECChangesetKindKey:@(TECChangesetKindSection),
+                                     kTECChangesetChangeTypeKey:@(NSFetchedResultsChangeInsert),
+                                     kTECChangesetIndexKey:@(0),
+                                     kTECChangesetSectionKey:infoMock};
+        NSDictionary *changeset2 = @{kTECChangesetKindKey:@(TECChangesetKindSection),
+                                     kTECChangesetChangeTypeKey:@(NSFetchedResultsChangeDelete),
+                                     kTECChangesetIndexKey:@(0),
+                                     kTECChangesetSectionKey:infoMock};
+        provider = [[TECFetchedResultsControllerContentProvider alloc] initWithItemsGetter:getterMock
+                                                                              itemsMutator:mutatorMock
+                                                                              fetchRequest:templateFetchRequest
+                                                                        sectionNameKeyPath:@"name"];
+        NSMutableArray *array = [NSMutableArray nullMock];
+        [[array should] receive:@selector(addObject:) withArguments:changeset1];
+        [[array should] receive:@selector(addObject:) withArguments:changeset2];
+        provider.changeSetArray = array;
+        [provider controller:frcMock
+            didChangeSection:infoMock
+                     atIndex:0
+               forChangeType:NSFetchedResultsChangeInsert];
+        [provider controller:frcMock
+            didChangeSection:infoMock
+                     atIndex:0
+               forChangeType:NSFetchedResultsChangeDelete];
+    });
+    
+    it(@"should notify presentation adapter on changes begin", ^() {
+        NSFetchedResultsController *frcMock = [NSFetchedResultsController mock];
+        KWMock<TECContentProviderPresentationAdapterProtocol> *adapter =
+        [KWMock mockForProtocol:@protocol(TECContentProviderPresentationAdapterProtocol)];
+        provider = [[TECFetchedResultsControllerContentProvider alloc] initWithItemsGetter:getterMock
+                                                                              itemsMutator:mutatorMock
+                                                                              fetchRequest:templateFetchRequest
+                                                                        sectionNameKeyPath:@"name"];
+        provider.presentationAdapter = adapter;
+        [[adapter should] receive:@selector(contentProviderWillChangeContent:) withArguments:provider];
+        [provider controllerWillChangeContent:frcMock];
+    });
+    
+    it(@"should apply workarounds and notify presentation adapter on changes end", ^() {
+        NSFetchedResultsController *frcMock = [NSFetchedResultsController mock];
+        KWMock<TECContentProviderPresentationAdapterProtocol> *adapter =
+        [KWMock mockForProtocol:@protocol(TECContentProviderPresentationAdapterProtocol)];
+        provider = [[TECFetchedResultsControllerContentProvider alloc] initWithItemsGetter:getterMock
+                                                                              itemsMutator:mutatorMock
+                                                                              fetchRequest:templateFetchRequest
+                                                                        sectionNameKeyPath:@"name"];
+        provider.presentationAdapter = adapter;
+        [[provider should] receive:@selector(snapshotSectionModelArray)];
+        [[provider should] receive:@selector(workChangeSetArrayAround)];
+        [[provider should] receive:@selector(flushChangeSetArrayToAdapter)];
+        [[adapter should] receive:@selector(contentProviderDidChangeContent:) withArguments:provider];
+        [provider controllerDidChangeContent:frcMock];
     });
 });
 
