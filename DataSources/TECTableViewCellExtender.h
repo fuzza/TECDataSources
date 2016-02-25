@@ -8,11 +8,11 @@
 
 #import "TECTableViewExtender.h"
 
-@protocol TECTableViewCellFactoryProtocol;
+@protocol TECReusableViewFactoryProtocol;
 
 TECTableViewExtenderInterface(TECTableViewCellExtender)
 
-+ (instancetype)cellExtenderWithCellFactory:(id <TECTableViewCellFactoryProtocol>)cellFactory;
-- (instancetype)initWithCellFactory:(id <TECTableViewCellFactoryProtocol>)cellFactory;
++ (instancetype)cellExtenderWithCellFactory:(id <TECReusableViewFactoryProtocol>)cellFactory;
+- (instancetype)initWithCellFactory:(id <TECReusableViewFactoryProtocol>)cellFactory;
 
 TECTableViewExtenderEnd

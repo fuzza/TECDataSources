@@ -8,20 +8,20 @@
 
 #import <Kiwi/Kiwi.h>
 #import "TECTableViewCellExtender.h"
-#import "TECTableViewCellFactoryProtocol.h"
+#import "TECReusableViewFactoryProtocol.h"
 #import "TECContentProviderProtocol.h"
 
 SPEC_BEGIN(TECTableViewCellExtenderSpec)
 
 describe(@"TECTableViewCellExtender", ^{
     __block TECTableViewCellExtender *sut;
-    __block id cellFactoryMock;
+    __block KWMock<TECReusableViewFactoryProtocol> *cellFactoryMock;
     
     __block id contentProviderMock;
     __block id tableViewMock;
     
     beforeEach(^{
-        cellFactoryMock = [KWMock mockForProtocol:@protocol(TECTableViewCellFactoryProtocol)];
+        cellFactoryMock = [KWMock mockForProtocol:@protocol(TECReusableViewFactoryProtocol)];
         contentProviderMock = [KWMock mockForProtocol:@protocol(TECContentProviderProtocol)];
         tableViewMock = [UITableView mock];
         
@@ -59,19 +59,28 @@ describe(@"TECTableViewCellExtender", ^{
         beforeEach(^{
             indexPathMock = [NSIndexPath mock];
             itemMock = [NSObject mock];
-            cellMock = [UITableViewCell mock];
+            cellMock = [UITableViewCell new];
             
             [contentProviderMock stub:@selector(itemAtIndexPath:) andReturn:itemMock withArguments:indexPathMock];
         });
         
         it(@"Should request cell from factory", ^{
-            [cellFactoryMock stub:@selector(cellForItem:tableView:atIndexPath:) andReturn:cellMock withArguments:itemMock, tableViewMock, indexPathMock];
+            [cellFactoryMock stub:@selector(viewForItem:atIndexPath:) andReturn:cellMock withArguments:itemMock, indexPathMock];
             UITableViewCell *cell = [sut tableView:tableViewMock cellForRowAtIndexPath:indexPathMock];
             [[cell should] beIdenticalTo:cellMock];
         });
         
+        #ifndef DNS_BLOCK_ASSERTIONS
+        it(@"Throws if factory doesn't return table view cell subclass", ^{
+            [cellFactoryMock stub:@selector(viewForItem:atIndexPath:) andReturn:[UIView new] withArguments:itemMock, indexPathMock];
+            [[theBlock(^{
+                __unused id cell = [sut tableView:tableViewMock cellForRowAtIndexPath:indexPathMock];
+            }) should] raise];
+        });
+        #endif
+        
         it(@"Should configure cell before display", ^{
-            [[cellFactoryMock should] receive:@selector(configureCell:forItem:inTableView:atIndexPath:) withArguments:cellMock, itemMock, tableViewMock, indexPathMock];
+            [[cellFactoryMock should] receive:@selector(configureView:forItem:atIndexPath:) withArguments:cellMock, itemMock, indexPathMock];
             [sut tableView:tableViewMock willDisplayCell:cellMock forRowAtIndexPath:indexPathMock];
         });
     });

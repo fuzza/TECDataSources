@@ -8,11 +8,11 @@
 
 #import "MemoryContentProviderViewController.h"
 
+#import "TECTableViewCellRegistrationAdapter.h"
+#import "TECSimpleReusableViewFactory.h"
+
 #import "TECMemoryContentProvider.h"
 #import "TECMemorySectionModel.h"
-
-#import "TECTableViewCellFactory.h"
-#import "TECTableViewCellRegistrator.h"
 
 #import "TECCustomCell.h"
 
@@ -27,25 +27,22 @@
 @implementation MemoryContentProviderViewController
 
 - (void)setupTableController {
-    TECTableViewCellRegistrator *registrator = [[TECTableViewCellRegistrator alloc] initWithClassHandler:^Class(id item, NSIndexPath *indexPath) {
-        return [TECCustomCell class];
-    } reuseIdHandler:^NSString *(Class cellClass, id item, NSIndexPath *indexPath) {
-        return NSStringFromClass(cellClass);
-    }];
+    TECTableViewCellRegistrationAdapter *cellAdapter = [[TECTableViewCellRegistrationAdapter alloc] initWithTableView:self.tableView];
     
-    TECTableViewCellFactory *factory = [[TECTableViewCellFactory alloc] initWithСellRegistrator:registrator
-            configurationHandler:^(UITableViewCell *cell, id item, UITableView *tableView, NSIndexPath *indexPath) {
-                cell.textLabel.text = item;
+    TECSimpleReusableViewFactory <TECCustomCell *, NSString *> *cellFactory = [[TECSimpleReusableViewFactory alloc] initWithRegistrationAdapter:cellAdapter];
+    [cellFactory registerViewClass:[TECCustomCell class]];
+    [cellFactory setConfigurationHandler:^(TECCustomCell *cell, NSString *object, NSIndexPath *indexPath) {
+        cell.textLabel.text = object;
     }];
     
     TECMemorySectionModel *firstSection = [[TECMemorySectionModel alloc] initWithItems:@[@"one", @"two", @"three"] headerTitle:@"firstHeader" footerTitle:@"firstFooter"];
     TECMemorySectionModel *secondSection = [[TECMemorySectionModel alloc] initWithItems:@[@"four", @"five", @"six"] headerTitle:@"secondHeader" footerTitle:@"secondFooter"];
     self.contentProvider = [[TECMemoryContentProvider alloc] initWithSections:@[firstSection, secondSection]];
-    
+
     self.footerExtender = [TECTableViewSectionFooterExtender extender];
     self.headerExtender = [TECTableViewSectionHeaderExtender extender];
     
-    self.cellExtender = [TECTableViewCellExtender cellExtenderWithCellFactory:factory];
+    self.cellExtender = [TECTableViewCellExtender cellExtenderWithCellFactory:cellFactory];
     self.reorderingExtender =
     [TECTableViewReorderingExtender reorderingExtenderWithCanMoveBlock:^BOOL(UITableView *tableView, NSIndexPath *indexPath, id<TECSectionModelProtocol> section, id item) {
         return YES;

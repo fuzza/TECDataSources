@@ -9,21 +9,21 @@
 #import "TECTableViewCellExtender.h"
 #import "TECContentProviderProtocol.h"
 #import "TECSectionModelProtocol.h"
-#import "TECTableViewCellFactoryProtocol.h"
+#import "TECReusableViewFactoryProtocol.h"
 
 TECTableViewExtenderInterfaceExtension(TECTableViewCellExtender)
 
-@property (nonatomic, strong) id <TECTableViewCellFactoryProtocol> cellFactory;
+@property (nonatomic, strong) id <TECReusableViewFactoryProtocol> cellFactory;
 
 TECTableViewExtenderEnd
 
 TECTableViewExtenderImplementation(TECTableViewCellExtender)
 
-+ (instancetype)cellExtenderWithCellFactory:(id <TECTableViewCellFactoryProtocol>)cellFactory {
++ (instancetype)cellExtenderWithCellFactory:(id <TECReusableViewFactoryProtocol>)cellFactory {
     return [[self alloc] initWithCellFactory:cellFactory];
 }
 
-- (instancetype)initWithCellFactory:(id <TECTableViewCellFactoryProtocol>)cellFactory {
+- (instancetype)initWithCellFactory:(id <TECReusableViewFactoryProtocol>)cellFactory {
     NSParameterAssert(cellFactory);
     self = [super init];
     if(self) {
@@ -40,7 +40,8 @@ TECTableViewExtenderImplementation(TECTableViewCellExtender)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     id item = [self.contentProvider itemAtIndexPath:indexPath];
-    UITableViewCell *cell = [self.cellFactory cellForItem:item tableView:tableView atIndexPath:indexPath];
+    UITableViewCell *cell = (UITableViewCell *)[self.cellFactory viewForItem:item atIndexPath:indexPath];
+    NSAssert([cell isKindOfClass:[UITableViewCell class]], @"Cell returned from factory is not UITableViewCell subclass");
     return cell;
 }
 
@@ -52,7 +53,7 @@ TECTableViewExtenderImplementation(TECTableViewCellExtender)
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     id item = [self.contentProvider itemAtIndexPath:indexPath];
-    [self.cellFactory configureCell:cell forItem:item inTableView:tableView atIndexPath:indexPath];
+    [self.cellFactory configureView:cell forItem:item atIndexPath:indexPath];
 }
 
 TECTableViewExtenderEnd

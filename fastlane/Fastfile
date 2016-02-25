@@ -1,0 +1,21 @@
+fastlane_version "1.63.0"
+
+default_platform :ios
+
+platform :ios do
+  before_all do
+    cocoapods
+  end
+
+  desc "Runs all the tests"
+  lane :test do
+    scan(
+      scheme: "DataSources"	
+    )
+  end
+
+  error do |lane, exception|
+    #   success: false
+    # )
+  end
+end
