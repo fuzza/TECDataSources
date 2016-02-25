@@ -13,6 +13,19 @@
 #import "TECFetchedResultsControllerContentProviderGetter.h"
 #import "TECFetchedResultsControllerContentProviderMutator.h"
 
+typedef NS_ENUM(NSUInteger, TECChangesetKind) {
+    TECChangesetKindSection = 1,
+    TECChangesetKindRow,
+};
+
+extern NSString * const kTECChangesetKindKey;
+extern NSString * const kTECChangesetSectionKey;
+extern NSString * const kTECChangesetIndexKey;
+extern NSString * const kTECChangesetObjectKey;
+extern NSString * const kTECChangesetIndexPathKey;
+extern NSString * const kTECChangesetChangeTypeKey;
+extern NSString * const kTECChangesetNewIndexPathKey;
+
 @interface TECFetchedResultsControllerContentProvider (Test)
 
 @property (nonatomic, strong) id <TECFetchedResultsControllerContentProviderGetter> itemsGetter;
@@ -23,6 +36,15 @@
 
 - (void)snapshotSectionModelArray;
 - (void)resetChangeSetArray;
+- (void)flushChangeSetArrayToAdapter;
+
+- (void)workChangeSetArrayAround;
+- (void)workUpdateThenMoveAround;
+- (void)workConsecutiveSectionInsertDeleteAround;
+- (void)workSectionBeforeRowChangeSetsAround;
+- (void)workManualMovesAround;
+- (void)workOddMovesAround;
+
 
 @end
 
@@ -143,6 +165,65 @@ describe(@"Init", ^() {
 describe(@"Workarounds & changeset accumulator", ^() {
     beforeEach(^() {
         CoreDataMockBlock();
+    });
+    
+    it(@"should snapshot FRC sections into correct adapter", ^() {
+        KWMock *frcMock = [KWMock nullMockForClass:[NSFetchedResultsController class]];
+        [getterMock stub:@selector(fetchedResultsControllerForFetchRequest:sectionNameKeyPath:)
+               andReturn:frcMock];
+        KWMock<NSFetchedResultsSectionInfo> *section1 = [KWMock nullMockForProtocol:@protocol(NSFetchedResultsSectionInfo)];
+        KWMock<NSFetchedResultsSectionInfo> *section2 = [KWMock nullMockForProtocol:@protocol(NSFetchedResultsSectionInfo)];
+        KWMock<NSFetchedResultsSectionInfo> *section3 = [KWMock nullMockForProtocol:@protocol(NSFetchedResultsSectionInfo)];
+        NSArray *sectionMocksArray = @[section1, section2, section3];
+        [frcMock stub:@selector(sections) andReturn:sectionMocksArray];
+        provider = [[TECFetchedResultsControllerContentProvider alloc] initWithItemsGetter:getterMock
+                                                                              itemsMutator:mutatorMock
+                                                                              fetchRequest:templateFetchRequest
+                                                                        sectionNameKeyPath:@"name"];
+        [provider snapshotSectionModelArray];
+        [[[provider.sectionModelArray valueForKey:@"info"] should] equal:sectionMocksArray];
+    });
+    
+    it(@"should recreate changeset array on resetChangeSetArray", ^() {
+        provider = [[TECFetchedResultsControllerContentProvider alloc] initWithItemsGetter:getterMock
+                                                                              itemsMutator:mutatorMock
+                                                                              fetchRequest:templateFetchRequest
+                                                                        sectionNameKeyPath:@"name"];
+        [[provider should] receive:@selector(setChangeSetArray:) withArguments:@[]];
+        [provider resetChangeSetArray];
+    });
+    
+    it(@"should correctly flush changeset array to presentation adapter", ^() {
+        NSArray *changesetArray =
+        @[@{kTECChangesetKindKey:@(TECChangesetKindRow)},
+          @{kTECChangesetKindKey:@(TECChangesetKindRow)},
+          @{kTECChangesetKindKey:@(TECChangesetKindRow)},
+          @{kTECChangesetKindKey:@(TECChangesetKindSection)},
+          @{kTECChangesetKindKey:@(TECChangesetKindSection)}];
+        KWMock<TECContentProviderPresentationAdapterProtocol> *adapter =
+        [KWMock mockForProtocol:@protocol(TECContentProviderPresentationAdapterProtocol)];
+        provider = [[TECFetchedResultsControllerContentProvider alloc] initWithItemsGetter:getterMock
+                                                                              itemsMutator:mutatorMock
+                                                                              fetchRequest:templateFetchRequest
+                                                                        sectionNameKeyPath:@"name"];
+        provider.presentationAdapter = adapter;
+        [provider stub:@selector(changeSetArray) andReturn:changesetArray];
+        [[adapter should] receive:@selector(contentProviderDidChangeItem:atIndexPath:forChangeType:newIndexPath:) withCount:3];
+        [[adapter should] receive:@selector(contentProviderDidChangeSection:atIndex:forChangeType:) withCount:2];
+        [provider flushChangeSetArrayToAdapter];
+    });
+    
+    it(@"should call workarounds consecutively", ^() {
+        provider = [[TECFetchedResultsControllerContentProvider alloc] initWithItemsGetter:getterMock
+                                                                              itemsMutator:mutatorMock
+                                                                              fetchRequest:templateFetchRequest
+                                                                        sectionNameKeyPath:@"name"];
+        [[provider should] receive:@selector(workUpdateThenMoveAround)];
+        [[provider should] receive:@selector(workConsecutiveSectionInsertDeleteAround)];
+        [[provider should] receive:@selector(workSectionBeforeRowChangeSetsAround)];
+        [[provider should] receive:@selector(workManualMovesAround)];
+        [[provider should] receive:@selector(workOddMovesAround)];
+        [provider workChangeSetArrayAround];
     });
 });
 

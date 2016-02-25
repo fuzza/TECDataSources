@@ -11,7 +11,6 @@
 #import "TECContentProviderDelegate.h"
 #import <libkern/OSAtomic.h>
 
-
 typedef NS_ENUM(NSUInteger, TECChangesetKind) {
     TECChangesetKindSection = 1,
     TECChangesetKindRow,
