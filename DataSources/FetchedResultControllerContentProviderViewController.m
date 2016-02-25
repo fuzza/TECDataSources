@@ -11,8 +11,8 @@
 
 #import "TECFetchedResultsControllerContentProvider.h"
 
-#import "TECTableViewCellFactory.h"
-#import "TECTableViewCellRegistrator.h"
+#import "TECTableViewCellRegistrationAdapter.h"
+#import "TECSimpleReusableViewFactory.h"
 
 #import "TECCustomCell.h"
 
@@ -25,6 +25,8 @@
 #import "TECDelegateProxy.h"
 #import "CoreDataManager.h"
 
+#import "Person.h"
+
 @interface FetchedResultControllerContentProviderViewController ()
 
 @property (nonatomic, strong) TECFetchedResultsControllerContentProvider *contentProvider;
@@ -34,16 +36,14 @@
 @implementation FetchedResultControllerContentProviderViewController
 
 - (void)setupTableController {
-    TECTableViewCellRegistrator *registrator = [[TECTableViewCellRegistrator alloc] initWithClassHandler:^Class(id item, NSIndexPath *indexPath) {
-        return [TECCustomCell class];
-    } reuseIdHandler:^NSString *(Class cellClass, id item, NSIndexPath *indexPath) {
-        return NSStringFromClass(cellClass);
-    }];
+    TECTableViewCellRegistrationAdapter *adapter
+    = [[TECTableViewCellRegistrationAdapter alloc] initWithTableView:self.tableView];
     
-    TECTableViewCellFactory *factory = [[TECTableViewCellFactory alloc] initWithСellRegistrator:registrator
-                                                                           configurationHandler:^(UITableViewCell *cell, id item, UITableView *tableView, NSIndexPath *indexPath) {
-                                                                               cell.textLabel.text = [item name];
-                                                                           }];
+    TECSimpleReusableViewFactory<TECCustomCell *, Person *> *factory = [[TECSimpleReusableViewFactory alloc] initWithRegistrationAdapter:adapter];
+    [factory registerViewClass:[TECCustomCell class]];
+    [factory setConfigurationHandler:^(TECCustomCell *cell, Person *person, NSIndexPath *indexPath) {
+        cell.textLabel.text = person.name;
+    }];
     
     self.footerExtender = [TECTableViewSectionFooterExtender extender];
     self.headerExtender = [TECTableViewSectionHeaderExtender extender];
@@ -56,7 +56,9 @@
     
     self.contentProvider =
     [[TECFetchedResultsControllerContentProvider alloc] initWithItemsGetter:[[CoreDataManager sharedObject] createObjectGetter]
-                                                               itemsMutator:[[CoreDataManager sharedObject] createObjectMutator] fetchRequest:[[CoreDataManager sharedObject] createPersonFetchRequest] sectionNameKeyPath:@"firstAlphaCapitalized"];
+                                                               itemsMutator:[[CoreDataManager sharedObject] createObjectMutator]
+                                                               fetchRequest:[[CoreDataManager sharedObject] createPersonFetchRequest]
+                                                         sectionNameKeyPath:@"firstAlphaCapitalized"];
     
     self.tableController =
     [[TECTableController alloc] initWithContentProvider:self.contentProvider

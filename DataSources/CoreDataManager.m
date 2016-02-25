@@ -157,8 +157,9 @@
 - (void)fillDataForEntity:(NSEntityDescription *)entity
                 fromArray:(NSArray<NSDictionary *> *)array
                   context:(NSManagedObjectContext *)context {
+    Class class = NSClassFromString(entity.managedObjectClassName);
     for (NSDictionary *dictionary in array) {
-        NSManagedObject *managedObject = [[entity.class alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+        NSManagedObject *managedObject = [[class alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
         [managedObject setValuesForKeysWithDictionary:dictionary];
     }
 }

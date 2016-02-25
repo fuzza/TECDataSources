@@ -12,8 +12,8 @@
 
 #import "TECFetchedResultsControllerContentProvider.h"
 
-#import "TECTableViewCellFactory.h"
-#import "TECTableViewCellRegistrator.h"
+#import "TECTableViewCellRegistrationAdapter.h"
+#import "TECSimpleReusableViewFactory.h"
 
 #import "TECCustomCell.h"
 
@@ -67,16 +67,14 @@
 }
 
 - (void)setupTableController {
-    TECTableViewCellRegistrator *registrator = [[TECTableViewCellRegistrator alloc] initWithClassHandler:^Class(id item, NSIndexPath *indexPath) {
-        return [TECCustomCell class];
-    } reuseIdHandler:^NSString *(Class cellClass, id item, NSIndexPath *indexPath) {
-        return NSStringFromClass(cellClass);
-    }];
+    TECTableViewCellRegistrationAdapter *adapter
+    = [[TECTableViewCellRegistrationAdapter alloc] initWithTableView:self.tableView];
     
-    TECTableViewCellFactory *factory = [[TECTableViewCellFactory alloc] initWithСellRegistrator:registrator
-                                                                           configurationHandler:^(UITableViewCell *cell, id item, UITableView *tableView, NSIndexPath *indexPath) {
-                                                                               cell.textLabel.text = [item name];
-                                                                           }];
+    TECSimpleReusableViewFactory<TECCustomCell *, Person *> *factory = [[TECSimpleReusableViewFactory alloc] initWithRegistrationAdapter:adapter];
+    [factory registerViewClass:[TECCustomCell class]];
+    [factory setConfigurationHandler:^(TECCustomCell *cell, Person *person, NSIndexPath *indexPath) {
+        cell.textLabel.text = person.name;
+    }];
     
     self.footerExtender = [TECTableViewSectionFooterExtender extender];
     self.headerExtender = [TECTableViewSectionHeaderExtender extender];
