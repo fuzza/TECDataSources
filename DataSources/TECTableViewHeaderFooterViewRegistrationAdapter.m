@@ -10,7 +10,7 @@
 
 @interface TECTableViewHeaderFooterViewRegistrationAdapter ()
 
-@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, weak) UITableView *tableView;
 
 @end
 
