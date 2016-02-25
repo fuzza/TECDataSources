@@ -12,7 +12,6 @@
 #import "TECCoreDataSectionModel.h"
 #import "TECFetchedResultsControllerContentProviderGetter.h"
 #import "TECFetchedResultsControllerContentProviderMutator.h"
-#import "CoreDataManager.h"
 
 @interface TECFetchedResultsControllerContentProvider (Test)
 
@@ -22,14 +21,8 @@
 @property (nonatomic, strong) NSArray<TECCoreDataSectionModel *> *sectionModelArray;
 @property (nonatomic, strong) NSMutableArray<NSMutableDictionary *> *changeSetArray;
 
-@end
-
-@interface CoreDataManager (Test)
-
-@property (nonatomic, strong, readonly) NSManagedObjectContext *backgroundManagedObjectContext;
-@property (nonatomic, strong, readonly) NSManagedObjectContext *mainManagedObjectContext;
-@property (nonatomic, strong, readonly) NSManagedObjectModel *managedObjectModel;
-@property (nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+- (void)snapshotSectionModelArray;
+- (void)resetChangeSetArray;
 
 @end
 
@@ -41,7 +34,6 @@ let(testArray1, ^id{return @[testString1];});
 let(testArray2, ^id{return @[testString1, testString2];});
 
 TECFetchedResultsControllerContentProvider  * __block provider = nil;
-CoreDataManager * __block coreDataManagerMock = nil;
 NSPersistentStoreCoordinator * __block inMemoryPersistentStoreCoordinator = nil;
 NSManagedObjectContext * __block inMemoryMainContext = nil;
 NSManagedObjectContext * __block inMemoryBackgroundContext = nil;
@@ -66,8 +58,6 @@ let(templateFetchRequest, ^NSFetchRequest *{
 });
 
 void(^CoreDataMockBlock)() = ^() {
-    coreDataManagerMock = [CoreDataManager nullMock];
-
     inMemoryPersistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel];
     inMemoryMainContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     inMemoryBackgroundContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
@@ -83,13 +73,6 @@ void(^CoreDataMockBlock)() = ^() {
         [weakMainContext mergeChangesFromContextDidSaveNotification:note];
         [[NSNotificationCenter defaultCenter] removeObserver:observer];
     }];
-    
-    [coreDataManagerMock stub:@selector(persistentStoreCoordinator)
-                    andReturn:inMemoryPersistentStoreCoordinator];
-    [coreDataManagerMock stub:@selector(mainManagedObjectContext)
-                    andReturn:inMemoryMainContext];
-    [coreDataManagerMock stub:@selector(backgroundManagedObjectContext)
-                    andReturn:inMemoryBackgroundContext];
 };
 
 describe(@"Cocoa collection support", ^() {
@@ -141,6 +124,25 @@ describe(@"Init", ^() {
                                                                               fetchRequest:templateFetchRequest
                                                                         sectionNameKeyPath:@"name"];
         [[setDelegateSpy.argument should] equal:provider];
+    });
+    
+    it(@"should snapshot section model array", ^() {
+        KWMock *frcMock = [KWMock nullMockForClass:[NSFetchedResultsController class]];
+        [getterMock stub:@selector(fetchedResultsControllerForFetchRequest:sectionNameKeyPath:)
+               andReturn:frcMock];
+        provider = [TECFetchedResultsControllerContentProvider alloc];
+        [[provider should] receive:@selector(snapshotSectionModelArray)];
+        [[provider should] receive:@selector(resetChangeSetArray)];
+        provider = [provider initWithItemsGetter:getterMock
+                                    itemsMutator:mutatorMock
+                                    fetchRequest:templateFetchRequest
+                              sectionNameKeyPath:@"name"];
+    });
+});
+
+describe(@"Workarounds & changeset accumulator", ^() {
+    beforeEach(^() {
+        CoreDataMockBlock();
     });
 });
 
