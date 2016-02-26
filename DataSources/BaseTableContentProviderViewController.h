@@ -39,6 +39,7 @@
 - (id<TECContentProviderProtocol>)contentProvider;
 
 - (void)setupTableController;
+- (void)setupSubviews;
 
 - (void)closeButtonPressed:(id)sender;
 

@@ -97,8 +97,27 @@
                                             <segue destination="hYt-iO-ghu" kind="show" id="ElD-cF-WRY"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" tag="1" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="H1k-fA-g2V">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="2wd-Aj-gw8">
                                         <rect key="frame" x="0.0" y="196" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2wd-Aj-gw8" id="ne7-jv-HbI">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="FRC with search sample" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2H1-TU-NZr">
+                                                    <rect key="frame" x="16" y="11" width="270" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="7sq-P1-HMs" kind="show" id="SKo-Bl-uHo"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" tag="1" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="H1k-fA-g2V">
+                                        <rect key="frame" x="0.0" y="240" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="H1k-fA-g2V" id="348-vH-fTW">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -206,7 +225,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="q4X-R1-Nwv">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="885"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">    // 1.
+                                <string key="text">    // 1.
     // UITableView raises an exception if a row is both updated and moved.
     // So we should be able to handle change sequences like: (
     //     ...
@@ -253,7 +272,7 @@
     // Or even better just get rid of them
     // 5. (Check with 2. First tap - 2, then - 5)
     // Move from-to same indexpath should be replaced by update
-</mutableString>
+</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -269,6 +288,28 @@
                 <exit id="6RV-P6-vvN" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="314" y="2536"/>
+        </scene>
+        <!--Fetched Results Content Provider Search View Controller-->
+        <scene sceneID="a7M-ch-cc8">
+            <objects>
+                <viewController id="7sq-P1-HMs" customClass="FetchedResultsContentProviderSearchViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6on-vu-KCZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="dFa-pq-zJt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6wE-wF-QRb">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="eoj-wi-N85" kind="unwind" identifier="backToRootViewControllerWithSegue" unwindAction="backToRootViewControllerWithSegue:" id="8f5-sE-1mm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U11-53-d0p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="eoj-wi-N85" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="314" y="3384"/>
         </scene>
     </scenes>
 </document>
