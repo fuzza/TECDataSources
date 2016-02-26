@@ -1,12 +1,13 @@
 //
-//  FetchedResultsContentProviderSearchViewController.m
+//  FetchedResultsContentProviderTwoEntitiesViewController.m
 //  DataSources
 //
 //  Created by Petro Korienev on 2/26/16.
 //  Copyright © 2016 Alexey Fayzullov. All rights reserved.
 //
 
-#import "FetchedResultsContentProviderSearchViewController.h"
+#import "FetchedResultsContentProviderTwoEntitiesViewController.h"
+
 #import "TECTableController.h"
 
 #import "TECFetchedResultsControllerContentProvider.h"
@@ -26,15 +27,19 @@
 #import "CoreDataManager.h"
 
 #import "Person.h"
+#import "PersonOrdered.h"
 
-@interface FetchedResultsContentProviderSearchViewController () <UISearchBarDelegate>
+@interface FetchedResultsContentProviderTwoEntitiesViewController () <UISearchBarDelegate>
 
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) TECFetchedResultsControllerContentProvider *contentProvider;
 
+@property (nonatomic, strong) NSFetchRequest *personFetchRequest;
+@property (nonatomic, strong) NSFetchRequest *personOrderedFetchRequest;
+
 @end
 
-@implementation FetchedResultsContentProviderSearchViewController
+@implementation FetchedResultsContentProviderTwoEntitiesViewController
 
 - (void)setupTableController {
     TECTableViewCellRegistrationAdapter *adapter
@@ -55,10 +60,13 @@
     }];
     self.deletingExtender = [TECTableViewDeletingExtender extender];
     
+    self.personFetchRequest = [[CoreDataManager sharedObject] createPersonFetchRequest];
+    self.personOrderedFetchRequest = [[CoreDataManager sharedObject] createPersonOrderedFetchRequest];
+    
     self.contentProvider =
     [[TECFetchedResultsControllerContentProvider alloc] initWithItemsGetter:[[CoreDataManager sharedObject] createObjectGetter]
                                                                itemsMutator:[[CoreDataManager sharedObject] createObjectMutator]
-                                                               fetchRequest:[[CoreDataManager sharedObject] createPersonFetchRequest]
+                                                               fetchRequest:self.personFetchRequest
                                                          sectionNameKeyPath:@"firstAlphaCapitalized"];
     
     self.tableController =
@@ -81,16 +89,20 @@
                                                                    30.0f)];
     self.searchBar.placeholder = @"Enter search term";
     self.searchBar.showsCancelButton = YES;
+    self.searchBar.showsScopeBar = YES;
+    self.searchBar.scopeButtonTitles = @[NSStringFromClass([Person class]),
+                                         NSStringFromClass([PersonOrdered class])];    
     self.searchBar.delegate = self;
     [self.view addSubview:self.searchBar];
 }
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
+    [self.searchBar sizeToFit];
     self.searchBar.frame = CGRectMake(0,
                                       CGRectGetMaxY(self.toolbar.frame),
                                       self.view.frame.size.width,
-                                      30.0f);
+                                      self.searchBar.frame.size.height);
     self.tableView.frame = CGRectMake(0,
                                       CGRectGetMaxY(self.searchBar.frame),
                                       self.view.frame.size.width,
@@ -98,24 +110,27 @@
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    [self doSearchWithText:searchText];
+    [self doSearchWithText:searchText scope:self.searchBar.selectedScopeButtonIndex];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     [self.searchBar resignFirstResponder];
     self.searchBar.text = nil;
-    [self doSearchWithText:nil];
+    [self doSearchWithText:nil scope:self.searchBar.selectedScopeButtonIndex];
 }
 
-- (void)doSearchWithText:(NSString *)searchText {
-    NSFetchRequest *fetchRequest = self.contentProvider.currentRequest;
+- (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope {
+    [self doSearchWithText:searchBar.text scope:selectedScope];
+}
+
+- (void)doSearchWithText:(NSString *)searchText scope:(NSInteger)scope {
+    NSPredicate *searchPredicate = nil;
     if (searchText.length) {
-        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"name CONTAINS %@", searchText];
+        searchPredicate = [NSPredicate predicateWithFormat:@"name CONTAINS %@", searchText];
     }
-    else {
-        fetchRequest.predicate = nil;
-    }
-    self.contentProvider.currentRequest = fetchRequest;
+    self.personFetchRequest.predicate = searchPredicate;
+    self.personOrderedFetchRequest.predicate = searchPredicate;
+    self.contentProvider.currentRequest = scope ? self.personOrderedFetchRequest : self.personFetchRequest;
 }
 
 @end

@@ -116,8 +116,27 @@
                                             <segue destination="7sq-P1-HMs" kind="show" id="SKo-Bl-uHo"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" tag="1" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="H1k-fA-g2V">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="NBu-NI-gMF">
                                         <rect key="frame" x="0.0" y="240" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NBu-NI-gMF" id="T1g-7l-793">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="FRC with two entities sample" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g0L-6T-mst">
+                                                    <rect key="frame" x="16" y="11" width="270" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="lRT-6S-ZzK" kind="show" id="UR6-qD-JGn"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" tag="1" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="H1k-fA-g2V">
+                                        <rect key="frame" x="0.0" y="284" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="H1k-fA-g2V" id="348-vH-fTW">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -309,7 +328,29 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U11-53-d0p" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="eoj-wi-N85" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="314" y="3384"/>
+            <point key="canvasLocation" x="314" y="3397"/>
+        </scene>
+        <!--Fetched Results Content Provider Two Entities View Controller-->
+        <scene sceneID="JHY-LT-7k7">
+            <objects>
+                <viewController id="lRT-6S-ZzK" customClass="FetchedResultsContentProviderTwoEntitiesViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iJ4-E8-pbT"/>
+                        <viewControllerLayoutGuide type="bottom" id="QOz-r0-mFS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vLh-b1-b6M">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="2BC-sK-zEe" kind="unwind" identifier="backToRootViewControllerWithSegue" unwindAction="backToRootViewControllerWithSegue:" id="csf-mu-yTX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LwB-Xx-0yb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="2BC-sK-zEe" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="314" y="4172"/>
         </scene>
     </scenes>
 </document>

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0015F9BD1C7EEA8A00179FD9 /* TECDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A9651C57DCAF0095289C /* TECDelegateProxy.m */; };
 		0015F9C81C8088CB00179FD9 /* FetchedResultsContentProviderSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0015F9C71C8088CB00179FD9 /* FetchedResultsContentProviderSearchViewController.m */; };
+		0015F9CB1C80A1E000179FD9 /* FetchedResultsContentProviderTwoEntitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0015F9CA1C80A1E000179FD9 /* FetchedResultsContentProviderTwoEntitiesViewController.m */; };
 		005F13751C6F713900765CC1 /* TECFetchedResultsControllerContentProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F13741C6F713900765CC1 /* TECFetchedResultsControllerContentProvider.m */; };
 		005F137A1C6F80CA00765CC1 /* TECBackgroundContextObjectMutator.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F13791C6F80CA00765CC1 /* TECBackgroundContextObjectMutator.m */; };
 		005F137D1C6F80E900765CC1 /* TECMainContextObjectGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F137C1C6F80E900765CC1 /* TECMainContextObjectGetter.m */; };
@@ -93,6 +94,8 @@
 /* Begin PBXFileReference section */
 		0015F9C61C8088CB00179FD9 /* FetchedResultsContentProviderSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchedResultsContentProviderSearchViewController.h; sourceTree = "<group>"; };
 		0015F9C71C8088CB00179FD9 /* FetchedResultsContentProviderSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchedResultsContentProviderSearchViewController.m; sourceTree = "<group>"; };
+		0015F9C91C80A1E000179FD9 /* FetchedResultsContentProviderTwoEntitiesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchedResultsContentProviderTwoEntitiesViewController.h; sourceTree = "<group>"; };
+		0015F9CA1C80A1E000179FD9 /* FetchedResultsContentProviderTwoEntitiesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchedResultsContentProviderTwoEntitiesViewController.m; sourceTree = "<group>"; };
 		005F13731C6F713900765CC1 /* TECFetchedResultsControllerContentProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECFetchedResultsControllerContentProvider.h; sourceTree = "<group>"; };
 		005F13741C6F713900765CC1 /* TECFetchedResultsControllerContentProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECFetchedResultsControllerContentProvider.m; sourceTree = "<group>"; };
 		005F13761C6F720400765CC1 /* TECFetchedResultsControllerContentProviderMutator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECFetchedResultsControllerContentProviderMutator.h; sourceTree = "<group>"; };
@@ -260,6 +263,8 @@
 				00AA47541C7B26D000B2AD56 /* FetchedResultsContentProviderWorkaroundsViewController.m */,
 				0015F9C61C8088CB00179FD9 /* FetchedResultsContentProviderSearchViewController.h */,
 				0015F9C71C8088CB00179FD9 /* FetchedResultsContentProviderSearchViewController.m */,
+				0015F9C91C80A1E000179FD9 /* FetchedResultsContentProviderTwoEntitiesViewController.h */,
+				0015F9CA1C80A1E000179FD9 /* FetchedResultsContentProviderTwoEntitiesViewController.m */,
 				00AA471F1C770E2100B2AD56 /* DataSources.xcdatamodeld */,
 				00AA47221C770EC400B2AD56 /* Person+CoreDataProperties.h */,
 				00AA47231C770EC400B2AD56 /* Person+CoreDataProperties.m */,
@@ -812,6 +817,7 @@
 				00AA471E1C77042A00B2AD56 /* CoreDataManager.m in Sources */,
 				0015F9C81C8088CB00179FD9 /* FetchedResultsContentProviderSearchViewController.m in Sources */,
 				0015F9BD1C7EEA8A00179FD9 /* TECDelegateProxy.m in Sources */,
+				0015F9CB1C80A1E000179FD9 /* FetchedResultsContentProviderTwoEntitiesViewController.m in Sources */,
 				6F550A511C7DBC9600846E46 /* TECCollectionController.m in Sources */,
 				6F550A531C7DBC9600846E46 /* TECCollectionViewCellRegistratorAdapter.m in Sources */,
 				6F550A5F1C7DC29900846E46 /* TECTableViewCellRegistrationAdapter.m in Sources */,

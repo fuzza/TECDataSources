@@ -12,4 +12,8 @@
 
 // Insert code here to add functionality to your managed object subclass
 
+- (NSString *)firstAlphaCapitalized {
+    return [[self.name substringWithRange:NSMakeRange(0, 1)] uppercaseString];
+}
+
 @end

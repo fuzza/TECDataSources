@@ -40,6 +40,7 @@
 
 - (void)setupTableController;
 - (void)setupSubviews;
+- (void)setupToolbar;
 
 - (void)closeButtonPressed:(id)sender;
 

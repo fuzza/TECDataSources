@@ -73,13 +73,17 @@
 }
 
 - (NSFetchRequest *)createPersonFetchRequest {
-    NSFetchRequest *fr = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([Person class])];
+    NSFetchRequest *fr = [NSFetchRequest new];
+    fr.entity = [NSEntityDescription entityForName:NSStringFromClass([Person class])
+                            inManagedObjectContext:self.mainManagedObjectContext];
     fr.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
     return fr;
 }
 
 - (NSFetchRequest *)createPersonOrderedFetchRequest {
-    NSFetchRequest *fr = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([PersonOrdered class])];
+    NSFetchRequest *fr = [NSFetchRequest new];
+    fr.entity = [NSEntityDescription entityForName:NSStringFromClass([PersonOrdered class])
+                            inManagedObjectContext:self.mainManagedObjectContext];
     fr.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"ordinal" ascending:YES]];
     return fr;
 }
