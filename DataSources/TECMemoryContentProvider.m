@@ -108,9 +108,9 @@
                                                                forChangeType:
                                                                newIndexPath:)]) {
         [self.presentationAdapter contentProviderDidChangeItem:item
-                                                   atIndexPath:indexPath
+                                                   atIndexPath:nil
                                                  forChangeType:TECContentProviderItemChangeTypeInsert
-                                                  newIndexPath:nil];
+                                                  newIndexPath:indexPath];
     }
     [self notifyDidChangeContentIfNeededIsBatchUpdate:NO];
 }

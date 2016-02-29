@@ -94,6 +94,12 @@
             }];
             break;
         }
+        case TECContentProviderSectionChangeTypeUpdate: {
+            [self.blockOperation addExecutionBlock:^{
+                [weakSelf.collectionView reloadSections:[NSIndexSet indexSetWithIndex:index]];
+            }];
+            break;
+        }
     }
 }
 
