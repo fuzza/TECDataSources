@@ -8,5 +8,5 @@
 
 #import "TECTableViewExtender.h"
 
-TECTableViewExtenderInterface(TECTableViewDeletingExtender)
-TECTableViewExtenderEnd
+@interface TECTableViewDeletingExtender : TECTableViewExtender
+@end

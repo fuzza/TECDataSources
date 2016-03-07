@@ -58,7 +58,7 @@
 
 - (void)attachExtender:(TECCollectionViewExtender *)extender {
     extender.contentProvider = self.contentProvider;
-    extender.collectionView = self.collectionView;
+    extender.extendedView = self.collectionView;
     [self.delegateProxy attachDelegate:extender];
 }
 

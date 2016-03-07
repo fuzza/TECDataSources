@@ -8,10 +8,17 @@
 
 #import "TECTableViewExtender.h"
 
-TECTableViewExtenderImplementation(TECTableViewExtender)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wprotocol"
+
+@implementation TECTableViewExtender
+
+@dynamic extendedView;
 
 + (instancetype)extender {
     return [[self alloc] init];
 }
 
-TECTableViewExtenderEnd
+@end
+
+#pragma clang diagnostic pop

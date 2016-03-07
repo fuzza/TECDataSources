@@ -6,13 +6,10 @@
 //  Copyright © 2016 Alexey Fayzullov. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "TECExtender.h"
 
-@protocol TECContentProviderProtocol;
+@interface TECCollectionViewExtender : TECExtender <UICollectionViewDelegate, UICollectionViewDataSource>
 
-@interface TECCollectionViewExtender : NSObject <UICollectionViewDelegate, UICollectionViewDataSource>
-
-@property (nonatomic, weak) UICollectionView *collectionView;
-@property (nonatomic, weak) id <TECContentProviderProtocol> contentProvider;
+@property (nonatomic, weak) UICollectionView *extendedView;
 
 @end

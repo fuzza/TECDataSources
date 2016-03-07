@@ -75,10 +75,10 @@ describe(@"TECCollectionController", ^{
         
         it(@"Should setup every extender with collection view and content provider", ^{
             [[firstExtender should] receive:@selector(setContentProvider:) withArguments:contentProviderMock];
-            [[firstExtender should] receive:@selector(setCollectionView:) withArguments:collectionViewMock];
+            [[firstExtender should] receive:@selector(setExtendedView:) withArguments:collectionViewMock];
             
             [[secondExtender should] receive:@selector(setContentProvider:) withArguments:contentProviderMock];
-            [[secondExtender should] receive:@selector(setCollectionView:) withArguments:collectionViewMock];
+            [[secondExtender should] receive:@selector(setExtendedView:) withArguments:collectionViewMock];
             
             __unused TECCollectionController *localSut = createSut();
         });

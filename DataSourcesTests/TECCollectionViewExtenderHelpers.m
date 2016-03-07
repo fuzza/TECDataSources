@@ -12,9 +12,10 @@
 
 SHARED_EXAMPLES_BEGIN(TECCollectionViewExtenderHelpers)
 
-sharedExamplesFor(@"extender", ^(NSDictionary *data) {
-    __block Class sutClass;
+sharedExamplesFor(@"collection extender", ^(NSDictionary *data) {
+    itBehavesLike(@"base extender", data);
     
+    __block Class sutClass;
     beforeAll(^{
         sutClass = data[@"class"];
     });
@@ -23,35 +24,13 @@ sharedExamplesFor(@"extender", ^(NSDictionary *data) {
         return [[sutClass alloc] init];
     });
     
-    it(@"Should be an extender", ^{
-        [[sut shouldNot] beNil];
+    it(@"Should be a collection extender", ^{
         [[sut should] beKindOfClass:[TECCollectionViewExtender class]];
     });
     
-    it(@"Should be collection view data source", ^{
+    it(@"Should conform collection view protocols", ^{
         [[sut should] conformToProtocol:@protocol(UICollectionViewDataSource)];
-    });
-    
-    it(@"Should be collection view delegate", ^{
         [[sut should] conformToProtocol:@protocol(UICollectionViewDelegate)];
-    });
-    
-    it(@"Should have weak property to content provider", ^{
-        @autoreleasepool {
-            id providerMock = [KWMock mockForProtocol:@protocol(TECContentProviderProtocol)];
-            sut.contentProvider = providerMock;
-            providerMock = nil;
-        }
-        [[(KWMock *)sut.contentProvider should] beNil];
-    });
-    
-    it(@"Should have weak link to collection view", ^{
-        @autoreleasepool {
-            id collectionViewMock = [UICollectionView mock];
-            sut.collectionView = collectionViewMock;
-            collectionViewMock = nil;
-        }
-        [[sut.collectionView should] beNil];
     });
 });
 

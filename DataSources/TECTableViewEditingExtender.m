@@ -8,14 +8,14 @@
 
 #import "TECTableViewEditingExtender.h"
 
-TECTableViewExtenderInterfaceExtension(TECTableViewEditingExtender) {
+@interface TECTableViewEditingExtender() {
     BOOL _isEditing;
 }
 @property (nonatomic, copy) TECTableViewEditingExtenderCanEditBlock canEditBlock;
 
-TECTableViewExtenderEnd
+@end
 
-TECTableViewExtenderImplementation(TECTableViewEditingExtender)
+@implementation TECTableViewEditingExtender
 
 + (instancetype)editingExtenderWithCanEditBlock:(TECTableViewEditingExtenderCanEditBlock)block {
     return [[self alloc] initWithCanEditBlock:block];
@@ -35,7 +35,7 @@ TECTableViewExtenderImplementation(TECTableViewEditingExtender)
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
     _isEditing = editing;
-    [self.tableView setEditing:editing animated:animated];
+    [self.extendedView setEditing:editing animated:animated];
 }
 
 - (BOOL)isEditing {
@@ -55,4 +55,4 @@ TECTableViewExtenderImplementation(TECTableViewEditingExtender)
     return result;
 }
 
-TECTableViewExtenderEnd
+@end

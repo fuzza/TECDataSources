@@ -14,7 +14,7 @@
 SPEC_BEGIN(TECCollectionViewSupplementaryExtenderSpec)
 
 describe(@"TECCollectionViewSupplementaryExtender", ^{
-    itBehavesLike(@"extender", @{@"class" : [TECCollectionViewSupplementaryExtender class]});
+    itBehavesLike(@"collection extender", @{@"class" : [TECCollectionViewSupplementaryExtender class]});
 });
 
 let(headerFactoryMock,^id{
@@ -66,7 +66,7 @@ describe(@"Supplementary views creation", ^{
     });
     
     beforeEach(^{
-        sut.collectionView = collectionViewMock;
+        sut.extendedView = collectionViewMock;
         sut.contentProvider = contentProviderMock;
     });
     

@@ -8,5 +8,6 @@
 
 #import "TECTableViewExtender.h"
 
-TECTableViewExtenderInterface(TECTableViewItemUpdatingExtender)
-TECTableViewExtenderEnd
+@interface TECTableViewItemUpdatingExtender : TECTableViewExtender
+
+@end

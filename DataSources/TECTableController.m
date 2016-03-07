@@ -70,7 +70,7 @@
 - (void)addExtender:(TECTableViewExtender *)extender {
     NSParameterAssert(self.tableView);
     NSParameterAssert(self.contentProvider);
-    extender.tableView = self.tableView;
+    extender.extendedView = self.tableView;
     extender.contentProvider = self.contentProvider;
     [self.delegateProxy attachDelegate:extender];
     [self.extenders addObject:extender];
