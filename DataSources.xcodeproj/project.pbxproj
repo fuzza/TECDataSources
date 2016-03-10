@@ -16,7 +16,6 @@
 		005F13801C71ACFF00765CC1 /* TECCoreDataSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F137F1C71ACFF00765CC1 /* TECCoreDataSectionModel.m */; };
 		008D85671C63B51C002D82F3 /* TECTableViewEditingExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 008D85661C63B51C002D82F3 /* TECTableViewEditingExtender.m */; };
 		008D856A1C63B561002D82F3 /* TECTableViewDeletingExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 008D85691C63B561002D82F3 /* TECTableViewDeletingExtender.m */; };
-		008D856D1C63B5A8002D82F3 /* TECTableViewItemUpdatingExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 008D856C1C63B5A8002D82F3 /* TECTableViewItemUpdatingExtender.m */; };
 		008D85701C648F52002D82F3 /* TECTableViewReorderingExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 008D856F1C648F52002D82F3 /* TECTableViewReorderingExtender.m */; };
 		009B584C1C74D05B00CAC105 /* TECFetchedResultsControllerContentProviderSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 009B584B1C74D05B00CAC105 /* TECFetchedResultsControllerContentProviderSpec.m */; };
 		00A4CA3D1C75DCFE00515A94 /* FetchedResultControllerContentProviderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A4CA3C1C75DCFE00515A94 /* FetchedResultControllerContentProviderViewController.m */; };
@@ -114,8 +113,6 @@
 		008D85661C63B51C002D82F3 /* TECTableViewEditingExtender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewEditingExtender.m; sourceTree = "<group>"; };
 		008D85681C63B561002D82F3 /* TECTableViewDeletingExtender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewDeletingExtender.h; sourceTree = "<group>"; };
 		008D85691C63B561002D82F3 /* TECTableViewDeletingExtender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewDeletingExtender.m; sourceTree = "<group>"; };
-		008D856B1C63B5A8002D82F3 /* TECTableViewItemUpdatingExtender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewItemUpdatingExtender.h; sourceTree = "<group>"; };
-		008D856C1C63B5A8002D82F3 /* TECTableViewItemUpdatingExtender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewItemUpdatingExtender.m; sourceTree = "<group>"; };
 		008D856E1C648F52002D82F3 /* TECTableViewReorderingExtender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewReorderingExtender.h; sourceTree = "<group>"; };
 		008D856F1C648F52002D82F3 /* TECTableViewReorderingExtender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewReorderingExtender.m; sourceTree = "<group>"; };
 		009B584B1C74D05B00CAC105 /* TECFetchedResultsControllerContentProviderSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECFetchedResultsControllerContentProviderSpec.m; sourceTree = "<group>"; };
@@ -570,8 +567,6 @@
 				008D85661C63B51C002D82F3 /* TECTableViewEditingExtender.m */,
 				008D85681C63B561002D82F3 /* TECTableViewDeletingExtender.h */,
 				008D85691C63B561002D82F3 /* TECTableViewDeletingExtender.m */,
-				008D856B1C63B5A8002D82F3 /* TECTableViewItemUpdatingExtender.h */,
-				008D856C1C63B5A8002D82F3 /* TECTableViewItemUpdatingExtender.m */,
 				008D856E1C648F52002D82F3 /* TECTableViewReorderingExtender.h */,
 				008D856F1C648F52002D82F3 /* TECTableViewReorderingExtender.m */,
 			);
@@ -868,7 +863,6 @@
 				6F550A541C7DBC9600846E46 /* TECCollectionViewExtender.m in Sources */,
 				00AA472B1C770EC400B2AD56 /* Person.m in Sources */,
 				00A4CA3D1C75DCFE00515A94 /* FetchedResultControllerContentProviderViewController.m in Sources */,
-				008D856D1C63B5A8002D82F3 /* TECTableViewItemUpdatingExtender.m in Sources */,
 				6FD285C71C591D0400A11316 /* TECTableViewCellExtender.m in Sources */,
 				00AA47551C7B26D000B2AD56 /* FetchedResultsContentProviderWorkaroundsViewController.m in Sources */,
 				00AA471B1C77039500B2AD56 /* FetchedResultsContentProviderReorderingViewController.m in Sources */,
