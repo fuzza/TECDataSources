@@ -33,16 +33,12 @@
                           delegateProxy:(TECDelegateProxy *)delegateProxy {
     self = [self init];
     if(self) {
-        self.contentProvider = contentProvider;
-        self.contentProvider.presentationAdapter = self;
-
-        self.delegateProxy = delegateProxy;
         self.extendedView = tableView;
+        self.contentProvider = contentProvider;
+        self.delegateProxy = delegateProxy;
         
         [self addExtenders:extenders];
-        
-        self.extendedView.dataSource = [self.delegateProxy proxy];
-        self.extendedView.delegate = [self.delegateProxy proxy];
+        [self setupContentProvider];
     }
     return self;
 }
@@ -62,6 +58,7 @@
     for(TECTableViewExtender *extender in extenders) {
         [self addExtender:extender];
     }
+    [self setupExtendedView];
 }
 
 - (void)addExtender:(TECTableViewExtender *)extender {
@@ -70,6 +67,15 @@
     extender.extendedView = self.extendedView;
     extender.contentProvider = self.contentProvider;
     [self.delegateProxy attachDelegate:extender];
+}
+
+- (void)setupExtendedView {
+    self.extendedView.dataSource = [self.delegateProxy proxy];
+    self.extendedView.delegate = [self.delegateProxy proxy];
+}
+
+- (void)setupContentProvider {
+    self.contentProvider.presentationAdapter = self;
 }
 
 #pragma mark - ContentProviderPresentationAdapter

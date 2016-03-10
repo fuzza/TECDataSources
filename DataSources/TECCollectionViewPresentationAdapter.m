@@ -29,11 +29,11 @@
                           delegateProxy:(TECDelegateProxy *)delegateProxy {
     self = [super init];
     if(self) {
+        
         self.extendedView = collectionView;
         self.contentProvider = contentProvider;
         self.delegateProxy = delegateProxy;
-        [self setupExtenders:extenders];
-        [self setupCollectionView];
+        [self addExtenders:extenders];
         [self setupContentProvider];
     }
     return self;
@@ -43,10 +43,11 @@
     self.contentProvider.presentationAdapter = self;
 }
 
-- (void)setupExtenders:(NSArray *)extenders {
+- (void)addExtenders:(NSArray *)extenders {
     for(TECCollectionViewExtender *extender in extenders) {
         [self attachExtender:extender];
     }
+    [self setupExtendedView];
 }
 
 - (void)attachExtender:(TECCollectionViewExtender *)extender {
@@ -55,7 +56,7 @@
     [self.delegateProxy attachDelegate:extender];
 }
 
-- (void)setupCollectionView {
+- (void)setupExtendedView {
     self.extendedView.delegate = [self.delegateProxy proxy];
     self.extendedView.dataSource = [self.delegateProxy proxy];
 }
