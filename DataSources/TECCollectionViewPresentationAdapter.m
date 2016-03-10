@@ -16,7 +16,6 @@
 
 @property (nonatomic, strong, readwrite) UICollectionView *extendedView;
 @property (nonatomic, strong) id <TECContentProviderProtocol> contentProvider;
-@property (nonatomic, strong) NSArray <TECCollectionViewExtender *> *extenders;
 @property (nonatomic, strong) TECDelegateProxy *delegateProxy;
 @property (nonatomic, strong) TECBlockOperation *blockOperation;
 
@@ -33,25 +32,19 @@
         self.extendedView = collectionView;
         self.contentProvider = contentProvider;
         self.delegateProxy = delegateProxy;
-        self.extenders = extenders;
-        
-        [self setup];
+        [self setupExtenders:extenders];
+        [self setupCollectionView];
+        [self setupContentProvider];
     }
     return self;
-}
-
-- (void)setup {
-    [self setupExtenders];
-    [self setupCollectionView];
-    [self setupContentProvider];
 }
 
 - (void)setupContentProvider {
     self.contentProvider.presentationAdapter = self;
 }
 
-- (void)setupExtenders {
-    for(TECCollectionViewExtender *extender in self.extenders) {
+- (void)setupExtenders:(NSArray *)extenders {
+    for(TECCollectionViewExtender *extender in extenders) {
         [self attachExtender:extender];
     }
 }

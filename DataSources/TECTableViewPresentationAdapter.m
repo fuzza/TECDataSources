@@ -20,7 +20,6 @@
 @property (nonatomic, strong) id <TECContentProviderProtocol> contentProvider;
 
 @property (nonatomic, strong) TECDelegateProxy <id <UITableViewDelegate, UITableViewDataSource>> *delegateProxy;
-@property (nonatomic, strong) NSMutableArray <TECTableViewExtender *> *extenders;
 
 @end
 
@@ -38,8 +37,6 @@
         self.contentProvider.presentationAdapter = self;
 
         self.delegateProxy = delegateProxy;
-        self.extenders = [NSMutableArray new];
-        
         self.extendedView = tableView;
         
         [self addExtenders:extenders];
@@ -73,7 +70,6 @@
     extender.extendedView = self.extendedView;
     extender.contentProvider = self.contentProvider;
     [self.delegateProxy attachDelegate:extender];
-    [self.extenders addObject:extender];
 }
 
 #pragma mark - ContentProviderPresentationAdapter
