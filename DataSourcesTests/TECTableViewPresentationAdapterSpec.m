@@ -7,14 +7,14 @@
 //
 
 #import <Kiwi/Kiwi.h>
-#import "TECTableController.h"
+#import "TECTableViewPresentationAdapter.h"
 #import "TECContentProviderProtocol.h"
 #import "TECDelegateProxy.h"
 #import "TECTableViewExtender.h"
 
-SPEC_BEGIN(TECTableControllerSpec)
+SPEC_BEGIN(TECTableViewPresentationAdapterSpec)
 
-__block TECTableController *sut;
+__block TECTableViewPresentationAdapter *sut;
 __block id contentProviderMock;
 
 __block id delegateProxyMock;
@@ -24,7 +24,7 @@ __block id secondExtender;
 
 __block id tableViewMock;
 
-describe(@"TECTableController", ^{
+describe(@"TECTableViewPresentationAdapter", ^{
 
     beforeEach(^{
         contentProviderMock = [KWMock mockForProtocol:@protocol(TECContentProviderProtocol)];
@@ -44,7 +44,7 @@ describe(@"TECTableController", ^{
         it(@"Should be set as presentation adapter for content provider", ^{
             KWCaptureSpy *adapterSpy = [contentProviderMock captureArgument:@selector(setPresentationAdapter:) atIndex:0];
             
-            sut = [[TECTableController alloc] initWithContentProvider:contentProviderMock
+            sut = [[TECTableViewPresentationAdapter alloc] initWithContentProvider:contentProviderMock
                                                             tableView:tableViewMock
                                                             extenders:@[firstExtender, secondExtender]
                                                         delegateProxy:delegateProxyMock];
@@ -65,7 +65,7 @@ describe(@"TECTableController", ^{
                 KWCaptureSpy *dataSourceSpy = [tableViewMock captureArgument:@selector(setDataSource:) atIndex:0];
                 KWCaptureSpy *delegateSpy = [tableViewMock captureArgument:@selector(setDelegate:) atIndex:0];
                 
-                sut = [[TECTableController alloc] initWithContentProvider:contentProviderMock
+                sut = [[TECTableViewPresentationAdapter alloc] initWithContentProvider:contentProviderMock
                                                                 tableView:tableViewMock
                                                                 extenders:@[firstExtender, secondExtender]
                                                             delegateProxy:delegateProxyMock];
@@ -77,7 +77,7 @@ describe(@"TECTableController", ^{
         
         context(@"Dealloc", ^{
             it(@"Should clean table view delegate and datasource", ^{
-                sut = [[TECTableController alloc] initWithContentProvider:contentProviderMock
+                sut = [[TECTableViewPresentationAdapter alloc] initWithContentProvider:contentProviderMock
                                                                 tableView:tableViewMock
                                                                 extenders:@[firstExtender, secondExtender]
                                                             delegateProxy:delegateProxyMock];
@@ -98,7 +98,7 @@ describe(@"TECTableController", ^{
                 [[delegateProxyMock should] receive:@selector(attachDelegate:) withArguments:firstExtender];
                 [[delegateProxyMock should] receive:@selector(attachDelegate:) withArguments:secondExtender];
                 
-                sut = [[TECTableController alloc] initWithContentProvider:contentProviderMock
+                sut = [[TECTableViewPresentationAdapter alloc] initWithContentProvider:contentProviderMock
                                                                 tableView:tableViewMock
                                                                 extenders:@[firstExtender, secondExtender]
                                                             delegateProxy:delegateProxyMock];
@@ -107,7 +107,7 @@ describe(@"TECTableController", ^{
         
         context(@"Content provider callbacks", ^{
             it(@"Should reload table on reload callback", ^{
-                sut = [[TECTableController alloc] initWithContentProvider:contentProviderMock
+                sut = [[TECTableViewPresentationAdapter alloc] initWithContentProvider:contentProviderMock
                                                                 tableView:tableViewMock
                                                                 extenders:@[firstExtender, secondExtender]
                                                             delegateProxy:delegateProxyMock];

@@ -8,7 +8,7 @@
 
 #import "FetchedResultsContentProviderTwoEntitiesViewController.h"
 
-#import "TECTableController.h"
+#import "TECTableViewPresentationAdapter.h"
 
 #import "TECFetchedResultsControllerContentProvider.h"
 
@@ -70,7 +70,7 @@
                                                          sectionNameKeyPath:@"firstAlphaCapitalized"];
     
     self.tableController =
-    [[TECTableController alloc] initWithContentProvider:self.contentProvider
+    [[TECTableViewPresentationAdapter alloc] initWithContentProvider:self.contentProvider
                                               tableView:self.tableView
                                               extenders:@[
                                                           self.headerExtender,

@@ -6,13 +6,13 @@
 //  Copyright © 2016 Alexey Fayzullov. All rights reserved.
 //
 
-#import "TECCollectionController.h"
+#import "TECCollectionViewPresentationAdapter.h"
 #import "TECContentProviderProtocol.h"
 #import "TECCollectionViewExtender.h"
 #import "TECDelegateProxy.h"
 #import "TECBlockOperation.h"
 
-@interface TECCollectionController ()
+@interface TECCollectionViewPresentationAdapter ()
 
 @property (nonatomic, weak) UICollectionView *collectionView;
 @property (nonatomic, strong) id <TECContentProviderProtocol> contentProvider;
@@ -22,7 +22,7 @@
 
 @end
 
-@implementation TECCollectionController
+@implementation TECCollectionViewPresentationAdapter
 
 - (instancetype)initWithContentProvider:(id<TECContentProviderProtocol>)contentProvider
                          collectionView:(UICollectionView *)collectionView

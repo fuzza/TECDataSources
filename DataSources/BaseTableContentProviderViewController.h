@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "TECTableController.h"
+#import "TECTableViewPresentationAdapter.h"
 
 #import "TECTableViewSectionHeaderExtender.h"
 #import "TECTableViewSectionFooterExtender.h"
@@ -27,7 +27,7 @@
 @property (nonatomic, strong) UIBarButtonItem *reloadButtonItem;
 @property (nonatomic, strong) UIBarButtonItem *closeButtonItem;
 
-@property (nonatomic, strong) TECTableController *tableController;
+@property (nonatomic, strong) TECTableViewPresentationAdapter *tableController;
 
 @property (nonatomic, strong) TECTableViewSectionHeaderExtender *headerExtender;
 @property (nonatomic, strong) TECTableViewSectionFooterExtender *footerExtender;

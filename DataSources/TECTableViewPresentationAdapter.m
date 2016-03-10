@@ -6,14 +6,14 @@
 //  Copyright © 2016 Alexey Fayzullov. All rights reserved.
 //
 
-#import "TECTableController.h"
+#import "TECTableViewPresentationAdapter.h"
 #import "TECContentProviderProtocol.h"
 #import "TECSectionModelProtocol.h"
 
 #import "TECDelegateProxy.h"
 #import "TECTableViewExtender.h"
 
-@interface TECTableController ()
+@interface TECTableViewPresentationAdapter ()
 
 @property (nonatomic, weak) UITableView *tableView;
 
@@ -24,7 +24,7 @@
 
 @end
 
-@implementation TECTableController
+@implementation TECTableViewPresentationAdapter
 
 #pragma mark - Lifecycle
 

@@ -7,16 +7,16 @@
 //
 
 #import <Kiwi/Kiwi.h>
-#import "TECCollectionController.h"
+#import "TECCollectionViewPresentationAdapter.h"
 #import "TECContentProviderProtocol.h"
 #import "TECContentProviderDelegate.h"
 #import "TECCollectionViewExtender.h"
 #import "TECDelegateProxy.h"
 #import "TECBlockOperation.h"
 
-SPEC_BEGIN(TECCollectionControllerSpec)
+SPEC_BEGIN(TECCollectionViewPresentationAdapterSpec)
 
-describe(@"TECCollectionController", ^{
+describe(@"TECCollectionViewPresentationAdapter", ^{
     
     let(delegateProxyMock, ^id {
         return [KWMock nullMockForClass:[TECDelegateProxy class]];
@@ -40,8 +40,8 @@ describe(@"TECCollectionController", ^{
         return contentProviderMock;
     }) ;
     
-    TECCollectionController *(^createSut)() = ^{
-        return [[TECCollectionController alloc] initWithContentProvider:contentProviderMock
+    TECCollectionViewPresentationAdapter *(^createSut)() = ^{
+        return [[TECCollectionViewPresentationAdapter alloc] initWithContentProvider:contentProviderMock
                                                          collectionView:collectionViewMock
                                                               extenders:@[firstExtender,
                                                                           secondExtender]
@@ -51,26 +51,26 @@ describe(@"TECCollectionController", ^{
     context(@"Initialization", ^{
         
         it(@"Should initialize new collection controller", ^{
-            TECCollectionController *localSut = createSut();
+            TECCollectionViewPresentationAdapter *localSut = createSut();
             [[localSut shouldNot] beNil];
-            [[localSut should] beKindOfClass:[TECCollectionController class]];
+            [[localSut should] beKindOfClass:[TECCollectionViewPresentationAdapter class]];
         });
         
         it(@"Should be presentation adapter for content provider", ^{
-            TECCollectionController *localSut = createSut();
+            TECCollectionViewPresentationAdapter *localSut = createSut();
             [[localSut should] conformToProtocol:@protocol(TECContentProviderPresentationAdapterProtocol)];
         });
         
         it(@"Should register controller as presentation adapter for content provider", ^{
             KWCaptureSpy *presentationAdapterSpy = [contentProviderMock captureArgument:@selector(setPresentationAdapter:) atIndex:0];
-            TECCollectionController *localSut = createSut();
+            TECCollectionViewPresentationAdapter *localSut = createSut();
             [[presentationAdapterSpy.argument should] beIdenticalTo:localSut];
         });
         
         it(@"Should register extenders in delegate proxy", ^{
             [[delegateProxyMock should] receive:@selector(attachDelegate:) withArguments:firstExtender];
             [[delegateProxyMock should] receive:@selector(attachDelegate:) withArguments:secondExtender];
-            __unused TECCollectionController *localSut = createSut();
+            __unused TECCollectionViewPresentationAdapter *localSut = createSut();
         });
         
         it(@"Should setup every extender with collection view and content provider", ^{
@@ -80,7 +80,7 @@ describe(@"TECCollectionController", ^{
             [[secondExtender should] receive:@selector(setContentProvider:) withArguments:contentProviderMock];
             [[secondExtender should] receive:@selector(setExtendedView:) withArguments:collectionViewMock];
             
-            __unused TECCollectionController *localSut = createSut();
+            __unused TECCollectionViewPresentationAdapter *localSut = createSut();
         });
         
         it(@"Should set delegate proxy as collection view delegate and data source", ^{
@@ -89,7 +89,7 @@ describe(@"TECCollectionController", ^{
             [[collectionViewMock should] receive:@selector(setDelegate:) withArguments:delegateProxyMock];
             [[collectionViewMock should] receive:@selector(setDataSource:) withArguments:delegateProxyMock];
             
-            __unused TECCollectionController *localSut = createSut();
+            __unused TECCollectionViewPresentationAdapter *localSut = createSut();
         });
     });
     

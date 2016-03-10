@@ -1,8 +1,8 @@
 //
-//  TECTableViewDataSource.h
+//  TECCollectionController.h
 //  DataSources
 //
-//  Created by Alexey Fayzullov on 1/26/16.
+//  Created by Alexey Fayzullov on 2/18/16.
 //  Copyright © 2016 Alexey Fayzullov. All rights reserved.
 //
 
@@ -11,14 +11,14 @@
 
 @protocol TECContentProviderProtocol;
 
-@class TECTableViewExtender;
+@class TECCollectionViewExtender;
 @class TECDelegateProxy;
 
-@interface TECTableController : NSObject <TECContentProviderPresentationAdapterProtocol>
+@interface TECCollectionViewPresentationAdapter : NSObject <TECContentProviderPresentationAdapterProtocol>
 
 - (instancetype)initWithContentProvider:(id <TECContentProviderProtocol>)contentProvider
-                              tableView:(UITableView *)tableView
-                              extenders:(NSArray <TECTableViewExtender *> *)extenders
+                         collectionView:(UICollectionView *)collectionView
+                              extenders:(NSArray <TECCollectionViewExtender *> *)extenders
                           delegateProxy:(TECDelegateProxy *)delegateProxy;
 
 @end

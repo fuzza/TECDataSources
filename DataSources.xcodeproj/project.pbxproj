@@ -43,7 +43,7 @@
 		6F0CD6171C51109400D09C01 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F0CD6151C51109400D09C01 /* Main.storyboard */; };
 		6F0CD6191C51109400D09C01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F0CD6181C51109400D09C01 /* Assets.xcassets */; };
 		6F0CD61C1C51109400D09C01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F0CD61A1C51109400D09C01 /* LaunchScreen.storyboard */; };
-		6F4855531C7375BF0006F6E5 /* TECTableControllerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4855521C7375BF0006F6E5 /* TECTableControllerSpec.m */; };
+		6F4855531C7375BF0006F6E5 /* TECTableViewPresentationAdapterSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4855521C7375BF0006F6E5 /* TECTableViewPresentationAdapterSpec.m */; };
 		6F4855551C739C720006F6E5 /* TECTableViewExtenderSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4855541C739C720006F6E5 /* TECTableViewExtenderSpec.m */; };
 		6F4855571C739E030006F6E5 /* TECTableViewSectionHeaderExtenderSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4855561C739E030006F6E5 /* TECTableViewSectionHeaderExtenderSpec.m */; };
 		6F48555B1C739F870006F6E5 /* TECTableViewSectionFooterExtenderSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F48555A1C739F870006F6E5 /* TECTableViewSectionFooterExtenderSpec.m */; };
@@ -57,7 +57,7 @@
 		6F550A3C1C7B802D00846E46 /* TECCollectionViewExtenderHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC95B61C7646DB00B1094E /* TECCollectionViewExtenderHelpers.m */; };
 		6F550A401C7CBEFA00846E46 /* TECBlockOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F550A3F1C7CBEFA00846E46 /* TECBlockOperation.m */; };
 		6F550A431C7CBF1300846E46 /* TECBlockOperationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F550A421C7CBF1300846E46 /* TECBlockOperationSpec.m */; };
-		6F550A511C7DBC9600846E46 /* TECCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F550A461C7DBC9600846E46 /* TECCollectionController.m */; };
+		6F550A511C7DBC9600846E46 /* TECCollectionViewPresentationAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F550A461C7DBC9600846E46 /* TECCollectionViewPresentationAdapter.m */; };
 		6F550A521C7DBC9600846E46 /* TECCollectionViewCellExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F550A481C7DBC9600846E46 /* TECCollectionViewCellExtender.m */; };
 		6F550A531C7DBC9600846E46 /* TECCollectionViewCellRegistratorAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F550A4A1C7DBC9600846E46 /* TECCollectionViewCellRegistratorAdapter.m */; };
 		6F550A541C7DBC9600846E46 /* TECCollectionViewExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F550A4C1C7DBC9600846E46 /* TECCollectionViewExtender.m */; };
@@ -67,14 +67,14 @@
 		6F550A631C7DC2D300846E46 /* TECTableViewCellRegistrationAdapterSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F550A621C7DC2D300846E46 /* TECTableViewCellRegistrationAdapterSpec.m */; };
 		6F550A661C7DDF0200846E46 /* TECTableViewHeaderFooterViewRegistrationAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F550A651C7DDF0200846E46 /* TECTableViewHeaderFooterViewRegistrationAdapter.m */; };
 		6F550A681C7DDF8F00846E46 /* TECTableViewHeaderFooterViewRegistrationAdapterSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F550A671C7DDF8F00846E46 /* TECTableViewHeaderFooterViewRegistrationAdapterSpec.m */; };
-		6F59A9521C57B8EB0095289C /* TECTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A9511C57B8EB0095289C /* TECTableController.m */; };
+		6F59A9521C57B8EB0095289C /* TECTableViewPresentationAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A9511C57B8EB0095289C /* TECTableViewPresentationAdapter.m */; };
 		6F59A96A1C58CA650095289C /* TECMemoryContentProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A9691C58CA650095289C /* TECMemoryContentProvider.m */; };
 		6F59A96D1C58CA990095289C /* TECMemorySectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A96C1C58CA990095289C /* TECMemorySectionModel.m */; };
 		6F59A9701C58CDC40095289C /* TECCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A96F1C58CDC40095289C /* TECCustomCell.m */; };
 		6F59A9811C58EC610095289C /* TECTableViewSectionHeaderExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A9801C58EC610095289C /* TECTableViewSectionHeaderExtender.m */; };
 		6F59A9841C58ECF70095289C /* TECTableViewSectionFooterExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A9831C58ECF70095289C /* TECTableViewSectionFooterExtender.m */; };
 		6F59A98A1C5911570095289C /* TECTableViewExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A9891C5911570095289C /* TECTableViewExtender.m */; };
-		6FD26B1D1C7614C1006A0E2F /* TECCollectionControllerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD26B1C1C7614C1006A0E2F /* TECCollectionControllerSpec.m */; };
+		6FD26B1D1C7614C1006A0E2F /* TECCollectionViewPresentationAdapterSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD26B1C1C7614C1006A0E2F /* TECCollectionViewPresentationAdapterSpec.m */; };
 		6FD285C71C591D0400A11316 /* TECTableViewCellExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD285C61C591D0400A11316 /* TECTableViewCellExtender.m */; };
 		6FEC95B51C76455900B1094E /* TECCollectionViewExtenderSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC95B41C76455900B1094E /* TECCollectionViewExtenderSpec.m */; };
 		6FEC95C21C771B6400B1094E /* TECCollectionViewCellRegistratorAdapterSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC95C11C771B6400B1094E /* TECCollectionViewCellRegistratorAdapterSpec.m */; };
@@ -144,7 +144,6 @@
 		00AA47571C7B359600B2AD56 /* BaseTableContentProviderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableContentProviderViewController.m; sourceTree = "<group>"; };
 		1EF957566F87E00C2CAB1977 /* Pods-DataSourcesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataSourcesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DataSourcesTests/Pods-DataSourcesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2BA9BBEB5BFFAD972BFA7ACE /* Pods-DataSourcesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataSourcesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DataSourcesTests/Pods-DataSourcesTests.release.xcconfig"; sourceTree = "<group>"; };
-		6F0124E21C8DD14200646EB5 /* TECPresentationAdapterProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECPresentationAdapterProtocol.h; sourceTree = "<group>"; };
 		6F0124E41C8DD3F500646EB5 /* TECExtender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECExtender.h; sourceTree = "<group>"; };
 		6F0124E51C8DD3F500646EB5 /* TECExtender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECExtender.m; sourceTree = "<group>"; };
 		6F0124E81C8DD40D00646EB5 /* TECExtenderSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECExtenderSpec.m; sourceTree = "<group>"; };
@@ -162,7 +161,7 @@
 		6F0CD61D1C51109400D09C01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F0CD6221C51109400D09C01 /* DataSourcesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataSourcesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F0CD6281C51109500D09C01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6F4855521C7375BF0006F6E5 /* TECTableControllerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableControllerSpec.m; sourceTree = "<group>"; };
+		6F4855521C7375BF0006F6E5 /* TECTableViewPresentationAdapterSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewPresentationAdapterSpec.m; sourceTree = "<group>"; };
 		6F4855541C739C720006F6E5 /* TECTableViewExtenderSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewExtenderSpec.m; sourceTree = "<group>"; };
 		6F4855561C739E030006F6E5 /* TECTableViewSectionHeaderExtenderSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewSectionHeaderExtenderSpec.m; sourceTree = "<group>"; };
 		6F48555A1C739F870006F6E5 /* TECTableViewSectionFooterExtenderSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewSectionFooterExtenderSpec.m; sourceTree = "<group>"; };
@@ -178,8 +177,8 @@
 		6F550A3E1C7CBEFA00846E46 /* TECBlockOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECBlockOperation.h; sourceTree = "<group>"; };
 		6F550A3F1C7CBEFA00846E46 /* TECBlockOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECBlockOperation.m; sourceTree = "<group>"; };
 		6F550A421C7CBF1300846E46 /* TECBlockOperationSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECBlockOperationSpec.m; sourceTree = "<group>"; };
-		6F550A451C7DBC9600846E46 /* TECCollectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECCollectionController.h; sourceTree = "<group>"; };
-		6F550A461C7DBC9600846E46 /* TECCollectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECCollectionController.m; sourceTree = "<group>"; };
+		6F550A451C7DBC9600846E46 /* TECCollectionViewPresentationAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECCollectionViewPresentationAdapter.h; sourceTree = "<group>"; };
+		6F550A461C7DBC9600846E46 /* TECCollectionViewPresentationAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECCollectionViewPresentationAdapter.m; sourceTree = "<group>"; };
 		6F550A471C7DBC9600846E46 /* TECCollectionViewCellExtender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECCollectionViewCellExtender.h; sourceTree = "<group>"; };
 		6F550A481C7DBC9600846E46 /* TECCollectionViewCellExtender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECCollectionViewCellExtender.m; sourceTree = "<group>"; };
 		6F550A491C7DBC9600846E46 /* TECCollectionViewCellRegistratorAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECCollectionViewCellRegistratorAdapter.h; sourceTree = "<group>"; };
@@ -196,8 +195,8 @@
 		6F550A641C7DDF0200846E46 /* TECTableViewHeaderFooterViewRegistrationAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewHeaderFooterViewRegistrationAdapter.h; sourceTree = "<group>"; };
 		6F550A651C7DDF0200846E46 /* TECTableViewHeaderFooterViewRegistrationAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewHeaderFooterViewRegistrationAdapter.m; sourceTree = "<group>"; };
 		6F550A671C7DDF8F00846E46 /* TECTableViewHeaderFooterViewRegistrationAdapterSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewHeaderFooterViewRegistrationAdapterSpec.m; sourceTree = "<group>"; };
-		6F59A9501C57B8EB0095289C /* TECTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableController.h; sourceTree = "<group>"; };
-		6F59A9511C57B8EB0095289C /* TECTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableController.m; sourceTree = "<group>"; };
+		6F59A9501C57B8EB0095289C /* TECTableViewPresentationAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewPresentationAdapter.h; sourceTree = "<group>"; };
+		6F59A9511C57B8EB0095289C /* TECTableViewPresentationAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewPresentationAdapter.m; sourceTree = "<group>"; };
 		6F59A9621C57C7D90095289C /* TECContentProviderProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECContentProviderProtocol.h; sourceTree = "<group>"; };
 		6F59A9631C57C86A0095289C /* TECSectionModelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECSectionModelProtocol.h; sourceTree = "<group>"; };
 		6F59A9641C57DCAF0095289C /* TECDelegateProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECDelegateProxy.h; sourceTree = "<group>"; };
@@ -215,7 +214,7 @@
 		6F59A9881C5911570095289C /* TECTableViewExtender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewExtender.h; sourceTree = "<group>"; };
 		6F59A9891C5911570095289C /* TECTableViewExtender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewExtender.m; sourceTree = "<group>"; };
 		6FB0892F1C5A75DF008AF389 /* TECContentProviderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECContentProviderDelegate.h; sourceTree = "<group>"; };
-		6FD26B1C1C7614C1006A0E2F /* TECCollectionControllerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECCollectionControllerSpec.m; sourceTree = "<group>"; };
+		6FD26B1C1C7614C1006A0E2F /* TECCollectionViewPresentationAdapterSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECCollectionViewPresentationAdapterSpec.m; sourceTree = "<group>"; };
 		6FD285C51C591D0400A11316 /* TECTableViewCellExtender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECTableViewCellExtender.h; sourceTree = "<group>"; };
 		6FD285C61C591D0400A11316 /* TECTableViewCellExtender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECTableViewCellExtender.m; sourceTree = "<group>"; };
 		6FEC95B41C76455900B1094E /* TECCollectionViewExtenderSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECCollectionViewExtenderSpec.m; sourceTree = "<group>"; };
@@ -322,14 +321,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		6F0124E11C8DD0C300646EB5 /* PresentationAdapter */ = {
-			isa = PBXGroup;
-			children = (
-				6F0124E21C8DD14200646EB5 /* TECPresentationAdapterProtocol.h */,
-			);
-			name = PresentationAdapter;
-			sourceTree = "<group>";
-		};
 		6F0124E31C8DD3E500646EB5 /* Extender */ = {
 			isa = PBXGroup;
 			children = (
@@ -405,12 +396,12 @@
 				6FEC95C31C773F3400B1094E /* HelperCode */,
 				0015F9BF1C7F55AD00179FD9 /* ContentProviders */,
 				6F0CD6281C51109500D09C01 /* Info.plist */,
-				6F4855521C7375BF0006F6E5 /* TECTableControllerSpec.m */,
+				6F4855521C7375BF0006F6E5 /* TECTableViewPresentationAdapterSpec.m */,
 				6F4855561C739E030006F6E5 /* TECTableViewSectionHeaderExtenderSpec.m */,
 				6F48555A1C739F870006F6E5 /* TECTableViewSectionFooterExtenderSpec.m */,
 				6F48555C1C73AF2C0006F6E5 /* TECTableViewCellExtenderSpec.m */,
 				6F48555E1C73B7120006F6E5 /* TECDelegateProxySpec.m */,
-				6FD26B1C1C7614C1006A0E2F /* TECCollectionControllerSpec.m */,
+				6FD26B1C1C7614C1006A0E2F /* TECCollectionViewPresentationAdapterSpec.m */,
 				6FEC95C11C771B6400B1094E /* TECCollectionViewCellRegistratorAdapterSpec.m */,
 			);
 			path = DataSourcesTests;
@@ -454,18 +445,18 @@
 			children = (
 				6F550A5A1C7DBCAE00846E46 /* RegistrationAdapters */,
 				6F550A581C7DBCA200846E46 /* Extenders */,
-				6F550A571C7DBC9B00846E46 /* Controller */,
+				6F550A571C7DBC9B00846E46 /* PresentationAdapter */,
 			);
 			name = CollectionView;
 			sourceTree = "<group>";
 		};
-		6F550A571C7DBC9B00846E46 /* Controller */ = {
+		6F550A571C7DBC9B00846E46 /* PresentationAdapter */ = {
 			isa = PBXGroup;
 			children = (
-				6F550A451C7DBC9600846E46 /* TECCollectionController.h */,
-				6F550A461C7DBC9600846E46 /* TECCollectionController.m */,
+				6F550A451C7DBC9600846E46 /* TECCollectionViewPresentationAdapter.h */,
+				6F550A461C7DBC9600846E46 /* TECCollectionViewPresentationAdapter.m */,
 			);
-			name = Controller;
+			name = PresentationAdapter;
 			sourceTree = "<group>";
 		};
 		6F550A581C7DBCA200846E46 /* Extenders */ = {
@@ -525,7 +516,6 @@
 			isa = PBXGroup;
 			children = (
 				6F0124E31C8DD3E500646EB5 /* Extender */,
-				6F0124E11C8DD0C300646EB5 /* PresentationAdapter */,
 				6F550A3D1C7CBEE700846E46 /* BlockOperation */,
 				6FEC95D51C7B1F3300B1094E /* ReusableViewsFactory */,
 				6FEC95B81C77163800B1094E /* ReusableViewsRegistrator */,
@@ -540,7 +530,7 @@
 			isa = PBXGroup;
 			children = (
 				6F550A5C1C7DC26B00846E46 /* RegistrationAdapters */,
-				6F59A97B1C58EA870095289C /* Controller */,
+				6F59A97B1C58EA870095289C /* PresentationAdapter */,
 				6F59A97A1C58EA610095289C /* Extenders */,
 			);
 			name = TableView;
@@ -588,13 +578,13 @@
 			name = Extenders;
 			sourceTree = "<group>";
 		};
-		6F59A97B1C58EA870095289C /* Controller */ = {
+		6F59A97B1C58EA870095289C /* PresentationAdapter */ = {
 			isa = PBXGroup;
 			children = (
-				6F59A9501C57B8EB0095289C /* TECTableController.h */,
-				6F59A9511C57B8EB0095289C /* TECTableController.m */,
+				6F59A9501C57B8EB0095289C /* TECTableViewPresentationAdapter.h */,
+				6F59A9511C57B8EB0095289C /* TECTableViewPresentationAdapter.m */,
 			);
-			name = Controller;
+			name = PresentationAdapter;
 			sourceTree = "<group>";
 		};
 		6F59A97C1C58EA9C0095289C /* DelegateProxy */ = {
@@ -859,14 +849,14 @@
 				00AA472A1C770EC400B2AD56 /* Person+CoreDataProperties.m in Sources */,
 				00AA47581C7B359600B2AD56 /* BaseTableContentProviderViewController.m in Sources */,
 				6F59A9701C58CDC40095289C /* TECCustomCell.m in Sources */,
-				6F59A9521C57B8EB0095289C /* TECTableController.m in Sources */,
+				6F59A9521C57B8EB0095289C /* TECTableViewPresentationAdapter.m in Sources */,
 				6F550A661C7DDF0200846E46 /* TECTableViewHeaderFooterViewRegistrationAdapter.m in Sources */,
 				6F59A98A1C5911570095289C /* TECTableViewExtender.m in Sources */,
 				00AA471E1C77042A00B2AD56 /* CoreDataManager.m in Sources */,
 				0015F9C81C8088CB00179FD9 /* FetchedResultsContentProviderSearchViewController.m in Sources */,
 				0015F9BD1C7EEA8A00179FD9 /* TECDelegateProxy.m in Sources */,
 				0015F9CB1C80A1E000179FD9 /* FetchedResultsContentProviderTwoEntitiesViewController.m in Sources */,
-				6F550A511C7DBC9600846E46 /* TECCollectionController.m in Sources */,
+				6F550A511C7DBC9600846E46 /* TECCollectionViewPresentationAdapter.m in Sources */,
 				6F550A531C7DBC9600846E46 /* TECCollectionViewCellRegistratorAdapter.m in Sources */,
 				6F550A5F1C7DC29900846E46 /* TECTableViewCellRegistrationAdapter.m in Sources */,
 				6F550A561C7DBC9600846E46 /* TECCollectionViewSupplementaryRegistrationAdapter.m in Sources */,
@@ -894,12 +884,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F550A3C1C7B802D00846E46 /* TECCollectionViewExtenderHelpers.m in Sources */,
-				6F4855531C7375BF0006F6E5 /* TECTableControllerSpec.m in Sources */,
+				6F4855531C7375BF0006F6E5 /* TECTableViewPresentationAdapterSpec.m in Sources */,
 				6F4855621C73B89F0006F6E5 /* TECDelegateProxyTestModels.m in Sources */,
 				6FEC95B51C76455900B1094E /* TECCollectionViewExtenderSpec.m in Sources */,
 				6F0124EE1C8DDCEC00646EB5 /* TECTableViewExtenderHelpers.m in Sources */,
 				6F4855571C739E030006F6E5 /* TECTableViewSectionHeaderExtenderSpec.m in Sources */,
-				6FD26B1D1C7614C1006A0E2F /* TECCollectionControllerSpec.m in Sources */,
+				6FD26B1D1C7614C1006A0E2F /* TECCollectionViewPresentationAdapterSpec.m in Sources */,
 				6F550A2F1C7B5B1600846E46 /* TECCollectionViewSupplementaryRegistrationAdapterSpec.m in Sources */,
 				6FEC95C21C771B6400B1094E /* TECCollectionViewCellRegistratorAdapterSpec.m in Sources */,
 				6F550A631C7DC2D300846E46 /* TECTableViewCellRegistrationAdapterSpec.m in Sources */,
