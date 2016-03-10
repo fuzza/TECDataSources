@@ -49,6 +49,7 @@ describe(@"TECTableViewPresentationAdapter", ^{
                                                             extenders:@[firstExtender, secondExtender]
                                                         delegateProxy:delegateProxyMock];
             [[adapterSpy.argument should] equal:sut];
+            [[sut.extendedView should] equal:tableViewMock];
         });
     });
     

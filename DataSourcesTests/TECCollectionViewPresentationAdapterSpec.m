@@ -54,6 +54,7 @@ describe(@"TECCollectionViewPresentationAdapter", ^{
             TECCollectionViewPresentationAdapter *localSut = createSut();
             [[localSut shouldNot] beNil];
             [[localSut should] beKindOfClass:[TECCollectionViewPresentationAdapter class]];
+            [[localSut.extendedView should] equal:collectionViewMock];
         });
         
         it(@"Should be presentation adapter for content provider", ^{

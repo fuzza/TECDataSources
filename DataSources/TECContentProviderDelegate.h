@@ -26,6 +26,8 @@ typedef NS_ENUM(NSUInteger, TECContentProviderItemChangeType) {
 
 @protocol TECContentProviderPresentationAdapterProtocol <NSObject>
 
+@property (nonatomic, strong, readonly) UIScrollView *extendedView;
+
 @optional
 
 - (void)contentProviderDidReloadData:(id <TECContentProviderProtocol>)contentProvider;

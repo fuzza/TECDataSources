@@ -16,6 +16,8 @@
 
 @interface TECTableViewPresentationAdapter : NSObject <TECContentProviderPresentationAdapterProtocol>
 
+@property (nonatomic, strong, readonly) UITableView *extendedView;
+
 - (instancetype)initWithContentProvider:(id <TECContentProviderProtocol>)contentProvider
                               tableView:(UITableView *)tableView
                               extenders:(NSArray <TECTableViewExtender *> *)extenders
