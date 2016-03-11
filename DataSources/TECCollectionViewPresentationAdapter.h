@@ -14,7 +14,9 @@
 @class TECCollectionViewExtender;
 @class TECDelegateProxy;
 
-@interface TECCollectionController : NSObject <TECContentProviderPresentationAdapterProtocol>
+@interface TECCollectionViewPresentationAdapter : NSObject <TECContentProviderPresentationAdapterProtocol>
+
+@property (nonatomic, strong, readonly) UICollectionView *extendedView;
 
 - (instancetype)initWithContentProvider:(id <TECContentProviderProtocol>)contentProvider
                          collectionView:(UICollectionView *)collectionView

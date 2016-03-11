@@ -10,9 +10,9 @@
 
 @protocol TECReusableViewFactoryProtocol;
 
-TECTableViewExtenderInterface(TECTableViewCellExtender)
+@interface TECTableViewCellExtender : TECTableViewExtender
 
 + (instancetype)cellExtenderWithCellFactory:(id <TECReusableViewFactoryProtocol>)cellFactory;
 - (instancetype)initWithCellFactory:(id <TECReusableViewFactoryProtocol>)cellFactory;
 
-TECTableViewExtenderEnd
+@end

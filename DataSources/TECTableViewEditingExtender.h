@@ -15,7 +15,7 @@ typedef BOOL(^TECTableViewEditingExtenderCanEditBlock)(UITableView *tableView,
                                                        id <TECSectionModelProtocol> section,
                                                        id item);
 
-TECTableViewExtenderInterface(TECTableViewEditingExtender)
+@interface TECTableViewEditingExtender : TECTableViewExtender
 
 + (instancetype)editingExtenderWithCanEditBlock:(TECTableViewEditingExtenderCanEditBlock)block;
 - (instancetype)initWithCanEditBlock:(TECTableViewEditingExtenderCanEditBlock)block;
@@ -23,4 +23,4 @@ TECTableViewExtenderInterface(TECTableViewEditingExtender)
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated;
 - (BOOL)isEditing;
 
-TECTableViewExtenderEnd
+@end

@@ -10,11 +10,11 @@
 #import "TECContentProviderProtocol.h"
 #import "TECSectionModelProtocol.h"
 
-TECTableViewExtenderImplementation(TECTableViewSectionFooterExtender)
+@implementation TECTableViewSectionFooterExtender
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
     id <TECSectionModelProtocol> sectionModel = [self.contentProvider sectionAtIndex:section];
     return sectionModel.footerTitle;
 }
 
-TECTableViewExtenderEnd
+@end

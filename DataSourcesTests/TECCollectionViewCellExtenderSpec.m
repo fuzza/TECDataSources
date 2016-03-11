@@ -14,7 +14,7 @@
 SPEC_BEGIN(TECCollectionViewCellExtenderSpec)
 
 describe(@"TECCollectionViewCellExtender", ^{
-    itBehavesLike(@"extender", @{@"class" : [TECCollectionViewCellExtender class]});
+    itBehavesLike(@"collection extender", @{@"class" : [TECCollectionViewCellExtender class]});
     
     let(cellFactoryMock, ^id{
         return [KWMock mockForProtocol:@protocol(TECReusableViewFactoryProtocol)];
@@ -50,7 +50,7 @@ describe(@"TECCollectionViewCellExtender", ^{
         
         beforeEach(^{
             sut.contentProvider = contentProviderMock;
-            sut.collectionView = collectionViewMock;
+            sut.extendedView = collectionViewMock;
             [contentProviderMock stub:@selector(itemAtIndexPath:) andReturn:itemMock withArguments:indexPathMock];
         });
         

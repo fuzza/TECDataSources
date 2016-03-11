@@ -14,7 +14,9 @@
 @class TECTableViewExtender;
 @class TECDelegateProxy;
 
-@interface TECTableController : NSObject <TECContentProviderPresentationAdapterProtocol>
+@interface TECTableViewPresentationAdapter : NSObject <TECContentProviderPresentationAdapterProtocol>
+
+@property (nonatomic, strong, readonly) UITableView *extendedView;
 
 - (instancetype)initWithContentProvider:(id <TECContentProviderProtocol>)contentProvider
                               tableView:(UITableView *)tableView

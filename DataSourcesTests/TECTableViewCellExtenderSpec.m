@@ -27,7 +27,7 @@ describe(@"TECTableViewCellExtender", ^{
         
         sut = [[TECTableViewCellExtender alloc] initWithCellFactory:cellFactoryMock];
         sut.contentProvider = contentProviderMock;
-        sut.tableView = tableViewMock;
+        sut.extendedView = tableViewMock;
     });
     
     it(@"Should be an extender", ^{

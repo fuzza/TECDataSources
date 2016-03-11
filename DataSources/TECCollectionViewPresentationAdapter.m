@@ -6,23 +6,22 @@
 //  Copyright © 2016 Alexey Fayzullov. All rights reserved.
 //
 
-#import "TECCollectionController.h"
+#import "TECCollectionViewPresentationAdapter.h"
 #import "TECContentProviderProtocol.h"
 #import "TECCollectionViewExtender.h"
 #import "TECDelegateProxy.h"
 #import "TECBlockOperation.h"
 
-@interface TECCollectionController ()
+@interface TECCollectionViewPresentationAdapter ()
 
-@property (nonatomic, weak) UICollectionView *collectionView;
+@property (nonatomic, strong, readwrite) UICollectionView *extendedView;
 @property (nonatomic, strong) id <TECContentProviderProtocol> contentProvider;
-@property (nonatomic, strong) NSArray <TECCollectionViewExtender *> *extenders;
 @property (nonatomic, strong) TECDelegateProxy *delegateProxy;
 @property (nonatomic, strong) TECBlockOperation *blockOperation;
 
 @end
 
-@implementation TECCollectionController
+@implementation TECCollectionViewPresentationAdapter
 
 - (instancetype)initWithContentProvider:(id<TECContentProviderProtocol>)contentProvider
                          collectionView:(UICollectionView *)collectionView
@@ -30,47 +29,42 @@
                           delegateProxy:(TECDelegateProxy *)delegateProxy {
     self = [super init];
     if(self) {
-        self.collectionView = collectionView;
+        
+        self.extendedView = collectionView;
         self.contentProvider = contentProvider;
         self.delegateProxy = delegateProxy;
-        self.extenders = extenders;
-        
-        [self setup];
+        [self addExtenders:extenders];
+        [self setupContentProvider];
     }
     return self;
-}
-
-- (void)setup {
-    [self setupExtenders];
-    [self setupCollectionView];
-    [self setupContentProvider];
 }
 
 - (void)setupContentProvider {
     self.contentProvider.presentationAdapter = self;
 }
 
-- (void)setupExtenders {
-    for(TECCollectionViewExtender *extender in self.extenders) {
+- (void)addExtenders:(NSArray *)extenders {
+    for(TECCollectionViewExtender *extender in extenders) {
         [self attachExtender:extender];
     }
+    [self setupExtendedView];
 }
 
 - (void)attachExtender:(TECCollectionViewExtender *)extender {
     extender.contentProvider = self.contentProvider;
-    extender.collectionView = self.collectionView;
+    extender.extendedView = self.extendedView;
     [self.delegateProxy attachDelegate:extender];
 }
 
-- (void)setupCollectionView {
-    self.collectionView.delegate = [self.delegateProxy proxy];
-    self.collectionView.dataSource = [self.delegateProxy proxy];
+- (void)setupExtendedView {
+    self.extendedView.delegate = [self.delegateProxy proxy];
+    self.extendedView.dataSource = [self.delegateProxy proxy];
 }
 
 #pragma mark - TECContentProviderPresentationAdapterProtocol
 
 - (void)contentProviderDidReloadData:(id<TECContentProviderProtocol>)contentProvider {
-    [self.collectionView reloadData];
+    [self.extendedView reloadData];
 }
 
 - (void)contentProviderWillChangeContent:(id<TECContentProviderProtocol>)contentProvider {
@@ -84,19 +78,19 @@
     switch (changeType) {
         case TECContentProviderSectionChangeTypeInsert: {
             [self.blockOperation addExecutionBlock:^{
-                [weakSelf.collectionView insertSections:[NSIndexSet indexSetWithIndex:index]];
+                [weakSelf.extendedView insertSections:[NSIndexSet indexSetWithIndex:index]];
             }];
             break;
         }
         case TECContentProviderSectionChangeTypeDelete: {
             [self.blockOperation addExecutionBlock:^{
-                [weakSelf.collectionView deleteSections:[NSIndexSet indexSetWithIndex:index]];
+                [weakSelf.extendedView deleteSections:[NSIndexSet indexSetWithIndex:index]];
             }];
             break;
         }
         case TECContentProviderSectionChangeTypeUpdate: {
             [self.blockOperation addExecutionBlock:^{
-                [weakSelf.collectionView reloadSections:[NSIndexSet indexSetWithIndex:index]];
+                [weakSelf.extendedView reloadSections:[NSIndexSet indexSetWithIndex:index]];
             }];
             break;
         }
@@ -111,26 +105,26 @@
     switch (changeType) {
         case TECContentProviderItemChangeTypeInsert: {
             [self.blockOperation addExecutionBlock:^{
-                [weakSelf.collectionView insertItemsAtIndexPaths:@[indexPath]];
+                [weakSelf.extendedView insertItemsAtIndexPaths:@[indexPath]];
             }];
             break;
         }
         case TECContentProviderItemChangeTypeDelete: {
             [self.blockOperation addExecutionBlock:^{
-                [weakSelf.collectionView deleteItemsAtIndexPaths:@[indexPath]];
+                [weakSelf.extendedView deleteItemsAtIndexPaths:@[indexPath]];
             }];
             break;
         }
         case TECContentProviderItemChangeTypeUpdate: {
             [self.blockOperation addExecutionBlock:^{
-                [weakSelf.collectionView reloadItemsAtIndexPaths:@[indexPath]];
+                [weakSelf.extendedView reloadItemsAtIndexPaths:@[indexPath]];
             }];
             break;
         }
         case TECContentProviderItemChangeTypeMove: {
             [self.blockOperation addExecutionBlock:^{
-                [weakSelf.collectionView deleteItemsAtIndexPaths:@[indexPath]];
-                [weakSelf.collectionView insertItemsAtIndexPaths:@[newIndexPath]];
+                [weakSelf.extendedView deleteItemsAtIndexPaths:@[indexPath]];
+                [weakSelf.extendedView insertItemsAtIndexPaths:@[newIndexPath]];
             }];
             break;
         }
@@ -139,7 +133,7 @@
 
 - (void)contentProviderDidChangeContent:(id<TECContentProviderProtocol>)contentProvider {
     __weak typeof(self) weakSelf = self;
-    [self.collectionView performBatchUpdates:^{
+    [self.extendedView performBatchUpdates:^{
         [weakSelf.blockOperation start];
     } completion:nil];
 }

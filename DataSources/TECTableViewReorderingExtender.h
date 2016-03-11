@@ -22,11 +22,11 @@ typedef NSIndexPath *(^TECTableViewReorderingExtenderTargetIndexPathBlock)(UITab
                                                                          id <TECSectionModelProtocol> targetSection,
                                                                          id targetItem);
 
-TECTableViewExtenderInterface(TECTableViewReorderingExtender)
+@interface TECTableViewReorderingExtender : TECTableViewExtender
 
 + (instancetype)reorderingExtenderWithCanMoveBlock:(TECTableViewReorderingExtenderCanMoveBlock)canMoveBlock
                               targetIndexPathBlock:(TECTableViewReorderingExtenderTargetIndexPathBlock)targetIndexPathBlock;
 - (instancetype)initWithCanMoveBlock:(TECTableViewReorderingExtenderCanMoveBlock)canMoveBlock
                 targetIndexPathBlock:(TECTableViewReorderingExtenderTargetIndexPathBlock)targetIndexPathBlock;
 
-TECTableViewExtenderEnd
+@end

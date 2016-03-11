@@ -9,14 +9,14 @@
 #import "TECTableViewReorderingExtender.h"
 #import "TECContentProviderProtocol.h"
 
-TECTableViewExtenderInterfaceExtension(TECTableViewReorderingExtender)
+@interface TECTableViewReorderingExtender()
 
 @property (nonatomic, copy) TECTableViewReorderingExtenderCanMoveBlock canMoveBlock;
 @property (nonatomic, copy) TECTableViewReorderingExtenderTargetIndexPathBlock targetIndexPathBlock;
 
-TECTableViewExtenderEnd
+@end
 
-TECTableViewExtenderImplementation(TECTableViewReorderingExtender)
+@implementation TECTableViewReorderingExtender
 
 + (instancetype)reorderingExtenderWithCanMoveBlock:(TECTableViewReorderingExtenderCanMoveBlock)canMoveBlock
                               targetIndexPathBlock:(TECTableViewReorderingExtenderTargetIndexPathBlock)targetIndexPathBlock {
@@ -71,4 +71,4 @@ TECTableViewExtenderImplementation(TECTableViewReorderingExtender)
     }
 }
 
-TECTableViewExtenderEnd
+@end

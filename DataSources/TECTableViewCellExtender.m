@@ -11,13 +11,13 @@
 #import "TECSectionModelProtocol.h"
 #import "TECReusableViewFactoryProtocol.h"
 
-TECTableViewExtenderInterfaceExtension(TECTableViewCellExtender)
+@interface TECTableViewCellExtender()
 
 @property (nonatomic, strong) id <TECReusableViewFactoryProtocol> cellFactory;
 
-TECTableViewExtenderEnd
+@end
 
-TECTableViewExtenderImplementation(TECTableViewCellExtender)
+@implementation TECTableViewCellExtender
 
 + (instancetype)cellExtenderWithCellFactory:(id <TECReusableViewFactoryProtocol>)cellFactory {
     return [[self alloc] initWithCellFactory:cellFactory];
@@ -56,4 +56,4 @@ TECTableViewExtenderImplementation(TECTableViewCellExtender)
     [self.cellFactory configureView:cell forItem:item atIndexPath:indexPath];
 }
 
-TECTableViewExtenderEnd
+@end

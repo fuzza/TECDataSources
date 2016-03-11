@@ -12,7 +12,7 @@
 SPEC_BEGIN(TECCollectionViewExtenderSpec)
 
 describe(@"TECCollectionViewExtender", ^{
-    itBehavesLike(@"extender", @{@"class" : [TECCollectionViewExtender class]});
+    itBehavesLike(@"collection extender", @{@"class" : [TECCollectionViewExtender class]});
 });
 
 SPEC_END

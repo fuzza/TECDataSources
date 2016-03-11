@@ -6,25 +6,24 @@
 //  Copyright © 2016 Alexey Fayzullov. All rights reserved.
 //
 
-#import "TECTableController.h"
+#import "TECTableViewPresentationAdapter.h"
 #import "TECContentProviderProtocol.h"
 #import "TECSectionModelProtocol.h"
 
 #import "TECDelegateProxy.h"
 #import "TECTableViewExtender.h"
 
-@interface TECTableController ()
+@interface TECTableViewPresentationAdapter ()
 
-@property (nonatomic, weak) UITableView *tableView;
+@property (nonatomic, strong, readwrite) UITableView *extendedView;
 
 @property (nonatomic, strong) id <TECContentProviderProtocol> contentProvider;
 
 @property (nonatomic, strong) TECDelegateProxy <id <UITableViewDelegate, UITableViewDataSource>> *delegateProxy;
-@property (nonatomic, strong) NSMutableArray <TECTableViewExtender *> *extenders;
 
 @end
 
-@implementation TECTableController
+@implementation TECTableViewPresentationAdapter
 
 #pragma mark - Lifecycle
 
@@ -34,18 +33,12 @@
                           delegateProxy:(TECDelegateProxy *)delegateProxy {
     self = [self init];
     if(self) {
+        self.extendedView = tableView;
         self.contentProvider = contentProvider;
-        self.contentProvider.presentationAdapter = self;
-
         self.delegateProxy = delegateProxy;
-        self.extenders = [NSMutableArray new];
-        
-        self.tableView = tableView;
         
         [self addExtenders:extenders];
-        
-        self.tableView.dataSource = [self.delegateProxy proxy];
-        self.tableView.delegate = [self.delegateProxy proxy];
+        [self setupContentProvider];
     }
     return self;
 }
@@ -55,8 +48,8 @@
 }
 
 - (void)cleanup {
-    self.tableView.dataSource = nil;
-    self.tableView.delegate = nil;
+    self.extendedView.dataSource = nil;
+    self.extendedView.delegate = nil;
 }
 
 #pragma mark - Extenders configuration
@@ -65,25 +58,34 @@
     for(TECTableViewExtender *extender in extenders) {
         [self addExtender:extender];
     }
+    [self setupExtendedView];
 }
 
 - (void)addExtender:(TECTableViewExtender *)extender {
-    NSParameterAssert(self.tableView);
+    NSParameterAssert(self.extendedView);
     NSParameterAssert(self.contentProvider);
-    extender.tableView = self.tableView;
+    extender.extendedView = self.extendedView;
     extender.contentProvider = self.contentProvider;
     [self.delegateProxy attachDelegate:extender];
-    [self.extenders addObject:extender];
+}
+
+- (void)setupExtendedView {
+    self.extendedView.dataSource = [self.delegateProxy proxy];
+    self.extendedView.delegate = [self.delegateProxy proxy];
+}
+
+- (void)setupContentProvider {
+    self.contentProvider.presentationAdapter = self;
 }
 
 #pragma mark - ContentProviderPresentationAdapter
 
 - (void)contentProviderDidReloadData:(id<TECContentProviderProtocol>)contentProvider {
-    [self.tableView reloadData];
+    [self.extendedView reloadData];
 }
 
 - (void)contentProviderWillChangeContent:(id<TECContentProviderProtocol>)contentProvider {
-    [self.tableView beginUpdates];
+    [self.extendedView beginUpdates];
 }
 
 - (void)contentProviderDidChangeItem:(id<TECSectionModelProtocol>)section
@@ -92,19 +94,19 @@
                         newIndexPath:(NSIndexPath *)newIndexPath {
     switch (changeType) {
         case TECContentProviderItemChangeTypeDelete:
-            [self.tableView deleteRowsAtIndexPaths:@[indexPath]
+            [self.extendedView deleteRowsAtIndexPaths:@[indexPath]
                                   withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
         case TECContentProviderItemChangeTypeInsert:
-            [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
+            [self.extendedView insertRowsAtIndexPaths:@[newIndexPath]
                                   withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
         case TECContentProviderItemChangeTypeMove:
-            [self.tableView moveRowAtIndexPath:indexPath
+            [self.extendedView moveRowAtIndexPath:indexPath
                                    toIndexPath:newIndexPath];
             break;
         case TECContentProviderItemChangeTypeUpdate:
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath]
+            [self.extendedView reloadRowsAtIndexPaths:@[indexPath]
                                   withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
     }
@@ -115,22 +117,22 @@
                           forChangeType:(TECContentProviderSectionChangeType)changeType {
     switch (changeType) {
         case TECContentProviderSectionChangeTypeInsert:
-            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:index]
+            [self.extendedView insertSections:[NSIndexSet indexSetWithIndex:index]
                           withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
         case TECContentProviderSectionChangeTypeDelete:
-            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:index]
+            [self.extendedView deleteSections:[NSIndexSet indexSetWithIndex:index]
                           withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
         case TECContentProviderSectionChangeTypeUpdate:
-            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:index]
+            [self.extendedView reloadSections:[NSIndexSet indexSetWithIndex:index]
                           withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
     }
 }
 
 - (void)contentProviderDidChangeContent:(id<TECContentProviderProtocol>)contentProvider {
-    [self.tableView endUpdates];
+    [self.extendedView endUpdates];
 }
 
 @end
