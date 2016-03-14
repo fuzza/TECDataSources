@@ -38,6 +38,7 @@
 		6F0124EE1C8DDCEC00646EB5 /* TECTableViewExtenderHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0124ED1C8DDCEC00646EB5 /* TECTableViewExtenderHelpers.m */; };
 		6F0125281C9301D000646EB5 /* TECPullToRefreshExtender.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0125271C9301D000646EB5 /* TECPullToRefreshExtender.m */; };
 		6F01252B1C93021300646EB5 /* TECPullToRefreshExtenderSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F01252A1C93021300646EB5 /* TECPullToRefreshExtenderSpec.m */; };
+		6F03E4E31C96D0AE005C6DF7 /* TECActivityIndicatorPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F03E4E21C96D0AE005C6DF7 /* TECActivityIndicatorPullToRefresh.m */; };
 		6F0CD60E1C51109400D09C01 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CD60D1C51109400D09C01 /* main.m */; };
 		6F0CD6111C51109400D09C01 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CD6101C51109400D09C01 /* AppDelegate.m */; };
 		6F0CD6141C51109400D09C01 /* MemoryContentProviderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CD6131C51109400D09C01 /* MemoryContentProviderViewController.m */; };
@@ -152,6 +153,8 @@
 		6F0125271C9301D000646EB5 /* TECPullToRefreshExtender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECPullToRefreshExtender.m; sourceTree = "<group>"; };
 		6F01252A1C93021300646EB5 /* TECPullToRefreshExtenderSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECPullToRefreshExtenderSpec.m; sourceTree = "<group>"; };
 		6F03E4E01C96CD81005C6DF7 /* TECPullToRefreshPresentationAdapterProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECPullToRefreshPresentationAdapterProtocol.h; sourceTree = "<group>"; };
+		6F03E4E11C96D0AE005C6DF7 /* TECActivityIndicatorPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECActivityIndicatorPullToRefresh.h; sourceTree = "<group>"; };
+		6F03E4E21C96D0AE005C6DF7 /* TECActivityIndicatorPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECActivityIndicatorPullToRefresh.m; sourceTree = "<group>"; };
 		6F0CD6091C51109400D09C01 /* DataSources.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DataSources.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F0CD60D1C51109400D09C01 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6F0CD60F1C51109400D09C01 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -293,6 +296,8 @@
 				6F0CD60C1C51109400D09C01 /* Supporting Files */,
 				6F59A96E1C58CDC40095289C /* TECCustomCell.h */,
 				6F59A96F1C58CDC40095289C /* TECCustomCell.m */,
+				6F03E4E11C96D0AE005C6DF7 /* TECActivityIndicatorPullToRefresh.h */,
+				6F03E4E21C96D0AE005C6DF7 /* TECActivityIndicatorPullToRefresh.m */,
 			);
 			name = SampleApp;
 			sourceTree = "<group>";
@@ -869,6 +874,7 @@
 				6F59A96A1C58CA650095289C /* TECMemoryContentProvider.m in Sources */,
 				00AA472A1C770EC400B2AD56 /* Person+CoreDataProperties.m in Sources */,
 				00AA47581C7B359600B2AD56 /* BaseTableContentProviderViewController.m in Sources */,
+				6F03E4E31C96D0AE005C6DF7 /* TECActivityIndicatorPullToRefresh.m in Sources */,
 				6F59A9701C58CDC40095289C /* TECCustomCell.m in Sources */,
 				6F59A9521C57B8EB0095289C /* TECTableViewPresentationAdapter.m in Sources */,
 				6F550A661C7DDF0200846E46 /* TECTableViewHeaderFooterViewRegistrationAdapter.m in Sources */,

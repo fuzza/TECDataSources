@@ -16,6 +16,7 @@
 #import "TECTableViewEditingExtender.h"
 #import "TECTableViewReorderingExtender.h"
 #import "TECTableViewDeletingExtender.h"
+#import "TECPullToRefreshExtender.h"
 
 @interface BaseTableContentProviderViewController : UIViewController
 
@@ -35,6 +36,8 @@
 @property (nonatomic, strong) TECTableViewReorderingExtender *reorderingExtender;
 @property (nonatomic, strong) TECTableViewEditingExtender *editingExtender;
 @property (nonatomic, strong) TECTableViewDeletingExtender *deletingExtender;
+@property (nonatomic, strong) TECPullToRefreshExtender *pullToRefreshExtender;
+
 
 - (id<TECContentProviderProtocol>)contentProvider;
 
