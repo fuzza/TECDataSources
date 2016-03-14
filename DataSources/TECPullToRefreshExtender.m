@@ -8,6 +8,7 @@
 
 #import "TECPullToRefreshExtender.h"
 #import "TECPullToRefreshPresentationAdapterProtocol.h"
+#import "TECLoaderProtocol.h"
 
 @interface TECPullToRefreshExtender ()
 
@@ -15,18 +16,18 @@
 @property (nonatomic, assign) CGFloat offset;
 @property (nonatomic, assign) TECPullToRefreshState state;
 @property (nonatomic, strong) id <TECPullToRefreshPresentationAdapterProtocol> presentationAdapter;
-@property (nonatomic, strong) TECPullToRefreshActionHandler actionHandler;
+@property (nonatomic, strong) id<TECLoaderProtocol> loader;
 @end
 
 @implementation TECPullToRefreshExtender
 
-- (instancetype)initWithHeight:(CGFloat)height presentationAdapter:(id<TECPullToRefreshPresentationAdapterProtocol>)presentationAdapter actionHandler:(TECPullToRefreshActionHandler)actionHandler {
+- (instancetype)initWithHeight:(CGFloat)height presentationAdapter:(id<TECPullToRefreshPresentationAdapterProtocol>)presentationAdapter loader:(id<TECLoaderProtocol>)loader {
     self = [super init];
     if(self) {
         self.offset = height;
         self.presentationAdapter = presentationAdapter;
         self.state = TECPullToRefreshStateInitial;
-        self.actionHandler = actionHandler;
+        self.loader = loader;
     }
     return self;
 }
@@ -37,10 +38,6 @@
     self.containerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self.extendedView addSubview:self.containerView];
     [self.presentationAdapter setupWithContainerView:self.containerView];
-}
-
-- (void)stop {
-    [self toClosing];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -109,9 +106,10 @@
     self.extendedView.contentInset = UIEdgeInsetsMake(self.offset, 0, 0, 0);
     self.extendedView.contentOffset = CGPointMake(0, self.extendedView.contentOffset.y-self.offset);
     
-    if(self.actionHandler) {
-        self.actionHandler();
-    }
+    __weak typeof(self) weakSelf = self;
+    [self.loader reloadWithCompletionBlock:^(NSArray *result, NSError *error) {
+        [weakSelf toClosing];
+    }];
 }
 
 - (void)toClosing {

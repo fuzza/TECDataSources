@@ -11,11 +11,12 @@
 typedef void(^TECPullToRefreshActionHandler)();
 
 @protocol TECPullToRefreshPresentationAdapterProtocol;
+@protocol TECLoaderProtocol;
 
 @interface TECPullToRefreshExtender : TECExtender
 
-- (instancetype)initWithHeight:(CGFloat)height presentationAdapter:(id<TECPullToRefreshPresentationAdapterProtocol>)presentationAdapter actionHandler:(TECPullToRefreshActionHandler)actionHandler;
-
-- (void)stop;
+- (instancetype)initWithHeight:(CGFloat)height
+           presentationAdapter:(id<TECPullToRefreshPresentationAdapterProtocol>)presentationAdapter
+                 loader:(id<TECLoaderProtocol>)loader;
 
 @end

@@ -18,6 +18,7 @@
 
 #import "TECDelegateProxy.h"
 #import "TECActivityIndicatorPullToRefresh.h"
+#import "TECDummyLoader.h"
 
 @interface MemoryContentProviderViewController ()
 
@@ -58,13 +59,8 @@
         return YES;
     }];
     self.deletingExtender = [TECTableViewDeletingExtender extender];
-   
-    __weak typeof(self) weakSelf = self;
-    self.pullToRefreshExtender = [[TECPullToRefreshExtender alloc] initWithHeight:50 presentationAdapter:[TECActivityIndicatorPullToRefresh new] actionHandler:^{
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [weakSelf.pullToRefreshExtender stop];
-        });
-    }];
+
+    self.pullToRefreshExtender = [[TECPullToRefreshExtender alloc] initWithHeight:50 presentationAdapter:[TECActivityIndicatorPullToRefresh new] loader:[TECDummyLoader new]];
     
     self.tableController =
     [[TECTableViewPresentationAdapter alloc] initWithContentProvider:self.contentProvider
