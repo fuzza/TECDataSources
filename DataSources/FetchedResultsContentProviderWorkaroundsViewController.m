@@ -103,15 +103,15 @@
     
     self.tableController =
     [[TECTableViewPresentationAdapter alloc] initWithContentProvider:self.contentProvider
-                                              tableView:self.tableView
-                                              extenders:@[
-                                                          self.headerExtender,
-                                                          self.footerExtender,
-                                                          self.cellExtender,
-                                                          self.editingExtender,
-                                                          self.deletingExtender,
-                                                          self.reorderingExtender]
-                                          delegateProxy:[[TECDelegateProxy alloc] init]];
+                                                        extendedView:self.tableView
+                                                           extenders:@[
+                                                                       self.headerExtender,
+                                                                       self.footerExtender,
+                                                                       self.cellExtender,
+                                                                       self.editingExtender,
+                                                                       self.deletingExtender,
+                                                                       self.reorderingExtender]
+                                                       delegateProxy:[[TECDelegateProxy alloc] init]];
 }
 
 - (void)workaround1ButtonItemPressed:(id)sender {

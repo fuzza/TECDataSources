@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @protocol TECContentProviderProtocol;
 @protocol TECSectionModelProtocol;
@@ -36,7 +37,7 @@ typedef NS_ENUM(NSUInteger, TECContentProviderItemChangeType) {
 - (void)contentProviderDidChangeSection:(id<TECSectionModelProtocol>)section
                                 atIndex:(NSUInteger)index
                           forChangeType:(TECContentProviderSectionChangeType)changeType;
-- (void)contentProviderDidChangeItem:(id<TECSectionModelProtocol>)section
+- (void)contentProviderDidChangeItem:(id)item
                          atIndexPath:(NSIndexPath *)indexPath
                        forChangeType:(TECContentProviderItemChangeType)changeType
                         newIndexPath:(NSIndexPath *)newIndexPath;

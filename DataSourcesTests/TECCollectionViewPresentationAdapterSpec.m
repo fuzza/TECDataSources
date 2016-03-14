@@ -42,10 +42,10 @@ describe(@"TECCollectionViewPresentationAdapter", ^{
     
     TECCollectionViewPresentationAdapter *(^createSut)() = ^{
         return [[TECCollectionViewPresentationAdapter alloc] initWithContentProvider:contentProviderMock
-                                                         collectionView:collectionViewMock
-                                                              extenders:@[firstExtender,
-                                                                          secondExtender]
-                                                          delegateProxy:delegateProxyMock];
+                                                                        extendedView:collectionViewMock
+                                                                           extenders:@[firstExtender,
+                                                                                       secondExtender]
+                                                                       delegateProxy:delegateProxyMock];
     };
     
     context(@"Initialization", ^{

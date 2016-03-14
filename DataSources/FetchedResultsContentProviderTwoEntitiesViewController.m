@@ -26,6 +26,9 @@
 #import "TECDelegateProxy.h"
 #import "CoreDataManager.h"
 
+#import "TECBlankStateDecorator.h"
+#import "TECBlankStateTextDisplay.h"
+
 #import "Person.h"
 #import "PersonOrdered.h"
 
@@ -33,6 +36,9 @@
 
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) TECFetchedResultsControllerContentProvider *contentProvider;
+
+@property (nonatomic, strong) TECBlankStateTextDisplay *blankTextDisplay;
+@property (nonatomic, strong) TECBlankStateDecorator *blankStateDecorator;
 
 @property (nonatomic, strong) NSFetchRequest *personFetchRequest;
 @property (nonatomic, strong) NSFetchRequest *personOrderedFetchRequest;
@@ -71,14 +77,18 @@
     
     self.tableController =
     [[TECTableViewPresentationAdapter alloc] initWithContentProvider:self.contentProvider
-                                              tableView:self.tableView
-                                              extenders:@[
-                                                          self.headerExtender,
-                                                          self.footerExtender,
-                                                          self.cellExtender,
-                                                          self.editingExtender,
-                                                          self.deletingExtender]
-                                          delegateProxy:[[TECDelegateProxy alloc] init]];
+                                                        extendedView:self.tableView
+                                                           extenders:@[
+                                                                       self.headerExtender,
+                                                                       self.footerExtender,
+                                                                       self.cellExtender,
+                                                                       self.editingExtender,
+                                                                       self.deletingExtender]
+                                                       delegateProxy:[[TECDelegateProxy alloc] init]];
+
+    self.blankTextDisplay = [[TECBlankStateTextDisplay alloc] initWithText:@"No items for display :("];
+    self.blankStateDecorator = [[TECBlankStateDecorator alloc] initWithPresentationAdapter:self.tableController
+                                                                       blankStateDisplayer:self.blankTextDisplay];
 }
 
 - (void)setupSubviews {
