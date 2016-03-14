@@ -26,26 +26,26 @@
     return self;
 }
 
-- (void)reloadWithSuccess:(TECLoaderResultBlock)successBlock error:(TECLoaderErrorBlock)errorBlock {
+- (void)reloadWithCompletionBlock:(TECLoaderCompletionBlock)completionBlock {
     self.state = TECLoaderStateReloading;
-    [self simulateRequestWithSuccess:successBlock];
+    [self simulateRequestWithCompletionBlock:completionBlock];
 }
 
-- (void)loadMoreWithSuccess:(TECLoaderResultBlock)successBlock error:(TECLoaderErrorBlock)errorBlock {
+- (void)loadMoreWithCompletionBlock:(TECLoaderCompletionBlock)completionBlock {
     if(self.state == TECLoaderStateReloading) {
         return;
     }
     self.state = TECLoaderStateLoadingMore;
-    [self simulateRequestWithSuccess:successBlock];
+    [self simulateRequestWithCompletionBlock:completionBlock];
 }
 
-- (void)simulateRequestWithSuccess:(TECLoaderResultBlock)successBlock {
+- (void)simulateRequestWithCompletionBlock:(TECLoaderCompletionBlock)completionBlock {
     __weak typeof(self) weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [weakSelf.contentProvider reloadDataSourceWithCompletion:nil];
         weakSelf.state = TECLoaderStateReady;
-        if(successBlock) {
-            successBlock(@[]);
+        if(completionBlock) {
+            completionBlock(@[], nil);
         }
     });
 }

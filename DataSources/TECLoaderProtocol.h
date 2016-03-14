@@ -13,8 +13,7 @@
 
 @property (nonatomic, assign, readonly) TECLoaderState state;
 
-- (void)reloadWithSuccess:(TECLoaderResultBlock)successBlock
-                    error:(TECLoaderErrorBlock)errorBlock;
+- (void)reloadWithCompletionBlock:(TECLoaderCompletionBlock)completionBlock;
 
 - (void)cancelCurrentLoading;
 
