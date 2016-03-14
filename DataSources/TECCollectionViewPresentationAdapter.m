@@ -54,6 +54,7 @@
     extender.contentProvider = self.contentProvider;
     extender.extendedView = self.extendedView;
     [self.delegateProxy attachDelegate:extender];
+    [extender didSetup];
 }
 
 - (void)setupExtendedView {

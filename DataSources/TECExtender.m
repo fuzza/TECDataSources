@@ -10,4 +10,6 @@
 
 @implementation TECExtender
 
+- (void)didSetup {}
+
 @end
