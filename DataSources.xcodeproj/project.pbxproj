@@ -274,7 +274,7 @@
 		0015F9BE1C7F559100179FD9 /* SampleApp */ = {
 			isa = PBXGroup;
 			children = (
-				6F03E4EB1C96DE77005C6DF7 /* DummyReloader */,
+				6F03E4EB1C96DE77005C6DF7 /* DummyLoader */,
 				6F0CD60F1C51109400D09C01 /* AppDelegate.h */,
 				6F0CD6101C51109400D09C01 /* AppDelegate.m */,
 				00AA471C1C77042A00B2AD56 /* CoreDataManager.h */,
@@ -403,13 +403,13 @@
 			name = Loader;
 			sourceTree = "<group>";
 		};
-		6F03E4EB1C96DE77005C6DF7 /* DummyReloader */ = {
+		6F03E4EB1C96DE77005C6DF7 /* DummyLoader */ = {
 			isa = PBXGroup;
 			children = (
 				6F03E4EC1C96DE9E005C6DF7 /* TECDummyLoader.h */,
 				6F03E4ED1C96DE9E005C6DF7 /* TECDummyLoader.m */,
 			);
-			name = DummyReloader;
+			name = DummyLoader;
 			sourceTree = "<group>";
 		};
 		6F03E4EF1C9711E1005C6DF7 /* StateMachine */ = {

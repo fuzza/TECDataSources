@@ -16,5 +16,4 @@ typedef NS_ENUM (NSInteger, TECLoaderState) {
     TECLoaderStateFailed
 };
 
-typedef void(TECLoaderResultBlock)(NSArray *result);
-typedef void(TECLoaderErrorBlock)(NSError *error);
+typedef void(^TECLoaderCompletionBlock)(NSArray *result, NSError *error);

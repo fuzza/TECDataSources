@@ -10,7 +10,6 @@
 
 @protocol TECLoadMoreProtocol <TECLoaderProtocol>
 
-- (void)loadMoreWithSuccess:(TECLoaderResultBlock)successBlock
-                      error:(TECLoaderErrorBlock)errorBlock;
+- (void)loadMoreWithCompletionBlock:(TECLoaderCompletionBlock)completionBlock;
 
 @end
