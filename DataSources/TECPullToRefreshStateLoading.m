@@ -10,23 +10,26 @@
 #import "TECPullToRefreshStateClosing.h"
 #import "TECPullToRefreshStateContextProtocol.h"
 #import "TECLoaderProtocol.h"
+#import "TECScrollViewHelper.h"
 
 @implementation TECPullToRefreshStateLoading
 
 - (void)didAttach {
-    [self setupTopScrollViewInset:[self.context pullToRefreshThreshold]];
+    [TECScrollViewHelper modifyTopInset:self.context.pullToRefreshThreshold
+                             scrollView:self.context.scrollView];
     [self triggerLoading];
 }
 
 - (void)didScroll {
     CGFloat scrollPosition = [self.context scrollPosition];
     CGFloat threshold = [self.context pullToRefreshThreshold];
+    UIScrollView *scrollView = [self.context scrollView];
     
-    if(scrollPosition >= 0) {
-        [self setupTopScrollViewInset:0];
-    } else {
-        [self setupTopScrollViewInset:MIN(-scrollPosition, threshold)];
+    CGFloat topInset = 0;
+    if(scrollPosition < 0) {
+        topInset = MIN(-scrollPosition, threshold);
     }
+    [TECScrollViewHelper modifyTopInset:topInset scrollView:scrollView];
 }
 
 - (TECPullToRefreshStateCode)code {
@@ -34,13 +37,6 @@
 }
 
 #pragma mark - Private
-
-- (void)setupTopScrollViewInset:(CGFloat)topInset {
-    UIScrollView *scrollView = [self.context scrollView];
-    UIEdgeInsets modifiedInset = scrollView.contentInset;
-    modifiedInset.top = topInset;
-    scrollView.contentInset = modifiedInset;
-}
 
 - (void)triggerLoading {
     id <TECLoaderProtocol> loader = [self.context loader];

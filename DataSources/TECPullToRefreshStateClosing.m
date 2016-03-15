@@ -9,6 +9,7 @@
 #import "TECPullToRefreshStateClosing.h"
 #import "TECPullToRefreshStateInitial.h"
 #import "TECPullToRefreshStateContextProtocol.h"
+#import "TECScrollViewHelper.h"
 
 @implementation TECPullToRefreshStateClosing
 
@@ -21,18 +22,11 @@
     
     __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:animationDuration animations:^{
-        [weakSelf setupTopScrollViewInset:0];
+        [TECScrollViewHelper modifyTopInset:0 scrollView:weakSelf.context.scrollView];
     } completion:^(BOOL finished) {
         TECPullToRefreshStateInitial *initialState = [TECPullToRefreshStateInitial stateWithContext:weakSelf.context];
         [weakSelf.context setState:initialState];
     }];
-}
-
-- (void)setupTopScrollViewInset:(CGFloat)topInset {
-    UIScrollView *scrollView = [self.context scrollView];
-    UIEdgeInsets modifiedInset = scrollView.contentInset;
-    modifiedInset.top = topInset;
-    scrollView.contentInset = modifiedInset;
 }
 
 @end
