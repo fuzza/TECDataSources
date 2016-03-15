@@ -13,10 +13,12 @@
 
 @interface TECPullToRefreshExtender ()
 
-@property (nonatomic, strong, readwrite) UIView *containerView;
-@property (nonatomic, assign) CGFloat offset;
-@property (nonatomic, strong) id <TECPullToRefreshPresentationAdapterProtocol> presentationAdapter;
+@property (nonatomic, strong) UIView *pullToRefreshView;
+@property (nonatomic, assign) CGFloat pullToRefreshThreshold;
 @property (nonatomic, strong) id<TECLoaderProtocol> loader;
+
+@property (nonatomic, strong) id <TECPullToRefreshPresentationAdapterProtocol> presentationAdapter;
+
 @end
 
 @implementation TECPullToRefreshExtender
@@ -24,7 +26,7 @@
 - (instancetype)initWithHeight:(CGFloat)height presentationAdapter:(id<TECPullToRefreshPresentationAdapterProtocol>)presentationAdapter loader:(id<TECLoaderProtocol>)loader {
     self = [super init];
     if(self) {
-        self.offset = height;
+        self.pullToRefreshThreshold = height;
         self.presentationAdapter = presentationAdapter;
         self.loader = loader;
     }
@@ -32,12 +34,26 @@
 }
 
 - (void)didSetup {
-    self.containerView = [UIView new];
-    self.containerView.frame = CGRectMake(0, -self.offset, CGRectGetHeight(self.extendedView.bounds), self.offset);
-    self.containerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [self.extendedView addSubview:self.containerView];
-    [self.presentationAdapter setupWithContainerView:self.containerView];
-    
+    [self setupContainerView];
+    [self setupPresentationAdapter];
+    [self setupInitialState];
+}
+
+- (void)setupContainerView {
+    CGRect containerFrame = CGRectMake(0,
+                                       -self.pullToRefreshThreshold,
+                                       CGRectGetWidth(self.extendedView.bounds),
+                                       self.pullToRefreshThreshold);
+    self.pullToRefreshView = [[UIView alloc] initWithFrame:containerFrame];
+    self.pullToRefreshView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [self.extendedView addSubview:self.pullToRefreshView];
+}
+
+- (void)setupPresentationAdapter {
+    [self.presentationAdapter setupWithContainerView:self.pullToRefreshView];
+}
+
+- (void)setupInitialState {
     self.state = [TECPullToRefreshStateInitial stateWithContext:self];
 }
 
@@ -61,14 +77,9 @@
     _state = state;
     [_state didAttach];
     [self.presentationAdapter didChangeState:_state];
-    NSLog(@"%@", @(state.code));
 }
 
 #pragma mark - TECPullToRefreshStateContextProtocol
-
-- (CGFloat)pullToRefreshThreshold {
-    return self.offset;
-}
 
 - (CGFloat)scrollPosition {
     return self.scrollView.contentOffset.y;
@@ -80,10 +91,6 @@
 
 - (UIScrollView *)scrollView {
     return self.extendedView;
-}
-
-- (UIView *)pullToRefreshView {
-    return self.containerView;
 }
 
 @end
