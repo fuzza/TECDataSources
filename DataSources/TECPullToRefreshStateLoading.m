@@ -16,8 +16,11 @@
 @implementation TECPullToRefreshStateLoading
 
 - (void)didAttach {
+    CGFloat scrollPosition = self.context.scrollPosition;
     [TECScrollViewHelper modifyTopInset:self.context.pullToRefreshThreshold
                              scrollView:self.context.scrollView];
+    [self.context.scrollView setContentOffset:CGPointMake(0, scrollPosition)];
+    
     [self triggerLoading];
 }
 

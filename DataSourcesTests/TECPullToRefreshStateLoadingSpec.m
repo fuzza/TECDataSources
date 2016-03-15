@@ -41,6 +41,7 @@ describe(@"Attach event", ^{
         [contextMock stub:@selector(scrollView) andReturn:scrollViewMock];
         [contextMock stub:@selector(loader) andReturn:loaderMock];
         [contextMock stub:@selector(pullToRefreshThreshold) andReturn:theValue(25)];
+        [contextMock stub:@selector(scrollPosition) andReturn:theValue(477)];
     });
     
     it(@"Sets top content inset", ^{
@@ -49,6 +50,11 @@ describe(@"Attach event", ^{
         [scrollViewMock stub:@selector(contentInset) andReturn:theValue(originInsets)];
         
         [[scrollViewMock should] receive:@selector(setContentInset:) withArguments:theValue(expectedInsets)];
+        [sut didAttach];
+    });
+    
+    it(@"Should re-set scroll position after changing inset", ^{
+        [[scrollViewMock should] receive:@selector(setContentOffset:) withArguments:theValue(CGPointMake(0, 477))];
         [sut didAttach];
     });
     
