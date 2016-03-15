@@ -9,12 +9,12 @@
 #import "TECPullToRefreshStateInitial.h"
 #import "TECPullToRefreshStateContextProtocol.h"
 #import "TECPullToRefreshStatePulling.h"
+#import "TECRefreshTransitionHelper.h"
 
 @implementation TECPullToRefreshStateInitial
 
 - (void)didStartDragging {
-    TECPullToRefreshStatePulling *pullingState = [TECPullToRefreshStatePulling stateWithContext:self.context];
-    [self.context setState:pullingState];
+    [TECRefreshTransitionHelper goToStateClass:[TECPullToRefreshStatePulling class] inContext:self.context];
 }
 
 - (TECPullToRefreshStateCode)code {

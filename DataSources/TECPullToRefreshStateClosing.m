@@ -10,6 +10,7 @@
 #import "TECPullToRefreshStateInitial.h"
 #import "TECPullToRefreshStateContextProtocol.h"
 #import "TECScrollViewHelper.h"
+#import "TECRefreshTransitionHelper.h"
 
 @implementation TECPullToRefreshStateClosing
 
@@ -24,8 +25,8 @@
     [UIView animateWithDuration:animationDuration animations:^{
         [TECScrollViewHelper modifyTopInset:0 scrollView:weakSelf.context.scrollView];
     } completion:^(BOOL finished) {
-        TECPullToRefreshStateInitial *initialState = [TECPullToRefreshStateInitial stateWithContext:weakSelf.context];
-        [weakSelf.context setState:initialState];
+        [TECRefreshTransitionHelper goToStateClass:[TECPullToRefreshStateInitial class]
+                                         inContext:weakSelf.context];
     }];
 }
 

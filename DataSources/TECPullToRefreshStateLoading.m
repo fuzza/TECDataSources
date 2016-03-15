@@ -11,6 +11,7 @@
 #import "TECPullToRefreshStateContextProtocol.h"
 #import "TECLoaderProtocol.h"
 #import "TECScrollViewHelper.h"
+#import "TECRefreshTransitionHelper.h"
 
 @implementation TECPullToRefreshStateLoading
 
@@ -42,8 +43,7 @@
     id <TECLoaderProtocol> loader = [self.context loader];
     __weak typeof(self) weakSelf = self;
     [loader reloadWithCompletionBlock:^(NSArray *result, NSError *error) {
-        TECPullToRefreshStateClosing *closingState = [TECPullToRefreshStateClosing stateWithContext:weakSelf.context];
-        [weakSelf.context setState:closingState];
+        [TECRefreshTransitionHelper goToStateClass:[TECPullToRefreshStateClosing class] inContext:weakSelf.context];
     }];
 }
 
