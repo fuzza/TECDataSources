@@ -8,17 +8,30 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol TECPullToRefreshStateContext;
+typedef NS_ENUM(NSInteger, TECPullToRefreshStateCode) {
+    TECPullToRefreshStateCodeUnknown = 0,
+    TECPullToRefreshStateCodeInitial,
+    TECPullToRefreshStateCodePulling,
+    TECPullToRefreshStateCodeReady,
+    TECPullToRefreshStateCodeLoading,
+    TECPullToRefreshStateCodeClosing
+};
+
+@protocol TECPullToRefreshStateContextProtocol;
 
 @interface TECPullToRefreshState : NSObject
 
-@property (nonatomic, weak, readonly) id <TECPullToRefreshStateContext>context;
+@property (nonatomic, weak, readonly) id <TECPullToRefreshStateContextProtocol>context;
 
-- (instancetype)initWithContext:(id<TECPullToRefreshStateContext>)context;
++ (instancetype)stateWithContext:(id<TECPullToRefreshStateContextProtocol>)context;
+- (instancetype)initWithContext:(id<TECPullToRefreshStateContextProtocol>)context;
 
+- (void)didAttach;
 - (void)didScroll;
 - (void)didStartDragging;
 - (void)didRelease;
 - (void)didLoad;
+
+- (TECPullToRefreshStateCode)code;
 
 @end

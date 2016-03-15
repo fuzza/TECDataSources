@@ -7,13 +7,16 @@
 //
 
 #import "TECExtender.h"
+#import "TECPullToRefreshStateContextProtocol.h"
 
 typedef void(^TECPullToRefreshActionHandler)();
 
 @protocol TECPullToRefreshPresentationAdapterProtocol;
 @protocol TECLoaderProtocol;
 
-@interface TECPullToRefreshExtender : TECExtender
+@interface TECPullToRefreshExtender : TECExtender <TECPullToRefreshStateContextProtocol>
+
+@property (nonatomic, strong) TECPullToRefreshState *state;
 
 - (instancetype)initWithHeight:(CGFloat)height
            presentationAdapter:(id<TECPullToRefreshPresentationAdapterProtocol>)presentationAdapter

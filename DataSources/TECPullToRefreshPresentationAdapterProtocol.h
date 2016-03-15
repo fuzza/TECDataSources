@@ -8,19 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger, TECPullToRefreshState) {
-    TECPullToRefreshStateInitial,
-    TECPullToRefreshStatePulling,
-    TECPullToRefreshStateReady,
-    TECPullToRefreshStateLoading,
-    TECPullToRefreshStateClosing
-};
+@class TECPullToRefreshState;
 
 @protocol TECPullToRefreshPresentationAdapterProtocol <NSObject>
 
 - (void)setupWithContainerView:(UIView *)containerView;
 
 - (void)didChangeScrollProgress:(CGFloat)progress;
-- (void)didChangeState:(TECPullToRefreshState)state;
+- (void)didChangeState:(TECPullToRefreshState *)state;
 
 @end

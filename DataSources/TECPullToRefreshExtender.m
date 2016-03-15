@@ -7,6 +7,7 @@
 //
 
 #import "TECPullToRefreshExtender.h"
+#import "TECPullToRefreshStateInitial.h"
 #import "TECPullToRefreshPresentationAdapterProtocol.h"
 #import "TECLoaderProtocol.h"
 
@@ -14,7 +15,6 @@
 
 @property (nonatomic, strong, readwrite) UIView *containerView;
 @property (nonatomic, assign) CGFloat offset;
-@property (nonatomic, assign) TECPullToRefreshState state;
 @property (nonatomic, strong) id <TECPullToRefreshPresentationAdapterProtocol> presentationAdapter;
 @property (nonatomic, strong) id<TECLoaderProtocol> loader;
 @end
@@ -26,7 +26,6 @@
     if(self) {
         self.offset = height;
         self.presentationAdapter = presentationAdapter;
-        self.state = TECPullToRefreshStateInitial;
         self.loader = loader;
     }
     return self;
@@ -38,88 +37,53 @@
     self.containerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self.extendedView addSubview:self.containerView];
     [self.presentationAdapter setupWithContainerView:self.containerView];
+    
+    self.state = [TECPullToRefreshStateInitial stateWithContext:self];
 }
 
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    switch (self.state) {
-        case TECPullToRefreshStatePulling: {
-            if(scrollView.contentOffset.y <= -self.offset) {
-                self.state = TECPullToRefreshStateReady;
-            }
-        }
-            break;
-        case TECPullToRefreshStateReady: {
-            if(scrollView.contentOffset.y > -self.offset) {
-                self.state = TECPullToRefreshStatePulling;
-            }
-        }
-            break;
-        case TECPullToRefreshStateLoading: {
-            if(scrollView.contentOffset.y >= 0 )
-                scrollView.contentInset = UIEdgeInsetsZero;
-            else
-                scrollView.contentInset = UIEdgeInsetsMake(MIN( -scrollView.contentOffset.y, self.offset), 0, 0, 0 );       }
-            break;
-        default:
-            break;
-    }
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    switch (self.state) {
-        case TECPullToRefreshStatePulling: {
-            [self toClosing];
-        }
-            break;
-        case TECPullToRefreshStateReady: {
-            [self toLoading];
-        }
-            break;
-        default:
-            break;
-    }
+    [self.state didScroll];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    switch (self.state) {
-        case TECPullToRefreshStateInitial: {
-            self.state = TECPullToRefreshStatePulling;
-        }
-            break;
-        default:
-            break;
-    }
+    [self.state didStartDragging];
 }
 
-- (void)setState:(TECPullToRefreshState)state {
-    _state = state;
-    [self.presentationAdapter didChangeState:state];
-    NSLog(@"%@", @(state));
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [self.state didRelease];
 }
 
 #pragma mark - State machine
 
-- (void)toLoading {
-    self.state = TECPullToRefreshStateLoading;
-    self.extendedView.contentInset = UIEdgeInsetsMake(self.offset, 0, 0, 0);
-    self.extendedView.contentOffset = CGPointMake(0, self.extendedView.contentOffset.y-self.offset);
-    
-    __weak typeof(self) weakSelf = self;
-    [self.loader reloadWithCompletionBlock:^(NSArray *result, NSError *error) {
-        [weakSelf toClosing];
-    }];
+- (void)setState:(TECPullToRefreshState *)state {
+    _state = state;
+    [_state didAttach];
+    [self.presentationAdapter didChangeState:_state];
+    NSLog(@"%@", @(state.code));
 }
 
-- (void)toClosing {
-    self.state = TECPullToRefreshStateClosing;
-    __weak typeof(self) weakSelf = self;
-    [UIView animateWithDuration:0.25 animations:^{
-        weakSelf.extendedView.contentInset = UIEdgeInsetsZero;
-    } completion:^(BOOL finished) {
-        weakSelf.state = TECPullToRefreshStateInitial;
-    }];
+#pragma mark - TECPullToRefreshStateContextProtocol
+
+- (CGFloat)pullToRefreshThreshold {
+    return self.offset;
+}
+
+- (CGFloat)scrollPosition {
+    return self.scrollView.contentOffset.y;
+}
+
+- (CGFloat)animationDuration {
+    return 0.25;
+}
+
+- (UIScrollView *)scrollView {
+    return self.extendedView;
+}
+
+- (UIView *)pullToRefreshView {
+    return self.containerView;
 }
 
 @end

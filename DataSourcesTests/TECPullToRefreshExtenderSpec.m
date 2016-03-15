@@ -13,5 +13,4 @@ SPEC_BEGIN(TECPullToRefreshExtenderSpec)
 
 itBehavesLike(@"base extender", @{@"class" : [TECPullToRefreshExtender class]});
 
-
 SPEC_END

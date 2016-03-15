@@ -10,12 +10,16 @@
 #import "TECPullToRefreshStateContextProtocol.h"
 
 @interface TECPullToRefreshState ()
-@property (nonatomic, weak, readwrite) id <TECPullToRefreshStateContext>context;
+@property (nonatomic, weak, readwrite) id <TECPullToRefreshStateContextProtocol>context;
 @end
 
 @implementation TECPullToRefreshState
 
-- (instancetype)initWithContext:(id<TECPullToRefreshStateContext>)context {
++ (instancetype)stateWithContext:(id<TECPullToRefreshStateContextProtocol>)context {
+    return [[self alloc] initWithContext:context];
+}
+
+- (instancetype)initWithContext:(id<TECPullToRefreshStateContextProtocol>)context {
     self = [super init];
     if(self) {
         self.context = context;
@@ -23,20 +27,20 @@
     return self;
 }
 
-- (void)didScroll {
-    
-}
+#pragma mark - Events
 
-- (void)didStartDragging {
-    
-}
+- (void)didAttach {}
 
-- (void)didRelease {
-    
-}
+- (void)didScroll {}
 
-- (void)didLoad {
-    
+- (void)didStartDragging {}
+
+- (void)didRelease {}
+
+- (void)didLoad {}
+
+- (TECPullToRefreshStateCode)code {
+    return TECPullToRefreshStateCodeUnknown;
 }
 
 @end

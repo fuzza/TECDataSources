@@ -7,6 +7,7 @@
 //
 
 #import "TECActivityIndicatorPullToRefresh.h"
+#import "TECPullToRefreshState.h"
 
 @interface TECActivityIndicatorPullToRefresh ()
 
@@ -32,10 +33,10 @@
     [self.containerView addConstraint:yCenterConstraint];
 }
 
-- (void)didChangeState:(TECPullToRefreshState)state {
-    switch (state) {
-        case TECPullToRefreshStateReady:
-        case TECPullToRefreshStateLoading:
+- (void)didChangeState:(TECPullToRefreshState *)state {
+    switch (state.code) {
+        case TECPullToRefreshStateCodeReady:
+        case TECPullToRefreshStateCodeLoading:
             [self.indicator startAnimating];
             break;
         default:

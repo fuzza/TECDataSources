@@ -19,6 +19,7 @@
 - (UIView *)pullToRefreshView;
 
 - (CGFloat)pullToRefreshThreshold;
+- (CGFloat)scrollPosition;
 - (CGFloat)animationDuration;
 
 - (id<TECLoaderProtocol>)loader;
