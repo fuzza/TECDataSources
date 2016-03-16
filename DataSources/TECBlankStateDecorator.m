@@ -10,10 +10,10 @@
 #import "TECPresentationAdapter.h"
 #import "TECContentProviderProtocol.h"
 
-@interface TECBlankStateDecorator () {
-    __weak id<TECBlankStateDisplayProtocol> _display;
-    UIView *_containerView;
-}
+@interface TECBlankStateDecorator ()
+
+@property (nonatomic, weak) id<TECBlankStateDisplayProtocol> display;
+@property (nonatomic, strong) UIView *containerView;
 
 @end
 
@@ -21,65 +21,74 @@
 
 #pragma mark - Lifecycle
 
-- (instancetype)initWithPresentationAdapter:(TECPresentationAdapter *)presentationAdapter
-                        blankStateDisplayer:(id<TECBlankStateDisplayProtocol>)blankStateDisplayer {
++ (id)decoratedInstanceOf:(TECPresentationAdapter *)presentationAdapter
+  withBlankStateDisplayer:(id<TECBlankStateDisplayProtocol>)blankStateDisplayer {
+    return [[self alloc] initWithPresentationAdapter:presentationAdapter blankStateDisplayer:blankStateDisplayer];
+}
+
+- (id)initWithPresentationAdapter:(TECPresentationAdapter *)presentationAdapter
+              blankStateDisplayer:(id<TECBlankStateDisplayProtocol>)blankStateDisplayer {
     self = [super initWithPresentationAdapter:presentationAdapter];
     if (self) {
-        _display = blankStateDisplayer;
+        self.display = blankStateDisplayer;
         [self initViewHierarchy];
-        [self testDisplayability];
+        [self displayBlankStateIfNeeded];
     }
     return self;
 }
 
 - (void)initViewHierarchy {
     UIScrollView *extendedView = self.presentationAdapter.extendedView;
-    _containerView = [[UIView alloc] initWithFrame:extendedView.frame];
-    _containerView.hidden = YES;
-    _containerView.translatesAutoresizingMaskIntoConstraints = NO;
-    NSLayoutConstraint *equalWidth = [NSLayoutConstraint constraintWithItem:_containerView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:extendedView attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0.0];
-    NSLayoutConstraint *equalHeight = [NSLayoutConstraint constraintWithItem:_containerView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:extendedView attribute:NSLayoutAttributeHeight multiplier:1.0 constant:0.0];
-    NSLayoutConstraint *centerX = [NSLayoutConstraint constraintWithItem:_containerView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:extendedView attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0];
-    NSLayoutConstraint *centerY = [NSLayoutConstraint constraintWithItem:_containerView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:extendedView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0];
-    [extendedView.superview insertSubview:_containerView aboveSubview:extendedView];
+    self.containerView = [[UIView alloc] initWithFrame:extendedView.frame];
+    self.containerView.hidden = YES;
+    self.containerView.translatesAutoresizingMaskIntoConstraints = NO;
+    NSLayoutConstraint *equalWidth = [NSLayoutConstraint constraintWithItem:self.containerView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:extendedView attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0.0];
+    NSLayoutConstraint *equalHeight = [NSLayoutConstraint constraintWithItem:self.containerView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:extendedView attribute:NSLayoutAttributeHeight multiplier:1.0 constant:0.0];
+    NSLayoutConstraint *centerX = [NSLayoutConstraint constraintWithItem:self.containerView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:extendedView attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0];
+    NSLayoutConstraint *centerY = [NSLayoutConstraint constraintWithItem:self.containerView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:extendedView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0];
+    [extendedView.superview insertSubview:self.containerView aboveSubview:extendedView];
     [extendedView.superview addConstraints:@[equalWidth, equalHeight, centerX, centerY]];
 }
 
 #pragma mark - TECContentProviderPresentationAdapter
 
 - (void)contentProviderDidReloadData:(id<TECContentProviderProtocol>)contentProvider {
-    [super contentProviderDidReloadData:contentProvider];
-    [self testDisplayability];
+    if ([self.presentationAdapter respondsToSelector:@selector(contentProviderDidReloadData:)]) {
+        [self.presentationAdapter contentProviderDidReloadData:contentProvider];
+    }
+    [self displayBlankStateIfNeeded];
 }
 
 - (void)contentProviderDidChangeContent:(id<TECContentProviderProtocol>)contentProvider {
-    [super contentProviderDidChangeContent:contentProvider];
-    [self testDisplayability];
+    if ([self.presentationAdapter respondsToSelector:@selector(contentProviderDidChangeContent:)]) {
+        [self.presentationAdapter contentProviderDidChangeContent:contentProvider];
+    }
+    [self displayBlankStateIfNeeded];
 }
 
 #pragma mark - Test displayability & display
 
-- (void)testDisplayability {
-    [self testAgainstBlankState];
-    [self testAgainstNonBlankState];
+- (void)displayBlankStateIfNeeded {
+    [self showBlankStateIfNeeded];
+    [self hideBlankStateIfNeeded];
 }
 
-- (void)testAgainstBlankState {
+- (void)showBlankStateIfNeeded {
     if ([self.contentProvider numberOfSections] == 0) {
-        BOOL shouldShow = [_display shouldShowBlankStateForPresentationAdapter:self.presentationAdapter];
+        BOOL shouldShow = [self.display shouldShowBlankStateForPresentationAdapter:self.presentationAdapter];
         if (shouldShow) {
-            _containerView.hidden = NO;
-            [_display showBlankStateForPresentationAdapter:self.presentationAdapter containerView:_containerView];
+            self.containerView.hidden = NO;
+            [self.display showBlankStateForPresentationAdapter:self.presentationAdapter containerView:self.containerView];
         }
     }
 }
 
-- (void)testAgainstNonBlankState {
+- (void)hideBlankStateIfNeeded {
     if ([self.contentProvider numberOfSections] != 0) {
-        BOOL shouldHide = [_display shouldHideBlankStateForPresentationAdapter:self.presentationAdapter];
+        BOOL shouldHide = [self.display shouldHideBlankStateForPresentationAdapter:self.presentationAdapter];
         if (shouldHide) {
-            _containerView.hidden = YES;
-            [_display hideBlankStateForPresentationAdapter:self.presentationAdapter containerView:_containerView];
+            self.containerView.hidden = YES;
+            [self.display hideBlankStateForPresentationAdapter:self.presentationAdapter containerView:self.containerView];
         }
     }
 }

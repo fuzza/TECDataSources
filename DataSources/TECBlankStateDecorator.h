@@ -21,7 +21,9 @@
 
 @interface TECBlankStateDecorator : TECPresentationAdapterDecorator
 
-- (instancetype)initWithPresentationAdapter:(TECPresentationAdapter *)presentationAdapter
-                        blankStateDisplayer:(id<TECBlankStateDisplayProtocol>)blankStateDisplayer;
++ (id)decoratedInstanceOf:(TECPresentationAdapter *)presentationAdapter
+  withBlankStateDisplayer:(id<TECBlankStateDisplayProtocol>)blankStateDisplayer;
+- (id)initWithPresentationAdapter:(TECPresentationAdapter *)presentationAdapter
+              blankStateDisplayer:(id<TECBlankStateDisplayProtocol>)blankStateDisplayer;
 
 @end

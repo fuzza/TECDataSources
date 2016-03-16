@@ -12,10 +12,9 @@
 
 @interface TECBlankStateDecorator (Test)
 
-- (void)initViewHierarchy;
-- (void)testDisplayability;
-- (void)testAgainstBlankState;
-- (void)testAgainstNonBlankState;
+- (void)displayBlankStateIfNeeded;
+- (void)showBlankStateIfNeeded;
+- (void)hideBlankStateIfNeeded;
 
 @end
 
@@ -32,6 +31,7 @@ describe(@"TECBlankStateDecorator", ^() {
         UIView *extendedViewSuperviewMock = [UIView nullMock];
         UIView *extendedViewMock = [UIView nullMock];
         [extendedViewMock stub:@selector(superview) andReturn:extendedViewSuperviewMock];
+        [extendedViewMock stub:@selector(frame) andReturn:theValue(CGRectZero)];
         [tablePresentationAdapterMock stub:@selector(extendedView) andReturn:extendedViewMock];
         [tablePresentationAdapterMock stub:@selector(contentProvider) andReturn:contentProviderMock];
     };
@@ -39,8 +39,9 @@ describe(@"TECBlankStateDecorator", ^() {
     context(@"on initialization", ^() {
         beforeEach(beforeEachBlock);
         it(@"should set presentation adapter and contentProvider", ^() {
-            TECBlankStateDecorator *decorator = [[TECBlankStateDecorator alloc] initWithPresentationAdapter:tablePresentationAdapterMock
-                                                                                        blankStateDisplayer:displayMock];
+            TECBlankStateDecorator *decorator =
+            [[TECBlankStateDecorator alloc] initWithPresentationAdapter:tablePresentationAdapterMock
+                                                    blankStateDisplayer:displayMock];
             [[decorator.presentationAdapter should] beIdenticalTo:tablePresentationAdapterMock];
             [[contentProviderMock should] beIdenticalTo:decorator.contentProvider];
         });
@@ -53,8 +54,8 @@ describe(@"TECBlankStateDecorator", ^() {
                                                            blankStateDisplayer:displayMock];
         });
         
-        it(@"should test both blank and non-nlank states", ^() {
-            [sut testDisplayability];
+        it(@"should test both blank and non-blank states", ^() {
+            [sut showBlankStateIfNeeded];
         });
         
         context(@"when content provider is empty", ^(){
@@ -66,7 +67,7 @@ describe(@"TECBlankStateDecorator", ^() {
             it(@"should ask displayer for show", ^() {
                 [[displayMock should] receive:@selector(shouldShowBlankStateForPresentationAdapter:)
                                 withArguments:tablePresentationAdapterMock];
-                [sut testDisplayability];
+                [sut showBlankStateIfNeeded];
             });
             
             context(@"when displayer allows show", ^() {
@@ -77,7 +78,7 @@ describe(@"TECBlankStateDecorator", ^() {
                 });
                 it(@"should call show on displayer", ^{
                     [[displayMock should] receive:@selector(showBlankStateForPresentationAdapter:containerView:)];
-                    [sut testDisplayability];
+                    [sut showBlankStateIfNeeded];
                 });
             });
             
@@ -90,7 +91,7 @@ describe(@"TECBlankStateDecorator", ^() {
                 
                 it(@"should not call show on displayer", ^{
                     [[displayMock shouldNot] receive:@selector(showBlankStateForPresentationAdapter:containerView:)];
-                    [sut testDisplayability];
+                    [sut showBlankStateIfNeeded];
                 });
             });
         });
@@ -100,11 +101,13 @@ describe(@"TECBlankStateDecorator", ^() {
                 beforeEachBlock();
                 [contentProviderMock stub:@selector(numberOfSections) andReturn:theValue(1)];
             };
+            
             beforeEach(beforeEachBlock1);
+            
             it(@"should ask displayer for hide", ^() {
                 [[displayMock should] receive:@selector(shouldHideBlankStateForPresentationAdapter:)
                                 withArguments:tablePresentationAdapterMock];
-                [sut testDisplayability];
+                [sut hideBlankStateIfNeeded];
             });
             
             context(@"when displayer disallows hide", ^() {
@@ -113,9 +116,10 @@ describe(@"TECBlankStateDecorator", ^() {
                     [displayMock stub:@selector(shouldHideBlankStateForPresentationAdapter:)
                             andReturn:theValue(YES)];
                 });
+                
                 it(@"should call hide on displayer", ^{
                     [[displayMock should] receive:@selector(hideBlankStateForPresentationAdapter:containerView:)];
-                    [sut testDisplayability];
+                    [sut hideBlankStateIfNeeded];
                 });
             });
             
@@ -128,7 +132,7 @@ describe(@"TECBlankStateDecorator", ^() {
                 
                 it(@"should not call hide on displayer", ^{
                     [[displayMock shouldNot] receive:@selector(hideBlankStateForPresentationAdapter:containerView:)];
-                    [sut testDisplayability];
+                    [sut hideBlankStateIfNeeded];
                 });
             });
         });

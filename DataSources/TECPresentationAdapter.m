@@ -11,13 +11,6 @@
 #import "TECDelegateProxy.h"
 #import "TECContentProviderProtocol.h"
 
-@protocol TECExtendedViewProtocol <NSObject>
-
-@property (nonatomic, assign) id dataSource;
-@property (nonatomic, assign) id delegate;
-
-@end
-
 @interface TECPresentationAdapter<ExtendedViewType, ExtenderType> ()
 
 @property (nonatomic, strong, readwrite) ExtendedViewType extendedView;
@@ -54,8 +47,12 @@
 }
 
 - (void)cleanup {
-    ((TECPresentationAdapter<id<TECExtendedViewProtocol>, id> *)self).extendedView.dataSource = nil;
-    ((TECPresentationAdapter<id<TECExtendedViewProtocol>, id> *)self).extendedView.delegate = nil;
+    if ([self.extendedView respondsToSelector:@selector(setDataSource:)]) {
+        [self.extendedView setDataSource:nil];
+    }
+    if ([self.extendedView respondsToSelector:@selector(setDelegate:)]) {
+        [self.extendedView setDelegate:nil];
+    }
 }
 
 #pragma mark - Extenders configuration
@@ -76,8 +73,12 @@
 }
 
 - (void)setupExtendedView {
-    ((TECPresentationAdapter<id<TECExtendedViewProtocol>, id> *)self).extendedView.dataSource = [self.delegateProxy proxy];
-    ((TECPresentationAdapter<id<TECExtendedViewProtocol>, id> *)self).extendedView.delegate = [self.delegateProxy proxy];
+    if ([self.extendedView respondsToSelector:@selector(setDataSource:)]) {
+        [self.extendedView setDataSource:[self.delegateProxy proxy]];
+    }
+    if ([self.extendedView respondsToSelector:@selector(setDelegate:)]) {
+        [self.extendedView setDelegate:[self.delegateProxy proxy]];
+    }
 }
 
 - (void)setupContentProvider {

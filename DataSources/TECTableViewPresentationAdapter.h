@@ -11,8 +11,8 @@
 
 @protocol TECContentProviderProtocol;
 
-@class TECTableViewExtender;
+@class TECExtender;
 
-@interface TECTableViewPresentationAdapter : TECPresentationAdapter<UITableView *, TECTableViewExtender *>
+@interface TECTableViewPresentationAdapter : TECPresentationAdapter<UITableView *, TECExtender *>
 
 @end

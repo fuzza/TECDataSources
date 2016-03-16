@@ -11,8 +11,8 @@
 
 @protocol TECContentProviderProtocol;
 
-@class TECCollectionViewExtender;
+@class TECExtender;
 
-@interface TECCollectionViewPresentationAdapter : TECPresentationAdapter<UICollectionView *, TECCollectionViewExtender *>
+@interface TECCollectionViewPresentationAdapter : TECPresentationAdapter<UICollectionView *, TECExtender *>
 
 @end

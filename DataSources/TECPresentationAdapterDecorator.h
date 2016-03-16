@@ -11,10 +11,12 @@
 
 @class TECPresentationAdapter;
 
-@interface TECPresentationAdapterDecorator : NSProxy <TECContentProviderPresentationAdapterProtocol>
+@interface TECPresentationAdapterDecorator : NSProxy
 
 @property (nonatomic, weak, readonly) id<TECContentProviderProtocol> contentProvider;
 @property (nonatomic, strong, readonly) TECPresentationAdapter *presentationAdapter;
-- (instancetype)initWithPresentationAdapter:(TECPresentationAdapter *)presentationAdapter;
+
++ (id)decoratedInstanceOf:(TECPresentationAdapter *)presentationAdapter;
+- (id)initWithPresentationAdapter:(TECPresentationAdapter *)presentationAdapter;
 
 @end

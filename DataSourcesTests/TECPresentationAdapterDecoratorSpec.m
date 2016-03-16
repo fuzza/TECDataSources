@@ -41,7 +41,7 @@ sharedExamplesFor(@"TECPresentationAdapterDecorator", ^(NSDictionary *data) {
             it(@"should proxy content provider presentation adapter protocol methods", ^() {
                 KWNilMatcher *nilMatcher = [KWNilMatcher new];
                 [nilMatcher beNil];
-                TECPresentationAdapterDecorator *decorator =
+                TECPresentationAdapterDecorator<TECContentProviderPresentationAdapterProtocol> *decorator =
                 [[sutClass alloc] initWithPresentationAdapter:tablePresentationAdapterMock];
                 [[tablePresentationAdapterMock should] receive:@selector(contentProviderDidReloadData:) withArguments:contentProviderMock];
                 [[tablePresentationAdapterMock should] receive:@selector(contentProviderWillChangeContent:) withArguments:contentProviderMock];
@@ -60,11 +60,18 @@ sharedExamplesFor(@"TECPresentationAdapterDecorator", ^(NSDictionary *data) {
                 [decorator contentProviderDidChangeContent:contentProviderMock];
             });
             
-            it(@"should proxy an arbitraty method to presentation adapter", ^() {
-                TECPresentationAdapterDecorator *decorator =
+            it(@"should proxy method that defined on presentation adapter to presentation adapter", ^() {
+                TECPresentationAdapterDecorator<TECContentProviderPresentationAdapterProtocol> *decorator =
                 [[sutClass alloc] initWithPresentationAdapter:tablePresentationAdapterMock];
-                [[tablePresentationAdapterMock should] receive:@selector(viewDidAppear:) withArguments:theValue(YES)];
-                [(UIViewController *)decorator viewDidAppear:YES];
+                [[tablePresentationAdapterMock should] receive:@selector(extendedView) withArguments:theValue(YES)];
+                [decorator extendedView];
+            });
+            
+            it(@"should not proxy method that is not defined on presentation adapter to presentation adapter", ^() {
+                TECPresentationAdapterDecorator<TECContentProviderPresentationAdapterProtocol> *decorator =
+                [[sutClass alloc] initWithPresentationAdapter:tablePresentationAdapterMock];
+                [[tablePresentationAdapterMock should] receive:@selector(extendedView) withArguments:theValue(YES)];
+                [decorator extendedView];
             });
         });
         
