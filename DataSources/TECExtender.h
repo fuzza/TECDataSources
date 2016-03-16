@@ -15,4 +15,6 @@
 @property (nonatomic, weak) id<TECContentProviderProtocol> contentProvider;
 @property (nonatomic, weak) UIScrollView *extendedView;
 
+- (void)didSetup;
+
 @end
