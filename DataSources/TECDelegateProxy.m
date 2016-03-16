@@ -10,7 +10,7 @@
 
 @interface TECDelegateProxy ()
 
-@property (nonatomic, strong) NSMutableSet *delegates;
+@property (nonatomic, strong) NSHashTable *delegates;
 
 @end
 
@@ -26,14 +26,14 @@
 }
 
 - (void)setupDelegatesCache {
-    self.delegates = [[NSMutableSet alloc] init];
+    self.delegates = [NSHashTable weakObjectsHashTable];
 }
 
 - (void)attachDelegate:(id)delegate {
     [self.delegates addObject:delegate];
 }
 
-- (void)detachDelegate:(id)delegate {
+- (void)detachDelegate:(__unsafe_unretained id)delegate {
     [self.delegates removeObject:delegate];
 }
 

@@ -12,6 +12,9 @@
 
 @interface TECBlankStateDecorator (Test)
 
+@property (nonatomic, weak) id<TECBlankStateDisplayProtocol> display;
+@property (nonatomic, strong) UIView *containerView;
+
 - (void)displayBlankStateIfNeeded;
 - (void)showBlankStateIfNeeded;
 - (void)hideBlankStateIfNeeded;
@@ -44,6 +47,8 @@ describe(@"TECBlankStateDecorator", ^() {
                                                     blankStateDisplayer:displayMock];
             [[decorator.presentationAdapter should] beIdenticalTo:tablePresentationAdapterMock];
             [[contentProviderMock should] beIdenticalTo:decorator.contentProvider];
+            [[displayMock should] equal:decorator.display];
+            [[decorator.containerView should] beKindOfClass:[UIView class]];
         });
     });
     
@@ -77,8 +82,9 @@ describe(@"TECBlankStateDecorator", ^() {
                             andReturn:theValue(YES)];
                 });
                 it(@"should call show on displayer", ^{
-                    [[displayMock should] receive:@selector(showBlankStateForPresentationAdapter:containerView:)];
+                    [[displayMock should] receive:@selector(showBlankStateForPresentationAdapter:containerView:) withArguments:tablePresentationAdapterMock, sut.containerView];
                     [sut showBlankStateIfNeeded];
+                    [[theValue(sut.containerView.hidden) should] beNo];
                 });
             });
             
@@ -92,6 +98,7 @@ describe(@"TECBlankStateDecorator", ^() {
                 it(@"should not call show on displayer", ^{
                     [[displayMock shouldNot] receive:@selector(showBlankStateForPresentationAdapter:containerView:)];
                     [sut showBlankStateIfNeeded];
+                    [[theValue(sut.containerView.hidden) should] beYes];
                 });
             });
         });
@@ -118,8 +125,9 @@ describe(@"TECBlankStateDecorator", ^() {
                 });
                 
                 it(@"should call hide on displayer", ^{
-                    [[displayMock should] receive:@selector(hideBlankStateForPresentationAdapter:containerView:)];
+                    [[displayMock should] receive:@selector(hideBlankStateForPresentationAdapter:containerView:) withArguments:tablePresentationAdapterMock, sut.containerView];
                     [sut hideBlankStateIfNeeded];
+                    [[theValue(sut.containerView.hidden) should] beYes];
                 });
             });
             
@@ -132,9 +140,21 @@ describe(@"TECBlankStateDecorator", ^() {
                 
                 it(@"should not call hide on displayer", ^{
                     [[displayMock shouldNot] receive:@selector(hideBlankStateForPresentationAdapter:containerView:)];
+                    [[sut.containerView shouldNot] receive:@selector(setHidden:)];
                     [sut hideBlankStateIfNeeded];
                 });
             });
+        });
+        
+        it(@"should return correct instance from its decoratedInstanceOf method", ^() {
+            [tablePresentationAdapterMock stub:@selector(contentProvider) andReturn:contentProviderMock];
+            TECBlankStateDecorator *decorator = [TECBlankStateDecorator decoratedInstanceOf:tablePresentationAdapterMock
+                                                                    withBlankStateDisplayer:displayMock];
+            [[theValue([decorator isProxy]) should] beYes];
+            [[[decorator presentationAdapter] should] equal:tablePresentationAdapterMock];
+            [[(NSObject *)[decorator contentProvider] should] equal:[tablePresentationAdapterMock contentProvider]];
+            [[displayMock should] equal:decorator.display];
+            [[decorator.containerView should] beKindOfClass:[UIView class]];
         });
     });
 });

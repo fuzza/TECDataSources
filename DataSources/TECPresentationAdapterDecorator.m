@@ -25,7 +25,7 @@
 }
 
 - (id)initWithPresentationAdapter:(TECPresentationAdapter *)presentationAdapter {
-    NSAssert([presentationAdapter isKindOfClass:[TECPresentationAdapter class]] && ![presentationAdapter isMemberOfClass:[TECPresentationAdapter class]], @"Incorrect presentation adapter for decorate - %@", presentationAdapter);
+    NSAssert(([presentationAdapter isKindOfClass:[TECPresentationAdapter class]] && ![presentationAdapter isMemberOfClass:[TECPresentationAdapter class]]) || presentationAdapter.isProxy, @"Incorrect presentation adapter for decorate - %@", presentationAdapter);
     self.presentationAdapter = presentationAdapter;
     [self stealContentProviderDelegationFromPresentationAdapter];
     return self;

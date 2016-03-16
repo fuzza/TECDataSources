@@ -63,15 +63,33 @@ sharedExamplesFor(@"TECPresentationAdapterDecorator", ^(NSDictionary *data) {
             it(@"should proxy method that defined on presentation adapter to presentation adapter", ^() {
                 TECPresentationAdapterDecorator<TECContentProviderPresentationAdapterProtocol> *decorator =
                 [[sutClass alloc] initWithPresentationAdapter:tablePresentationAdapterMock];
-                [[tablePresentationAdapterMock should] receive:@selector(extendedView) withArguments:theValue(YES)];
+                [[tablePresentationAdapterMock should] receive:@selector(extendedView)];
                 [decorator extendedView];
             });
             
             it(@"should not proxy method that is not defined on presentation adapter to presentation adapter", ^() {
                 TECPresentationAdapterDecorator<TECContentProviderPresentationAdapterProtocol> *decorator =
                 [[sutClass alloc] initWithPresentationAdapter:tablePresentationAdapterMock];
-                [[tablePresentationAdapterMock should] receive:@selector(extendedView) withArguments:theValue(YES)];
-                [decorator extendedView];
+                [[tablePresentationAdapterMock shouldNot] receive:@selector(viewDidAppear:)];
+                [(UIViewController *)decorator viewDidAppear:YES];
+            });
+            
+            it(@"should respond to selectors it implements", ^() {
+                TECPresentationAdapterDecorator<TECContentProviderPresentationAdapterProtocol> *decorator =
+                [[sutClass alloc] initWithPresentationAdapter:tablePresentationAdapterMock];
+                [[theValue([decorator respondsToSelector:@selector(presentationAdapter)]) should] beYes];
+            });
+            
+            it(@"should respond to selectors which are implemented by decorated object", ^() {
+                TECPresentationAdapterDecorator<TECContentProviderPresentationAdapterProtocol> *decorator =
+                [[sutClass alloc] initWithPresentationAdapter:tablePresentationAdapterMock];
+                [[theValue([decorator respondsToSelector:@selector(contentProviderDidChangeContent:)]) should] beYes];
+            });
+            
+            it(@"should not respond to selectors which aren't implemented either by decorated object or by itself", ^() {
+                TECPresentationAdapterDecorator<TECContentProviderPresentationAdapterProtocol> *decorator =
+                [[sutClass alloc] initWithPresentationAdapter:tablePresentationAdapterMock];
+                [[theValue([decorator respondsToSelector:@selector(viewDidAppear:)]) should] beNo];
             });
         });
         
@@ -115,6 +133,25 @@ sharedExamplesFor(@"TECPresentationAdapterDecorator", ^(NSDictionary *data) {
                 }) shouldNot] raise];
                 [[theValue(isProxy) should] beYes];
             });
+        });
+        
+        it(@"should return correct instance from its decoratedInstanceOf method", ^() {
+            [tablePresentationAdapterMock stub:@selector(contentProvider) andReturn:contentProviderMock];
+            id decorator = [sutClass decoratedInstanceOf:tablePresentationAdapterMock];
+            [[theValue([decorator isProxy]) should] beYes];
+            [[[decorator presentationAdapter] should] equal:tablePresentationAdapterMock];
+            [[(NSObject *)[decorator contentProvider] should] equal:[tablePresentationAdapterMock contentProvider]];
+        });
+    });
+    
+    describe(@"Decorator chaining", ^() {
+        it(@"should forward methods which it implements to decorated instance", ^(){
+            [[tablePresentationAdapterMock should] receive:@selector(contentProviderDidChangeContent:) withCount:2];
+            id decorator1 = [sutClass decoratedInstanceOf:tablePresentationAdapterMock];
+            [decorator1 contentProviderDidChangeContent:nil];
+            [[decorator1 should] receive:@selector(contentProviderDidChangeContent:) withCount:1];
+            id decorator2 = [sutClass decoratedInstanceOf:decorator1];
+            [decorator2 contentProviderDidChangeContent:nil];
         });
     });
 });

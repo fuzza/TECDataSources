@@ -154,6 +154,13 @@ describe(@"TECCollectionViewPresentationAdapter", ^{
             });
         });
         
+        it(@"Puts section update in queue", ^{
+            verifyOperationBlockExecution(^{
+                [[collectionViewMock should] receive:@selector(reloadSections:) withArguments:[NSIndexSet indexSetWithIndex:7]];
+                [sut contentProviderDidChangeSection:sectionMock atIndex:7 forChangeType:TECContentProviderSectionChangeTypeUpdate];
+            });
+        });
+        
         it(@"Puts object insert in queue", ^{
             verifyOperationBlockExecution(^{
                 [[collectionViewMock should] receive:@selector(insertItemsAtIndexPaths:) withArguments:@[indexPathMock]];
