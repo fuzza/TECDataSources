@@ -94,8 +94,10 @@ describe(@"TECTableViewPresentationAdapter", ^{
             it(@"Should register extenders in delegate proxy", ^{
                 [[firstExtender should] receive:@selector(setExtendedView:) withArguments:tableViewMock];
                 [[firstExtender should] receive:@selector(setContentProvider:) withArguments:contentProviderMock];
+                [[firstExtender should] receive:@selector(didSetup)];
                 [[secondExtender should] receive:@selector(setExtendedView:) withArguments:tableViewMock];
                 [[secondExtender should] receive:@selector(setContentProvider:) withArguments:contentProviderMock];
+                [[secondExtender should] receive:@selector(didSetup)];
                 [[delegateProxyMock should] receive:@selector(attachDelegate:) withArguments:firstExtender];
                 [[delegateProxyMock should] receive:@selector(attachDelegate:) withArguments:secondExtender];
                 
