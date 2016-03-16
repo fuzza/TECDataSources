@@ -10,20 +10,20 @@
 #import "TECPullToRefreshStateLoading.h"
 #import "TECPullToRefreshStatePulling.h"
 #import "TECPullToRefreshStateContextProtocol.h"
-#import "TECRefreshTransitionHelper.h"
 
 @implementation TECPullToRefreshStateReady
 
 - (void)didRelease {
-    [TECRefreshTransitionHelper goToStateClass:[TECPullToRefreshStateLoading class]
-                                     inContext:self.context];
+    TECPullToRefreshStateLoading *loadingState = [TECPullToRefreshStateLoading stateWithContext:self.context];
+    [self.context setState:loadingState];
 }
 
 - (void)didScroll {
     CGFloat scrollPosition = [self.context scrollPosition];
     CGFloat threshold = [self.context pullToRefreshThreshold];
     if(scrollPosition > -threshold) {
-        [TECRefreshTransitionHelper goToStateClass:[TECPullToRefreshStatePulling class] inContext:self.context];
+        TECPullToRefreshStatePulling *pullingState = [TECPullToRefreshStatePulling stateWithContext:self.context];
+        [self.context setState:pullingState];
     }
 }
 
