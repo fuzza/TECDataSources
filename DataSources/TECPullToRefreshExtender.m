@@ -8,7 +8,7 @@
 
 #import "TECPullToRefreshExtender.h"
 #import "TECPullToRefreshStateInitial.h"
-#import "TECPullToRefreshPresentationAdapterProtocol.h"
+#import "TECPullToRefreshDisplayProtocol.h"
 #import "TECLoaderProtocol.h"
 
 @interface TECPullToRefreshExtender ()
@@ -17,17 +17,19 @@
 @property (nonatomic, assign) CGFloat pullToRefreshThreshold;
 @property (nonatomic, strong) id<TECLoaderProtocol> loader;
 
-@property (nonatomic, strong) id <TECPullToRefreshPresentationAdapterProtocol> presentationAdapter;
+@property (nonatomic, strong) id <TECPullToRefreshDisplayProtocol> pullToRefreshDisplay;
 
 @end
 
 @implementation TECPullToRefreshExtender
 
-- (instancetype)initWithHeight:(CGFloat)height presentationAdapter:(id<TECPullToRefreshPresentationAdapterProtocol>)presentationAdapter loader:(id<TECLoaderProtocol>)loader {
+- (instancetype)initWithThreshold:(CGFloat)threshold
+                          display:(id<TECPullToRefreshDisplayProtocol>)presentationAdapter
+                           loader:(id<TECLoaderProtocol>)loader {
     self = [super init];
     if(self) {
-        self.pullToRefreshThreshold = height;
-        self.presentationAdapter = presentationAdapter;
+        self.pullToRefreshThreshold = threshold;
+        self.pullToRefreshDisplay = presentationAdapter;
         self.loader = loader;
     }
     return self;
@@ -35,7 +37,7 @@
 
 - (void)didSetup {
     [self setupContainerView];
-    [self setupPresentationAdapter];
+    [self setupDisplay];
     [self setupInitialState];
 }
 
@@ -49,8 +51,8 @@
     [self.extendedView addSubview:self.pullToRefreshView];
 }
 
-- (void)setupPresentationAdapter {
-    [self.presentationAdapter setupWithContainerView:self.pullToRefreshView];
+- (void)setupDisplay {
+    [self.pullToRefreshDisplay setupWithContainerView:self.pullToRefreshView];
 }
 
 - (void)setupInitialState {
@@ -76,7 +78,7 @@
 - (void)setState:(TECPullToRefreshState *)state {
     _state = state;
     [_state didAttach];
-    [self.presentationAdapter didChangeState:_state];
+    [self.pullToRefreshDisplay didChangeState:_state];
 }
 
 #pragma mark - TECPullToRefreshStateContextProtocol

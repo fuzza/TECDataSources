@@ -6,17 +6,17 @@
 //  Copyright © 2016 Alexey Fayzullov. All rights reserved.
 //
 
-#import "TECActivityIndicatorPullToRefresh.h"
+#import "TECPullToRefreshSampleDisplay.h"
 #import "TECPullToRefreshState.h"
 
-@interface TECActivityIndicatorPullToRefresh ()
+@interface TECPullToRefreshSampleDisplay ()
 
 @property (nonatomic, strong) UIActivityIndicatorView *indicator;
 @property (nonatomic, strong) UIView *containerView;
 
 @end
 
-@implementation TECActivityIndicatorPullToRefresh
+@implementation TECPullToRefreshSampleDisplay
 
 - (void)setupWithContainerView:(UIView *)containerView {
     self.containerView = containerView;

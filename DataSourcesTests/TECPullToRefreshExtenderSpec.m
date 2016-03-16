@@ -10,7 +10,7 @@
 #import "TECPullToRefreshExtender.h"
 #import "TECPullToRefreshStateInitial.h"
 #import "TECLoaderProtocol.h"
-#import "TECPullToRefreshPresentationAdapterProtocol.h"
+#import "TECPullToRefreshDisplayProtocol.h"
 
 SPEC_BEGIN(TECPullToRefreshExtenderSpec)
 
@@ -20,13 +20,14 @@ let(loaderMock, ^id{
     return [KWMock mockForProtocol:@protocol(TECLoaderProtocol)];
 });
 
-let(adapterMock, ^id{
-    return [KWMock mockForProtocol:@protocol(TECPullToRefreshPresentationAdapterProtocol)];
+let(displayMock, ^id{
+    return [KWMock mockForProtocol:@protocol(TECPullToRefreshDisplayProtocol)];
 });
 
 let(sut, ^TECPullToRefreshExtender *{
-    return [[TECPullToRefreshExtender alloc] initWithHeight:55
-                                        presentationAdapter:adapterMock loader:loaderMock];
+    return [[TECPullToRefreshExtender alloc] initWithThreshold:55
+                                                       display:displayMock
+                                                        loader:loaderMock];
 });
 
 describe(@"Init", ^{
@@ -70,7 +71,7 @@ describe(@"Setup hook", ^{
     
     it(@"Should create p-t-r view and set correct frame", ^{
         [sut stub:@selector(setState:)];
-        [adapterMock stub:@selector(setupWithContainerView:)];
+        [displayMock stub:@selector(setupWithContainerView:)];
         
         CGRect bounds = CGRectMake(0, 0, 333, 0);
         CGRect expectedFrame = CGRectMake(0, -85, 333, 85);
@@ -91,12 +92,12 @@ describe(@"Setup hook", ^{
         id viewMock = [UIView nullMock];
         [sut stub:@selector(pullToRefreshView) andReturn:viewMock];
         
-        [[adapterMock should] receive:@selector(setupWithContainerView:) withArguments:viewMock];
+        [[displayMock should] receive:@selector(setupWithContainerView:) withArguments:viewMock];
         [sut didSetup];
     });
     
     it(@"Sets initial state", ^{
-        [adapterMock stub:@selector(setupWithContainerView:)];
+        [displayMock stub:@selector(setupWithContainerView:)];
         
         id stateMock = [TECPullToRefreshStateInitial mock];
         [TECPullToRefreshStateInitial stub:@selector(stateWithContext:) andReturn:stateMock withArguments:sut];
@@ -144,7 +145,7 @@ describe(@"State change", ^{
     it(@"Changes state, attaches it and notify adapter", ^{
         id stateMock = [TECPullToRefreshState mock];
         [[stateMock should] receive:@selector(didAttach)];
-        [[adapterMock should] receive:@selector(didChangeState:) withArguments:stateMock];
+        [[displayMock should] receive:@selector(didChangeState:) withArguments:stateMock];
         
         sut.state = stateMock;
         

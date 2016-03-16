@@ -6,8 +6,8 @@
 //  Copyright © 2016 Alexey Fayzullov. All rights reserved.
 //
 
-#import "TECPullToRefreshPresentationAdapterProtocol.h"
+#import "TECPullToRefreshDisplayProtocol.h"
 
-@interface TECActivityIndicatorPullToRefresh : NSObject <TECPullToRefreshPresentationAdapterProtocol>
+@interface TECPullToRefreshSampleDisplay : NSObject <TECPullToRefreshDisplayProtocol>
 
 @end

@@ -17,7 +17,7 @@
 #import "TECCustomCell.h"
 
 #import "TECDelegateProxy.h"
-#import "TECActivityIndicatorPullToRefresh.h"
+#import "TECPullToRefreshSampleDisplay.h"
 #import "TECDummyLoader.h"
 
 @interface MemoryContentProviderViewController ()
@@ -60,7 +60,9 @@
     }];
     self.deletingExtender = [TECTableViewDeletingExtender extender];
 
-    self.pullToRefreshExtender = [[TECPullToRefreshExtender alloc] initWithHeight:50 presentationAdapter:[TECActivityIndicatorPullToRefresh new] loader:[TECDummyLoader new]];
+    self.pullToRefreshExtender = [[TECPullToRefreshExtender alloc] initWithThreshold:50
+                                                                             display:[TECPullToRefreshSampleDisplay new]
+                                                                              loader:[TECDummyLoader new]];
     
     self.tableController =
     [[TECTableViewPresentationAdapter alloc] initWithContentProvider:self.contentProvider

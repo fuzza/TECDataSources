@@ -10,7 +10,7 @@
 
 @class TECPullToRefreshState;
 
-@protocol TECPullToRefreshPresentationAdapterProtocol <NSObject>
+@protocol TECPullToRefreshDisplayProtocol <NSObject>
 
 - (void)setupWithContainerView:(UIView *)containerView;
 
