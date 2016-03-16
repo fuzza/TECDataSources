@@ -11,6 +11,7 @@
 #import "TECPullToRefreshStateInitial.h"
 #import "TECLoaderProtocol.h"
 #import "TECPullToRefreshDisplayProtocol.h"
+#import "TECScrollViewHelper.h"
 
 SPEC_BEGIN(TECPullToRefreshExtenderSpec)
 
@@ -120,8 +121,12 @@ describe(@"ScrollViewDelegate", ^{
         [sut stub:@selector(state) andReturn:stateMock];
     });
     
-    it(@"Forwards scroll events to state", ^{
+    it(@"Forwards scroll events to state and sends progress to display", ^{
+        [TECScrollViewHelper stub:@selector(scrollProgressForTopThreshold:scrollView:)
+                        andReturn:theValue(0.1)];
+        
         [[stateMock should] receive:@selector(didScroll)];
+        [[displayMock should] receive:@selector(didChangeScrollProgress:) withArguments:theValue(0.1)];
         [sut scrollViewDidScroll:scrollViewMock];
     });
     

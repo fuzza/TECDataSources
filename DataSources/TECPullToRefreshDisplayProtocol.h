@@ -13,8 +13,9 @@
 @protocol TECPullToRefreshDisplayProtocol <NSObject>
 
 - (void)setupWithContainerView:(UIView *)containerView;
-
-- (void)didChangeScrollProgress:(CGFloat)progress;
 - (void)didChangeState:(TECPullToRefreshState *)state;
+
+@optional
+- (void)didChangeScrollProgress:(CGFloat)progress;
 
 @end

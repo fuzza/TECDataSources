@@ -10,6 +10,7 @@
 #import "TECPullToRefreshStateInitial.h"
 #import "TECPullToRefreshDisplayProtocol.h"
 #import "TECLoaderProtocol.h"
+#import "TECScrollViewHelper.h"
 
 @interface TECPullToRefreshExtender ()
 
@@ -63,6 +64,11 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [self.state didScroll];
+    if([self.pullToRefreshDisplay respondsToSelector:@selector(didChangeScrollProgress:)]) {
+        CGFloat scrollProgress = [TECScrollViewHelper scrollProgressForTopThreshold:self.pullToRefreshThreshold
+                                                                         scrollView:scrollView];
+        [self.pullToRefreshDisplay didChangeScrollProgress:scrollProgress];
+    }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {

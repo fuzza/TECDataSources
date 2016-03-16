@@ -45,8 +45,4 @@
     }
 }
 
-- (void)didChangeScrollProgress:(CGFloat)progress {
-    
-}
-
 @end

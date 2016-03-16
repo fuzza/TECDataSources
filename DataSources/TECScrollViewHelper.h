@@ -10,6 +10,9 @@
 
 @interface TECScrollViewHelper : NSObject
 
++ (CGFloat)scrollProgressForTopThreshold:(CGFloat)threshold
+                              scrollView:(UIScrollView *)scrollView;
+
 + (void)modifyTopInset:(CGFloat)topInset scrollView:(UIScrollView *)scrollView;
 
 @end
