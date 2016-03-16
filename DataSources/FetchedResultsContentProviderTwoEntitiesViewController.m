@@ -38,7 +38,6 @@
 @property (nonatomic, strong) TECFetchedResultsControllerContentProvider *contentProvider;
 
 @property (nonatomic, strong) TECBlankStateTextDisplay *blankTextDisplay;
-@property (nonatomic, strong) TECBlankStateDecorator *blankStateDecorator;
 
 @property (nonatomic, strong) NSFetchRequest *personFetchRequest;
 @property (nonatomic, strong) NSFetchRequest *personOrderedFetchRequest;
@@ -87,8 +86,9 @@
                                                        delegateProxy:[[TECDelegateProxy alloc] init]];
 
     self.blankTextDisplay = [[TECBlankStateTextDisplay alloc] initWithText:@"No items for display :("];
-    self.blankStateDecorator = [[TECBlankStateDecorator alloc] initWithPresentationAdapter:self.tableController
-                                                                       blankStateDisplayer:self.blankTextDisplay];
+    self.tableController =
+    [TECBlankStateDecorator decoratedInstanceOf:self.tableController
+                        withBlankStateDisplayer:self.blankTextDisplay];
 }
 
 - (void)setupSubviews {
