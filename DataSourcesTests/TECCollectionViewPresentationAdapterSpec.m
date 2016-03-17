@@ -42,10 +42,10 @@ describe(@"TECCollectionViewPresentationAdapter", ^{
     
     TECCollectionViewPresentationAdapter *(^createSut)() = ^{
         return [[TECCollectionViewPresentationAdapter alloc] initWithContentProvider:contentProviderMock
-                                                         collectionView:collectionViewMock
-                                                              extenders:@[firstExtender,
-                                                                          secondExtender]
-                                                          delegateProxy:delegateProxyMock];
+                                                                        extendedView:collectionViewMock
+                                                                           extenders:@[firstExtender,
+                                                                                       secondExtender]
+                                                                       delegateProxy:delegateProxyMock];
     };
     
     context(@"Initialization", ^{
@@ -153,6 +153,13 @@ describe(@"TECCollectionViewPresentationAdapter", ^{
             verifyOperationBlockExecution(^{
                 [[collectionViewMock should] receive:@selector(deleteSections:) withArguments:[NSIndexSet indexSetWithIndex:7]];
                 [sut contentProviderDidChangeSection:sectionMock atIndex:7 forChangeType:TECContentProviderSectionChangeTypeDelete];
+            });
+        });
+        
+        it(@"Puts section update in queue", ^{
+            verifyOperationBlockExecution(^{
+                [[collectionViewMock should] receive:@selector(reloadSections:) withArguments:[NSIndexSet indexSetWithIndex:7]];
+                [sut contentProviderDidChangeSection:sectionMock atIndex:7 forChangeType:TECContentProviderSectionChangeTypeUpdate];
             });
         });
         

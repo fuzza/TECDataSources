@@ -51,6 +51,11 @@ describe(@"TECTableViewCellExtender", ^{
         [[theValue(firstSectionRows) should] equal:theValue(13)];
     });
     
+    it(@"Should correctly be dequeud from factory method", ^() {
+        TECTableViewCellExtender *cellExtender = [TECTableViewCellExtender cellExtenderWithCellFactory:cellFactoryMock];
+        [[cellExtender should] beKindOfClass:[TECTableViewCellExtender class]];
+    });
+    
     context(@"Cell creation and configuration", ^{
         __block id indexPathMock;
         __block id itemMock;

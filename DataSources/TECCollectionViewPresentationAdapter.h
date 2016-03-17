@@ -7,20 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TECContentProviderDelegate.h"
+#import "TECPresentationAdapter.h"
 
 @protocol TECContentProviderProtocol;
 
-@class TECCollectionViewExtender;
-@class TECDelegateProxy;
+@class TECExtender;
 
-@interface TECCollectionViewPresentationAdapter : NSObject <TECContentProviderPresentationAdapterProtocol>
-
-@property (nonatomic, strong, readonly) UICollectionView *extendedView;
-
-- (instancetype)initWithContentProvider:(id <TECContentProviderProtocol>)contentProvider
-                         collectionView:(UICollectionView *)collectionView
-                              extenders:(NSArray <TECCollectionViewExtender *> *)extenders
-                          delegateProxy:(TECDelegateProxy *)delegateProxy;
+@interface TECCollectionViewPresentationAdapter : TECPresentationAdapter<UICollectionView *, TECExtender *>
 
 @end

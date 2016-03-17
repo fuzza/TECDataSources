@@ -15,7 +15,7 @@
 @interface TECCollectionViewPresentationAdapter ()
 
 @property (nonatomic, strong, readwrite) UICollectionView *extendedView;
-@property (nonatomic, strong) id <TECContentProviderProtocol> contentProvider;
+@property (nonatomic, strong, readwrite) id <TECContentProviderProtocol> contentProvider;
 @property (nonatomic, strong) TECDelegateProxy *delegateProxy;
 @property (nonatomic, strong) TECBlockOperation *blockOperation;
 
@@ -23,44 +23,8 @@
 
 @implementation TECCollectionViewPresentationAdapter
 
-- (instancetype)initWithContentProvider:(id<TECContentProviderProtocol>)contentProvider
-                         collectionView:(UICollectionView *)collectionView
-                              extenders:(NSArray<TECCollectionViewExtender *> *)extenders
-                          delegateProxy:(TECDelegateProxy *)delegateProxy {
-    self = [super init];
-    if(self) {
-        
-        self.extendedView = collectionView;
-        self.contentProvider = contentProvider;
-        self.delegateProxy = delegateProxy;
-        [self addExtenders:extenders];
-        [self setupContentProvider];
-    }
-    return self;
-}
-
-- (void)setupContentProvider {
-    self.contentProvider.presentationAdapter = self;
-}
-
-- (void)addExtenders:(NSArray *)extenders {
-    for(TECCollectionViewExtender *extender in extenders) {
-        [self attachExtender:extender];
-    }
-    [self setupExtendedView];
-}
-
-- (void)attachExtender:(TECCollectionViewExtender *)extender {
-    extender.contentProvider = self.contentProvider;
-    extender.extendedView = self.extendedView;
-    [self.delegateProxy attachDelegate:extender];
-    [extender didSetup];
-}
-
-- (void)setupExtendedView {
-    self.extendedView.delegate = [self.delegateProxy proxy];
-    self.extendedView.dataSource = [self.delegateProxy proxy];
-}
+@synthesize extendedView;
+@synthesize contentProvider;
 
 #pragma mark - TECContentProviderPresentationAdapterProtocol
 
@@ -98,7 +62,7 @@
     }
 }
 
-- (void)contentProviderDidChangeItem:(id<TECSectionModelProtocol>)section
+- (void)contentProviderDidChangeItem:(id)item
                          atIndexPath:(NSIndexPath *)indexPath
                        forChangeType:(TECContentProviderItemChangeType)changeType
                         newIndexPath:(NSIndexPath *)newIndexPath {

@@ -26,14 +26,14 @@
 }
 
 - (void)setupDelegatesCache {
-    self.delegates = [[NSMutableSet alloc] init];
+    self.delegates = [NSMutableSet new];
 }
 
 - (void)attachDelegate:(id)delegate {
     [self.delegates addObject:delegate];
 }
 
-- (void)detachDelegate:(id)delegate {
+- (void)detachDelegate:(__unsafe_unretained id)delegate {
     [self.delegates removeObject:delegate];
 }
 

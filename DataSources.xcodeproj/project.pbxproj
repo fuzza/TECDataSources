@@ -10,6 +10,13 @@
 		0015F9BD1C7EEA8A00179FD9 /* TECDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F59A9651C57DCAF0095289C /* TECDelegateProxy.m */; };
 		0015F9C81C8088CB00179FD9 /* FetchedResultsContentProviderSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0015F9C71C8088CB00179FD9 /* FetchedResultsContentProviderSearchViewController.m */; };
 		0015F9CB1C80A1E000179FD9 /* FetchedResultsContentProviderTwoEntitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0015F9CA1C80A1E000179FD9 /* FetchedResultsContentProviderTwoEntitiesViewController.m */; };
+		00361FD31C975615002ACDD1 /* TECPresentationAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 00361FD21C975615002ACDD1 /* TECPresentationAdapter.m */; };
+		00361FD61C976E9C002ACDD1 /* TECPresentationAdapterDecorator.m in Sources */ = {isa = PBXBuildFile; fileRef = 00361FD51C976E9C002ACDD1 /* TECPresentationAdapterDecorator.m */; };
+		00361FDA1C977CE8002ACDD1 /* TECPresentationAdapterDecoratorSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 00361FD91C977CE8002ACDD1 /* TECPresentationAdapterDecoratorSpec.m */; };
+		00361FDC1C97848A002ACDD1 /* KiwiWorkarounds.m in Sources */ = {isa = PBXBuildFile; fileRef = 00361FDB1C97848A002ACDD1 /* KiwiWorkarounds.m */; };
+		00361FE01C9873B4002ACDD1 /* TECBlankStateDecorator.m in Sources */ = {isa = PBXBuildFile; fileRef = 00361FDF1C9873B4002ACDD1 /* TECBlankStateDecorator.m */; };
+		00361FE31C993EFC002ACDD1 /* TECBlankStateTextDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 00361FE21C993EFC002ACDD1 /* TECBlankStateTextDisplay.m */; };
+		00361FE51C9944B8002ACDD1 /* TECBlankStateDecoratorSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 00361FE41C9944B8002ACDD1 /* TECBlankStateDecoratorSpec.m */; };
 		005F13751C6F713900765CC1 /* TECFetchedResultsControllerContentProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F13741C6F713900765CC1 /* TECFetchedResultsControllerContentProvider.m */; };
 		005F137A1C6F80CA00765CC1 /* TECBackgroundContextObjectMutator.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F13791C6F80CA00765CC1 /* TECBackgroundContextObjectMutator.m */; };
 		005F137D1C6F80E900765CC1 /* TECMainContextObjectGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 005F137C1C6F80E900765CC1 /* TECMainContextObjectGetter.m */; };
@@ -118,6 +125,17 @@
 		0015F9C71C8088CB00179FD9 /* FetchedResultsContentProviderSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchedResultsContentProviderSearchViewController.m; sourceTree = "<group>"; };
 		0015F9C91C80A1E000179FD9 /* FetchedResultsContentProviderTwoEntitiesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchedResultsContentProviderTwoEntitiesViewController.h; sourceTree = "<group>"; };
 		0015F9CA1C80A1E000179FD9 /* FetchedResultsContentProviderTwoEntitiesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchedResultsContentProviderTwoEntitiesViewController.m; sourceTree = "<group>"; };
+		00361FD11C975615002ACDD1 /* TECPresentationAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECPresentationAdapter.h; sourceTree = "<group>"; };
+		00361FD21C975615002ACDD1 /* TECPresentationAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECPresentationAdapter.m; sourceTree = "<group>"; };
+		00361FD41C976E9C002ACDD1 /* TECPresentationAdapterDecorator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECPresentationAdapterDecorator.h; sourceTree = "<group>"; };
+		00361FD51C976E9C002ACDD1 /* TECPresentationAdapterDecorator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECPresentationAdapterDecorator.m; sourceTree = "<group>"; };
+		00361FD91C977CE8002ACDD1 /* TECPresentationAdapterDecoratorSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECPresentationAdapterDecoratorSpec.m; sourceTree = "<group>"; };
+		00361FDB1C97848A002ACDD1 /* KiwiWorkarounds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KiwiWorkarounds.m; sourceTree = "<group>"; };
+		00361FDE1C9873B4002ACDD1 /* TECBlankStateDecorator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECBlankStateDecorator.h; sourceTree = "<group>"; };
+		00361FDF1C9873B4002ACDD1 /* TECBlankStateDecorator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECBlankStateDecorator.m; sourceTree = "<group>"; };
+		00361FE11C993EFC002ACDD1 /* TECBlankStateTextDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECBlankStateTextDisplay.h; sourceTree = "<group>"; };
+		00361FE21C993EFC002ACDD1 /* TECBlankStateTextDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECBlankStateTextDisplay.m; sourceTree = "<group>"; };
+		00361FE41C9944B8002ACDD1 /* TECBlankStateDecoratorSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECBlankStateDecoratorSpec.m; sourceTree = "<group>"; };
 		005F13731C6F713900765CC1 /* TECFetchedResultsControllerContentProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECFetchedResultsControllerContentProvider.h; sourceTree = "<group>"; };
 		005F13741C6F713900765CC1 /* TECFetchedResultsControllerContentProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECFetchedResultsControllerContentProvider.m; sourceTree = "<group>"; };
 		005F13761C6F720400765CC1 /* TECFetchedResultsControllerContentProviderMutator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECFetchedResultsControllerContentProviderMutator.h; sourceTree = "<group>"; };
@@ -355,6 +373,37 @@
 				009B584B1C74D05B00CAC105 /* TECFetchedResultsControllerContentProviderSpec.m */,
 			);
 			name = ContentProviders;
+			sourceTree = "<group>";
+		};
+		00361FD01C9755EA002ACDD1 /* PresentationAdapter */ = {
+			isa = PBXGroup;
+			children = (
+				00361FD11C975615002ACDD1 /* TECPresentationAdapter.h */,
+				00361FD21C975615002ACDD1 /* TECPresentationAdapter.m */,
+				00361FD41C976E9C002ACDD1 /* TECPresentationAdapterDecorator.h */,
+				00361FD51C976E9C002ACDD1 /* TECPresentationAdapterDecorator.m */,
+			);
+			name = PresentationAdapter;
+			sourceTree = "<group>";
+		};
+		00361FD71C977C7C002ACDD1 /* PresentationAdapter */ = {
+			isa = PBXGroup;
+			children = (
+				00361FD91C977CE8002ACDD1 /* TECPresentationAdapterDecoratorSpec.m */,
+				00361FE41C9944B8002ACDD1 /* TECBlankStateDecoratorSpec.m */,
+			);
+			name = PresentationAdapter;
+			sourceTree = "<group>";
+		};
+		00361FDD1C987370002ACDD1 /* BlankState */ = {
+			isa = PBXGroup;
+			children = (
+				00361FDE1C9873B4002ACDD1 /* TECBlankStateDecorator.h */,
+				00361FDF1C9873B4002ACDD1 /* TECBlankStateDecorator.m */,
+				00361FE11C993EFC002ACDD1 /* TECBlankStateTextDisplay.h */,
+				00361FE21C993EFC002ACDD1 /* TECBlankStateTextDisplay.m */,
+			);
+			name = BlankState;
 			sourceTree = "<group>";
 		};
 		27C0CDB6768F17A16CBB3368 /* Frameworks */ = {
@@ -782,6 +831,8 @@
 		6F59A9761C58E9790095289C /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				00361FDD1C987370002ACDD1 /* BlankState */,
+				00361FD01C9755EA002ACDD1 /* PresentationAdapter */,
 				6F03E4E71C96DB8B005C6DF7 /* Loader */,
 				6F0124E31C8DD3E500646EB5 /* Extenders */,
 				6F550A3D1C7CBEE700846E46 /* BlockOperation */,
@@ -885,6 +936,7 @@
 		6FEC95C31C773F3400B1094E /* HelperCode */ = {
 			isa = PBXGroup;
 			children = (
+				00361FDB1C97848A002ACDD1 /* KiwiWorkarounds.m */,
 				6F4855601C73B89F0006F6E5 /* TECDelegateProxyTestModels.h */,
 				6F4855611C73B89F0006F6E5 /* TECDelegateProxyTestModels.m */,
 				6FEC95C41C773F4F00B1094E /* TECDummyModels.h */,
@@ -896,6 +948,7 @@
 		6FEC95CA1C7752CB00B1094E /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				00361FD71C977C7C002ACDD1 /* PresentationAdapter */,
 				6F0124E71C8DD3FF00646EB5 /* Extenders */,
 				6F550A411C7CBF0300846E46 /* BlockOperation */,
 				6FEC95D61C7B1F4800B1094E /* ReusableViewsFactory */,
@@ -1100,12 +1153,14 @@
 				6F03E5101C972B30005C6DF7 /* TECPullToRefreshStateReady.m in Sources */,
 				6F59A9841C58ECF70095289C /* TECTableViewSectionFooterExtender.m in Sources */,
 				00AA47181C75E53900B2AD56 /* RootViewController.m in Sources */,
+				00361FD31C975615002ACDD1 /* TECPresentationAdapter.m in Sources */,
 				005F137D1C6F80E900765CC1 /* TECMainContextObjectGetter.m in Sources */,
 				00AA472D1C770EC400B2AD56 /* PersonOrdered.m in Sources */,
 				6F03E5161C972B48005C6DF7 /* TECPullToRefreshStateClosing.m in Sources */,
 				6F03E5001C972585005C6DF7 /* TECPullToRefreshStateInitial.m in Sources */,
 				6FEC95D91C7B1F6200B1094E /* TECReusableViewsFactory.m in Sources */,
 				6F550A521C7DBC9600846E46 /* TECCollectionViewCellExtender.m in Sources */,
+				00361FD61C976E9C002ACDD1 /* TECPresentationAdapterDecorator.m in Sources */,
 				6F550A401C7CBEFA00846E46 /* TECBlockOperation.m in Sources */,
 				6F550A321C7B636B00846E46 /* TECSimpleReusableViewFactory.m in Sources */,
 				008D856A1C63B561002D82F3 /* TECTableViewDeletingExtender.m in Sources */,
@@ -1126,6 +1181,7 @@
 				00AA471E1C77042A00B2AD56 /* CoreDataManager.m in Sources */,
 				0015F9C81C8088CB00179FD9 /* FetchedResultsContentProviderSearchViewController.m in Sources */,
 				0015F9BD1C7EEA8A00179FD9 /* TECDelegateProxy.m in Sources */,
+				00361FE01C9873B4002ACDD1 /* TECBlankStateDecorator.m in Sources */,
 				0015F9CB1C80A1E000179FD9 /* FetchedResultsContentProviderTwoEntitiesViewController.m in Sources */,
 				6F550A511C7DBC9600846E46 /* TECCollectionViewPresentationAdapter.m in Sources */,
 				6F550A531C7DBC9600846E46 /* TECCollectionViewCellRegistratorAdapter.m in Sources */,
@@ -1139,6 +1195,7 @@
 				6F0125281C9301D000646EB5 /* TECPullToRefreshExtender.m in Sources */,
 				005F13751C6F713900765CC1 /* TECFetchedResultsControllerContentProvider.m in Sources */,
 				6F550A541C7DBC9600846E46 /* TECCollectionViewExtender.m in Sources */,
+				00361FE31C993EFC002ACDD1 /* TECBlankStateTextDisplay.m in Sources */,
 				00AA472B1C770EC400B2AD56 /* Person.m in Sources */,
 				00A4CA3D1C75DCFE00515A94 /* FetchedResultControllerContentProviderViewController.m in Sources */,
 				6F03E50A1C972A57005C6DF7 /* TECPullToRefreshStatePulling.m in Sources */,
@@ -1160,7 +1217,9 @@
 			files = (
 				6F550A3C1C7B802D00846E46 /* TECCollectionViewExtenderHelpers.m in Sources */,
 				6F4855531C7375BF0006F6E5 /* TECTableViewPresentationAdapterSpec.m in Sources */,
+				00361FE51C9944B8002ACDD1 /* TECBlankStateDecoratorSpec.m in Sources */,
 				6F4855621C73B89F0006F6E5 /* TECDelegateProxyTestModels.m in Sources */,
+				00361FDA1C977CE8002ACDD1 /* TECPresentationAdapterDecoratorSpec.m in Sources */,
 				6FEC95B51C76455900B1094E /* TECCollectionViewExtenderSpec.m in Sources */,
 				6F0124EE1C8DDCEC00646EB5 /* TECTableViewExtenderHelpers.m in Sources */,
 				6F4855571C739E030006F6E5 /* TECTableViewSectionHeaderExtenderSpec.m in Sources */,
@@ -1192,6 +1251,7 @@
 				6F0124E91C8DD40D00646EB5 /* TECExtenderSpec.m in Sources */,
 				6FEC95DD1C7B1F8D00B1094E /* TECReusableViewsFactoryHelperSpec.m in Sources */,
 				6F550A681C7DDF8F00846E46 /* TECTableViewHeaderFooterViewRegistrationAdapterSpec.m in Sources */,
+				00361FDC1C97848A002ACDD1 /* KiwiWorkarounds.m in Sources */,
 				6FEC95DB1C7B1F7000B1094E /* TECReusableViewsFactorySpec.m in Sources */,
 				00A85D461C60FCDA00125C2C /* TECMemoryContentProviderSpec.m in Sources */,
 			);

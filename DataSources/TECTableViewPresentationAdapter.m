@@ -17,7 +17,7 @@
 
 @property (nonatomic, strong, readwrite) UITableView *extendedView;
 
-@property (nonatomic, strong) id <TECContentProviderProtocol> contentProvider;
+@property (nonatomic, strong, readwrite) id <TECContentProviderProtocol> contentProvider;
 
 @property (nonatomic, strong) TECDelegateProxy <id <UITableViewDelegate, UITableViewDataSource>> *delegateProxy;
 
@@ -25,59 +25,8 @@
 
 @implementation TECTableViewPresentationAdapter
 
-#pragma mark - Lifecycle
-
-- (instancetype)initWithContentProvider:(id <TECContentProviderProtocol>)contentProvider
-                              tableView:(UITableView *)tableView
-                              extenders:(NSArray<TECTableViewExtender *> *)extenders
-                          delegateProxy:(TECDelegateProxy *)delegateProxy {
-    self = [self init];
-    if(self) {
-        self.extendedView = tableView;
-        self.contentProvider = contentProvider;
-        self.delegateProxy = delegateProxy;
-        
-        [self addExtenders:extenders];
-        [self setupContentProvider];
-    }
-    return self;
-}
-
-- (void)dealloc {
-    [self cleanup];
-}
-
-- (void)cleanup {
-    self.extendedView.dataSource = nil;
-    self.extendedView.delegate = nil;
-}
-
-#pragma mark - Extenders configuration
-
-- (void)addExtenders:(NSArray <TECTableViewExtender *> *)extenders {
-    for(TECTableViewExtender *extender in extenders) {
-        [self addExtender:extender];
-    }
-    [self setupExtendedView];
-}
-
-- (void)addExtender:(TECTableViewExtender *)extender {
-    NSParameterAssert(self.extendedView);
-    NSParameterAssert(self.contentProvider);
-    extender.extendedView = self.extendedView;
-    extender.contentProvider = self.contentProvider;
-    [self.delegateProxy attachDelegate:extender];
-    [extender didSetup];
-}
-
-- (void)setupExtendedView {
-    self.extendedView.dataSource = [self.delegateProxy proxy];
-    self.extendedView.delegate = [self.delegateProxy proxy];
-}
-
-- (void)setupContentProvider {
-    self.contentProvider.presentationAdapter = self;
-}
+@synthesize extendedView;
+@synthesize contentProvider;
 
 #pragma mark - ContentProviderPresentationAdapter
 
@@ -89,7 +38,7 @@
     [self.extendedView beginUpdates];
 }
 
-- (void)contentProviderDidChangeItem:(id<TECSectionModelProtocol>)section
+- (void)contentProviderDidChangeItem:(id)item
                          atIndexPath:(NSIndexPath *)indexPath
                        forChangeType:(TECContentProviderItemChangeType)changeType
                         newIndexPath:(NSIndexPath *)newIndexPath {

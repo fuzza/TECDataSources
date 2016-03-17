@@ -44,6 +44,12 @@ describe(@"TECMemorySectionModel mutation", ^() {
         [model replaceItems:testArray2];
         [[model.items should] equal:testArray2];
     });
+    
+    it(@"should allow indexed subscript mutation", ^() {
+        TECMemorySectionModel *model = [[TECMemorySectionModel alloc] initWithItems:testArray1];
+        model[0] = testString2;
+        [[model[0] should] equal:testString2];
+    });
 });
 
 describe(@"Cocoa collection support", ^() {

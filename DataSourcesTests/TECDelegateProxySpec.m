@@ -10,6 +10,40 @@
 #import "TECDelegateProxy.h"
 #import "TECDelegateProxyTestModels.h"
 
+@interface NSProxy (Test)
+
+- (NSUInteger)refCnt;
+
+@end
+
+@implementation NSProxy (Test)
+
+- (NSUInteger)refCnt {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    return (NSUInteger)((__bridge void *)[self performSelector:NSSelectorFromString(@"retainCount")]);
+#pragma clang diagnostic pop
+}
+
+@end
+
+@interface NSObject (Test)
+
+- (NSUInteger)refCnt;
+
+@end
+
+@implementation NSObject (Test)
+
+- (NSUInteger)refCnt {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    return (NSUInteger)((__bridge void *)[self performSelector:NSSelectorFromString(@"retainCount")]);
+#pragma clang diagnostic pop
+}
+
+@end
+
 SPEC_BEGIN(TECDelegateProxySpec)
 
 void (^attachDelegatesBlock)(TECDelegateProxy *proxy ,NSArray *delegates) = ^(TECDelegateProxy *proxy, NSArray *delegates) {
@@ -166,6 +200,33 @@ describe(@"TECDelegateProxy", ^{
         });
     });
     
+    describe(@"Memory management", ^() {
+        it(@"should return self unretained from proxy method", ^() {
+            NSUInteger retainCountOriginal = [sut refCnt];
+            id __unsafe_unretained proxy = [sut proxy];
+            [[theValue(proxy == sut) should] beYes];
+            [[theValue([proxy refCnt]) should] equal:theValue(retainCountOriginal)];
+        });
+        
+        it(@"should retain delegate", ^() {
+            KWMock<TECDelegateProxyTestProtocol> *delegateMock = [KWMock mockForProtocol:@protocol(TECDelegateProxyTestProtocol)];
+            NSUInteger retainCountOriginal = [delegateMock refCnt];
+            TECDelegateProxy *proxy = [[TECDelegateProxy alloc] init];
+            [proxy attachDelegate:delegateMock];
+            [[theValue([delegateMock refCnt]) should] equal:theValue(retainCountOriginal + 1)];
+        });
+        
+        it(@"should correctly detach delegate", ^() {
+            KWMock<TECDelegateProxyTestProtocol> *delegateMock = [KWMock mockForProtocol:@protocol(TECDelegateProxyTestProtocol)];
+            TECDelegateProxy *proxy = [[TECDelegateProxy alloc] init];
+            NSUInteger retainCountOriginal = [delegateMock refCnt];
+            [proxy attachDelegate:delegateMock];
+            [[theValue([proxy conformsToProtocol:@protocol(TECDelegateProxyTestProtocol)]) should] beYes];
+            [proxy detachDelegate:delegateMock];
+            [[theValue([proxy conformsToProtocol:@protocol(TECDelegateProxyTestProtocol)]) should] beNo];
+            [[theValue([delegateMock refCnt]) should] equal:theValue(retainCountOriginal)];
+        });
+    });
 
 });
 
