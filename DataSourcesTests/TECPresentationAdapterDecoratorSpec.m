@@ -11,12 +11,6 @@
 #import "TECTableViewPresentationAdapter.h"
 #import "TECContentProviderProtocol.h"
 
-@interface TECPresentationAdapterDecorator (Test)
-
-- (void)stealContentProviderDelegationFromPresentationAdapter;
-
-@end
-
 SHARED_EXAMPLES_BEGIN(TECPresentationAdapterDecoratorSpec)
 
 sharedExamplesFor(@"TECPresentationAdapterDecorator", ^(NSDictionary *data) {
@@ -26,7 +20,7 @@ sharedExamplesFor(@"TECPresentationAdapterDecorator", ^(NSDictionary *data) {
     let(presentationAdapterMock, ^TECPresentationAdapter *{return [TECPresentationAdapter nullMock];});
     let(contentProviderMock, ^KWMock<TECContentProviderProtocol> *{return [KWMock nullMockForProtocol:@protocol(TECContentProviderProtocol)];});
     
-    describe([NSString stringWithFormat:@"%@ inherited from TECPresentationAdapterDecorator", sutClass], ^() {
+    describe([NSString stringWithFormat:@"%@ inherited from TECPresentationAdapterDecorator", data[@"class"]], ^() {
         
         context(@"when initialized with TECPresentationAdapter subclass", ^() {
     #ifndef DNS_BLOCK_ASSERTIONS
@@ -72,12 +66,6 @@ sharedExamplesFor(@"TECPresentationAdapterDecorator", ^(NSDictionary *data) {
                 [[sutClass alloc] initWithPresentationAdapter:tablePresentationAdapterMock];
                 [[tablePresentationAdapterMock shouldNot] receive:@selector(viewDidAppear:)];
                 [(UIViewController *)decorator viewDidAppear:YES];
-            });
-            
-            it(@"should respond to selectors it implements", ^() {
-                TECPresentationAdapterDecorator<TECContentProviderPresentationAdapterProtocol> *decorator =
-                [[sutClass alloc] initWithPresentationAdapter:tablePresentationAdapterMock];
-                [[theValue([decorator respondsToSelector:@selector(presentationAdapter)]) should] beYes];
             });
             
             it(@"should respond to selectors which are implemented by decorated object", ^() {

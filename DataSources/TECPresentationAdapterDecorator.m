@@ -48,15 +48,6 @@
     }
 }
 
-- (BOOL)respondsToSelector:(SEL)aSelector {
-    if ([[self class] instancesRespondToSelector:aSelector]) {
-        return YES;
-    }
-    else {
-        return [self.presentationAdapter respondsToSelector:aSelector];
-    }
-}
-
 - (BOOL)isKindOfClass:(Class)aClass {
     return NO;
 }

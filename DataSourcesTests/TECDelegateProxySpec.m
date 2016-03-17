@@ -208,21 +208,23 @@ describe(@"TECDelegateProxy", ^{
             [[theValue([proxy refCnt]) should] equal:theValue(retainCountOriginal)];
         });
         
-        it(@"should not retain delegate", ^() {
+        it(@"should retain delegate", ^() {
             KWMock<TECDelegateProxyTestProtocol> *delegateMock = [KWMock mockForProtocol:@protocol(TECDelegateProxyTestProtocol)];
             NSUInteger retainCountOriginal = [delegateMock refCnt];
             TECDelegateProxy *proxy = [[TECDelegateProxy alloc] init];
             [proxy attachDelegate:delegateMock];
-            [[theValue([delegateMock refCnt]) should] equal:theValue(retainCountOriginal)];
+            [[theValue([delegateMock refCnt]) should] equal:theValue(retainCountOriginal + 1)];
         });
         
         it(@"should correctly detach delegate", ^() {
             KWMock<TECDelegateProxyTestProtocol> *delegateMock = [KWMock mockForProtocol:@protocol(TECDelegateProxyTestProtocol)];
             TECDelegateProxy *proxy = [[TECDelegateProxy alloc] init];
+            NSUInteger retainCountOriginal = [delegateMock refCnt];
             [proxy attachDelegate:delegateMock];
             [[theValue([proxy conformsToProtocol:@protocol(TECDelegateProxyTestProtocol)]) should] beYes];
             [proxy detachDelegate:delegateMock];
             [[theValue([proxy conformsToProtocol:@protocol(TECDelegateProxyTestProtocol)]) should] beNo];
+            [[theValue([delegateMock refCnt]) should] equal:theValue(retainCountOriginal)];
         });
     });
 
